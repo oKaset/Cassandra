@@ -1,0 +1,308 @@
+[001] Abrantes                         → cm-abrantes.pt
+[002] Aguiar da Beira                  → cm-aguiardabeira.pt
+[003] Alandroal                        → cm-alandroal.pt
+[004] Albergaria-a-Velha               → albergaria-a-velha.pt
+[005] Albufeira                        → cm-albufeira.pt
+[006] Alcanena                         → cm-alcanena.pt
+[007] Alcobaça                         → cm-alcobaca.pt
+[008] Alcochete                        → cm-alcochete.pt
+[009] Alcoutim                         → cm-alcoutim.pt
+[010] Alcácer do Sal                   → cm-alcacerdosal.pt
+[011] Alenquer                         → cm-alenquer.pt
+[012] Alfândega da Fé                  → cm-alfandegadafe.pt
+[013] Alijó                            → cm-alijo.pt
+[014] Aljezur                          → cm-aljezur.pt
+[015] Aljustrel                        → mun-aljustrel.pt
+[016] Almada                           → cm-almada.pt
+[017] Almeida                          → cm-almeida.pt
+[018] Almeirim                         → cm-almeirim.pt
+[019] Almodôvar                        → cm-almodovar.pt
+[020] Alpiarça                         → cm-alpiarca.pt
+[021] Alter do Chão                    → cm-alter-chao.pt
+[022] Alvaiázere                       → cm-alvaiazere.pt
+[023] Alvito                           → cm-alvito.pt
+[024] Amadora                          → cm-amadora.pt
+[025] Amarante                         → cm-amarante.pt
+[026] Amares                           → cm-amares.pt
+[027] Anadia                           → cm-anadia.pt
+[028] Angra do Heroísmo                → angradoheroismo.pt
+[029] Ansião                           → cm-ansiao.pt
+[030] Arcos de Valdevez                → arcosdevaldevez.pt
+[031] Arganil                          → cm-arganil.pt
+[032] Armamar                          → cm-armamar.pt
+[033] Arouca                           → cm-arouca.pt
+[034] Arraiolos                        → cm-arraiolos.pt
+[035] Arronches                        → cm-arronches.pt
+[036] Arruda dos Vinhos                → cm-arruda.pt
+[037] Aveiro                           → cm-aveiro.pt
+[038] Avis                             → cm-avis.pt
+[039] Azambuja                         → cm-azambuja.pt
+[040] Baião                            → cm-baiao.pt
+[041] Barcelos                         → cm-barcelos.pt
+[042] Barrancos                        → cm-barrancos.pt
+[043] Barreiro                         → cm-barreiro.pt
+[044] Batalha                          → cm-batalha.pt
+[045] Beja                             → cm-beja.pt
+[046] Belmonte                         → cm-belmonte.pt
+[047] Benavente                        → cm-benavente.pt
+[048] Bombarral                        → cm-bombarral.pt
+[049] Borba                            → cm-borba.pt
+[050] Boticas                          → cm-boticas.pt
+[051] Braga                            → cm-braga.pt
+[052] Bragança                         → cm-braganca.pt
+[053] Cabeceiras de Basto              → cabeceirasdebasto.pt
+[054] Cadaval                          → cm-cadaval.pt
+[055] Caldas da Rainha                 → caldasdarainha.pt
+[056] Calheta [R.A.A.]                 → cm-calheta.pt
+[057] Calheta [R.A.M.]                 → cmcalheta.pt
+[058] Caminha                          → cm-caminha.pt
+[059] Campo Maior                      → cm-campo-maior.pt
+[060] Cantanhede                       → cm-cantanhede.pt
+[061] Carrazeda de Ansiães             → cm-carrazedadeansiaes.pt
+[062] Carregal do Sal                  → cm-carregal.pt
+[063] Cartaxo                          → cm-cartaxo.pt
+[064] Cascais                          → cm-cascais.pt
+[065] Castanheira de Pêra              → castanheiradepera.pt
+[066] Castelo Branco                   → cm-castelobranco.pt
+[067] Castelo de Paiva                 → cm-castelo-paiva.pt
+[068] Castelo de Vide                  → cm-castelo-vide.pt
+[069] Castro Daire                     → cm-castrodaire.pt
+[070] Castro Marim                     → cm-castromarim.pt
+[071] Castro Verde                     → cm-castroverde.pt
+[072] Celorico da Beira                → cm-celoricodabeira.pt
+[073] Celorico de Basto                → cm-celoricodebasto.pt
+[074] Chamusca                         → cm-chamusca.pt
+[075] Chaves                           → cm-chaves.pt
+[076] Cinfães                          → cm-cinfaes.pt
+[077] Coimbra                          → cm-coimbra.pt
+[078] Condeixa-a-Nova                  → cm-condeixa.pt
+[079] Constância                       → cm-constancia.pt
+[080] Coruche                          → cm-coruche.pt
+[081] Corvo                            → cm-corvo.pt
+[082] Covilhã                          → cm-covilha.pt
+[083] Crato                            → cm-crato.pt
+[084] Cuba                             → cm-cuba.pt
+[085] Câmara de Lobos                  → cm-camaradelobos.pt
+[086] Elvas                            → cm-elvas.pt
+[087] Entroncamento                    → cm-entroncamento.pt
+[088] Espinho                          → cm-espinho.pt
+[089] Esposende                        → cm-esposende.pt
+[090] Estarreja                        → cm-estarreja.pt
+[091] Estremoz                         → cm-estremoz.pt
+[092] Fafe                             → cm-fafe.pt
+[093] Faro                             → cm-faro.pt
+[094] Felgueiras                       → cm-felgueiras.pt
+[095] Ferreira do Alentejo             → ferreiradoalentejo.pt
+[096] Ferreira do Zêzere               → cm-ferreiradozezere.pt
+[097] Figueira da Foz                  → cm-figfoz.pt
+[098] Figueira de Castelo Rodrigo      → cm-fcr.pt
+[099] Figueiró dos Vinhos              → cm-figueirodosvinhos.pt
+[100] Fornos de Algodres               → cm-fornosdealgodres.pt
+[101] Freixo de Espada à Cinta         → cm-freixoespadacinta.pt
+[102] Fronteira                        → cm-fronteira.pt
+[103] Funchal                          → cm-funchal.pt
+[104] Fundão                           → cm-fundao.pt
+[105] Gavião                           → cm-gaviao.pt
+[106] Golegã                           → cm-golega.pt
+[107] Gondomar                         → cm-gondomar.pt
+[108] Gouveia                          → cm-gouveia.pt
+[109] Grândola                         → cm-grandola.pt
+[110] Guarda                           → mun-guarda.pt
+[111] Guimarães                        → cm-guimaraes.pt
+[112] Góis                             → cm-gois.pt
+[113] Horta                            → cmhorta.pt
+[114] Idanha-a-Nova                    → cm-idanhanova.pt
+[115] Lagoa                            → cm-lagoa.pt
+[116] Lagoa [R.A.A.]                   → lagoa-acores.pt
+[117] Lagos                            → cm-lagos.pt
+[118] Lajes das Flores                 → cmlajesdasflores.pt
+[119] Lajes do Pico                    → municipio-lajes-do-pico.pt
+[120] Lamego                           → cm-lamego.pt
+[121] Leiria                           → cm-leiria.pt
+[122] Lisboa                           → cm-lisboa.pt
+[123] Loulé                            → cm-loule.pt
+[124] Loures                           → cm-loures.pt
+[125] Lourinhã                         → cm-lourinha.pt
+[126] Lousada                          → cm-lousada.pt
+[127] Lousã                            → cm-lousa.pt
+[128] Macedo de Cavaleiros             → cm-macedodecavaleiros.pt
+[129] Machico                          → cm-machico.pt
+[130] Madalena                         → cm-madalena.pt
+[131] Mafra                            → cm-mafra.pt
+[132] Maia                             → cm-maia.pt
+[133] Mangualde                        → cmmangualde.pt
+[134] Manteigas                        → cm-manteigas.pt
+[135] Marco de Canaveses               → cm-marco-canaveses.pt
+[136] Marinha Grande                   → cm-mgrande.pt
+[137] Marvão                           → cm-marvao.pt
+[138] Matosinhos                       → cm-matosinhos.pt
+[139] Mação                            → cm-macao.pt
+[140] Mealhada                         → cm-mealhada.pt
+[141] Melgaço                          → cm-melgaco.pt
+[142] Mesão Frio                       → cm-mesaofrio.pt
+[143] Mira                             → cm-mira.pt
+[144] Miranda do Corvo                 → cm-mirandadocorvo.pt
+[145] Miranda do Douro                 → cm-mdouro.pt
+[146] Mirandela                        → cm-mirandela.pt
+[147] Mogadouro                        → cm-mogadouro.pt
+[148] Moimenta da Beira                → cm-moimenta.pt
+[149] Moita                            → cm-moita.pt
+[150] Monchique                        → cm-monchique.pt
+[151] Mondim de Basto                  → cm-mondimdebasto.pt
+[152] Monforte                         → cm-monforte.pt
+[153] Montalegre                       → cm-montalegre.pt
+[154] Montemor-o-Novo                  → cm-montemornovo.pt
+[155] Montemor-o-Velho                 → cm-montemorvelho.pt
+[156] Montijo                          → mun-montijo.pt
+[157] Monção                           → cm-moncao.pt
+[158] Mora                             → cm-mora.pt
+[159] Mortágua                         → cm-mortagua.pt
+[160] Moura                            → cm-moura.pt
+[161] Mourão                           → cm-mourao.pt
+[162] Murtosa                          → cm-murtosa.pt
+[163] Murça                            → cm-murca.pt
+[164] Mértola                          → cm-mertola.pt
+[165] Mêda                             → cm-meda.pt
+[166] Nazaré                           → cm-nazare.pt
+[167] Nelas                            → cm-nelas.pt
+[168] Nisa                             → cm-nisa.pt
+[169] Nordeste                         → cm-nordeste.pt
+[170] Odemira                          → cm-odemira.pt
+[171] Odivelas                         → cm-odivelas.pt
+[172] Oeiras                           → cm-oeiras.pt
+[173] Oleiros                          → cm-oleiros.pt
+[174] Olhão                            → cm-olhao.pt
+[175] Oliveira de Azeméis              → cm-oaz.pt
+[176] Oliveira de Frades               → cm-ofrades.pt
+[177] Oliveira do Bairro               → cm-olb.pt
+[178] Oliveira do Hospital             → cm-oliveiradohospital.pt
+[179] Ourique                          → cm-ourique.pt
+[180] Ourém                            → cm-ourem.pt
+[181] Ovar                             → cm-ovar.pt
+[182] Palmela                          → cm-palmela.pt
+[183] Pampilhosa da Serra              → cm-pampilhosadaserra.pt
+[184] Paredes                          → cm-paredes.pt
+[185] Paredes de Coura                 → cm-paredes-coura.pt
+[186] Paços de Ferreira                → cm-pacosdeferreira.pt
+[187] Pedrógão Grande                  → cm-pedrogaogrande.pt
+[188] Penacova                         → cm-penacova.pt
+[189] Penafiel                         → cm-penafiel.pt
+[190] Penalva do Castelo               → cm-penalvadocastelo.pt
+[191] Penamacor                        → cm-penamacor.pt
+[192] Penedono                         → cm-penedono.pt
+[193] Penela                           → cm-penela.pt
+[194] Peniche                          → cm-peniche.pt
+[195] Peso da Régua                    → cm-pesoregua.pt
+[196] Pinhel                           → cm-pinhel.pt
+[197] Pombal                           → cm-pombal.pt
+[198] Ponta Delgada                    → cm-pontadelgada.pt
+[199] Ponta do Sol                     → cm-pontadosol.pt
+[200] Ponte da Barca                   → cm-pontedabarca.pt
+[201] Ponte de Lima                    → cm-pontedelima.pt
+[202] Ponte de Sor                     → cm-pontedesor.pt
+[203] Portalegre                       → cm-portalegre.pt
+[204] Portel                           → cm-portel.pt
+[205] Portimão                         → cm-portimao.pt
+[206] Porto                            → cm-porto.pt
+[207] Porto de Mós                     → portodemos.pt
+[208] Porto Moniz                      → cm-portomoniz.pt
+[209] Porto Santo                      → cm-portosanto.pt
+[210] Povoação                         → cm-povoacao.pt
+[211] Proença-a-Nova                   → cm-proencanova.pt
+[212] Póvoa de Lanhoso                 → cm-povoadelanhoso.pt
+[213] Póvoa de Varzim                  → cm-pvarzim.pt
+[214] Redondo                          → cm-redondo.pt
+[215] Reguengos de Monsaraz            → cm-reguengos-monsaraz.pt
+[216] Resende                          → cm-resende.pt
+[217] Ribeira Brava                    → cm-ribeirabrava.pt
+[218] Ribeira de Pena                  → cm-rpena.pt
+[219] Ribeira Grande                   → cm-ribeiragrande.pt
+[220] Rio Maior                        → cm-riomaior.pt
+[221] Sabrosa                          → cm-sabrosa.pt
+[222] Sabugal                          → cm-sabugal.pt
+[223] Salvaterra de Magos              → cm-salvaterrademagos.pt
+[224] Santa Comba Dão                  → cm-santacombadao.pt
+[225] Santa Cruz                       → cm-santacruz.pt
+[226] Santa Cruz da Graciosa           → cm-graciosa.pt
+[227] Santa Cruz das Flores            → cmscflores.pt
+[228] Santa Maria da Feira             → cm-feira.pt
+[229] Santa Marta de Penaguião         → cm-smpenaguiao.pt
+[230] Santana                          → cm-santana.com
+[231] Santarém                         → cm-santarem.pt
+[232] Santiago do Cacém                → cm-santiago-do-cacem.pt
+[233] Santo Tirso                      → cm-stirso.pt
+[234] Sardoal                          → cm-sardoal.pt
+[235] Seia                             → cm-seia.pt
+[236] Seixal                           → cm-seixal.pt
+[237] Sernancelhe                      → cm-sernancelhe.pt
+[238] Serpa                            → cm-serpa.pt
+[239] Sertã                            → cm-serta.pt
+[240] Sesimbra                         → cm-sesimbra.pt
+[241] Setúbal                          → cm-setubal.pt
+[242] Sever do Vouga                   → cm-sever.pt
+[243] Silves                           → cm-silves.pt
+[244] Sines                            → cm-sines.pt
+[245] Sintra                           → cm-sintra.pt
+[246] Sobral de Monte Agraço           → cm-sobral.pt
+[247] Soure                            → cm-soure.pt
+[248] Sousel                           → cm-sousel.pt
+[249] Sátão                            → cm-satao.pt
+[250] São Brás de Alportel             → cm-sbras.pt
+[251] São João da Madeira              → cm-sjm.pt
+[252] São João da Pesqueira            → cm-sjpesqueira.pt
+[253] São Pedro do Sul                 → cm-spsul.pt
+[254] São Roque do Pico                → cm-saoroquedopico.pt
+[255] São Vicente                      → cm-saovicente.pt
+[256] Tabuaço                          → cm-tabuaco.pt
+[257] Tarouca                          → cm-tarouca.pt
+[258] Tavira                           → cm-tavira.pt
+[259] Terras de Bouro                  → cm-terrasdebouro.pt
+[260] Tomar                            → cm-tomar.pt
+[261] Tondela                          → cm-tondela.pt
+[262] Torre de Moncorvo                → cm-moncorvo.pt
+[263] Torres Novas                     → cm-torresnovas.pt
+[264] Torres Vedras                    → cm-tvedras.pt
+[265] Trancoso                         → cm-trancoso.pt
+[266] Trofa                            → mun-trofa.pt
+[267] Tábua                            → cm-tabua.pt
+[268] Vagos                            → cm-vagos.pt
+[269] Vale de Cambra                   → cm-valedecambra.pt
+[270] Valença                          → cm-valenca.pt
+[271] Valongo                          → cm-valongo.pt
+[272] Valpaços                         → cm-valpacos.pt
+[273] Velas                            → cmvelas.pt
+[274] Vendas Novas                     → cm-vendasnovas.pt
+[275] Viana do Alentejo                → cm-vianadoalentejo.pt
+[276] Viana do Castelo                 → cm-viana-castelo.pt
+[277] Vidigueira                       → cm-vidigueira.pt
+[278] Vieira do Minho                  → cm-vminho.pt
+[279] Vila da Praia da Vitória         → cmpv.pt
+[280] Vila de Rei                      → cm-viladerei.pt
+[281] Vila do Bispo                    → cm-viladobispo.pt
+[282] Vila do Conde                    → cm-viladoconde.pt
+[283] Vila do Porto                    → cm-viladoporto.pt
+[284] Vila Flor                        → cm-vilaflor.pt
+[285] Vila Franca de Xira              → cm-vfxira.pt
+[286] Vila Franca do Campo             → cmvfc.pt
+[287] Vila Nova da Barquinha           → cm-vnbarquinha.pt
+[288] Vila Nova de Cerveira            → cm-vncerveira.pt
+[289] Vila Nova de Famalicão           → cm-vnfamalicao.pt
+[290] Vila Nova de Foz Côa             → cm-fozcoa.pt
+[291] Vila Nova de Gaia                → cm-gaia.pt
+[292] Vila Nova de Paiva               → cm-vnpaiva.pt
+[293] Vila Nova de Poiares             → cm-vilanovadepoiares.pt
+[294] Vila Pouca de Aguiar             → cm-vpaguiar.pt
+[295] Vila Real                        → cm-vilareal.pt
+[296] Vila Real de Santo António       → cm-vrsa.pt
+[297] Vila Velha de Ródão              → cm-vvrodao.pt
+[298] Vila Verde                       → cm-vilaverde.pt
+[299] Vila Viçosa                      → cm-vilavicosa.pt
+[300] Vimioso                          → cm-vimioso.pt
+[301] Vinhais                          → cm-vinhais.pt
+[302] Viseu                            → cm-viseu.pt
+[303] Vizela                           → cm-vizela.pt
+[304] Vouzela                          → cm-vouzela.pt
+[305] Águeda                           → cm-agueda.pt
+[306] Évora                            → cm-evora.pt
+[307] Ílhavo                           → cm-ilhavo.pt
+[308] Óbidos                           → cm-obidos.pt

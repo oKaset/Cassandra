@@ -181,7 +181,7 @@ cm-vinhais.pt,Vinhais,16.4133,95.5032
 cm-viseu.pt,Viseu,14.8368,95.9351
 cm-vizela.pt,Vizela,17.1178,95.3102
 cm-vouzela.pt,Vouzela,18.8144,94.8454
-albergaria-a-velha.pt,Albergaria-a-Velha,25.9995,92.8768
+cm-albergaria.pt,Albergaria-a-Velha,17.0086,95.3401
 cm-mirandadocorvo.pt,Miranda do Corvo,20.0883,94.4963
 cm-feira.pt,Santa Maria da Feira,18.1177,95.0363
 cm-gaia.pt,Vila Nova de Gaia,23.4566,93.5735
@@ -194,15 +194,15 @@ cmvelas.pt,Velas,7.9598,97.8192
 mun-guarda.pt,Guarda,2.1776,99.4034
 mun-aljustrel.pt,Aljustrel,19.4041,94.6838
 mun-montijo.pt,Montijo,10.3655,97.1601
-municipio-lajes-do-pico.pt,Lajes do Pico,26.054,92.8619
+cm-lajesdopico.pt,Lajes do Pico,9.4124,97.4213
 mun-trofa.pt,Trofa,3.4252,99.0616
-alter.pt,Alter do Chão,13.2672,96.3652
+cm-alter-chao.pt,Alter do Chão,20.8114,94.2982
 angradoheroismo.pt,Angra do Heroísmo,15.9522,95.6295
-arcosdevaldevez.pt,Arcos de Valdevez,12.8509,96.4792
+cmav.pt,Arcos de Valdevez,16.9892,95.3454
 cm-vnbarquinha.pt,Vila Nova da Barquinha,9.35,97.4384
 cabeceirasdebasto.pt,Cabeceiras de Basto,17.6565,95.1626
-caldasdarainha.pt,Caldas da Rainha,9.9526,97.2732
-castanheiradepera.pt,Castanheira de Pêra,47.5924,86.961
+mcr.pt,Caldas da Rainha,28.371,92.2271
+cm-castanheiradepera.pt,Castanheira de Pêra,18.393,94.9608
 cm-aguiardabeira.pt,Aguiar da Beira,16.6811,95.4298
 cm-alcacerdosal.pt,Alcácer do Sal,26.547,92.7268
 cm-alfandegadafe.pt,Alfândega da Fé,15.1756,95.8423
@@ -280,11 +280,11 @@ cm-vnpaiva.pt,Vila Nova de Paiva,17.2517,95.2735
 cm-vpaguiar.pt,Vila Pouca de Aguiar,17.1872,95.2912
 cm-vrsa.pt,Vila Real de Santo António,17.3112,95.2572
 cm-vvrodao.pt,Vila Velha de Ródão,8.7723,97.5966
-ferreiradoalentejo.pt,Ferreira do Alentejo,11.0497,96.9727
+cm-ferreira-alentejo.pt,Ferreira do Alentejo,24.1091,93.3948
 cm-freixoespadacinta.pt,Freixo de Espada à Cinta,19.3908,94.6874
 cm-marco-canaveses.pt,Marco de Canaveses,14.6495,95.9864
 cm-paredes-coura.pt,Paredes de Coura,25.7257,92.9519
-portodemos.pt,Porto de Mós,4.7247,98.7056
+municipio-portodemos.pt,Porto de Mós,16.0613,95.5996
 cm-sbras.pt,São Brás de Alportel,18.2732,94.9936
 cm-tvedras.pt,Torres Vedras,15.308,95.806
 cm-castelo-paiva.pt,Castelo de Paiva,15.5814,95.7311
