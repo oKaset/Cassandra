@@ -142,7 +142,7 @@ cm-pombal.pt,Pombal,16.8184,95.3922
 cm-portalegre.pt,Portalegre,19.0252,94.7876
 cm-portel.pt,Portel,20.0901,94.4959
 cm-portimao.pt,Portimão,15.4901,95.7561
-cm-porto.pt,Porto,14.5695,96.0084
+cm-porto.pt,Porto,26.0246,92.87
 cm-povoacao.pt,Povoação,18.6666,94.8859
 cm-redondo.pt,Redondo,21.6022,94.0816
 cm-resende.pt,Resende,1.1655,99.6807
@@ -181,3 +181,129 @@ cm-vinhais.pt,Vinhais,16.4133,95.5032
 cm-viseu.pt,Viseu,14.8368,95.9351
 cm-vizela.pt,Vizela,17.1178,95.3102
 cm-vouzela.pt,Vouzela,18.8144,94.8454
+albergaria-a-velha.pt,Albergaria-a-Velha,25.9995,92.8768
+cm-mirandadocorvo.pt,Miranda do Corvo,20.0883,94.4963
+cm-feira.pt,Santa Maria da Feira,18.1177,95.0363
+cm-gaia.pt,Vila Nova de Gaia,23.4566,93.5735
+cm-graciosa.pt,Santa Cruz da Graciosa,15.8351,95.6616
+cm-moncorvo.pt,Torre de Moncorvo,19.3908,94.6875
+cm-viladoporto.pt,Vila do Porto,26.0246,92.87
+cmhorta.pt,Horta,15.8812,95.649
+cmmangualde.pt,Mangualde,16.9693,95.3509
+cmvelas.pt,Velas,7.9598,97.8192
+mun-guarda.pt,Guarda,2.1776,99.4034
+mun-aljustrel.pt,Aljustrel,19.4041,94.6838
+mun-montijo.pt,Montijo,10.3655,97.1601
+municipio-lajes-do-pico.pt,Lajes do Pico,26.054,92.8619
+mun-trofa.pt,Trofa,3.4252,99.0616
+alter.pt,Alter do Chão,13.2672,96.3652
+angradoheroismo.pt,Angra do Heroísmo,15.9522,95.6295
+arcosdevaldevez.pt,Arcos de Valdevez,12.8509,96.4792
+cm-vnbarquinha.pt,Vila Nova da Barquinha,9.35,97.4384
+cabeceirasdebasto.pt,Cabeceiras de Basto,17.6565,95.1626
+caldasdarainha.pt,Caldas da Rainha,9.9526,97.2732
+castanheiradepera.pt,Castanheira de Pêra,47.5924,86.961
+cm-aguiardabeira.pt,Aguiar da Beira,16.6811,95.4298
+cm-alcacerdosal.pt,Alcácer do Sal,26.547,92.7268
+cm-alfandegadafe.pt,Alfândega da Fé,15.1756,95.8423
+cm-arruda.pt,Arruda dos Vinhos,16.5092,95.4769
+cm-calheta.pt,Calheta [R.A.A.],11.5987,96.8223
+cm-camaradelobos.pt,Câmara de Lobos,17.6848,95.1548
+cm-carrazedadeansiaes.pt,Carrazeda de Ansiães,16.7633,95.4073
+cm-carregal.pt,Carregal do Sal,19.4109,94.6819
+cm-castelobranco.pt,Castelo Branco,1.983,99.4567
+cm-castrodaire.pt,Castro Daire,16.7716,95.405
+cm-castromarim.pt,Castro Marim,16.1668,95.5707
+cm-castroverde.pt,Castro Verde,23.6007,93.5341
+cm-celoricodabeira.pt,Celorico da Beira,24.5579,93.2718
+cm-celoricodebasto.pt,Celorico de Basto,0.0,100.0
+cm-condeixa.pt,Condeixa-a-Nova,17.0453,95.3301
+cm-fcr.pt,Figueira de Castelo Rodrigo,20.1054,94.4917
+cm-ferreiradozezere.pt,Ferreira do Zêzere,16.3167,95.5297
+cm-figfoz.pt,Figueira da Foz,15.021,95.8847
+cm-figueirodosvinhos.pt,Figueiró dos Vinhos,17.078,95.3211
+cm-fornosdealgodres.pt,Fornos de Algodres,19.6174,94.6254
+cm-fozcoa.pt,Vila Nova de Foz Côa,17.5432,95.1936
+cm-idanhanova.pt,Idanha-a-Nova,2.4402,99.3315
+lagoa-acores.pt,Lagoa [R.A.A.],12.1744,96.6646
+cm-macedodecavaleiros.pt,Macedo de Cavaleiros,17.1355,95.3053
+cm-mesaofrio.pt,Mesão Frio,17.0612,95.3257
+cm-moimenta.pt,Moimenta da Beira,17.2514,95.2736
+cm-mondimdebasto.pt,Mondim de Basto,26.0586,92.8607
+cm-montemornovo.pt,Montemor-o-Novo,19.2497,94.7261
+cm-oaz.pt,Oliveira de Azeméis,16.489,95.4825
+cm-ofrades.pt,Oliveira de Frades,10.567,97.1049
+cm-oliveiradohospital.pt,Oliveira do Hospital,16.1299,95.5808
+cm-pampilhosadaserra.pt,Pampilhosa da Serra,17.0924,95.3172
+cm-pedrogaogrande.pt,Pedrógão Grande,17.0758,95.3217
+cm-penalvadocastelo.pt,Penalva do Castelo,17.1916,95.29
+cm-pesoregua.pt,Peso da Régua,16.5343,95.4701
+cm-pontadelgada.pt,Ponta Delgada,8.991,97.5367
+cm-pontadosol.pt,Ponta do Sol,13.2908,96.3587
+cm-pontedabarca.pt,Ponte da Barca,25.5688,92.9949
+cm-pontedelima.pt,Ponte de Lima,16.4564,95.4914
+cm-pontedesor.pt,Ponte de Sor,19.0142,94.7906
+cm-portomoniz.pt,Porto Moniz,6.2971,98.2748
+cm-portosanto.pt,Porto Santo,17.318,95.2554
+cm-povoadelanhoso.pt,Póvoa de Lanhoso,25.9654,92.8862
+cm-proencanova.pt,Proença-a-Nova,1.2997,99.6439
+cm-pvarzim.pt,Póvoa de Varzim,2.3498,99.3562
+cm-ribeirabrava.pt,Ribeira Brava,26.8924,92.6322
+cm-ribeiragrande.pt,Ribeira Grande,17.0926,95.3171
+cm-riomaior.pt,Rio Maior,15.7735,95.6785
+cm-rpena.pt,Ribeira de Pena,19.2004,94.7396
+cm-salvaterrademagos.pt,Salvaterra de Magos,16.3813,95.512
+cm-santacombadao.pt,Santa Comba Dão,17.0637,95.325
+cm-santacruz.pt,Santa Cruz,17.3023,95.2597
+cm-saoroquedopico.pt,São Roque do Pico,9.0764,97.5133
+cm-saovicente.pt,São Vicente,16.1762,95.5682
+cm-sjm.pt,São João da Madeira,14.844,95.9332
+cm-sjpesqueira.pt,São João da Pesqueira,25.0358,93.1409
+cm-smpenaguiao.pt,Santa Marta de Penaguião,19.2407,94.7286
+cm-sobral.pt,Sobral de Monte Agraço,17.391,95.2353
+cm-spsul.pt,São Pedro do Sul,18.0082,95.0662
+cm-torresnovas.pt,Torres Novas,16.1528,95.5746
+cm-valedecambra.pt,Vale de Cambra,25.2925,93.0705
+cm-vendasnovas.pt,Vendas Novas,19.5868,94.6337
+cm-vfxira.pt,Vila Franca de Xira,15.4072,95.7789
+cm-viana-castelo.pt,Viana do Castelo,15.5695,95.7344
+cm-vianadoalentejo.pt,Viana do Alentejo,20.7508,94.3148
+cm-viladerei.pt,Vila de Rei,1.4453,99.604
+cm-viladobispo.pt,Vila do Bispo,18.2733,94.9936
+cm-viladoconde.pt,Vila do Conde,16.01,95.6137
+cm-vilaflor.pt,Vila Flor,16.0225,95.6103
+cm-vilareal.pt,Vila Real,16.6094,95.4495
+cm-vilaverde.pt,Vila Verde,16.768,95.406
+cm-vilavicosa.pt,Vila Viçosa,19.8935,94.5497
+cm-vnfamalicao.pt,Vila Nova de Famalicão,17.0119,95.3392
+cm-vnpaiva.pt,Vila Nova de Paiva,17.2517,95.2735
+cm-vpaguiar.pt,Vila Pouca de Aguiar,17.1872,95.2912
+cm-vrsa.pt,Vila Real de Santo António,17.3112,95.2572
+cm-vvrodao.pt,Vila Velha de Ródão,8.7723,97.5966
+ferreiradoalentejo.pt,Ferreira do Alentejo,11.0497,96.9727
+cm-freixoespadacinta.pt,Freixo de Espada à Cinta,19.3908,94.6874
+cm-marco-canaveses.pt,Marco de Canaveses,14.6495,95.9864
+cm-paredes-coura.pt,Paredes de Coura,25.7257,92.9519
+portodemos.pt,Porto de Mós,4.7247,98.7056
+cm-sbras.pt,São Brás de Alportel,18.2732,94.9936
+cm-tvedras.pt,Torres Vedras,15.308,95.806
+cm-castelo-paiva.pt,Castelo de Paiva,15.5814,95.7311
+cm-reguengos-monsaraz.pt,Reguengos de Monsaraz,19.514,94.6537
+cm-vncerveira.pt,Vila Nova de Cerveira,15.6775,95.7048
+cm-castelo-vide.pt,Castelo de Vide,19.4713,94.6654
+cm-mdouro.pt,Miranda do Douro,16.8118,95.394
+cm-mgrande.pt,Marinha Grande,15.6826,95.7034
+cm-montemorvelho.pt,Montemor-o-Velho,16.8557,95.382
+cm-olb.pt,Oliveira do Bairro,17.2624,95.2706
+cm-pacosdeferreira.pt,Paços de Ferreira,17.0284,95.3347
+cm-santana.com,Santana,21.1346,94.2097
+cm-sever.pt,Sever do Vouga,17.5434,95.1936
+cm-stirso.pt,Santo Tirso,16.6392,95.4413
+cm-terrasdebouro.pt,Terras de Bouro,17.0758,95.3217
+cm-vilanovadepoiares.pt,Vila Nova de Poiares,16.7627,95.4075
+cm-vminho.pt,Vieira do Minho,17.313,95.2567
+cmlajesdasflores.pt,Lajes das Flores,10.7668,97.0502
+cmpv.pt,Vila da Praia da Vitória,17.0233,95.3361
+cmscflores.pt,Santa Cruz das Flores,11.269,96.9126
+cmvfc.pt,Vila Franca do Campo,17.2422,95.2761
+cmcalheta.pt,Calheta [R.A.M.],17.4755,95.2122
