@@ -1,0 +1,309 @@
+﻿Município,Domain,Live_StatusCode,Total_Arquivo_Captures
+Abrantes,cm-abrantes.pt,Dead,1000
+Águeda,cm-agueda.pt,200,0
+Alandroal,cm-alandroal.pt,Dead,0
+Albufeira,cm-albufeira.pt,Dead,0
+Alcanena,cm-alcanena.pt,200,125
+Alcobaça,cm-alcobaca.pt,200,168
+Alcochete,cm-alcochete.pt,Dead,945
+Alcoutim,cm-alcoutim.pt,200,0
+Alenquer,cm-alenquer.pt,200,0
+Alijó,cm-alijo.pt,200,0
+Aljezur,cm-aljezur.pt,200,0
+Almada,cm-almada.pt,403,0
+Almeida,cm-almeida.pt,200,0
+Almeirim,cm-almeirim.pt,Dead,0
+Almodôvar,cm-almodovar.pt,200,0
+Alpiarça,cm-alpiarca.pt,503,0
+Alvaiázere,cm-alvaiazere.pt,200,0
+Alvito,cm-alvito.pt,200,0
+Amadora,cm-amadora.pt,Dead,0
+Amarante,cm-amarante.pt,200,0
+Amares,cm-amares.pt,200,0
+Anadia,cm-anadia.pt,200,1237
+Ansião,cm-ansiao.pt,200,902
+Arganil,cm-arganil.pt,200,271
+Armamar,cm-armamar.pt,200,782
+Arouca,cm-arouca.pt,200,345
+Arraiolos,cm-arraiolos.pt,Dead,505
+Arronches,cm-arronches.pt,200,0
+Aveiro,cm-aveiro.pt,Dead,0
+Avis,cm-avis.pt,200,0
+Azambuja,cm-azambuja.pt,503,0
+Baião,cm-baiao.pt,200,0
+Barcelos,cm-barcelos.pt,200,1532
+Barrancos,cm-barrancos.pt,200,282
+Barreiro,cm-barreiro.pt,200,1776
+Batalha,cm-batalha.pt,200,192
+Beja,cm-beja.pt,200,325
+Belmonte,cm-belmonte.pt,200,529
+Benavente,cm-benavente.pt,200,866
+Bombarral,cm-bombarral.pt,200,647
+Borba,cm-borba.pt,Dead,395
+Boticas,cm-boticas.pt,200,522
+Braga,cm-braga.pt,200,428
+Bragança,cm-braganca.pt,Dead,697
+Cadaval,cm-cadaval.pt,200,646
+Caminha,cm-caminha.pt,200,1097
+Campo Maior,cm-campo-maior.pt,200,208
+Cantanhede,cm-cantanhede.pt,200,167
+Cartaxo,cm-cartaxo.pt,503,241
+Cascais,cm-cascais.pt,Timeout,476
+Chamusca,cm-chamusca.pt,400,1312
+Chaves,cm-chaves.pt,Dead,20
+Cinfães,cm-cinfaes.pt,200,1292
+Coimbra,cm-coimbra.pt,200,1136
+Constância,cm-constancia.pt,200,1344
+Coruche,cm-coruche.pt,503,1246
+Corvo,cm-corvo.pt,200,93
+Covilhã,cm-covilha.pt,200,319
+Crato,cm-crato.pt,200,191
+Cuba,cm-cuba.pt,200,505
+Elvas,cm-elvas.pt,200,266
+Entroncamento,cm-entroncamento.pt,200,1047
+Espinho,cm-espinho.pt,Timeout,40
+Esposende,cm-esposende.pt,Dead,115
+Estarreja,cm-estarreja.pt,200,940
+Estremoz,cm-estremoz.pt,404,823
+Évora,cm-evora.pt,200,664
+Fafe,cm-fafe.pt,200,1283
+Faro,cm-faro.pt,200,396
+Felgueiras,cm-felgueiras.pt,200,0
+Fronteira,cm-fronteira.pt,200,0
+Funchal,cm-funchal.pt,200,0
+Fundão,cm-fundao.pt,200,0
+Gavião,cm-gaviao.pt,200,0
+Góis,cm-gois.pt,200,0
+Golegã,cm-golega.pt,503,0
+Gondomar,cm-gondomar.pt,200,0
+Gouveia,cm-gouveia.pt,200,0
+Grândola,cm-grandola.pt,200,0
+Guimarães,cm-guimaraes.pt,Dead,0
+Ílhavo,cm-ilhavo.pt,200,0
+Lagoa,cm-lagoa.pt,200,0
+Lagos,cm-lagos.pt,200,0
+Lamego,cm-lamego.pt,200,0
+Leiria,cm-leiria.pt,200,0
+Lisboa,cm-lisboa.pt,Dead,0
+Loulé,cm-loule.pt,200,0
+Loures,cm-loures.pt,200,0
+Lourinhã,cm-lourinha.pt,200,0
+Lousã,cm-lousa.pt,200,0
+Lousada,cm-lousada.pt,200,0
+Mação,cm-macao.pt,200,0
+Machico,cm-machico.pt,Dead,0
+Madalena,cm-madalena.pt,200,0
+Mafra,cm-mafra.pt,Dead,0
+Maia,cm-maia.pt,200,0
+Manteigas,cm-manteigas.pt,200,171
+Marvão,cm-marvao.pt,200,175
+Matosinhos,cm-matosinhos.pt,200,1726
+Mealhada,cm-mealhada.pt,200,1041
+Mêda,cm-meda.pt,200,432
+Melgaço,cm-melgaco.pt,200,1052
+Mértola,cm-mertola.pt,200,999
+Mira,cm-mira.pt,Dead,1027
+Mirandela,cm-mirandela.pt,200,938
+Mogadouro,cm-mogadouro.pt,200,43
+Moita,cm-moita.pt,200,1744
+Monção,cm-moncao.pt,200,160
+Monchique,cm-monchique.pt,Dead,248
+Monforte,cm-monforte.pt,200,150
+Montalegre,cm-montalegre.pt,200,1524
+Mora,cm-mora.pt,Dead,0
+Mortágua,cm-mortagua.pt,200,0
+Moura,cm-moura.pt,Dead,0
+Mourão,cm-mourao.pt,Dead,0
+Murça,cm-murca.pt,200,0
+Murtosa,cm-murtosa.pt,200,0
+Nazaré,cm-nazare.pt,200,128
+Nelas,cm-nelas.pt,200,1117
+Nisa,cm-nisa.pt,200,833
+Nordeste,cm-nordeste.pt,Dead,0
+Óbidos,cm-obidos.pt,200,542
+Odemira,cm-odemira.pt,200,1711
+Odivelas,cm-odivelas.pt,200,1564
+Oeiras,cm-oeiras.pt,Timeout,264
+Oleiros,cm-oleiros.pt,200,3157
+Olhão,cm-olhao.pt,200,642
+Ourém,cm-ourem.pt,Dead,186
+Ourique,cm-ourique.pt,200,171
+Ovar,cm-ovar.pt,Dead,0
+Palmela,cm-palmela.pt,Timeout,0
+Paredes,cm-paredes.pt,Dead,0
+Penacova,cm-penacova.pt,Dead,587
+Penafiel,cm-penafiel.pt,200,897
+Penamacor,cm-penamacor.pt,200,0
+Penedono,cm-penedono.pt,200,234
+Penela,cm-penela.pt,200,616
+Peniche,cm-peniche.pt,Dead,855
+Pinhel,cm-pinhel.pt,200,182
+Pombal,cm-pombal.pt,200,692
+Portalegre,cm-portalegre.pt,200,395
+Portel,cm-portel.pt,Dead,245
+Portimão,cm-portimao.pt,200,1759
+Porto,cm-porto.pt,200,1319
+Povoação,cm-povoacao.pt,200,613
+Redondo,cm-redondo.pt,Dead,181
+Resende,cm-resende.pt,200,866
+Sabrosa,cm-sabrosa.pt,200,57
+Sabugal,cm-sabugal.pt,200,662
+Santarém,cm-santarem.pt,200,1295
+Santiago do Cacém,cm-santiago-do-cacem.pt,200,7
+Sardoal,cm-sardoal.pt,200,1084
+Sátão,cm-satao.pt,200,282
+Seia,cm-seia.pt,200,914
+Seixal,cm-seixal.pt,200,1442
+Sernancelhe,cm-sernancelhe.pt,200,283
+Serpa,cm-serpa.pt,200,306
+Sertã,cm-serta.pt,200,0
+Sesimbra,cm-sesimbra.pt,200,277
+Setúbal,cm-setubal.pt,Dead,0
+Silves,cm-silves.pt,200,268
+Sines,cm-sines.pt,Dead,124
+Sintra,cm-sintra.pt,200,1254
+Soure,cm-soure.pt,200,279
+Sousel,cm-sousel.pt,200,155
+Tábua,cm-tabua.pt,Dead,610
+Tabuaço,cm-tabuaco.pt,200,712
+Tarouca,cm-tarouca.pt,Dead,0
+Tavira,cm-tavira.pt,200,0
+Tomar,cm-tomar.pt,200,0
+Tondela,cm-tondela.pt,200,0
+Trancoso,cm-trancoso.pt,200,0
+Vagos,cm-vagos.pt,200,0
+Valença,cm-valenca.pt,200,0
+Valongo,cm-valongo.pt,200,0
+Valpaços,cm-valpacos.pt,Dead,24
+Vidigueira,cm-vidigueira.pt,200,767
+Vimioso,cm-vimioso.pt,200,737
+Vinhais,cm-vinhais.pt,200,820
+Viseu,cm-viseu.pt,200,1268
+Vizela,cm-vizela.pt,200,468
+Vouzela,cm-vouzela.pt,200,420
+Albergaria-a-Velha,cm-albergaria.pt,200,767
+Miranda do Corvo,cm-mirandadocorvo.pt,200,247
+Santa Maria da Feira,cm-feira.pt,200,882
+Vila Nova de Gaia,cm-gaia.pt,200,157
+Santa Cruz da Graciosa,cm-graciosa.pt,200,589
+Torre de Moncorvo,cm-moncorvo.pt,200,236
+Vila do Porto,cm-viladoporto.pt,200,144
+Horta,cmhorta.pt,200,1121
+Mangualde,cmmangualde.pt,200,461
+Velas,cmvelas.pt,200,411
+Guarda,mun-guarda.pt,200,1137
+Aljustrel,mun-aljustrel.pt,200,530
+Montijo,mun-montijo.pt,200,1452
+Lajes do Pico,cm-lajesdopico.pt,200,698
+Trofa,mun-trofa.pt,200,676
+Alter do Chão,cm-alter-chao.pt,200,291
+Angra do Heroísmo,angradoheroismo.pt,200,839
+Arcos de Valdevez,cmav.pt,200,1020
+Vila Nova da Barquinha,cm-vnbarquinha.pt,200,2474
+Cabeceiras de Basto,cabeceirasdebasto.pt,200,531
+Caldas da Rainha,mcr.pt,200,25
+Castanheira de Pêra,cm-castanheiradepera.pt,200,374
+Aguiar da Beira,cm-aguiardabeira.pt,200,754
+Alcácer do Sal,cm-alcacerdosal.pt,200,129
+Alfândega da Fé,cm-alfandegadafe.pt,200,1264
+Arruda dos Vinhos,cm-arruda.pt,200,854
+Calheta [R.A.A.],cm-calheta.pt,200,146
+Câmara de Lobos,cm-camaradelobos.pt,200,581
+Carrazeda de Ansiães,cm-carrazedadeansiaes.pt,200,909
+Carregal do Sal,cm-carregal.pt,200,568
+Castelo Branco,cm-castelobranco.pt,200,3730
+Castro Daire,cm-castrodaire.pt,200,522
+Castro Marim,cm-castromarim.pt,200,201
+Castro Verde,cm-castroverde.pt,200,168
+Celorico da Beira,cm-celoricodabeira.pt,200,150
+Celorico de Basto,cm-celoricodebasto.pt,Dead,0
+Condeixa-a-Nova,cm-condeixa.pt,200,936
+Figueira de Castelo Rodrigo,cm-fcr.pt,200,381
+Ferreira do Zêzere,cm-ferreiradozezere.pt,200,1285
+Figueira da Foz,cm-figfoz.pt,200,1352
+Figueiró dos Vinhos,cm-figueirodosvinhos.pt,200,812
+Fornos de Algodres,cm-fornosdealgodres.pt,200,501
+Vila Nova de Foz Côa,cm-fozcoa.pt,200,460
+Idanha-a-Nova,cm-idanhanova.pt,200,2611
+Lagoa [R.A.A.],lagoa-acores.pt,200,200
+Macedo de Cavaleiros,cm-macedodecavaleiros.pt,200,788
+Mesão Frio,cm-mesaofrio.pt,200,726
+Moimenta da Beira,cm-moimenta.pt,200,778
+Mondim de Basto,cm-mondimdebasto.pt,403,55
+Montemor-o-Novo,cm-montemornovo.pt,200,369
+Oliveira de Azeméis,cm-oaz.pt,200,1097
+Oliveira de Frades,cm-ofrades.pt,Timeout,16
+Oliveira do Hospital,cm-oliveiradohospital.pt,200,949
+Pampilhosa da Serra,cm-pampilhosadaserra.pt,200,707
+Pedrógão Grande,cm-pedrogaogrande.pt,200,778
+Penalva do Castelo,cm-penalvadocastelo.pt,200,651
+Peso da Régua,cm-pesoregua.pt,200,847
+Ponta Delgada,cm-pontadelgada.pt,Dead,1026
+Ponta do Sol,cm-pontadosol.pt,200,495
+Ponte da Barca,cm-pontedabarca.pt,Dead,9
+Ponte de Lima,cm-pontedelima.pt,200,1072
+Ponte de Sor,cm-pontedesor.pt,200,538
+Porto Moniz,cm-portomoniz.pt,Dead,4
+Porto Santo,cm-portosanto.pt,200,640
+Póvoa de Lanhoso,cm-povoadelanhoso.pt,200,53
+Proença-a-Nova,cm-proencanova.pt,200,3247
+Póvoa de Varzim,cm-pvarzim.pt,200,2179
+Ribeira Brava,cm-ribeirabrava.pt,200,122
+Ribeira Grande,cm-ribeiragrande.pt,Dead,328
+Rio Maior,cm-riomaior.pt,Dead,1109
+Ribeira de Pena,cm-rpena.pt,200,373
+Salvaterra de Magos,cm-salvaterrademagos.pt,Dead,895
+Santa Comba Dão,cm-santacombadao.pt,200,783
+Santa Cruz,cm-santacruz.pt,200,650
+São Roque do Pico,cm-saoroquedopico.pt,200,701
+São Vicente,cm-saovicente.pt,200,314
+São João da Madeira,cm-sjm.pt,200,1097
+São João da Pesqueira,cm-sjpesqueira.pt,Dead,43
+Santa Marta de Penaguião,cm-smpenaguiao.pt,200,390
+Sobral de Monte Agraço,cm-sobral.pt,200,731
+São Pedro do Sul,cm-spsul.pt,Dead,581
+Torres Novas,cm-torresnovas.pt,200,1236
+Vale de Cambra,cm-valedecambra.pt,Timeout,155
+Vendas Novas,cm-vendasnovas.pt,Dead,477
+Vila Franca de Xira,cm-vfxira.pt,200,1474
+Viana do Castelo,cm-viana-castelo.pt,200,1384
+Viana do Alentejo,cm-vianadoalentejo.pt,Dead,209
+Vila de Rei,cm-viladerei.pt,200,3476
+Vila do Bispo,cm-viladobispo.pt,200,412
+Vila do Conde,cm-viladoconde.pt,200,1301
+Vila Flor,cm-vilaflor.pt,Dead,710
+Vila Real,cm-vilareal.pt,200,1593
+Vila Verde,cm-vilaverde.pt,200,877
+Vila Viçosa,cm-vilavicosa.pt,Dead,0
+Vila Nova de Famalicão,cm-vnfamalicao.pt,200,0
+Vila Nova de Paiva,cm-vnpaiva.pt,200,0
+Vila Pouca de Aguiar,cm-vpaguiar.pt,200,0
+Vila Real de Santo António,cm-vrsa.pt,Dead,0
+Vila Velha de Ródão,cm-vvrodao.pt,Dead,0
+Ferreira do Alentejo,cm-ferreira-alentejo.pt,403,0
+Freixo de Espada à Cinta,cm-freixoespadacinta.pt,200,0
+Marco de Canaveses,cm-marco-canaveses.pt,200,0
+Paredes de Coura,cm-paredes-coura.pt,404,43
+Porto de Mós,municipio-portodemos.pt,200,1114
+São Brás de Alportel,cm-sbras.pt,200,360
+Torres Vedras,cm-tvedras.pt,200,2209
+Castelo de Paiva,cm-castelo-paiva.pt,200,763
+Reguengos de Monsaraz,cm-reguengos-monsaraz.pt,Dead,494
+Vila Nova de Cerveira,cm-vncerveira.pt,200,1344
+Castelo de Vide,cm-castelo-vide.pt,200,525
+Miranda do Douro,cm-mdouro.pt,200,997
+Marinha Grande,cm-mgrande.pt,200,1163
+Montemor-o-Velho,cm-montemorvelho.pt,200,812
+Oliveira do Bairro,cm-olb.pt,200,849
+Paços de Ferreira,cm-pacosdeferreira.pt,200,403
+Santana,cm-santana.com,200,226
+Sever do Vouga,cm-sever.pt,200,680
+Santo Tirso,cm-stirso.pt,200,1235
+Terras de Bouro,cm-terrasdebouro.pt,200,715
+Vila Nova de Poiares,cm-vilanovadepoiares.pt,200,789
+Vieira do Minho,cm-vminho.pt,200,452
+Lajes das Flores,cmlajesdasflores.pt,Dead,579
+Vila da Praia da Vitória,cmpv.pt,200,606
+Santa Cruz das Flores,cmscflores.pt,200,603
+Vila Franca do Campo,cmvfc.pt,200,590
+Calheta [R.A.M.],cmcalheta.pt,200,148
