@@ -1,0 +1,309 @@
+﻿Município,Var_Pop,IEI_Score,Total_Arquivo_Captures,Live_StatusCode,CASSANDRA_Risk_Tier
+Mora,-16.03,94.0256,0,Dead,TIER 4 - Profecia CASSANDRA
+Penacova,-13.72,95.3133,587,Dead,TIER 4 - Profecia CASSANDRA
+Alandroal,-13.39,94.5689,0,Dead,TIER 4 - Profecia CASSANDRA
+Valpaços,-12.66,96.33,24,Dead,TIER 4 - Profecia CASSANDRA
+São João da Pesqueira,-12.61,93.1409,43,Dead,TIER 4 - Profecia CASSANDRA
+Abrantes,-12.24,95.4857,1000,Dead,TIER 4 - Profecia CASSANDRA
+Moura,-11.52,95.2264,0,Dead,TIER 4 - Profecia CASSANDRA
+Celorico de Basto,-11.51,100.0,0,Dead,TIER 4 - Profecia CASSANDRA
+Borba,-11.37,94.5055,395,Dead,TIER 4 - Profecia CASSANDRA
+Mourão,-10.8,94.6103,0,Dead,TIER 4 - Profecia CASSANDRA
+Vila Viçosa,-10.69,94.5497,0,Dead,TIER 4 - Profecia CASSANDRA
+Nordeste,-10.2,92.9905,0,Dead,TIER 4 - Profecia CASSANDRA
+Redondo,-10.1,94.0816,181,Dead,TIER 4 - Profecia CASSANDRA
+Machico,-9.82,95.3133,0,Dead,TIER 4 - Profecia CASSANDRA
+Portel,-9.69,94.4959,245,Dead,TIER 4 - Profecia CASSANDRA
+São Pedro do Sul,-9.13,95.0662,581,Dead,TIER 4 - Profecia CASSANDRA
+Monchique,-8.99,94.7666,248,Dead,TIER 4 - Profecia CASSANDRA
+Porto Moniz,-8.97,98.2748,4,Dead,TIER 4 - Profecia CASSANDRA
+Vila Flor,-8.75,95.6103,710,Dead,TIER 4 - Profecia CASSANDRA
+Chaves,-8.61,93.1265,20,Dead,TIER 4 - Profecia CASSANDRA
+Arraiolos,-8.47,94.6571,505,Dead,TIER 4 - Profecia CASSANDRA
+Reguengos de Monsaraz,-8.39,94.6537,494,Dead,TIER 4 - Profecia CASSANDRA
+Ponte da Barca,-7.88,92.9949,9,Dead,TIER 4 - Profecia CASSANDRA
+Tarouca,-7.52,95.3417,0,Dead,TIER 4 - Profecia CASSANDRA
+Viana do Alentejo,-6.69,94.3148,209,Dead,TIER 4 - Profecia CASSANDRA
+Tábua,-6.62,95.8619,610,Dead,TIER 4 - Profecia CASSANDRA
+Vale de Cambra,-6.62,93.0705,155,Timeout,TIER 4 - Profecia CASSANDRA
+Lajes das Flores,-6.23,97.0502,579,Dead,TIER 4 - Profecia CASSANDRA
+Oliveira de Frades,-6.1,97.1049,16,Timeout,TIER 4 - Profecia CASSANDRA
+Vila Velha de Ródão,-5.17,97.5966,0,Dead,TIER 4 - Profecia CASSANDRA
+Almeirim,-5.03,95.7998,0,Dead,TIER 4 - Profecia CASSANDRA
+Vendas Novas,-4.5,94.6337,477,Dead,TIER 4 - Profecia CASSANDRA
+Peniche,-4.04,95.5637,855,Dead,TIER 4 - Profecia CASSANDRA
+Ourém,-2.5,92.9489,186,Dead,TIER 4 - Profecia CASSANDRA
+Bragança,-2.37,95.6503,697,Dead,TIER 4 - Profecia CASSANDRA
+Mira,-2.3,95.384,1027,Dead,TIER 4 - Profecia CASSANDRA
+Paredes,-2.18,95.7794,0,Dead,TIER 4 - Profecia CASSANDRA
+Ponta Delgada,-1.81,97.5367,1026,Dead,TIER 4 - Profecia CASSANDRA
+Espinho,-1.75,92.8742,40,Timeout,TIER 4 - Profecia CASSANDRA
+Ribeira Grande,-1.64,95.3171,328,Dead,TIER 4 - Profecia CASSANDRA
+Salvaterra de Magos,-1.06,95.512,895,Dead,TIER 4 - Profecia CASSANDRA
+Vila Real de Santo António,-1.03,95.2572,0,Dead,TIER 4 - Profecia CASSANDRA
+Amadora,-0.86,95.8178,0,Dead,TIER 4 - Profecia CASSANDRA
+Guimarães,-0.82,95.9291,0,Dead,TIER 4 - Profecia CASSANDRA
+Oeiras,-0.2,94.8537,264,Timeout,TIER 4 - Profecia CASSANDRA
+Ovar,-0.13,94.6916,0,Dead,TIER 4 - Profecia CASSANDRA
+Sines,-0.1,92.8684,124,Dead,TIER 4 - Profecia CASSANDRA
+Nisa,-20.42,95.2167,833,200,TIER 3 - Risco de Fuga
+Almeida,-19.9,95.1886,0,200,TIER 3 - Risco de Fuga
+Tabuaço,-19.7,95.3774,712,200,TIER 3 - Risco de Fuga
+Mesão Frio,-19.63,95.3257,726,200,TIER 3 - Risco de Fuga
+Torre de Moncorvo,-18.84,94.6875,236,200,TIER 3 - Risco de Fuga
+Gavião,-18.25,94.5865,0,200,TIER 3 - Risco de Fuga
+Figueira de Castelo Rodrigo,-17.74,94.4917,381,200,TIER 3 - Risco de Fuga
+Barrancos,-17.01,94.6819,282,200,TIER 3 - Risco de Fuga
+Santa Marta de Penaguião,-16.46,94.7286,390,200,TIER 3 - Risco de Fuga
+Avis,-15.93,94.6819,0,200,TIER 3 - Risco de Fuga
+Castanheira de Pêra,-15.43,94.9608,374,200,TIER 3 - Risco de Fuga
+Melgaço,-15.1,95.6982,1052,200,TIER 3 - Risco de Fuga
+Pinhel,-15.0,93.8822,182,200,TIER 3 - Risco de Fuga
+Alfândega da Fé,-14.66,95.8423,1264,200,TIER 3 - Risco de Fuga
+Peso da Régua,-14.57,95.4701,847,200,TIER 3 - Risco de Fuga
+Trancoso,-14.5,93.6078,0,200,TIER 3 - Risco de Fuga
+Penamacor,-14.46,96.0038,0,200,TIER 3 - Risco de Fuga
+Santana,-14.38,94.2097,226,200,TIER 3 - Risco de Fuga
+Freixo de Espada à Cinta,-14.37,94.6874,0,200,TIER 3 - Risco de Fuga
+Chamusca,-14.36,95.6355,1312,400,TIER 3 - Risco de Fuga
+Vinhais,-14.01,95.5032,820,200,TIER 3 - Risco de Fuga
+Manteigas,-13.96,93.5699,171,200,TIER 3 - Risco de Fuga
+Fronteira,-13.88,92.9495,0,200,TIER 3 - Risco de Fuga
+Alter do Chão,-13.77,94.2982,291,200,TIER 3 - Risco de Fuga
+Alcácer do Sal,-13.72,92.7268,129,200,TIER 3 - Risco de Fuga
+Crato,-13.72,94.1087,191,200,TIER 3 - Risco de Fuga
+São Vicente,-13.72,95.5682,314,200,TIER 3 - Risco de Fuga
+Baião,-13.68,99.466,0,200,TIER 3 - Risco de Fuga
+Celorico da Beira,-13.64,93.2718,150,200,TIER 3 - Risco de Fuga
+Mondim de Basto,-13.64,92.8607,55,403,TIER 3 - Risco de Fuga
+Proença-a-Nova,-13.55,99.6439,3247,200,TIER 3 - Risco de Fuga
+Figueiró dos Vinhos,-13.48,95.3211,812,200,TIER 3 - Risco de Fuga
+Alcoutim,-13.25,94.9915,0,200,TIER 3 - Risco de Fuga
+Miranda do Douro,-13.23,95.394,997,200,TIER 3 - Risco de Fuga
+Oleiros,-13.18,99.6439,3157,200,TIER 3 - Risco de Fuga
+Sousel,-12.9,92.9491,155,200,TIER 3 - Risco de Fuga
+Marvão,-12.85,94.0704,175,200,TIER 3 - Risco de Fuga
+Alvaiázere,-12.78,95.9217,0,200,TIER 3 - Risco de Fuga
+Idanha-a-Nova,-12.73,99.3315,2611,200,TIER 3 - Risco de Fuga
+Boticas,-12.72,95.1957,522,200,TIER 3 - Risco de Fuga
+Vila Nova de Foz Côa,-12.61,95.1936,460,200,TIER 3 - Risco de Fuga
+Gouveia,-12.52,93.0802,0,200,TIER 3 - Risco de Fuga
+Arronches,-12.51,94.5084,0,200,TIER 3 - Risco de Fuga
+Carrazeda de Ansiães,-12.49,95.4073,909,200,TIER 3 - Risco de Fuga
+Mação,-12.49,95.4491,0,200,TIER 3 - Risco de Fuga
+Cinfães,-12.48,95.8693,1292,200,TIER 3 - Risco de Fuga
+Seia,-12.24,95.4903,914,200,TIER 3 - Risco de Fuga
+Mértola,-12.17,95.4761,999,200,TIER 3 - Risco de Fuga
+Fornos de Algodres,-12.15,94.6254,501,200,TIER 3 - Risco de Fuga
+Coruche,-12.03,95.5021,1246,503,TIER 3 - Risco de Fuga
+Sabrosa,-11.68,92.7405,57,200,TIER 3 - Risco de Fuga
+Mogadouro,-11.61,92.9317,43,200,TIER 3 - Risco de Fuga
+Sátão,-11.59,94.8636,282,200,TIER 3 - Risco de Fuga
+Vidigueira,-11.45,95.4175,767,200,TIER 3 - Risco de Fuga
+Montalegre,-11.42,95.9396,1524,200,TIER 3 - Risco de Fuga
+Resende,-11.34,99.6807,866,200,TIER 3 - Risco de Fuga
+Murça,-11.26,95.3572,0,200,TIER 3 - Risco de Fuga
+Serpa,-11.22,95.0493,306,200,TIER 3 - Risco de Fuga
+Terras de Bouro,-11.21,95.3217,715,200,TIER 3 - Risco de Fuga
+Góis,-11.17,94.6365,0,200,TIER 3 - Risco de Fuga
+Alijó,-11.1,95.0447,0,200,TIER 3 - Risco de Fuga
+Ourique,-10.87,93.1317,171,200,TIER 3 - Risco de Fuga
+Ansião,-10.76,95.3438,902,200,TIER 3 - Risco de Fuga
+Pedrógão Grande,-10.74,95.3217,778,200,TIER 3 - Risco de Fuga
+Alvito,-10.72,94.7313,0,200,TIER 3 - Risco de Fuga
+Cuba,-10.68,95.1436,505,200,TIER 3 - Risco de Fuga
+Vimioso,-10.67,95.3679,737,200,TIER 3 - Risco de Fuga
+Sardoal,-10.66,95.5697,1084,200,TIER 3 - Risco de Fuga
+Santa Cruz das Flores,-10.35,96.9126,603,200,TIER 3 - Risco de Fuga
+Estremoz,-10.19,95.552,823,404,TIER 3 - Risco de Fuga
+Sever do Vouga,-10.15,95.1936,680,200,TIER 3 - Risco de Fuga
+Elvas,-10.08,94.6819,266,200,TIER 3 - Risco de Fuga
+Mirandela,-10.08,95.3605,938,200,TIER 3 - Risco de Fuga
+Portalegre,-10.01,94.7876,395,200,TIER 3 - Risco de Fuga
+Soure,-10.0,94.6998,279,200,TIER 3 - Risco de Fuga
+Monforte,-9.98,92.9495,150,200,TIER 3 - Risco de Fuga
+Mêda,-9.88,94.6847,432,200,TIER 3 - Risco de Fuga
+Sabugal,-9.87,95.3447,662,200,TIER 3 - Risco de Fuga
+Tomar,-9.84,95.4843,0,200,TIER 3 - Risco de Fuga
+Belmonte,-9.83,96.0324,529,200,TIER 3 - Risco de Fuga
+Covilhã,-9.79,94.789,319,200,TIER 3 - Risco de Fuga
+Vila Nova de Paiva,-9.75,95.2735,0,200,TIER 3 - Risco de Fuga
+Castro Daire,-9.73,95.405,522,200,TIER 3 - Risco de Fuga
+Vila Pouca de Aguiar,-9.73,95.2912,0,200,TIER 3 - Risco de Fuga
+Ribeira de Pena,-9.59,94.7396,373,200,TIER 3 - Risco de Fuga
+Tondela,-9.54,95.3779,0,200,TIER 3 - Risco de Fuga
+Almodôvar,-9.48,95.2968,0,200,TIER 3 - Risco de Fuga
+Alcanena,-9.09,92.7969,125,200,TIER 3 - Risco de Fuga
+Macedo de Cavaleiros,-9.04,95.3053,788,200,TIER 3 - Risco de Fuga
+Câmara de Lobos,-8.98,95.1548,581,200,TIER 3 - Risco de Fuga
+Armamar,-8.78,95.3257,782,200,TIER 3 - Risco de Fuga
+Pampilhosa da Serra,-8.77,95.3172,707,200,TIER 3 - Risco de Fuga
+Ferreira do Zêzere,-8.69,95.5297,1285,200,TIER 3 - Risco de Fuga
+Lamego,-8.69,95.4123,0,200,TIER 3 - Risco de Fuga
+Alpiarça,-8.6,95.3445,0,503,TIER 3 - Risco de Fuga
+Velas,-8.48,97.8192,411,200,TIER 3 - Risco de Fuga
+Arcos de Valdevez,-8.35,95.3454,1020,200,TIER 3 - Risco de Fuga
+Ponte de Sor,-8.32,94.7906,538,200,TIER 3 - Risco de Fuga
+Miranda do Corvo,-8.26,94.4963,247,200,TIER 3 - Risco de Fuga
+Penela,-8.2,95.2623,616,200,TIER 3 - Risco de Fuga
+Fundão,-8.19,97.8169,0,200,TIER 3 - Risco de Fuga
+Arganil,-8.05,94.7327,271,200,TIER 3 - Risco de Fuga
+Montemor-o-Novo,-8.02,94.7261,369,200,TIER 3 - Risco de Fuga
+Castelo de Vide,-7.84,94.6654,525,200,TIER 3 - Risco de Fuga
+Penalva do Castelo,-7.76,95.29,651,200,TIER 3 - Risco de Fuga
+Vouzela,-7.74,94.8454,420,200,TIER 3 - Risco de Fuga
+Vieira do Minho,-7.63,95.2567,452,200,TIER 3 - Risco de Fuga
+Vila Franca do Campo,-7.42,95.2761,590,200,TIER 3 - Risco de Fuga
+Mangualde,-7.39,95.3509,461,200,TIER 3 - Risco de Fuga
+Carregal do Sal,-7.36,94.6819,568,200,TIER 3 - Risco de Fuga
+Santa Comba Dão,-7.24,95.325,783,200,TIER 3 - Risco de Fuga
+Castelo de Paiva,-7.11,95.7311,763,200,TIER 3 - Risco de Fuga
+Amarante,-6.98,95.9614,0,200,TIER 3 - Risco de Fuga
+Marco de Canaveses,-6.95,95.9864,0,200,TIER 3 - Risco de Fuga
+Pombal,-6.92,95.3922,692,200,TIER 3 - Risco de Fuga
+Povoação,-6.92,94.8859,613,200,TIER 3 - Risco de Fuga
+Calheta [R.A.A.],-6.84,96.8223,146,200,TIER 3 - Risco de Fuga
+Vila da Praia da Vitória,-6.83,95.3361,606,200,TIER 3 - Risco de Fuga
+Moimenta da Beira,-6.75,95.2736,778,200,TIER 3 - Risco de Fuga
+Monção,-6.72,93.3089,160,200,TIER 3 - Risco de Fuga
+Lajes do Pico,-6.64,97.4213,698,200,TIER 3 - Risco de Fuga
+Torres Novas,-6.6,95.5746,1236,200,TIER 3 - Risco de Fuga
+Beja,-6.48,94.73,325,200,TIER 3 - Risco de Fuga
+Cabeceiras de Basto,-6.46,95.1626,531,200,TIER 3 - Risco de Fuga
+Santa Cruz da Graciosa,-6.45,95.6616,589,200,TIER 3 - Risco de Fuga
+Castelo Branco,-6.42,99.4567,3730,200,TIER 3 - Risco de Fuga
+Oliveira do Hospital,-6.38,95.5808,949,200,TIER 3 - Risco de Fuga
+Constância,-6.23,95.6537,1344,200,TIER 3 - Risco de Fuga
+Aguiar da Beira,-6.03,95.4298,754,200,TIER 3 - Risco de Fuga
+Cantanhede,-6.02,93.55,167,200,TIER 3 - Risco de Fuga
+Mortágua,-5.93,93.6267,0,200,TIER 3 - Risco de Fuga
+Nelas,-5.92,95.8329,1117,200,TIER 3 - Risco de Fuga
+Penedono,-5.87,94.4959,234,200,TIER 3 - Risco de Fuga
+Guarda,-5.85,99.4034,1137,200,TIER 3 - Risco de Fuga
+Vila de Rei,-5.83,99.604,3476,200,TIER 3 - Risco de Fuga
+Sertã,-5.72,99.6288,0,200,TIER 3 - Risco de Fuga
+Golegã,-5.7,95.6771,0,503,TIER 3 - Risco de Fuga
+Ferreira do Alentejo,-5.67,93.3948,0,403,TIER 3 - Risco de Fuga
+Santiago do Cacém,-5.67,92.3529,7,200,TIER 3 - Risco de Fuga
+Porto Santo,-5.64,95.2554,640,200,TIER 3 - Risco de Fuga
+Grândola,-5.61,97.0291,0,200,TIER 3 - Risco de Fuga
+Montemor-o-Velho,-5.61,95.382,812,200,TIER 3 - Risco de Fuga
+Vila Nova de Poiares,-5.57,95.4075,789,200,TIER 3 - Risco de Fuga
+Castro Verde,-5.37,93.5341,168,200,TIER 3 - Risco de Fuga
+Arouca,-5.27,94.4963,345,200,TIER 3 - Risco de Fuga
+Santo Tirso,-5.19,95.4413,1235,200,TIER 3 - Risco de Fuga
+Ponte de Lima,-5.18,95.4914,1072,200,TIER 3 - Risco de Fuga
+Funchal,-5.11,93.2258,0,200,TIER 3 - Risco de Fuga
+Caminha,-4.83,95.4531,1097,200,TIER 2 - Estagnação
+Évora,-4.83,95.297,664,200,TIER 2 - Estagnação
+Paredes de Coura,-4.76,92.9519,43,404,TIER 2 - Estagnação
+Ponta do Sol,-4.75,96.3587,495,200,TIER 2 - Estagnação
+Figueira da Foz,-4.7,95.8847,1352,200,TIER 2 - Estagnação
+Anadia,-4.65,95.7431,1237,200,TIER 2 - Estagnação
+Mealhada,-4.61,95.563,1041,200,TIER 2 - Estagnação
+Campo Maior,-4.51,94.5849,208,200,TIER 2 - Estagnação
+Ribeira Brava,-4.45,92.6322,122,200,TIER 2 - Estagnação
+Angra do Heroísmo,-4.38,95.6295,839,200,TIER 2 - Estagnação
+Cadaval,-4.31,95.1811,646,200,TIER 2 - Estagnação
+Vila Real,-4.29,95.4495,1593,200,TIER 2 - Estagnação
+Calheta [R.A.M.],-4.27,95.2122,148,200,TIER 2 - Estagnação
+Santarém,-4.25,95.6092,1295,200,TIER 2 - Estagnação
+Fafe,-4.12,95.4703,1283,200,TIER 2 - Estagnação
+Cartaxo,-4.08,94.6952,241,503,TIER 2 - Estagnação
+São Roque do Pico,-4.01,97.5133,701,200,TIER 2 - Estagnação
+Porto de Mós,-3.88,95.5996,1114,200,TIER 2 - Estagnação
+Felgueiras,-3.79,95.7036,0,200,TIER 2 - Estagnação
+Horta,-3.78,95.649,1121,200,TIER 2 - Estagnação
+Aljustrel,-3.75,94.6838,530,200,TIER 2 - Estagnação
+Penafiel,-3.28,95.8193,897,200,TIER 2 - Estagnação
+Vila Nova de Cerveira,-3.13,95.7048,1344,200,TIER 2 - Estagnação
+Oliveira de Azeméis,-2.97,95.4825,1097,200,TIER 2 - Estagnação
+Lousã,-2.93,94.7299,0,200,TIER 2 - Estagnação
+Viana do Castelo,-2.87,95.7344,1384,200,TIER 2 - Estagnação
+Águeda,-2.83,96.1188,0,200,TIER 2 - Estagnação
+Barcelos,-2.77,95.4716,1532,200,TIER 2 - Estagnação
+Corvo,-2.67,92.8684,93,200,TIER 2 - Estagnação
+Castro Marim,-2.56,95.5707,201,200,TIER 2 - Estagnação
+Valença,-2.43,95.2341,0,200,TIER 2 - Estagnação
+Alcobaça,-2.33,93.5699,168,200,TIER 2 - Estagnação
+Vila Verde,-2.31,95.406,877,200,TIER 2 - Estagnação
+Estarreja,-2.21,95.3821,940,200,TIER 2 - Estagnação
+Vila do Porto,-1.91,92.87,144,200,TIER 2 - Estagnação
+Vila Nova da Barquinha,-1.82,97.4384,2474,200,TIER 2 - Estagnação
+Gondomar,-1.69,94.7396,0,200,TIER 2 - Estagnação
+Condeixa-a-Nova,-1.62,95.3301,936,200,TIER 2 - Estagnação
+Santa Maria da Feira,-1.44,95.0363,882,200,TIER 2 - Estagnação
+Nazaré,-1.4,93.1408,128,200,TIER 2 - Estagnação
+Olhão,-1.31,95.4792,642,200,TIER 2 - Estagnação
+Bombarral,-1.25,95.3087,647,200,TIER 2 - Estagnação
+Coimbra,-1.24,95.9236,1136,200,TIER 2 - Estagnação
+Paços de Ferreira,-1.18,95.3347,403,200,TIER 2 - Estagnação
+Porto,-1.07,92.87,1319,200,TIER 2 - Estagnação
+Matosinhos,-1.06,99.2,1726,200,TIER 2 - Estagnação
+Albergaria-a-Velha,-0.91,95.3401,767,200,TIER 2 - Estagnação
+Santa Cruz,-0.9,95.2597,650,200,TIER 2 - Estagnação
+Amares,-0.68,95.0031,0,200,TIER 2 - Estagnação
+Caldas da Rainha,-0.65,92.2271,25,200,TIER 2 - Estagnação
+Trofa,-0.52,99.0616,676,200,TIER 2 - Estagnação
+Lagoa [R.A.A.],-0.4,96.6646,200,200,TIER 2 - Estagnação
+Azambuja,-0.34,95.5078,0,503,TIER 2 - Estagnação
+Barreiro,-0.28,97.1859,1776,200,TIER 2 - Estagnação
+Sernancelhe,-0.25,94.6944,283,200,TIER 2 - Estagnação
+Batalha,-0.24,94.1579,192,200,TIER 2 - Estagnação
+Loures,0.08,99.5173,0,200,TIER 1 - Resiliência
+Murtosa,0.11,95.3108,0,200,TIER 1 - Resiliência
+Vila Nova de Famalicão,0.16,95.3392,0,200,TIER 1 - Resiliência
+Lousada,0.24,95.7339,0,200,TIER 1 - Resiliência
+Póvoa de Lanhoso,0.39,92.8862,53,200,TIER 1 - Resiliência
+Viseu,0.46,95.9351,1268,200,TIER 1 - Resiliência
+Vila Franca de Xira,0.61,95.7789,1474,200,TIER 1 - Resiliência
+Maia,0.72,95.439,0,200,TIER 1 - Resiliência
+Vila Nova de Gaia,0.8,93.5735,157,200,TIER 1 - Resiliência
+Moita,1.02,97.1921,1744,200,TIER 1 - Resiliência
+Vizela,1.21,95.3102,468,200,TIER 1 - Resiliência
+Vagos,1.31,95.3968,0,200,TIER 1 - Resiliência
+Entroncamento,1.46,95.4196,1047,200,TIER 1 - Resiliência
+Marinha Grande,1.75,95.7034,1163,200,TIER 1 - Resiliência
+Leiria,1.76,95.7098,0,200,TIER 1 - Resiliência
+Almada,1.89,93.736,0,403,TIER 1 - Resiliência
+Oliveira do Bairro,1.94,95.2706,849,200,TIER 1 - Resiliência
+Valongo,1.94,95.7849,0,200,TIER 1 - Resiliência
+Póvoa de Varzim,1.99,99.3562,2179,200,TIER 1 - Resiliência
+Sintra,2.32,95.8816,1254,200,TIER 1 - Resiliência
+Vila do Conde,2.41,95.6137,1301,200,TIER 1 - Resiliência
+Odivelas,2.82,95.8852,1564,200,TIER 1 - Resiliência
+Loulé,2.94,99.6876,0,200,TIER 1 - Resiliência
+Silves,3.0,94.903,268,200,TIER 1 - Resiliência
+Ílhavo,3.01,95.7468,0,200,TIER 1 - Resiliência
+Lourinhã,3.09,95.246,0,200,TIER 1 - Resiliência
+São João da Madeira,3.34,95.9332,1097,200,TIER 1 - Resiliência
+Óbidos,3.55,95.2214,542,200,TIER 1 - Resiliência
+Benavente,4.08,95.4279,866,200,TIER 1 - Resiliência
+Faro,4.16,95.1585,396,200,TIER 1 - Resiliência
+Lagoa,4.18,95.3748,0,200,TIER 1 - Resiliência
+Alenquer,4.43,95.266,0,200,TIER 1 - Resiliência
+Torres Vedras,5.22,95.806,2209,200,TIER 1 - Resiliência
+Seixal,5.34,95.7877,1442,200,TIER 1 - Resiliência
+Aljezur,5.39,94.8601,0,200,TIER 1 - Resiliência
+Madalena,5.45,95.3053,0,200,TIER 1 - Resiliência
+Tavira,5.52,94.7763,0,200,TIER 1 - Resiliência
+São Brás de Alportel,5.69,94.9936,360,200,TIER 1 - Resiliência
+Arruda dos Vinhos,5.91,95.4769,854,200,TIER 1 - Resiliência
+Sobral de Monte Agraço,6.36,95.2353,731,200,TIER 1 - Resiliência
+Sesimbra,6.45,95.0869,277,200,TIER 1 - Resiliência
+Braga,6.84,94.7852,428,200,TIER 1 - Resiliência
+Portimão,7.48,95.7561,1759,200,TIER 1 - Resiliência
+Lagos,8.09,95.9045,0,200,TIER 1 - Resiliência
+Montijo,9.69,97.1601,1452,200,TIER 1 - Resiliência
+Vila do Bispo,9.76,94.9936,412,200,TIER 1 - Resiliência
+Odemira,16.21,95.9733,1711,200,TIER 1 - Resiliência
+Lisboa,0.28,97.1029,0,Dead,TIER - Indeterminado
+Rio Maior,0.53,95.6785,1109,Dead,TIER - Indeterminado
+Setúbal,1.56,96.1677,0,Dead,TIER - Indeterminado
+Esposende,3.3,92.8744,115,Dead,TIER - Indeterminado
+Cascais,3.36,95.0934,476,Timeout,TIER - Indeterminado
+Aveiro,4.06,95.5442,0,Dead,TIER - Indeterminado
+Albufeira,8.69,97.292,0,Dead,TIER - Indeterminado
+Alcochete,9.52,95.7594,945,Dead,TIER - Indeterminado
+Palmela,9.81,95.9925,0,Timeout,TIER - Indeterminado
+Mafra,13.38,95.8292,0,Dead,TIER - Indeterminado

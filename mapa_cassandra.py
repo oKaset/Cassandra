@@ -5,6 +5,7 @@ Visualises population change (2011→2021) overlaid with municipal website
 health status for all 308 Portuguese municipalities.
 """
 
+import re
 import unicodedata
 
 import geopandas as gpd
@@ -19,12 +20,145 @@ import pandas as pd
 # Name normalisation — applied uniformly to CSV, Excel, and GeoJSON sources
 # ---------------------------------------------------------------------------
 
+MAPPING_DICT = {
+    'aguiardabeira': 'aguiar da beira',
+    'alcacerdosal': 'alcacer do sal',
+    'alfandegadafe': 'alfandega da fe',
+    'alterdochao': 'alter do chao',
+    'angradoheroismo': 'angra do heroismo',
+    'arcosdevaldevez': 'arcos de valdevez',
+    'arrudadosvinhos': 'arruda dos vinhos',
+    'azores calheta': 'azores calheta',
+    'azores lagoa': 'azores lagoa',
+    'cabeceirasdebasto': 'cabeceiras de basto',
+    'caldasdarainha': 'caldas da rainha',
+    'calheta [r.a.a.]': 'azores calheta',
+    'calheta [r.a.m.]': 'madeira calheta',
+    'camaradelobos': 'camara de lobos',
+    'campomaior': 'campo maior',
+    'carrazedadeansiaes': 'carrazeda de ansiaes',
+    'carregaldosal': 'carregal do sal',
+    'castanheiradepera': 'castanheira de pera',
+    'castelobranco': 'castelo branco',
+    'castelodepaiva': 'castelo de paiva',
+    'castelodevide': 'castelo de vide',
+    'castrodaire': 'castro daire',
+    'castromarim': 'castro marim',
+    'castroverde': 'castro verde',
+    'celoricodabeira': 'celorico da beira',
+    'celoricodebasto': 'celorico de basto',
+    'faro lagoa': 'faro lagoa',
+    'ferreiradoalentejo': 'ferreira do alentejo',
+    'ferreiradozezere': 'ferreira do zezere',
+    'figueiradafoz': 'figueira da foz',
+    'figueiradecastelorodrigo': 'figueira de castelo rodrigo',
+    'figueirodosvinhos': 'figueiro dos vinhos',
+    'fornosdealgodres': 'fornos de algodres',
+    'freixodeespadaacinta': 'freixo de espada a cinta',
+    'lagoa': 'faro lagoa',
+    'lagoa [r.a.a.]': 'azores lagoa',
+    'lajesdasflores': 'lajes das flores',
+    'lajesdopico': 'lajes do pico',
+    'macedodecavaleiros': 'macedo de cavaleiros',
+    'madeira calheta': 'madeira calheta',
+    'marcodecanaveses': 'marco de canaveses',
+    'marinhagrande': 'marinha grande',
+    'mesaofrio': 'mesao frio',
+    'mirandadocorvo': 'miranda do corvo',
+    'mirandadodouro': 'miranda do douro',
+    'moimentadabeira': 'moimenta da beira',
+    'mondimdebasto': 'mondim de basto',
+    'oliveiradeazemeis': 'oliveira de azemeis',
+    'oliveiradefrades': 'oliveira de frades',
+    'oliveiradobairro': 'oliveira do bairro',
+    'oliveiradohospital': 'oliveira do hospital',
+    'pacosdeferreira': 'pacos de ferreira',
+    'pampilhosadaserra': 'pampilhosa da serra',
+    'paredesdecoura': 'paredes de coura',
+    'pedrogaogrande': 'pedrogao grande',
+    'penalvadocastelo': 'penalva do castelo',
+    'pesodaregua': 'peso da regua',
+    'pontadelgada': 'ponta delgada',
+    'pontadosol': 'ponta do sol',
+    'pontedabarca': 'ponte da barca',
+    'pontedelima': 'ponte de lima',
+    'pontedesor': 'ponte de sor',
+    'portodemos': 'porto de mos',
+    'portomoniz': 'porto moniz',
+    'portosanto': 'porto santo',
+    'povoadelanhoso': 'povoa de lanhoso',
+    'povoadevarzim': 'povoa de varzim',
+    'praiadavitoria': 'praia da vitoria',
+    'reguengosdemonsaraz': 'reguengos de monsaraz',
+    'ribeirabrava': 'ribeira brava',
+    'ribeiradepena': 'ribeira de pena',
+    'ribeiragrande': 'ribeira grande',
+    'riomaior': 'rio maior',
+    'salvaterrademagos': 'salvaterra de magos',
+    'santacombadao': 'santa comba dao',
+    'santacruz': 'santa cruz',
+    'santacruzdagraciosa': 'santa cruz da graciosa',
+    'santacruzdasflores': 'santa cruz das flores',
+    'santamariadafeira': 'santa maria da feira',
+    'santamartadepenaguiao': 'santa marta de penaguiao',
+    'santiagodocacem': 'santiago do cacem',
+    'santotirso': 'santo tirso',
+    'saobrasdealportel': 'sao bras de alportel',
+    'saojoaodamadeira': 'sao joao da madeira',
+    'saojoaodapesqueira': 'sao joao da pesqueira',
+    'saopedrodosul': 'sao pedro do sul',
+    'saoroquedopico': 'sao roque do pico',
+    'saovicente': 'sao vicente',
+    'severdovouga': 'sever do vouga',
+    'sobraldemonteagraco': 'sobral de monte agraco',
+    'terrasdebouro': 'terras de bouro',
+    'torredemoncorvo': 'torre de moncorvo',
+    'torresnovas': 'torres novas',
+    'torresvedras': 'torres vedras',
+    'valedecambra': 'vale de cambra',
+    'vendasnovas': 'vendas novas',
+    'vianadoalentejo': 'viana do alentejo',
+    'vianadocastelo': 'viana do castelo',
+    'vieiradominho': 'vieira do minho',
+    'vila da praia da vitoria': 'praia da vitoria',
+    'viladerei': 'vila de rei',
+    'viladobispo': 'vila do bispo',
+    'viladoconde': 'vila do conde',
+    'viladoporto': 'vila do porto',
+    'vilaflor': 'vila flor',
+    'vilafrancadexira': 'vila franca de xira',
+    'vilafrancadocampo': 'vila franca do campo',
+    'vilanovadabarquinha': 'vila nova da barquinha',
+    'vilanovadecerveira': 'vila nova de cerveira',
+    'vilanovadefamalicao': 'vila nova de famalicao',
+    'vilanovadefozcoa': 'vila nova de foz coa',
+    'vilanovadegaia': 'vila nova de gaia',
+    'vilanovadepaiva': 'vila nova de paiva',
+    'vilanovadepoiares': 'vila nova de poiares',
+    'vilapoucadeaguiar': 'vila pouca de aguiar',
+    'vilareal': 'vila real',
+    'vilarealdesantoantonio': 'vila real de santo antonio',
+    'vilavelhaderodao': 'vila velha de rodao',
+    'vilaverde': 'vila verde',
+    'vilavicosa': 'vila vicosa',
+}
+
+
+def strip_accents(value: str) -> str:
+    return ''.join(
+        char for char in unicodedata.normalize('NFKD', value)
+        if not unicodedata.combining(char)
+    )
+
+
 def normalize_name(name: str) -> str:
     if not isinstance(name, str):
         return ''
     name = name.strip().lower()
-    name = unicodedata.normalize('NFKD', name)
-    return ''.join(c for c in name if not unicodedata.combining(c))
+    lookup_key = strip_accents(name)
+    name = MAPPING_DICT.get(lookup_key, name)
+    name = strip_accents(name.lower().strip())
+    return re.sub(r'\s+', ' ', name).strip()
 
 
 # ---------------------------------------------------------------------------
@@ -75,22 +209,35 @@ print(f"GeoJSON loaded from local file: {GEOJSON_PATH}")
 # Enforce WGS84 immediately to prevent distorted maps (source may be EPSG:3763)
 gdf = gdf.to_crs(epsg=4326)
 
-# Auto-detect the municipality name field by finding the column that contains 'lisboa'
-try:
-    name_col = next(
+# Prefer the municipality column explicitly when present; otherwise fall back
+# to the highest-cardinality column that contains the municipality 'lisboa'.
+if 'NAME_2' in gdf.columns:
+    name_col = 'NAME_2'
+else:
+    candidate_cols = [
         col for col in gdf.columns
         if gdf[col].astype(str).str.lower().str.strip().eq('lisboa').any()
-    )
-except StopIteration:
-    raise ValueError(
-        f"Could not detect municipality name column in GeoJSON. "
-        f"Available columns: {gdf.columns.tolist()}"
-    )
+    ]
+    if not candidate_cols:
+        raise ValueError(
+            f"Could not detect municipality name column in GeoJSON. "
+            f"Available columns: {gdf.columns.tolist()}"
+        )
+    name_col = max(candidate_cols, key=lambda col: gdf[col].astype(str).nunique())
 
 print(f"GeoJSON municipality name column: '{name_col}'")
 
-# Normalise GeoJSON municipality names
-gdf['mun_key'] = gdf[name_col].apply(normalize_name)
+# Normalise GeoJSON municipality names and disambiguate duplicated
+# municipality labels that exist in different autonomous regions.
+geo_name_counts = gdf[name_col].astype(str).str.strip().value_counts()
+gdf['mun_key'] = gdf.apply(
+    lambda row: normalize_name(
+        f"{row['NAME_1']} {row[name_col]}"
+        if geo_name_counts.get(str(row[name_col]).strip(), 0) > 1 and 'NAME_1' in gdf.columns
+        else row[name_col]
+    ),
+    axis=1,
+)
 
 # ---------------------------------------------------------------------------
 # 5. Merge GeoJSON ↔ combined data
@@ -118,6 +265,12 @@ print(f"  GeoJSON municipalities : {n_geojson}")
 print(f"  Data municipalities    : {n_data}")
 print(f"  Matched                : {n_matched} ({match_pct:.1f}% success rate)")
 print(f"  Unmatched from data    : {unmatched_names}\n")
+
+if n_matched != n_data or n_matched != n_geojson:
+    raise ValueError(
+        f"Municipality merge incomplete: {n_matched}/{n_data} matched. "
+        f"Unmatched data municipalities: {unmatched_names}"
+    )
 
 # ---------------------------------------------------------------------------
 # 6. Visualisation — CASSANDRA identity
