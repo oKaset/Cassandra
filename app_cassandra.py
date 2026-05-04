@@ -12,9 +12,108 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+def inject_css():
+    st.markdown(
+        """
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+        """,
+        unsafe_allow_html=True,
+    )
+    st.html(
+        """
+        <style>
+            :root {
+                --risk-critical: #FF3366;
+                --risk-elevated: #FFAA00;
+                --risk-moderate: #FFD166;
+                --risk-controlled: #00E5FF;
+                --shadow-hard: 4px 4px 0 0 #1c1b1b;
+            }
+
+            * { border-radius: 0 !important; }
+
+            /* Background */
+            .stApp { background: #fdf8f8 !important; }
+            [data-testid="stAppViewContainer"] { background: #fdf8f8 !important; }
+            [data-testid="stHeader"] { background: #fdf8f8 !important; }
+
+            /* Sidebar */
+            [data-testid="stSidebar"] > div:first-child {
+                background: #ffffff !important;
+                border-right: 1px solid #c4c7c7 !important;
+            }
+
+            /* Metric cards */
+            [data-testid="stMetric"] {
+                background: #ffffff !important;
+                border: 1px solid #c4c7c7 !important;
+                box-shadow: 4px 4px 0 0 #1c1b1b !important;
+                padding: 24px !important;
+            }
+            [data-testid="stMetricValue"] {
+                font-family: 'Space Grotesk', sans-serif !important;
+                font-size: 48px !important;
+                font-weight: 700 !important;
+            }
+            [data-testid="stMetricLabel"] {
+                font-family: 'Space Grotesk', sans-serif !important;
+                font-size: 11px !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.2em !important;
+            }
+
+            /* Typography */
+            h1, h2, h3 {
+                font-family: 'Space Grotesk', sans-serif !important;
+                font-weight: 700 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.08em !important;
+            }
+
+            /* Buttons */
+            .stButton > button {
+                border-radius: 0 !important;
+                border: 1px solid #1c1b1b !important;
+                box-shadow: 4px 4px 0 0 #1c1b1b !important;
+                background: #1c1b1b !important;
+                color: #ffffff !important;
+                font-family: 'Space Grotesk', sans-serif !important;
+                font-size: 12px !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.1em !important;
+                transition: none !important;
+            }
+            .stButton > button:hover {
+                background: #ffffff !important;
+                color: #1c1b1b !important;
+            }
+
+            /* Inputs */
+            [data-testid="stTextInput"] input {
+                border-radius: 0 !important;
+                border: 1px solid #c4c7c7 !important;
+                font-family: 'Work Sans', sans-serif !important;
+            }
+            [data-baseweb="select"] > div {
+                border-radius: 0 !important;
+                border: 1px solid #c4c7c7 !important;
+            }
+
+            /* Widget labels */
+            [data-testid="stWidgetLabel"] p {
+                font-family: 'Space Grotesk', sans-serif !important;
+                font-size: 11px !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.2em !important;
+            }
+        </style>
+        """
+    )
 
 st.set_page_config(layout="wide", page_title="CASSANDRA Oracle", page_icon="👁️")
-
+inject_css()
 
 BASE_DIR = Path(__file__).resolve().parent
 CSV_PATH = BASE_DIR / "relatorio_produto_cassandra.csv"
@@ -92,7 +191,116 @@ DISPLAY_LABELS: dict[str, str] = {
     "Live_StatusCode": "Estado Atual do Portal",
     "Total_Arquivo_Captures": "Pegada no Arquivo.pt",
     "Município": "Município",
+    "CASSANDRA_Risk_Score": "Risco de Colapso (%)",
 }
+
+# ── Political Pressure Radar — district lookup map ──────────────────────────
+DISTRITO_MAP: dict[str, str] = {
+    "Abrantes": "Santarém", "Águeda": "Aveiro", "Aguiar da Beira": "Guarda",
+    "Alandroal": "Évora", "Albergaria-a-Velha": "Aveiro", "Albufeira": "Faro",
+    "Alcácer do Sal": "Setúbal", "Alcanena": "Santarém", "Alcobaça": "Leiria",
+    "Alcochete": "Setúbal", "Alcoutim": "Faro", "Alenquer": "Lisboa",
+    "Alfândega da Fé": "Bragança", "Alijó": "Vila Real", "Aljezur": "Faro",
+    "Aljustrel": "Beja", "Almada": "Setúbal", "Almeida": "Guarda",
+    "Almeirim": "Santarém", "Almodôvar": "Beja", "Alpiarça": "Santarém",
+    "Alter do Chão": "Portalegre", "Alvaiázere": "Leiria", "Alvito": "Beja",
+    "Amadora": "Lisboa", "Amarante": "Porto", "Amares": "Braga",
+    "Anadia": "Aveiro", "Ansião": "Leiria", "Arcos de Valdevez": "Viana do Castelo",
+    "Arganil": "Coimbra", "Armamar": "Viseu", "Arouca": "Aveiro",
+    "Arraiolos": "Évora", "Arronches": "Portalegre", "Arruda dos Vinhos": "Lisboa",
+    "Aveiro": "Aveiro", "Avis": "Portalegre", "Azambuja": "Lisboa",
+    "Baião": "Porto", "Barcelos": "Braga", "Barrancos": "Beja",
+    "Barreiro": "Setúbal", "Batalha": "Leiria", "Beja": "Beja",
+    "Belmonte": "Castelo Branco", "Benavente": "Santarém", "Bombarral": "Leiria",
+    "Borba": "Évora", "Boticas": "Vila Real", "Braga": "Braga",
+    "Bragança": "Bragança", "Cabeceiras de Basto": "Braga", "Cadaval": "Lisboa",
+    "Caldas da Rainha": "Leiria", "Caminha": "Viana do Castelo",
+    "Campo Maior": "Portalegre", "Cantanhede": "Coimbra", "Carrazeda de Ansiães": "Bragança",
+    "Carregal do Sal": "Viseu", "Cartaxo": "Santarém", "Cascais": "Lisboa",
+    "Castanheira de Pêra": "Leiria", "Castelo Branco": "Castelo Branco",
+    "Castelo de Paiva": "Aveiro", "Castelo de Vide": "Portalegre",
+    "Castro Daire": "Viseu", "Castro Marim": "Faro", "Castro Verde": "Beja",
+    "Celorico da Beira": "Guarda", "Celorico de Basto": "Braga",
+    "Chamusca": "Santarém", "Chaves": "Vila Real", "Cinfães": "Viseu",
+    "Coimbra": "Coimbra", "Condeixa-a-Nova": "Coimbra", "Constância": "Santarém",
+    "Coruche": "Santarém", "Covilhã": "Castelo Branco", "Crato": "Portalegre",
+    "Cuba": "Beja", "Elvas": "Portalegre", "Entroncamento": "Santarém",
+    "Espinho": "Aveiro", "Esposende": "Braga", "Estarreja": "Aveiro",
+    "Estremoz": "Évora", "Évora": "Évora", "Fafe": "Braga",
+    "Faro": "Faro", "Felgueiras": "Porto", "Ferreira do Alentejo": "Beja",
+    "Ferreira do Zêzere": "Santarém", "Figueira da Foz": "Coimbra",
+    "Figueira de Castelo Rodrigo": "Guarda", "Figueiró dos Vinhos": "Leiria",
+    "Fornos de Algodres": "Guarda", "Freixo de Espada à Cinta": "Bragança",
+    "Fronteira": "Portalegre", "Funchal": "Madeira", "Góis": "Coimbra",
+    "Gondomar": "Porto", "Gouveia": "Guarda", "Grândola": "Setúbal",
+    "Guarda": "Guarda", "Guimarães": "Braga", "Idanha-a-Nova": "Castelo Branco",
+    "Ílhavo": "Aveiro", "Lagoa": "Faro", "Lagos": "Faro",
+    "Lajes das Flores": "Açores", "Lajes do Pico": "Açores", "Lamego": "Viseu",
+    "Leiria": "Leiria", "Lisboa": "Lisboa", "Loulé": "Faro",
+    "Loures": "Lisboa", "Lourinhã": "Lisboa", "Lousã": "Coimbra",
+    "Lousada": "Porto", "Macedo de Cavaleiros": "Bragança", "Mafra": "Lisboa",
+    "Maia": "Porto", "Manteigas": "Guarda", "Marco de Canaveses": "Porto",
+    "Marinha Grande": "Leiria", "Marvão": "Portalegre", "Matosinhos": "Porto",
+    "Mealhada": "Aveiro", "Mêda": "Guarda", "Melgaço": "Viana do Castelo",
+    "Mesão Frio": "Vila Real", "Mértola": "Beja", "Mira": "Coimbra",
+    "Miranda do Corvo": "Coimbra", "Miranda do Douro": "Bragança",
+    "Mirandela": "Bragança", "Mogadouro": "Bragança", "Moimenta da Beira": "Viseu",
+    "Moita": "Setúbal", "Monção": "Viana do Castelo", "Monchique": "Faro",
+    "Mondim de Basto": "Vila Real", "Monforte": "Portalegre",
+    "Montalegre": "Vila Real", "Montemor-o-Novo": "Évora",
+    "Montemor-o-Velho": "Coimbra", "Montijo": "Setúbal", "Mora": "Évora",
+    "Mortágua": "Viseu", "Moura": "Beja", "Mourão": "Évora",
+    "Murça": "Vila Real", "Murtosa": "Aveiro", "Nazaré": "Leiria",
+    "Nelas": "Viseu", "Nisa": "Portalegre", "Nordeste": "Açores",
+    "Óbidos": "Leiria", "Odemira": "Beja", "Odivelas": "Lisboa",
+    "Oeiras": "Lisboa", "Oleiros": "Castelo Branco", "Olhão": "Faro",
+    "Oliveira de Azeméis": "Aveiro", "Oliveira de Frades": "Viseu",
+    "Oliveira do Bairro": "Aveiro", "Oliveira do Hospital": "Coimbra",
+    "Ourém": "Santarém", "Ourique": "Beja", "Ovar": "Aveiro",
+    "Paços de Ferreira": "Porto", "Palmela": "Setúbal",
+    "Pampilhosa da Serra": "Coimbra", "Paredes": "Porto",
+    "Paredes de Coura": "Viana do Castelo", "Pedrógão Grande": "Leiria",
+    "Penacova": "Coimbra", "Penafiel": "Porto", "Penalva do Castelo": "Viseu",
+    "Penamacor": "Castelo Branco", "Penedono": "Viseu", "Penela": "Coimbra",
+    "Peniche": "Leiria", "Peso da Régua": "Vila Real", "Pinhel": "Guarda",
+    "Pombal": "Leiria", "Ponte da Barca": "Viana do Castelo",
+    "Ponte de Lima": "Viana do Castelo", "Ponte de Sor": "Portalegre",
+    "Portalegre": "Portalegre", "Portel": "Évora", "Portimão": "Faro",
+    "Porto": "Porto", "Porto de Mós": "Leiria", "Póvoa de Lanhoso": "Braga",
+    "Póvoa de Varzim": "Porto", "Proença-a-Nova": "Castelo Branco",
+    "Redondo": "Évora", "Reguengos de Monsaraz": "Évora", "Resende": "Viseu",
+    "Rio Maior": "Santarém", "Sabrosa": "Vila Real", "Sabugal": "Guarda",
+    "Salvaterra de Magos": "Santarém", "Santa Comba Dão": "Viseu",
+    "Santa Maria da Feira": "Aveiro", "Santa Marta de Penaguião": "Vila Real",
+    "Santarém": "Santarém", "Santiago do Cacém": "Setúbal", "Santo Tirso": "Porto",
+    "São Brás de Alportel": "Faro", "São João da Madeira": "Aveiro",
+    "São João da Pesqueira": "Viseu", "São Pedro do Sul": "Viseu",
+    "Sardoal": "Santarém", "Sátão": "Viseu", "Seia": "Guarda",
+    "Seixal": "Setúbal", "Sernancelhe": "Viseu", "Serpa": "Beja",
+    "Sertã": "Castelo Branco", "Sesimbra": "Setúbal", "Setúbal": "Setúbal",
+    "Sever do Vouga": "Aveiro", "Silves": "Faro", "Sines": "Setúbal",
+    "Sintra": "Lisboa", "Sobral de Monte Agraço": "Lisboa", "Soure": "Coimbra",
+    "Sousel": "Portalegre", "Tábua": "Coimbra", "Tabuaço": "Viseu",
+    "Tarouca": "Viseu", "Tavira": "Faro", "Terras de Bouro": "Braga",
+    "Tomar": "Santarém", "Tondela": "Viseu", "Torre de Moncorvo": "Bragança",
+    "Torres Novas": "Santarém", "Torres Vedras": "Lisboa", "Trancoso": "Guarda",
+    "Trofa": "Porto", "Vagos": "Aveiro", "Vale de Cambra": "Aveiro",
+    "Valença": "Viana do Castelo", "Valongo": "Porto", "Valpaços": "Vila Real",
+    "Velas": "Açores", "Vendas Novas": "Évora", "Viana do Alentejo": "Évora",
+    "Viana do Castelo": "Viana do Castelo", "Vidigueira": "Beja",
+    "Vieira do Minho": "Braga", "Vila de Rei": "Castelo Branco",
+    "Vila do Bispo": "Faro", "Vila do Conde": "Porto", "Vila Flor": "Bragança",
+    "Vila Franca de Xira": "Lisboa", "Vila Nova da Barquinha": "Santarém",
+    "Vila Nova de Cerveira": "Viana do Castelo", "Vila Nova de Famalicão": "Braga",
+    "Vila Nova de Foz Côa": "Guarda", "Vila Nova de Gaia": "Porto",
+    "Vila Nova de Paiva": "Viseu", "Vila Nova de Poiares": "Coimbra",
+    "Vila Pouca de Aguiar": "Vila Real", "Vila Real": "Vila Real",
+    "Vila Real de Santo António": "Faro", "Vila Velha de Ródão": "Castelo Branco",
+    "Vila Verde": "Braga", "Vila Viçosa": "Évora", "Vimioso": "Bragança",
+    "Vinhais": "Bragança", "Viseu": "Viseu", "Vizela": "Braga",
+    "Vouzela": "Viseu",
+}
+
 DISPLAY_HELP: dict[str, str] = {
     "Var_Pop": "Variação populacional entre 2011 e 2021. Valores negativos indicam desertificação.",
     "IEI_Score": "Índice de 0 a 100 baseado no histórico de 20 anos de capturas. Valores baixos indicam abandono e letargia digital.",
@@ -226,540 +434,6 @@ MAPPING_DICT = {
 }
 
 
-def inject_css() -> None:
-    st.markdown(
-        """
-        <style>
-            :root {
-                --bg-main: #07111f;
-                --bg-panel: rgba(12, 22, 38, 0.88);
-                --bg-panel-strong: rgba(9, 18, 31, 0.96);
-                --line-soft: rgba(255, 255, 255, 0.08);
-                --text-main: #ecf6ff;
-                --text-soft: #9db0c7;
-                --cyan: #00E5FF;
-                --red: #FF3366;
-                --amber: #FF9F1C;
-                --yellow: #FFD166;
-                --neutral: #8A93A6;
-                --radius-xl: 24px;
-                --radius-lg: 18px;
-                --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.28);
-            }
-
-            .stApp {
-                background:
-                    radial-gradient(circle at top left, rgba(0, 229, 255, 0.11), transparent 28%),
-                    radial-gradient(circle at top right, rgba(255, 51, 102, 0.10), transparent 22%),
-                    linear-gradient(180deg, #050d18 0%, #081322 100%);
-                color: var(--text-main);
-            }
-
-            [data-testid="stSidebar"] {
-                background:
-                    linear-gradient(180deg, rgba(6, 14, 24, 0.98) 0%, rgba(7, 17, 31, 0.94) 100%);
-                border-right: 1px solid rgba(255, 255, 255, 0.06);
-            }
-
-            [data-testid="stSidebar"] .block-container {
-                padding-top: 1.2rem;
-            }
-
-            [data-testid="stSidebar"] [data-testid="stMetric"] {
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                border-radius: 18px;
-                padding: 0.35rem 0.7rem;
-            }
-
-            .brand-shell {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                gap: 0.8rem;
-                padding: 1.1rem 0 1.4rem 0;
-            }
-
-            .brand-orb {
-                width: 116px;
-                height: 116px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 2.8rem;
-                background:
-                    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.02) 38%),
-                    radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.18), transparent 62%),
-                    linear-gradient(180deg, rgba(16, 33, 56, 0.96), rgba(8, 17, 30, 0.96));
-                border: 1px solid rgba(0, 229, 255, 0.35);
-                box-shadow:
-                    0 0 0 10px rgba(0, 229, 255, 0.05),
-                    0 0 48px rgba(0, 229, 255, 0.24),
-                    inset 0 0 32px rgba(0, 229, 255, 0.12);
-                color: var(--text-main);
-            }
-
-            .brand-caption {
-                color: var(--text-soft);
-                text-transform: uppercase;
-                letter-spacing: 0.24rem;
-                font-size: 0.68rem;
-            }
-
-            .sidebar-title {
-                font-size: 1.55rem;
-                font-weight: 700;
-                letter-spacing: 0.10rem;
-                text-align: center;
-                color: var(--text-main);
-                margin: 0.2rem 0 1rem 0;
-            }
-
-            .about-card,
-            .hero-card,
-            .premium-panel,
-            .status-card,
-            .detail-card,
-            .mini-indicator,
-            .legend-bar {
-                background: var(--bg-panel);
-                border: 1px solid var(--line-soft);
-                border-radius: var(--radius-xl);
-                box-shadow: var(--shadow-soft);
-            }
-
-            .about-card {
-                padding: 1rem 1rem 0.95rem 1rem;
-                margin-bottom: 1rem;
-            }
-
-            .about-card h4,
-            .section-title {
-                margin: 0 0 0.55rem 0;
-                color: var(--text-main);
-                font-size: 0.95rem;
-                font-weight: 700;
-                letter-spacing: 0.03rem;
-            }
-
-            .about-card p,
-            .hero-subtitle,
-            .caption-note,
-            .status-copy,
-            .empty-copy {
-                color: var(--text-soft);
-                line-height: 1.6;
-                font-size: 0.92rem;
-                margin: 0;
-            }
-
-            .sidebar-divider {
-                margin: 1rem 0 0.7rem 0;
-                border-top: 1px solid rgba(255, 255, 255, 0.06);
-            }
-
-            .filter-block-label {
-                color: var(--text-main);
-                font-size: 0.78rem;
-                font-weight: 700;
-                letter-spacing: 0.08rem;
-                text-transform: uppercase;
-                margin-bottom: 0.55rem;
-            }
-
-            .filters-state {
-                margin-top: 0.9rem;
-                padding: 0.85rem 0.95rem;
-                border-radius: 18px;
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-            }
-
-            .filters-state strong {
-                display: block;
-                color: var(--text-main);
-                font-size: 1.05rem;
-            }
-
-            .filters-state span {
-                color: var(--text-soft);
-                font-size: 0.82rem;
-                text-transform: uppercase;
-                letter-spacing: 0.06rem;
-            }
-
-            .hero-card {
-                padding: 1.55rem 1.7rem 1.45rem 1.7rem;
-                margin-bottom: 1.15rem;
-                background:
-                    radial-gradient(circle at right top, rgba(0, 229, 255, 0.10), transparent 24%),
-                    linear-gradient(180deg, rgba(8, 18, 32, 0.96), rgba(9, 17, 31, 0.92));
-            }
-
-            .hero-kicker {
-                color: var(--cyan);
-                font-size: 0.74rem;
-                text-transform: uppercase;
-                letter-spacing: 0.18rem;
-                margin-bottom: 0.55rem;
-                font-weight: 700;
-            }
-
-            .hero-title {
-                color: var(--text-main);
-                font-size: clamp(1.8rem, 3vw, 2.75rem);
-                font-weight: 800;
-                line-height: 1.08;
-                margin: 0 0 0.55rem 0;
-            }
-
-            .metric-card {
-                border-radius: 22px;
-                padding: 1.1rem 1.2rem 1rem 1.2rem;
-                min-height: 162px;
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                box-shadow: var(--shadow-soft);
-                position: relative;
-                overflow: hidden;
-            }
-
-            .metric-card::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%);
-                pointer-events: none;
-            }
-
-            .metric-kicker {
-                color: rgba(255, 255, 255, 0.78);
-                font-size: 0.74rem;
-                text-transform: uppercase;
-                letter-spacing: 0.12rem;
-                font-weight: 700;
-                margin-bottom: 0.7rem;
-            }
-
-            .metric-value {
-                color: #ffffff;
-                font-size: 2.4rem;
-                font-weight: 800;
-                line-height: 1;
-                margin-bottom: 0.5rem;
-            }
-
-            .metric-title {
-                color: var(--text-main);
-                font-size: 1.02rem;
-                font-weight: 700;
-                margin-bottom: 0.45rem;
-            }
-
-            .metric-subtitle {
-                color: rgba(236, 246, 255, 0.72);
-                font-size: 0.88rem;
-                line-height: 1.45;
-            }
-
-            .mini-indicator {
-                padding: 0.95rem 1.05rem;
-                margin: 0.75rem 0 1.15rem 0;
-            }
-
-            .mini-indicator strong {
-                color: var(--text-main);
-                font-size: 1rem;
-            }
-
-            .mini-indicator span {
-                color: var(--text-soft);
-                font-size: 0.9rem;
-                margin-left: 0.35rem;
-            }
-
-            .premium-panel {
-                padding: 1.2rem 1.25rem 1.15rem 1.25rem;
-                height: 100%;
-                background:
-                    linear-gradient(180deg, rgba(11, 23, 39, 0.94), rgba(8, 17, 30, 0.92));
-            }
-
-            .panel-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 1rem;
-                margin-bottom: 0.9rem;
-            }
-
-            .panel-header h3 {
-                color: var(--text-main);
-                margin: 0;
-                font-size: 1.12rem;
-                font-weight: 700;
-            }
-
-            .panel-pill {
-                padding: 0.35rem 0.7rem;
-                border-radius: 999px;
-                background: rgba(0, 229, 255, 0.10);
-                border: 1px solid rgba(0, 229, 255, 0.22);
-                color: var(--cyan);
-                font-size: 0.78rem;
-                font-weight: 700;
-                white-space: nowrap;
-            }
-
-            .caption-box {
-                margin-top: 0.85rem;
-                padding: 0.9rem 1rem;
-                border-radius: 18px;
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-            }
-
-            .status-card {
-                padding: 1rem 1.05rem;
-                margin: 0.25rem 0 0.75rem 0;
-            }
-
-            .status-card strong {
-                display: block;
-                color: var(--text-main);
-                margin-bottom: 0.35rem;
-                font-size: 1rem;
-            }
-
-            .status-card.warning {
-                border-color: rgba(255, 209, 102, 0.18);
-                background: linear-gradient(180deg, rgba(38, 28, 5, 0.55), rgba(22, 18, 7, 0.48));
-            }
-
-            .status-card.error {
-                border-color: rgba(255, 51, 102, 0.22);
-                background: linear-gradient(180deg, rgba(48, 7, 20, 0.62), rgba(26, 11, 18, 0.52));
-            }
-
-            .status-card.info {
-                border-color: rgba(0, 229, 255, 0.18);
-                background: linear-gradient(180deg, rgba(8, 27, 42, 0.72), rgba(8, 18, 31, 0.48));
-            }
-
-            .detail-card {
-                padding: 1rem 1rem 0.95rem 1rem;
-                margin-top: 0.85rem;
-            }
-
-            .detail-grid {
-                display: grid;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 0.8rem;
-                margin-top: 0.95rem;
-            }
-
-            .detail-item {
-                padding: 0.85rem 0.9rem;
-                border-radius: 16px;
-                background: rgba(255, 255, 255, 0.03);
-                border: 1px solid rgba(255, 255, 255, 0.05);
-            }
-
-            .detail-item span {
-                display: block;
-                color: var(--text-soft);
-                font-size: 0.76rem;
-                text-transform: uppercase;
-                letter-spacing: 0.06rem;
-                margin-bottom: 0.35rem;
-            }
-
-            .detail-item strong {
-                color: var(--text-main);
-                font-size: 1rem;
-                line-height: 1.35;
-            }
-
-            .tier-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.45rem;
-                padding: 0.45rem 0.8rem;
-                border-radius: 999px;
-                font-size: 0.84rem;
-                font-weight: 700;
-                margin-top: 0.25rem;
-                border: 1px solid transparent;
-            }
-
-            .legend-bar {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.6rem;
-                padding: 0.85rem 1rem;
-                margin: 0.45rem 0 0.95rem 0;
-            }
-
-            .legend-chip {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.45rem;
-                padding: 0.42rem 0.72rem;
-                border-radius: 999px;
-                font-size: 0.8rem;
-                color: var(--text-main);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                background: rgba(255, 255, 255, 0.03);
-            }
-
-            .legend-dot {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                flex: 0 0 auto;
-            }
-
-            .empty-card {
-                padding: 1rem 1.05rem;
-                border-radius: 18px;
-                border: 1px dashed rgba(255, 255, 255, 0.12);
-                background: rgba(255, 255, 255, 0.02);
-                margin-top: 0.85rem;
-            }
-
-            .empty-card strong {
-                display: block;
-                color: var(--text-main);
-                margin-bottom: 0.35rem;
-            }
-
-            [data-testid="stDataFrame"] {
-                border-radius: 22px;
-                overflow: hidden;
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                background: rgba(7, 15, 26, 0.85);
-            }
-
-            @media (max-width: 980px) {
-                .detail-grid {
-                    grid-template-columns: 1fr;
-                }
-            }
-
-            /* KPI row glassmorphism upgrade */
-            .metric-card {
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.09);
-                box-shadow:
-                    0 20px 48px rgba(0, 0, 0, 0.32),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.07);
-            }
-
-            /* Premium panel upgrade */
-            .premium-panel {
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-            }
-
-            /* Typography refinements */
-            .hero-title {
-                background: linear-gradient(135deg, #ffffff 0%, #b0d4f1 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-            }
-
-            /* Detail card glassmorphism upgrade */
-            .detail-card {
-                backdrop-filter: blur(14px);
-                -webkit-backdrop-filter: blur(14px);
-                background: linear-gradient(
-                    135deg,
-                    rgba(11, 26, 45, 0.92),
-                    rgba(7, 15, 26, 0.88)
-                );
-                border: 1px solid rgba(255, 255, 255, 0.09);
-                box-shadow:
-                    0 24px 52px rgba(0, 0, 0, 0.36),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-            }
-
-            /* Detail grid — 1-column for breathing room */
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-
-            /* Help text below each metric value */
-            .detail-help {
-                color: var(--text-soft);
-                font-size: 0.74rem;
-                line-height: 1.5;
-                margin-top: 0.28rem;
-                opacity: 0.85;
-            }
-
-            /* ── CHANGE 1 additions ── */
-            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-
-            html, body, [class*="css"] { font-family: 'Space Grotesk', sans-serif !important; }
-
-            [data-testid="stToolbar"] { display: none !important; }
-            [data-testid="stHeader"]  { display: none !important; }
-            #MainMenu                  { display: none !important; }
-            footer                     { display: none !important; }
-            .block-container           { padding: 1.5rem 2rem 2rem 2rem !important; max-width: 100% !important; }
-
-            .stApp { background: radial-gradient(ellipse at top left, #0d1117 0%, #060a0f 100%) !important; }
-
-            .kpi-card {
-                background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border: 1px solid rgba(255,255,255,0.05);
-                border-radius: 12px;
-                padding: 1.4rem 1.6rem;
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-                margin-bottom: 0.5rem;
-            }
-            .kpi-card:hover {
-                transform: translateY(-5px);
-            }
-            .kpi-card .kpi-value {
-                font-size: 2.8rem;
-                font-weight: 700;
-                line-height: 1;
-                margin-bottom: 0.3rem;
-            }
-            .kpi-card .kpi-label {
-                font-size: 0.65rem;
-                letter-spacing: 1.5px;
-                text-transform: uppercase;
-                opacity: 0.65;
-                color: #ffffff;
-            }
-            .kpi-card .kpi-sub {
-                font-size: 0.75rem;
-                opacity: 0.45;
-                margin-top: 0.2rem;
-            }
-
-            .cassandra-title {
-                font-family: 'Space Grotesk', sans-serif;
-                font-size: 2.2rem;
-                font-weight: 700;
-                letter-spacing: 3px;
-                color: #ffffff;
-                text-shadow: 0 0 20px rgba(0, 229, 255, 0.4), 0 0 60px rgba(0, 229, 255, 0.15);
-                margin-bottom: 0.2rem;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
 def strip_accents(value: str) -> str:
     return "".join(
         char for char in unicodedata.normalize("NFKD", value)
@@ -817,7 +491,10 @@ def load_risk_dataset(csv_path: str) -> tuple[pd.DataFrame | None, str | None]:
     if not is_valid:
         return None, validation_error
 
-    prepared = dataframe.loc[:, REQUIRED_COLUMNS].copy()
+    load_cols = list(REQUIRED_COLUMNS)
+    if "CASSANDRA_Risk_Score" in dataframe.columns:
+        load_cols.append("CASSANDRA_Risk_Score")
+    prepared = dataframe.loc[:, load_cols].copy()
     prepared["Município"] = prepared["Município"].astype(str).str.strip()
     prepared["Live_StatusCode"] = prepared["Live_StatusCode"].astype(str).str.strip()
     prepared["CASSANDRA_Risk_Tier"] = prepared["CASSANDRA_Risk_Tier"].astype(str).str.strip()
@@ -826,6 +503,10 @@ def load_risk_dataset(csv_path: str) -> tuple[pd.DataFrame | None, str | None]:
     prepared["Total_Arquivo_Captures"] = pd.to_numeric(
         prepared["Total_Arquivo_Captures"], errors="coerce"
     )
+    if "CASSANDRA_Risk_Score" in prepared.columns:
+        prepared["CASSANDRA_Risk_Score"] = pd.to_numeric(
+            prepared["CASSANDRA_Risk_Score"], errors="coerce"
+        )
     prepared["__municipio_normalized"] = prepared["Município"].map(normalize_search_text)
     prepared["mun_key"] = prepared["Município"].map(normalize_municipality)
 
@@ -1047,6 +728,8 @@ def prepare_map_dataframe(
         lambda value: format_decimal(value, 2)
     )
     matched["__hover_status_code"] = matched["Live_StatusCode"].astype(str)
+    if "CASSANDRA_Risk_Score" in dataframe.columns:
+        matched["CASSANDRA_Risk_Score"] = matched["CASSANDRA_Risk_Score"]
     return matched, unmatched
 
 
@@ -1489,8 +1172,137 @@ def render_detail_card(row: pd.Series) -> None:
         unsafe_allow_html=True,
     )
 
+    score_val = row.get("CASSANDRA_Risk_Score", None)
+    if score_val is not None and not pd.isna(score_val):
+        if score_val >= 75:
+            score_color = "#FF3366"
+        elif score_val >= 40:
+            score_color = "#FFAA00"
+        else:
+            score_color = "#69FF47"
+        score_str = f"{score_val:.1f}".replace(".", ",") + "%"
+    else:
+        score_color = "#8A93A6"
+        score_str = "N/D"
+    st.markdown(
+        (
+            "<div class='detail-card' style='margin-top:0.55rem;'>"
+            "<div class='detail-grid'>"
+            "<div class='detail-item'>"
+            f"<span>{html.escape(DISPLAY_LABELS['CASSANDRA_Risk_Score'])}</span>"
+            f"<strong style='color:{score_color};'>{score_str}</strong>"
+            "</div>"
+            "</div>"
+            "</div>"
+        ),
+        unsafe_allow_html=True,
+    )
+    st.caption(
+        "Probabilidade matemática de colapso demográfico-digital calculada"
+        " pelo motor XGBoost. Escala 0–100."
+    )
 
-def render_search_panel(filtered_dataframe: pd.DataFrame) -> None:
+    # ── PRR SIMULATOR ──────────────────────────────────────────────────────────
+    if score_val is not None and not pd.isna(score_val):
+        # Heuristic: calibrated against INE census loss rates in
+        # high-risk PT municipalities (2001→2021 median = 150‰ per decade)
+        HUMAN_COST_RATE = 150
+        loss_per_1000 = max(1, int((float(score_val) / 100.0) * HUMAN_COST_RATE))
+        loss_color = "#FF3366" if loss_per_1000 >= 113 else (
+                     "#FFAA00" if loss_per_1000 >= 60 else "#69FF47"
+                    )
+        loss_str = f"\u2212{format_integer(loss_per_1000)} hab. / 1.000 residentes"
+        st.markdown(
+            (
+                "<div class='detail-card' style='margin-top:0.55rem;'>"
+                "<div class='panel-header' style='margin-bottom:0.35rem;'>"
+                "<h3>Impacto Demográfico Estimado</h3>"
+                "<div class='panel-pill'>Heurística INE</div>"
+                "</div>"
+                "<div class='detail-grid'>"
+                "<div class='detail-item'>"
+                "<span>👥 Custo Humano Projetado (2035)</span>"
+                f"<strong style='color:{loss_color};'>{loss_str}</strong>"
+                "<p class='detail-help'>"
+                "Projeção heurística por cada 1.000 residentes na próxima"
+                " década. Baseada na taxa de colapso calibrada com dados INE"
+                " 2001→2021."
+                "</p>"
+                "</div>"
+                "</div>"
+                "</div>"
+            ),
+            unsafe_allow_html=True,
+        )
+        st.caption(
+            "Cassandra projeta: o risco percentual representa famílias "
+            "que abandonarão o território na próxima geração."
+        )
+
+        # IEI extraction with NaN fallback
+        raw_iei = row.get("IEI_Score", None)
+        current_iei = float(raw_iei) if raw_iei is not None and not pd.isna(raw_iei) else 0.0
+        current_iei = max(0.0, min(current_iei, 99.0))  # cap at 99 so slider always has room
+
+        simulated_iei = st.slider(
+            "Simular modernização digital (Novo IEI Score)",
+            min_value=0.0,
+            max_value=100.0,
+            value=current_iei,
+            step=1.0,
+            key=f"prr_slider_{municipality}",
+        )
+
+        delta_iei = simulated_iei - current_iei
+
+        if delta_iei > 0:
+            # Heuristic: derived from mean |SHAP| of IEI_Score ≈ 0.35 pts
+            # risk reduction per 1 pt IEI gain (proxy for XGBoost sensitivity)
+            HEURISTIC_COEFF = 0.35
+            current_risk = float(score_val)  # already validated above
+            new_risk = max(0.5, current_risk - (delta_iei * HEURISTIC_COEFF))
+            risk_reduction = round(current_risk - new_risk, 1)
+
+            # Determine color for projected risk using same 3-threshold logic as score_color
+            if new_risk >= 75:
+                new_risk_color = "#FF3366"
+            elif new_risk >= 40:
+                new_risk_color = "#FFAA00"
+            else:
+                new_risk_color = "#69FF47"
+
+            st.markdown(
+                (
+                    "<div class='detail-card' style='margin-top:0.55rem;'>"
+                    "<div class='panel-header' style='margin-bottom:0.35rem;'>"
+                    "<h3>💼 Simulador de Intervenção PRR — Projeção</h3>"
+                    "</div>"
+                    "<div class='detail-grid' style='display:grid;grid-template-columns:1fr 1fr;'>"
+                    "<div class='detail-item'>"
+                    "<span>Risco Pós-Intervenção</span>"
+                    f"<strong style='color:{new_risk_color};'>{format_decimal(new_risk, 1, '%')}</strong>"
+                    "</div>"
+                    "<div class='detail-item'>"
+                    "<span>Redução Estimada</span>"
+                    f"<strong style='color:#69FF47;'>-{format_decimal(risk_reduction, 1, '%')}</strong>"
+                    "</div>"
+                    "</div>"
+                    "<p class='detail-help'>"
+                    "Projeção heurística baseada no impacto SHAP do IEI Score. "
+                    "Não substitui modelação completa."
+                    "</p>"
+                    "<p style='color:#8A93A6; font-style:italic; font-size:0.8rem;'>"
+                    "Cassandra projeta: capital digital injetado reverte "
+                    "a letargia demográfica progressiva."
+                    "</p>"
+                    "</div>"
+                ),
+                unsafe_allow_html=True,
+            )
+    # ── END PRR SIMULATOR ──────────────────────────────────────────────────────
+
+
+def render_search_panel(filtered_dataframe: pd.DataFrame, dataframe: pd.DataFrame) -> None:
     st.markdown(
         """
         <div class="panel-header">
@@ -1563,6 +1375,85 @@ def render_search_panel(filtered_dataframe: pd.DataFrame) -> None:
     selected_row = filtered_dataframe.loc[filtered_dataframe["Município"] == selected].iloc[0]
     render_detail_card(selected_row)
 
+    # ── Political Pressure Radar ─────────────────────────────────────────────
+    mun_distrito = DISTRITO_MAP.get(selected, None)
+    if mun_distrito is None:
+        pass
+    else:
+        pool = dataframe[
+            dataframe["Município"].map(
+                lambda m: DISTRITO_MAP.get(m, None)
+            ) == mun_distrito
+        ].copy()
+        if not pool.empty and "CASSANDRA_Risk_Score" in pool.columns:
+            pool_valid = pool.dropna(subset=["CASSANDRA_Risk_Score"])
+            if not pool_valid.empty:
+                best_row = pool_valid.loc[pool_valid["CASSANDRA_Risk_Score"].idxmin()]
+                best_mun = str(best_row["Município"])
+                best_risk = float(best_row["CASSANDRA_Risk_Score"])
+                selected_risk_val = selected_row.get("CASSANDRA_Risk_Score", None)
+
+                best_risk_str = f"{best_risk:.1f}".replace(".", ",")
+                selected_risk_str = (
+                    f"{float(selected_risk_val):.1f}".replace(".", ",")
+                    if selected_risk_val is not None and not pd.isna(selected_risk_val)
+                    else "N/D"
+                )
+
+                if best_mun == selected:
+                    # Case A — selected IS the best
+                    body_color = "#69FF47"
+                    body_text = (
+                        f"🏆 {selected} é o município líder na transição digital "
+                        f"do Distrito de {mun_distrito}, com um risco de {best_risk_str}%."
+                    )
+                    caption_text = (
+                        "Cassandra confirma: esta autarquia é referência "
+                        "regional na resiliência demográfico-digital."
+                    )
+                    label_text = "Liderança Regional"
+                else:
+                    # Case B — selected is NOT the best
+                    delta_val = (
+                        float(selected_risk_val) - best_risk
+                        if selected_risk_val is not None and not pd.isna(selected_risk_val)
+                        else 0.0
+                    )
+                    body_color = "#FF3366" if delta_val > 30 else "#FFAA00"
+                    delta_str = f"{abs(delta_val):.1f}".replace(".", ",")
+                    body_text = (
+                        f"📍 O município líder no Distrito de {mun_distrito} é "
+                        f"{best_mun}, com um risco de {best_risk_str}% "
+                        f"(vs {selected_risk_str}% aqui). A letargia digital "
+                        f"é uma escolha política local."
+                    )
+                    caption_text = (
+                        f"Cassandra alerta: a diferença de {delta_str}% "
+                        "face ao líder regional é reversível com "
+                        "intervenção estruturada."
+                    )
+                    label_text = "Pressão Política"
+
+                st.markdown(
+                    f"""
+                    <div class='detail-card' style='margin-top:0.55rem;'>
+                        <div class='panel-header' style='margin-bottom:0.35rem;'>
+                            <h3>Radar Regional &#8212; Distrito de {mun_distrito}</h3>
+                            <div class='panel-pill'>{label_text}</div>
+                        </div>
+                        <div class='detail-grid'>
+                            <div class='detail-item'>
+                                <span>Posicionamento no distrito</span>
+                                <strong style='color:{body_color};'>{body_text}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+                st.caption(caption_text)
+
+
 
 def style_oracle_row(row: pd.Series) -> list[str]:
     _tier_col = DISPLAY_LABELS["CASSANDRA_Risk_Tier"]
@@ -1589,7 +1480,18 @@ def style_tier_column(column: pd.Series) -> list[str]:
 
 
 def build_oracle_styler(dataframe: pd.DataFrame) -> pd.io.formats.style.Styler:
-    display_df = dataframe.loc[:, REQUIRED_COLUMNS].copy()
+    base_cols = list(REQUIRED_COLUMNS)
+    if "CASSANDRA_Risk_Score" in dataframe.columns:
+        tier_idx = base_cols.index("CASSANDRA_Risk_Tier")
+        base_cols.insert(tier_idx + 1, "CASSANDRA_Risk_Score")
+
+    display_df = dataframe.loc[:, base_cols].copy()
+
+    if "CASSANDRA_Risk_Score" in display_df.columns:
+        display_df["CASSANDRA_Risk_Score"] = display_df["CASSANDRA_Risk_Score"].apply(
+            lambda x: f"{x:.1f}".replace(".", ",") + "%" if pd.notna(x) else "N/D"
+        )
+
     display_df = display_df.rename(columns=DISPLAY_LABELS)
 
     tier_col = DISPLAY_LABELS["CASSANDRA_Risk_Tier"]
@@ -1683,8 +1585,6 @@ def render_data_error_state(
 
 
 def main() -> None:
-    inject_css()
-
     dataframe, data_error = load_risk_dataset(str(CSV_PATH))
     geojson_contract, geojson_error = load_geojson_map_contract(str(GEOJSON_PATH))
     selected_tiers, selected_status_codes = render_sidebar(dataframe, data_error)
@@ -1729,7 +1629,7 @@ def main() -> None:
         render_map_panel(filtered_dataframe, dataframe, geojson_contract, geojson_error)
 
     with right_column:
-        render_search_panel(filtered_dataframe)
+        render_search_panel(filtered_dataframe, dataframe)
 
     render_oracle_log(filtered_dataframe)
 

@@ -1,0 +1,3297 @@
+<!DOCTYPE html>
+<!--
+// QUESTION 1: Where is the municipality data stored?
+// - The 308 municipalities are stored in a JavaScript array/object loaded from:
+//   filename: assets/dashboard_data.js
+//   load URL in this file: ./assets/dashboard_data.js (via <script src="./assets/dashboard_data.js"></script>)
+// - Main variable name with municipality entries: DASHBOARD_DATA.oracle_log
+// - This is not fetched from .csv/.json at runtime in this file.
+// - First 2 entries in DASHBOARD_DATA.oracle_log:
+//   {
+//     "id": "001",
+//     "municipio": "Abrantes",
+//     "tier": 4,
+//     "score": 86.7,
+//     "var_pop": "-12.2%",
+//     "date": "2026-01-01"
+//   }
+//   {
+//     "id": "002",
+//     "municipio": "Aguiar da Beira",
+//     "tier": 4,
+//     "score": 98.5,
+//     "var_pop": "-6.0%",
+//     "date": "2026-01-01"
+//   }
+//
+// QUESTION 2: What score fields exist per municipality?
+// - Properties/keys per municipality entry in DASHBOARD_DATA.oracle_log:
+//   id, municipio, tier, score, var_pop, date
+// - One complete municipality object example:
+//   {
+//     "id": "001",
+//     "municipio": "Abrantes",
+//     "tier": 4,
+//     "score": 86.7,
+//     "var_pop": "-12.2%",
+//     "date": "2026-01-01"
+//   }
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CASSANDRA Oracle Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="./assets/dashboard_data.js"></script>
+  <script src="./assets/tier_data.js"></script>
+  <style>
+    :root {
+      --surface-tint: #5f5e5e;
+      --surface-bright: #fdf8f8;
+      --surface: #fdf8f8;
+      --on-tertiary-fixed-variant: #484645;
+      --on-tertiary-fixed: #1c1b1a;
+      --on-secondary-fixed-variant: #4a463d;
+      --surface-container: #f1edec;
+      --error-container: #ffdad6;
+      --secondary-fixed-dim: #ccc6b9;
+      --on-tertiary-container: #868382;
+      --primary-fixed: #e5e2e1;
+      --on-error-container: #93000a;
+      --on-primary-container: #858383;
+      --surface-container-low: #f7f3f2;
+      --surface-container-high: #ebe7e6;
+      --primary-container: #1c1b1b;
+      --on-surface-variant: #444748;
+      --tertiary: #000000;
+      --secondary: #625e54;
+      --inverse-primary: #c8c6c5;
+      --on-primary: #ffffff;
+      --tertiary-fixed-dim: #cac6c4;
+      --tertiary-container: #1c1b1a;
+      --outline: #747878;
+      --outline-variant: #c4c7c7;
+      --inverse-on-surface: #f4f0ef;
+      --inverse-surface: #313030;
+      --background: #fdf8f8;
+      --primary: #000000;
+      --on-secondary-fixed: #1e1b13;
+      --on-secondary: #ffffff;
+      --secondary-container: #e9e2d4;
+      --surface-container-lowest: #ffffff;
+      --tertiary-fixed: #e6e2df;
+      --on-background: #1c1b1b;
+      --on-primary-fixed-variant: #474746;
+      --secondary-fixed: #e9e2d4;
+      --surface-container-highest: #e5e2e1;
+      --on-tertiary: #ffffff;
+      --on-surface: #1c1b1b;
+      --on-error: #ffffff;
+      --surface-dim: #ddd9d8;
+      --on-secondary-container: #696459;
+      --primary-fixed-dim: #c8c6c5;
+      --error: #ba1a1a;
+      --on-primary-fixed: #1c1b1b;
+      --surface-variant: #e5e2e1;
+      --brand-critical: #FF3366;
+      --brand-elevated: #FFAA00;
+      --brand-moderate: #FFD166;
+      --brand-controlled: #00E5FF;
+      --shadow-hard: 4px 4px 0 0 #1c1b1b;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-radius: 0 !important;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: var(--background);
+      color: var(--on-background);
+      font-family: "Work Sans", sans-serif;
+      font-size: 16px;
+      line-height: 24px;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .font-space {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    a,
+    button {
+      transition: none !important;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-nav {
+      background: #fff;
+      border-bottom: 1px solid var(--outline-variant);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      padding: 24px 64px;
+      position: sticky;
+      top: 0;
+      z-index: 80;
+    }
+
+    .brand {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 0.32em;
+      color: #1c1b1b;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      font-family: "Space Grotesk", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 12px;
+      font-weight: 700;
+      color: #777;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+
+    .nav-link:hover {
+      background: #1c1b1b;
+      color: #fff;
+    }
+
+    .nav-link.active {
+      color: #1c1b1b;
+      border-bottom: 2px solid #1c1b1b;
+    }
+
+    .terminal-btn {
+      font-family: "Space Grotesk", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1c1b1b;
+      border: 1px solid #1c1b1b;
+      padding: 10px 14px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .terminal-btn:hover {
+      background: #1c1b1b;
+      color: #fff;
+    }
+
+    .page {
+      display: none;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px 64px 96px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .home-watermark {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(48px, 8vw, 120px);
+      line-height: 0.92;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      text-transform: uppercase;
+      opacity: 0.03;
+      white-space: nowrap;
+      margin: 0;
+    }
+
+    .home-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .home-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(42px, 5.6vw, 80px);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 0 0 20px;
+      padding-right: 18px;
+    }
+
+    .home-lead {
+      font-size: 20px;
+      line-height: 32px;
+      letter-spacing: -0.01em;
+      color: var(--on-surface-variant);
+      max-width: 720px;
+      margin: 0 0 36px;
+      border-left: 1px solid var(--outline);
+      padding-left: 24px;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn {
+      border: 1px solid #1c1b1b;
+      padding: 16px 24px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #fff;
+      color: #1c1b1b;
+    }
+
+    .btn.primary {
+      background: #1c1b1b;
+      color: #fff;
+      border-color: #1c1b1b;
+    }
+
+    .btn:hover,
+    .btn.primary:hover {
+      background: #fff;
+      color: #1c1b1b;
+      border-color: #1c1b1b;
+    }
+
+    .home-visual {
+      position: relative;
+      min-height: 600px;
+      border: none;
+      background: var(--surface-container-highest);
+      overflow: hidden;
+    }
+
+    .home-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1);
+      mix-blend-mode: multiply;
+      opacity: 0.8;
+    }
+
+    .home-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: none;
+      pointer-events: none;
+    }
+
+    .alert-card {
+      position: absolute;
+      left: -40px;
+      bottom: -40px;
+      width: 320px;
+      border: 1px solid var(--outline);
+      background: var(--surface);
+      padding: 22px;
+      box-shadow: var(--shadow-hard);
+    }
+
+    .alert-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--brand-critical);
+    }
+
+    .alert-head {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--surface-dim);
+      margin-bottom: 12px;
+    }
+
+    .alert-num {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(72px, 8vw, 120px);
+      line-height: 0.9;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      margin: 0 0 6px;
+    }
+
+    .alert-sub {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--brand-critical);
+      margin: 0;
+    }
+
+    .home-triad {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
+    }
+
+    .triad-card {
+      border-top: 1px solid var(--outline);
+      padding-top: 16px;
+      position: relative;
+    }
+
+    .label-caps {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .outline-heading {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 3.8vw, 48px);
+      line-height: 52px;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+      margin: 0 0 10px;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--outline-variant);
+      text-transform: uppercase;
+    }
+
+    .solid-heading {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 3.8vw, 48px);
+      line-height: 52px;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+    }
+
+    .triad-text {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .triad-card.featured::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      position: absolute;
+      right: 0;
+      top: 22px;
+      background: var(--brand-critical);
+    }
+
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-top: 1px solid var(--outline-variant);
+      border-left: 1px solid var(--outline-variant);
+    }
+
+    .kpi {
+      padding: 24px;
+      border-right: 1px solid var(--outline-variant);
+      border-bottom: 1px solid var(--outline-variant);
+      position: relative;
+      background: var(--surface);
+    }
+
+    .kpi::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 16px;
+      height: 16px;
+      background: transparent;
+    }
+
+    .kpi.critical::after { background: var(--brand-critical); }
+    .kpi.elevated::after { background: var(--brand-elevated); }
+    .kpi.moderate::after { background: var(--brand-moderate); }
+    .kpi.controlled::after { background: var(--brand-controlled); }
+
+    .kpi-value {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(48px, 5vw, 80px);
+      line-height: 0.96;
+      letter-spacing: 0.02em;
+      font-weight: 700;
+      margin: 8px 0;
+    }
+
+    .kpi-sub {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+
+    .territories-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 400px;
+      border-left: 1px solid var(--outline-variant);
+      border-right: 1px solid var(--outline-variant);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    .map-zone {
+      position: relative;
+      min-height: 620px;
+      background: var(--surface-container-low);
+      border-right: 1px solid var(--outline-variant);
+      padding: 30px;
+      overflow: hidden;
+    }
+
+    #cassandra-map {
+      width: 100% !important;
+      height: 560px !important;
+      min-height: 560px !important;
+      border-radius: 0;
+    }
+
+    #cassandra-map * {
+      border-radius: 0 !important;
+    }
+
+    #cassandra-map .cassandra-archive-popup .leaflet-popup-content-wrapper {
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+      border-radius: 8px !important;
+    }
+
+    #cassandra-map .cassandra-archive-popup .leaflet-popup-content {
+      margin: 0;
+      width: auto !important;
+      max-width: 340px !important;
+    }
+
+    #cassandra-map .cassandra-archive-popup .leaflet-popup-tip-container {
+      display: none;
+    }
+
+    #cassandra-map .archive-popup {
+      width: min(340px, calc(100vw - 36px));
+      max-width: 340px;
+      background: #1a1a1a;
+      color: #fdf8f8;
+      border: 1px solid rgba(253, 248, 248, 0.16);
+      border-radius: 8px !important;
+      box-shadow: 6px 6px 0 0 rgba(28, 27, 27, 0.9);
+      padding: 14px;
+      font-family: "Work Sans", sans-serif;
+    }
+
+    #cassandra-map .archive-popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    #cassandra-map .archive-popup-title {
+      margin: 0;
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 15px;
+      line-height: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    #cassandra-map .archive-popup-tier {
+      flex: 0 0 auto;
+      border: 1px solid var(--popup-tier-color);
+      background: var(--popup-tier-color);
+      color: #1a1a1a;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      padding: 6px 7px;
+      border-radius: 4px !important;
+    }
+
+    #cassandra-map .archive-popup-divider {
+      height: 1px;
+      background: rgba(253, 248, 248, 0.18);
+      margin: 12px 0;
+    }
+
+    #cassandra-map .archive-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 12px;
+      color: rgba(253, 248, 248, 0.74);
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    #cassandra-map .archive-metrics strong {
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 800;
+    }
+
+    #cassandra-map .archive-explore-btn {
+      width: 100%;
+      border: 1px solid var(--popup-tier-color);
+      background: var(--popup-tier-color);
+      color: #1a1a1a;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 900;
+      padding: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 4px !important;
+    }
+
+    .archive-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0d0d0d;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 200ms ease-out, transform 200ms ease-out;
+      --archive-tier-color: #FF3366;
+    }
+
+    .archive-modal[hidden] {
+      display: none;
+    }
+
+    .archive-modal.is-open {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .archive-modal-header,
+    .archive-modal-years,
+    .archive-modal-footer {
+      background: #1a1a1a;
+      border-bottom: 1px solid rgba(253, 248, 248, 0.14);
+      padding: 16px 24px;
+    }
+
+    .archive-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .archive-modal-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .archive-modal-title {
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      line-height: 22px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 900;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .archive-modal-tier {
+      flex: 0 0 auto;
+      background: var(--archive-tier-color);
+      color: #1a1a1a;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      font-weight: 900;
+      padding: 7px 9px;
+      border-radius: 4px !important;
+    }
+
+    .archive-modal-close {
+      border: 1px solid rgba(253, 248, 248, 0.24);
+      background: transparent;
+      color: #fff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      padding: 9px 12px;
+      cursor: pointer;
+      border-radius: 4px !important;
+    }
+
+    .archive-modal-years {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .archive-modal-year {
+      min-width: 96px;
+      border: 1px solid rgba(253, 248, 248, 0.22);
+      background: transparent;
+      color: rgba(253, 248, 248, 0.78);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      font-weight: 900;
+      padding: 12px 16px;
+      cursor: pointer;
+      border-radius: 4px !important;
+    }
+
+    .archive-modal-arrow {
+      color: rgba(253, 248, 248, 0.7);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .archive-modal-year.is-active {
+      background: var(--archive-tier-color);
+      border-color: var(--archive-tier-color);
+      color: #1a1a1a;
+    }
+
+    .archive-modal-frame {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: #fff;
+    }
+
+    .archive-modal-footer {
+      border-top: 1px solid rgba(253, 248, 248, 0.14);
+      border-bottom: 0;
+    }
+
+    .archive-modal-link {
+      color: var(--archive-tier-color);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      line-height: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .archive-modal-link:hover,
+    .archive-modal-close:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      #cassandra-map { height: 360px; }
+    }
+
+    .map-image {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAIi27thrCOtVk3xwu-YqgutzP0o5D7zzFCg6-eb0bMYUZOo-kptQHRrnENTVcBpDNqVsDwWl17MiEiWmeouo5XG4H66wNneEuGFfUk5vGU4SPuD7mkNYw9tExD6tpKVzmEKvhTeunR5t9XhO1yLhU7UfqaNQ86fl049aOdGLvjUF9vlCTXqBIay7PKvjF86KPJipWaDSo1ODJrZw-Gc4mxMoF4UsOCmn5sVOa3Wz3jfjsDKJagEw-DXe6Mxv9iDlGZ3GgrOWgWdqFM');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      mix-blend-mode: luminosity;
+    }
+
+    .map-point {
+      position: absolute;
+      border: 1px solid var(--surface);
+    }
+
+    .map-point.p1 { top: 25%; left: 33%; width: 12px; height: 12px; background: var(--brand-critical); box-shadow: var(--shadow-hard); }
+    .map-point.p2 { top: 34%; left: 50%; width: 8px; height: 8px; background: var(--brand-elevated); }
+    .map-point.p3 { top: 66%; left: 25%; width: 14px; height: 14px; background: var(--brand-moderate); opacity: 0.8; }
+    .map-point.p4 { top: 51%; left: 67%; width: 8px; height: 8px; background: var(--brand-controlled); }
+
+    .legend {
+      position: absolute;
+      left: 30px;
+      bottom: 30px;
+      width: 280px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--outline-variant);
+      box-shadow: var(--shadow-hard);
+      z-index: 4;
+    }
+
+    .legend-title {
+      margin: 0 0 10px;
+      border-bottom: 1px solid var(--outline-variant);
+      padding-bottom: 8px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .tier-toggle {
+      width: 100%;
+      border: 1px solid #1c1b1b;
+      background: #fff;
+      color: #1c1b1b;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .tier-toggle.active {
+      background: #1c1b1b;
+      color: #fff;
+    }
+
+    .tier-dot {
+      width: 12px;
+      height: 12px;
+      flex: 0 0 auto;
+      border: 1px solid #1c1b1b;
+    }
+
+    .query-panel {
+      background: var(--surface);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .query-title {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 3.8vw, 48px);
+      line-height: 52px;
+      letter-spacing: 0.01em;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .query-copy {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+    }
+
+    .field input,
+    .field select {
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container-lowest);
+      color: var(--on-surface);
+      padding: 10px 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: #1c1b1b;
+      box-shadow: var(--shadow-hard);
+    }
+
+    .query-meta {
+      margin-top: auto;
+      border-top: 1px solid var(--outline-variant);
+      padding-top: 14px;
+      display: grid;
+      gap: 8px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+
+    .collapse-page {
+      max-width: none;
+      padding: 96px 64px;
+      background: #f1edec;
+    }
+
+    .collapse-inner {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .collapse-header {
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .collapse-title {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 3.8vw, 48px);
+      line-height: 1.12;
+      letter-spacing: 0.01em;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .collapse-subtitle {
+      margin: 10px 0 0;
+      color: var(--on-surface-variant);
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .collapse-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .collapse-card {
+      border-left: 3px solid var(--brand-critical);
+      background: #fff;
+      padding: 32px;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .collapse-card-head {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 24px;
+    }
+
+    .collapse-card-title {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 28px;
+      line-height: 1.12;
+      letter-spacing: 0;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #1c1b1b;
+      order: 2;
+    }
+
+    .collapse-tier {
+      margin-bottom: 12px;
+      background: transparent;
+      color: #FF3366;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      padding: 0;
+      text-transform: uppercase;
+      order: 1;
+    }
+
+    .collapse-timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+      padding-top: 28px;
+    }
+
+    .collapse-timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      top: 6px;
+      height: 1px;
+      background: linear-gradient(90deg, #c4c7c7, #FF3366);
+    }
+
+    .collapse-step {
+      position: relative;
+      min-width: 0;
+    }
+
+    .collapse-step::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -26px;
+      width: 12px;
+      height: 12px;
+      border: 1px solid #fff;
+      background: var(--step-color);
+    }
+
+    .collapse-year {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.05em;
+      font-weight: 400;
+      color: #747878;
+    }
+
+    .collapse-pop {
+      display: block;
+      margin-top: 6px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 16px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: #1c1b1b;
+      white-space: nowrap;
+    }
+
+    .collapse-step:nth-child(2) .collapse-pop {
+      color: #747878;
+    }
+
+    .collapse-step:nth-child(3) .collapse-pop {
+      color: #FF3366;
+    }
+
+    .collapse-total {
+      margin: 0 0 24px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #FF3366;
+    }
+
+    .collapse-dates {
+      display: grid;
+      gap: 0;
+      margin: 0 0 24px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 0.05em;
+      color: #747878;
+    }
+
+    .collapse-dates div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 0;
+      padding: 0;
+    }
+
+    .collapse-dates div + div {
+      border-top: 1px solid #e5e2e1;
+      margin-top: 12px;
+      padding-top: 12px;
+    }
+
+    .collapse-dates dt {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 400;
+      color: #747878;
+    }
+
+    .collapse-dates dd {
+      margin: 0;
+      color: #1c1b1b;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .collapse-quote {
+      margin: 0 0 24px;
+      color: #444748;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .collapse-cta {
+      margin-top: 0;
+      color: #1c1b1b;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .collapse-cta:hover {
+      background: transparent;
+      color: #FF3366;
+    }
+
+    .validation {
+      margin-top: 26px;
+      padding-top: 20px;
+      border-top: 1px solid var(--outline);
+    }
+
+    .validation-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .validation-card {
+      border: 1px solid #d4d1ca;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .validation-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: #28251d;
+    }
+
+    .validation-asset {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-bottom: 1px solid #1A1A1A;
+      background: #fdf8f8;
+    }
+
+    .validation-body {
+      padding: 20px 24px;
+    }
+
+    .validation-filename {
+      margin: 0 0 8px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: #7a7974;
+      text-transform: uppercase;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    .validation-divider {
+      border-top: 1px solid #d4d1ca;
+      margin-bottom: 12px;
+    }
+
+    .validation-description {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #7a7974;
+    }
+
+    .file-fallback {
+      display: none;
+      min-height: 220px;
+      border: 1px solid var(--outline);
+      background: #e5e2e1;
+      color: #1c1b1b;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 12px;
+    }
+
+    #intel {
+      background: #f5f5f0;
+    }
+
+    .intel-shell {
+      border-top: 1px solid #d4d1ca;
+      padding-top: 20px;
+    }
+
+    .intel-kicker {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #7a7974;
+      margin-bottom: 10px;
+    }
+
+    .intel-section-title {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 3.8vw, 48px);
+      line-height: 1.12;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .intel-layout {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      align-items: start;
+    }
+
+    .intel-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .intel-panel {
+      border: 1px solid #d4d1ca;
+      background: #fff;
+      padding: 20px;
+    }
+
+    .intel-column-title {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1.15;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #1c1b1b;
+    }
+
+    .intel-label {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #7a7974;
+    }
+
+    .intel-select {
+      width: 100%;
+      border: 1px solid #d4d1ca;
+      background: #fff;
+      color: #1c1b1b;
+      padding: 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      margin-top: 8px;
+      outline: none;
+    }
+
+    .intel-select:focus {
+      border-color: #1c1b1b;
+    }
+
+    .intel-analyze-btn {
+      width: 100%;
+      margin-top: 12px;
+      border: 1px solid #1c1b1b;
+      background: #1c1b1b;
+      color: #fff;
+      padding: 16px 18px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .intel-analyze-btn:hover {
+      background: #1c1b1b;
+      color: #fff;
+    }
+
+    .intel-results {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .intel-results.active {
+      display: block;
+    }
+
+    .intel-results-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .intel-metric-block {
+      border: 1px solid #d4d1ca;
+      background: #fff;
+      padding: 14px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .intel-big-number {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(48px, 5vw, 68px);
+      line-height: 0.9;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #1c1b1b;
+      text-transform: uppercase;
+      word-break: break-word;
+    }
+
+    .intel-progress-track {
+      width: 100%;
+      height: 8px;
+      background: #ece9e3;
+      border: 1px solid #d4d1ca;
+      overflow: hidden;
+    }
+
+    .intel-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #38a169;
+    }
+
+    .intel-tier-sub {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .intel-context-placeholder {
+      border: 1px dashed #d4d1ca;
+      background: #fff;
+      padding: 22px;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: "Work Sans", sans-serif;
+      color: #7a7974;
+    }
+
+    .intel-context-content[hidden] {
+      display: none;
+    }
+
+    .intel-context-rows {
+      display: grid;
+      gap: 10px;
+    }
+
+    .intel-context-row {
+      border-bottom: 1px solid #e4e1db;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .intel-context-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .intel-context-label {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #7a7974;
+    }
+
+    .intel-context-value-wrap {
+      text-align: right;
+    }
+
+    .intel-context-value {
+      display: block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 24px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: #1c1b1b;
+    }
+
+    .intel-best-name {
+      display: block;
+      margin-top: 2px;
+      font-family: "Work Sans", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.03em;
+      color: #7a7974;
+    }
+
+    .intel-context-bars {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .intel-context-bar-row {
+      display: grid;
+      grid-template-columns: 130px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+    }
+
+    .intel-context-bar-label {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #7a7974;
+    }
+
+    .intel-context-bar-track {
+      height: 8px;
+      border: 1px solid #d4d1ca;
+      background: #ece9e3;
+      overflow: hidden;
+    }
+
+    .intel-context-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #38a169;
+    }
+
+    .intel-context-sentence {
+      margin: 14px 0 0;
+      border-top: 1px solid #e4e1db;
+      padding-top: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #3f3e3a;
+    }
+
+    .app-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--outline-variant);
+      background: #fff;
+      width: 100%;
+      padding: 26px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .foot-left,
+    .foot-right {
+      font-family: "Space Grotesk", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 10px;
+      color: #1c1b1b;
+    }
+
+    .foot-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .foot-right a {
+      color: #1c1b1b;
+      text-decoration: none;
+    }
+
+    .foot-right a:hover {
+      background: #1c1b1b;
+      color: #fff;
+    }
+
+    @media (max-width: 1220px) {
+      .top-nav,
+      .app-footer,
+      .page {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+
+      .home-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .alert-card {
+        position: static;
+        margin-top: 12px;
+      }
+
+      .home-triad {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .kpi.total {
+        grid-column: 1 / -1;
+      }
+
+      .territories-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .map-zone {
+        border-right: 0;
+        border-bottom: 1px solid var(--outline-variant);
+      }
+
+      .intel-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .intel-results-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .collapse-page {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
+
+      .collapse-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .top-nav {
+        position: static;
+      }
+
+      .brand {
+        font-size: 22px;
+        letter-spacing: 0.18em;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .legend {
+        position: static;
+        margin-top: 16px;
+        width: 100%;
+      }
+
+      .kpi-row {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi.total {
+        grid-column: auto;
+      }
+
+      .query-title,
+      .outline-heading,
+      .solid-heading,
+      .intel-section-title {
+        line-height: 1.15;
+      }
+
+      .home-lead {
+        font-size: 18px;
+        line-height: 30px;
+      }
+
+      .intel-context-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .validation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .intel-context-value-wrap {
+        text-align: left;
+      }
+
+      .intel-context-bar-row {
+        grid-template-columns: 1fr;
+      }
+
+      .collapse-page {
+        padding-top: 44px;
+        padding-bottom: 56px;
+      }
+    }
+  </style>
+  <link rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="./assets/municipios_inline.js"></script>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <nav class="top-nav">
+      <div class="brand">CASSANDRA</div>
+      <div class="nav-links">
+        <a class="nav-link" data-route href="#home">INÍCIO</a>
+        <a class="nav-link" data-route href="#territories">TERRITÓRIOS</a>
+        <a class="nav-link" data-route href="#collapse">TERRITÓRIOS EM COLAPSO</a>
+        <a class="nav-link" data-route href="#intel">INTEL</a>
+        <a class="nav-link" data-route href="#archive">ARQUIVO</a>
+        <a class="nav-link" data-route href="#sobre">SOBRE NÓS</a>
+      </div>
+      <a class="terminal-btn" href="http://localhost:8504" target="_blank" rel="noopener">ENTRAR NO TERMINAL</a>
+    </nav>
+
+    <main>
+      <section id="home" class="page active">
+        <h1 class="home-watermark">ARQUITETURA DO MOTOR CASSANDRA</h1>
+        <div class="home-grid">
+          <div>
+            <h2 class="home-title">Portugal está a desaparecer da internet.</h2>
+            <p class="home-lead">O CASSANDRA monitoriza a presença digital dos 308 municípios portugueses e identifica aqueles cuja memória online está em colapso — antes que desapareça para sempre.</p>
+            <div class="action-row">
+              <a class="btn primary" href="#territories">Explorar Mapa →</a>
+              <a class="btn" href="#archive">Ver Metodologia ↑</a>
+            </div>
+          </div>
+
+          <div style="position: relative; margin-top: 8px; padding: 0;">
+            <div style="position:relative;width:100%;height:500px;border:1px solid #d4d1ca;overflow:hidden;flex-shrink:0;">
+              <img src="./assets/mapacapacassandra.png" alt="Mapa" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover;object-position: 55% 45%;transform: scale(1.8);transform-origin: 55% 45%;mix-blend-mode: multiply;opacity: 0.85;" />
+              <div style="position:absolute;inset:0;background:linear-gradient(to right,#f5f3f0 0%,transparent 25%);pointer-events:none;"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,#f5f3f0 100%);pointer-events:none;"></div>
+            </div>
+            <aside class="alert-card">
+              <p class="alert-head">ALERTA DO SISTEMA: MASSA CRÍTICA</p>
+              <p id="alert-tier4-count" class="alert-num">0</p>
+              <p class="alert-sub">MUNICÍPIOS NO TIER 4 (CRÍTICO)</p>
+            </aside>
+          </div>
+        </div>
+
+        <div class="home-triad">
+          <article class="triad-card">
+            <span class="label-caps">MUNICÍPIOS EM RISCO DIGITAL</span>
+            <h3 class="outline-heading">56.8%</h3>
+            <p class="triad-text">Tier 2, 3 ou 4</p>
+          </article>
+          <article class="triad-card">
+            <span class="label-caps">MONITORIZAÇÃO NACIONAL</span>
+            <h3 class="outline-heading">308</h3>
+            <p class="triad-text">municípios monitorizados</p>
+          </article>
+          <article class="triad-card featured">
+            <span class="label-caps">ARQUIVO DIGITAL</span>
+            <h3 class="solid-heading">20+ anos</h3>
+            <p class="triad-text">de arquivo digital analisados</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="territories" class="page">
+        <div class="kpi-row">
+          <article class="kpi critical">
+            <span class="label-caps">TIER CRÍTICO</span>
+            <span id="kpi-tier4-count" class="kpi-value">0</span>
+            <span class="kpi-sub"><span id="kpi-tier4-pct">0.0</span>% · MUNICÍPIOS</span>
+          </article>
+          <article class="kpi elevated">
+            <span class="label-caps">TIER ELEVADO</span>
+            <span id="kpi-tier3-count" class="kpi-value">0</span>
+            <span class="kpi-sub"><span id="kpi-tier3-pct">0.0</span>% · MUNICÍPIOS</span>
+          </article>
+          <article class="kpi moderate">
+            <span class="label-caps">TIER MODERADO</span>
+            <span id="kpi-tier2-count" class="kpi-value">0</span>
+            <span class="kpi-sub"><span id="kpi-tier2-pct">0.0</span>% · MUNICÍPIOS</span>
+          </article>
+          <article class="kpi controlled">
+            <span class="label-caps">TIER CONTROLADO</span>
+            <span id="kpi-tier1-count" class="kpi-value">0</span>
+            <span class="kpi-sub"><span id="kpi-tier1-pct">0.0</span>% · MUNICÍPIOS</span>
+          </article>
+          <article class="kpi total">
+            <span class="label-caps">TOTAL</span>
+            <span id="kpi-total-count" class="kpi-value">0</span>
+            <span class="kpi-sub">MUNICÍPIOS</span>
+          </article>
+        </div>
+
+        <div class="territories-layout">
+          <div class="map-zone" style="min-height:500px;">
+            <div id="cassandra-map"
+              style="width:100%;height:560px;background:#e5e2e1;"></div>
+            <script>
+            (function(){
+              var map = L.map('cassandra-map', {
+                center: [39.5, -8.0],
+                zoom: 6,
+                minZoom: 5,
+                zoomControl: true,
+                attributionControl: false,
+                scrollWheelZoom: false
+              });
+              window.cassandraMap = map;
+              map.getContainer().addEventListener('mouseenter', function() {
+                map.scrollWheelZoom.enable();
+              });
+              map.getContainer().addEventListener('mouseleave', function() {
+                map.scrollWheelZoom.disable();
+              });
+              setTimeout(function() { map.invalidateSize(); }, 100);
+
+              // Warm neutral base tiles matching CASSANDRA palette
+              L.tileLayer(
+                'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+                { maxZoom: 12, opacity: 0.4 }
+              ).addTo(map);
+
+              // Tier color map — CASSANDRA risk palette
+              const TIER_COLORS = {
+                4: '#FF3366',  // CRÍTICO
+                3: '#FFAA00',  // ELEVADO
+                2: '#FFD166',  // MODERADO
+                1: '#00E5FF'   // CONTROLADO
+              };
+
+              function normalizeMunicipalityName(value) {
+                return (value || '')
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .toUpperCase()
+                  .replace(/[^A-Z0-9]/g, '');
+              }
+
+              const TIER_ENTRY_BY_KEY = new Map(
+                Object.entries(window.TIER_DATA || {}).map(([name, value]) => [
+                  normalizeMunicipalityName(name),
+                  value
+                ])
+              );
+
+              const NORMALIZED_TIER_DATA = Object.fromEntries(
+                Object.entries(window.TIER_DATA || {}).map(([name, value]) => [
+                  normalizeMunicipalityName(name),
+                  Number(value && typeof value === 'object' ? value.tier : value)
+                ])
+              );
+
+              const DASHBOARD_ROWS_BY_KEY = new Map(
+                (Array.isArray(window.DASHBOARD_DATA && window.DASHBOARD_DATA.oracle_log)
+                  ? window.DASHBOARD_DATA.oracle_log
+                  : []
+                ).map(row => [normalizeMunicipalityName(row.municipio), row])
+              );
+
+              const DOMAIN_BY_KEY = new Map();
+              const ARCHIVE_METRICS_BY_KEY = new Map();
+              const ARCHIVE_POPUP_DATES = {
+                2010: '20100601120000',
+                2015: '20150601120000',
+                2020: '20200601120000',
+                2024: '20240601120000'
+              };
+              const POP2011_BY_KEY = new Map([
+                ['ABRANTES', 39160],
+                ['AGUEDA', 47772],
+                ['AGUIARDABEIRA', 5674],
+                ['ALANDROAL', 5812],
+                ['ALBERGARIAAVELHA', 25329],
+                ['ALBUFEIRA', 40984],
+                ['ALCACERDOSAL', 12959],
+                ['ALCANENA', 13813],
+                ['ALCOBACA', 56834],
+                ['ALCOCHETE', 17691],
+                ['ALCOUTIM', 2914],
+                ['ALENQUER', 43377],
+                ['ALFANDEGADAFE', 5049],
+                ['ALIJO', 11806],
+                ['ALJEZUR', 5824],
+                ['ALJUSTREL', 9256],
+                ['ALMADA', 174741],
+                ['ALMEIDA', 7281],
+                ['ALMEIRIM', 23418],
+                ['ALMODOVAR', 7466],
+                ['ALPIARCA', 7697],
+                ['ALTERDOCHAO', 3610],
+                ['ALVAIAZERE', 7222],
+                ['ALVITO', 2566],
+                ['AMADORA', 174194],
+                ['AMARANTE', 56125],
+                ['AMARES', 18893],
+                ['ANADIA', 29138],
+                ['ANGRADOHEROISMO', 35478],
+                ['ANSIAO', 13144],
+                ['ARCOSDEVALDEVEZ', 22645],
+                ['ARGANIL', 12152],
+                ['ARMAMAR', 6285],
+                ['AROUCA', 22317],
+                ['ARRAIOLOS', 7298],
+                ['ARRONCHES', 3205],
+                ['ARRUDADOSVINHOS', 13460],
+                ['AVEIRO', 78759],
+                ['AVIS', 4550],
+                ['AZAMBUJA', 21835],
+                ['BAIAO', 20335],
+                ['BARCELOS', 120277],
+                ['BARRANCOS', 1828],
+                ['BARREIRO', 78982],
+                ['BATALHA', 15758],
+                ['BEJA', 35956],
+                ['BELMONTE', 6868],
+                ['BENAVENTE', 29123],
+                ['BOMBARRAL', 13203],
+                ['BORBA', 7306],
+                ['BOTICAS', 5699],
+                ['BRAGA', 182122],
+                ['BRAGANCA', 35592],
+                ['CABECEIRASDEBASTO', 16661],
+                ['CADAVAL', 14286],
+                ['CALDASDARAINHA', 51946],
+                ['CALHETARAA', 3757],
+                ['CALHETARAM', 11463],
+                ['CAMARADELOBOS', 35520],
+                ['CAMINHA', 16724],
+                ['CAMPOMAIOR', 8454],
+                ['CANTANHEDE', 36615],
+                ['CARRAZEDADEANSIAES', 6251],
+                ['CARREGALDOSAL', 9815],
+                ['CARTAXO', 24513],
+                ['CASCAIS', 207494],
+                ['CASTANHEIRADEPERA', 3182],
+                ['CASTELOBRANCO', 56134],
+                ['CASTELODEPAIVA', 16714],
+                ['CASTELODEVIDE', 3470],
+                ['CASTRODAIRE', 15221],
+                ['CASTROMARIM', 6707],
+                ['CASTROVERDE', 7319],
+                ['CELORICODABEIRA', 7638],
+                ['CELORICODEBASTO', 19995],
+                ['CHAMUSCA', 9989],
+                ['CHAVES', 41122],
+                ['CINFAES', 20302],
+                ['COIMBRA', 143500],
+                ['CONDEIXAANOVA', 17183],
+                ['CONSTANCIA', 4059],
+                ['CORUCHE', 19868],
+                ['CORVO', 412],
+                ['COVILHA', 51600],
+                ['CRATO', 3769],
+                ['CUBA', 4933],
+                ['ELVAS', 23076],
+                ['ENTRONCAMENTO', 20267],
+                ['ESPINHO', 31866],
+                ['ESPOSENDE', 34384],
+                ['ESTARREJA', 27057],
+                ['ESTREMOZ', 14191],
+                ['EVORA', 56618],
+                ['FAFE', 50605],
+                ['FARO', 65211],
+                ['FELGUEIRAS', 58049],
+                ['FERREIRADOALENTEJO', 8257],
+                ['FERREIRADOZEZERE', 8600],
+                ['FIGUEIRADAFOZ', 62295],
+                ['FIGUEIRADECASTELORODRIGO', 6250],
+                ['FIGUEIRODOSVINHOS', 6111],
+                ['FORNOSDEALGODRES', 5055],
+                ['FREIXODEESPADAACINTA', 3806],
+                ['FRONTEIRA', 3423],
+                ['FUNCHAL', 112079],
+                ['FUNDAO', 29028],
+                ['GAVIAO', 4149],
+                ['GOIS', 4271],
+                ['GOLEGA', 5715],
+                ['GONDOMAR', 168151],
+                ['GOUVEIA', 14029],
+                ['GRANDOLA', 14783],
+                ['GUARDA', 42716],
+                ['GUIMARAES', 158212],
+                ['HORTA', 14994],
+                ['IDANHAANOVA', 9645],
+                ['ILHAVO', 38661],
+                ['LAGOA', 22988],
+                ['LAGOARAA', 14418],
+                ['LAGOS', 31113],
+                ['LAJESDASFLORES', 1509],
+                ['LAJESDOPICO', 4699],
+                ['LAMEGO', 26650],
+                ['LEIRIA', 127348],
+                ['LISBOA', 545506],
+                ['LOULE', 70463],
+                ['LOURES', 202489],
+                ['LOURINHA', 25888],
+                ['LOUSA', 17626],
+                ['LOUSADA', 47465],
+                ['MACAO', 7348],
+                ['MACEDODECAVALEIROS', 15642],
+                ['MACHICO', 21796],
+                ['MADALENA', 6068],
+                ['MAFRA', 77228],
+                ['MAIA', 135536],
+                ['MANGUALDE', 19863],
+                ['MANTEIGAS', 3446],
+                ['MARCODECANAVESES', 53342],
+                ['MARINHAGRANDE', 38754],
+                ['MARVAO', 3510],
+                ['MATOSINHOS', 175813],
+                ['MEALHADA', 20428],
+                ['MEDA', 5120],
+                ['MELGACO', 9134],
+                ['MERTOLA', 7134],
+                ['MESAOFRIO', 4412],
+                ['MIRA', 12502],
+                ['MIRANDADOCORVO', 13161],
+                ['MIRANDADODOURO', 7438],
+                ['MIRANDELA', 23818],
+                ['MOGADOURO', 9450],
+                ['MOIMENTADABEIRA', 10163],
+                ['MOITA', 66186],
+                ['MONCAO', 19187],
+                ['MONCHIQUE', 5996],
+                ['MONDIMDEBASTO', 7464],
+                ['MONFORTE', 3336],
+                ['MONTALEGRE', 10439],
+                ['MONTEMORONOVO', 17377],
+                ['MONTEMOROVELHO', 26166],
+                ['MONTIJO', 51551],
+                ['MORA', 4997],
+                ['MORTAGUA', 9589],
+                ['MOURA', 15073],
+                ['MOURAO', 2657],
+                ['MURCA', 5926],
+                ['MURTOSA', 10576],
+                ['NAZARE', 15197],
+                ['NELAS', 14048],
+                ['NISA', 7421],
+                ['NORDESTE', 4941],
+                ['OBIDOS', 11805],
+                ['ODEMIRA', 25975],
+                ['ODIVELAS', 144874],
+                ['OEIRAS', 172142],
+                ['OLEIROS', 5659],
+                ['OLHAO', 45342],
+                ['OLIVEIRADEAZEMEIS', 68578],
+                ['OLIVEIRADEFRADES', 10237],
+                ['OLIVEIRADOBAIRRO', 23090],
+                ['OLIVEIRADOHOSPITAL', 20820],
+                ['OUREM', 46184],
+                ['OURIQUE', 5429],
+                ['OVAR', 55461],
+                ['PACOSDEFERREIRA', 56449],
+                ['PALMELA', 63634],
+                ['PAMPILHOSADASERRA', 4469],
+                ['PAREDES', 86732],
+                ['PAREDESDECOURA', 9138],
+                ['PEDROGAOGRANDE', 3892],
+                ['PENACOVA', 15180],
+                ['PENAFIEL', 72253],
+                ['PENALVADOCASTELO', 7967],
+                ['PENAMACOR', 5602],
+                ['PENEDONO', 2962],
+                ['PENELA', 5977],
+                ['PENICHE', 27789],
+                ['PESODAREGUA', 17044],
+                ['PINHEL', 9513],
+                ['POMBAL', 55295],
+                ['PONTADELGADA', 68928],
+                ['PONTADOSOL', 8855],
+                ['PONTEDABARCA', 12037],
+                ['PONTEDELIMA', 43493],
+                ['PONTEDESOR', 16686],
+                ['PORTALEGRE', 24813],
+                ['PORTEL', 6356],
+                ['PORTIMAO', 56007],
+                ['PORTO', 236964],
+                ['PORTODEMOS', 24360],
+                ['PORTOMONIZ', 2730],
+                ['PORTOSANTO', 5496],
+                ['POVOACAO', 6298],
+                ['POVOADELANHOSO', 21917],
+                ['POVOADEVARZIM', 63554],
+                ['PROENCAANOVA', 8272],
+                ['REDONDO', 7019],
+                ['REGUENGOSDEMONSARAZ', 10800],
+                ['RESENDE', 11318],
+                ['RIBEIRABRAVA', 13384],
+                ['RIBEIRADEPENA', 6498],
+                ['RIBEIRAGRANDE', 32184],
+                ['RIOMAIOR', 21254],
+                ['SABROSA', 6302],
+                ['SABUGAL', 12617],
+                ['SALVATERRADEMAGOS', 22259],
+                ['SANTACOMBADAO', 11603],
+                ['SANTACRUZ', 43054],
+                ['SANTACRUZDAGRACIOSA', 4385],
+                ['SANTACRUZDASFLORES', 2289],
+                ['SANTAMARIADAFEIRA', 139295],
+                ['SANTAMARTADEPENAGUIAO', 7272],
+                ['SANTANA', 7655],
+                ['SANTAREM', 62025],
+                ['SANTIAGODOCACEM', 29669],
+                ['SANTOTIRSO', 71536],
+                ['SAOBRASDEALPORTEL', 10719],
+                ['SAOJOAODAMADEIRA', 21792],
+                ['SAOJOAODAPESQUEIRA', 7820],
+                ['SAOPEDRODOSUL', 16714],
+                ['SAOROQUEDOPICO', 3395],
+                ['SAOVICENTE', 5650],
+                ['SARDOAL', 3960],
+                ['SATAO', 12495],
+                ['SEIA', 24838],
+                ['SEIXAL', 159192],
+                ['SERNANCELHE', 5692],
+                ['SERPA', 15551],
+                ['SERTA', 15757],
+                ['SESIMBRA', 49828],
+                ['SETUBAL', 121811],
+                ['SEVERDOVOUGA', 12299],
+                ['SILVES', 36975],
+                ['SINES', 14390],
+                ['SINTRA', 378409],
+                ['SOBRALDEMONTEAGRACO', 10235],
+                ['SOURE', 19218],
+                ['SOUSEL', 5062],
+                ['TABUA', 12109],
+                ['TABUACO', 6265],
+                ['TAROUCA', 7965],
+                ['TAVIRA', 26164],
+                ['TERRASDEBOURO', 7193],
+                ['TOMAR', 40586],
+                ['TONDELA', 28737],
+                ['TORREDEMONCORVO', 8388],
+                ['TORRESNOVAS', 36777],
+                ['TORRESVEDRAS', 80058],
+                ['TRANCOSO', 9863],
+                ['TROFA', 39035],
+                ['VAGOS', 22917],
+                ['VALEDECAMBRA', 22829],
+                ['VALENCA', 14091],
+                ['VALONGO', 94008],
+                ['VALPACOS', 16806],
+                ['VELAS', 5410],
+                ['VENDASNOVAS', 11857],
+                ['VIANADOALENTEJO', 5815],
+                ['VIANADOCASTELO', 88635],
+                ['VIDIGUEIRA', 5889],
+                ['VIEIRADOMINHO', 13026],
+                ['VILADAPRAIADAVITORIA', 21005],
+                ['VILADEREI', 3548],
+                ['VILADOBISPO', 5267],
+                ['VILADOCONDE', 79738],
+                ['VILADOPORTO', 5560],
+                ['VILAFLOR', 6662],
+                ['VILAFRANCADEXIRA', 137097],
+                ['VILAFRANCADOCAMPO', 11200],
+                ['VILANOVADABARQUINHA', 7323],
+                ['VILANOVADECERVEIRA', 9260],
+                ['VILANOVADEFAMALICAO', 133867],
+                ['VILANOVADEFOZCOA', 7231],
+                ['VILANOVADEGAIA', 302999],
+                ['VILANOVADEPAIVA', 5199],
+                ['VILANOVADEPOIARES', 7349],
+                ['VILAPOUCADEAGUIAR', 13105],
+                ['VILAREAL', 51900],
+                ['VILAREALDESANTOANTONIO', 19143],
+                ['VILAVELHADERODAO', 3558],
+                ['VILAVERDE', 47892],
+                ['VILAVICOSA', 8281],
+                ['VIMIOSO', 4649],
+                ['VINHAIS', 8943],
+                ['VISEU', 99655],
+                ['VIZELA', 23747],
+                ['VOUZELA', 10486],
+              ]);
+
+              function loadCsvRows(path, onRow) {
+                if (!window.fetch) return;
+                fetch(path)
+                  .then(function(response) {
+                    return response.ok ? response.text() : '';
+                  })
+                  .then(function(text) {
+                    if (!text) return;
+                    const lines = text.trim().split(/\r?\n/);
+                    if (lines.length < 2) return;
+                    const headers = lines.shift().split(',').map(function(header) {
+                      return header.replace(/^\uFEFF/, '').trim();
+                    });
+                    lines.forEach(function(line) {
+                      if (!line.trim()) return;
+                      const values = line.split(',');
+                      const row = {};
+                      headers.forEach(function(header, index) {
+                        row[header] = (values[index] || '').trim();
+                      });
+                      onRow(row);
+                    });
+                  })
+                  .catch(function() {});
+              }
+
+              loadCsvRows('./municipios_dominios.csv', function(row) {
+                const key = normalizeMunicipalityName(row['Município']);
+                if (key && row.Domain) DOMAIN_BY_KEY.set(key, row.Domain);
+              });
+
+              loadCsvRows('./relatorio_produto_cassandra.csv', function(row) {
+                const key = normalizeMunicipalityName(row['Município']);
+                if (key) ARCHIVE_METRICS_BY_KEY.set(key, row);
+              });
+
+              function tierLookupKey(feature) {
+                const nameKey = normalizeMunicipalityName(feature.properties['NAME_2']);
+                const regionKey = normalizeMunicipalityName(feature.properties['NAME_1']);
+                if (nameKey === 'CALHETA' && regionKey === 'AZORES') return 'CALHETARAA';
+                if (nameKey === 'CALHETA' && regionKey === 'MADEIRA') return 'CALHETARAM';
+                if (nameKey === 'LAGOA' && regionKey === 'AZORES') return 'LAGOARAA';
+                if (nameKey === 'PRAIADAVITORIA') return 'VILADAPRAIADAVITORIA';
+                return nameKey;
+              }
+
+              function getTier(feature) {
+                var tier = Number(feature.properties.CASSANDRA_Risk_Tier);
+                if (!TIER_COLORS[tier]) {
+                  const rowTier = Number((getDashboardRow(feature) || {}).tier);
+                  tier = (TIER_COLORS[rowTier] && rowTier) ||
+                    NORMALIZED_TIER_DATA[tierLookupKey(feature)] ||
+                    3;
+                  feature.properties.CASSANDRA_Risk_Tier = tier;
+                }
+                return tier;
+              }
+
+              function styleFeature(feature) {
+                var tier = getTier(feature);
+                return {
+                  fillColor: TIER_COLORS[tier],
+                  weight: 0.5,
+                  opacity: 1,
+                  color: '#1c1b1b',
+                  fillOpacity: 0.85
+                };
+              }
+
+              function getFeatureKey(feature) {
+                return tierLookupKey(feature);
+              }
+
+              function getDashboardRow(feature) {
+                const key = getFeatureKey(feature);
+                return DASHBOARD_ROWS_BY_KEY.get(key) ||
+                  DASHBOARD_ROWS_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])) ||
+                  null;
+              }
+
+              function getArchiveMetrics(feature) {
+                const key = getFeatureKey(feature);
+                return ARCHIVE_METRICS_BY_KEY.get(key) ||
+                  ARCHIVE_METRICS_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])) ||
+                  null;
+              }
+
+              function getTierEntry(feature) {
+                const key = getFeatureKey(feature);
+                return TIER_ENTRY_BY_KEY.get(key) ||
+                  TIER_ENTRY_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])) ||
+                  null;
+              }
+
+              function escapeHtml(value) {
+                return String(value == null ? '' : value).replace(/[&<>"']/g, function(char) {
+                  return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                  }[char];
+                });
+              }
+
+              function pickValue(sources, keys) {
+                for (const source of sources) {
+                  if (!source || typeof source !== 'object') continue;
+                  for (const key of keys) {
+                    if (source[key] !== undefined && source[key] !== null && String(source[key]).trim() !== '') {
+                      return source[key];
+                    }
+                  }
+                }
+                return '';
+              }
+
+              function displayNameForFeature(feature, row) {
+                return pickValue([row, feature.properties], ['municipio', 'Município', 'name', 'NAME_2']) || 'N/A';
+              }
+
+              function slugMunicipalityName(value) {
+                return String(value || '')
+                  .replace(/\[[^\]]+\]/g, '')
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]+/g, '-')
+                  .replace(/^-+|-+$/g, '');
+              }
+
+              function cleanDomain(value) {
+                return String(value || '')
+                  .trim()
+                  .replace(/^https?:\/\//i, '')
+                  .replace(/^www\./i, '')
+                  .replace(/\/.*$/, '');
+              }
+
+              function domainForFeature(feature, row) {
+                const name = displayNameForFeature(feature, row);
+                const tierEntry = getTierEntry(feature);
+                const key = getFeatureKey(feature);
+                const directDomain = pickValue(
+                  [row, tierEntry, feature.properties],
+                  ['domain', 'Domain', 'dominio', 'Dominio']
+                );
+                const domain = cleanDomain(directDomain || DOMAIN_BY_KEY.get(key));
+                return domain || ('cm-' + slugMunicipalityName(name) + '.pt');
+              }
+
+              function parseMetricNumber(value) {
+                const raw = String(value == null ? '' : value).trim().replace('%', '');
+                if (!raw) return NaN;
+                if (/^[+-]?\d{1,3}(\.\d{3})+(,\d+)?$/.test(raw)) {
+                  return Number(raw.replace(/\./g, '').replace(',', '.'));
+                }
+                return Number(raw.replace(/\s/g, '').replace(',', '.'));
+              }
+
+              function formatIntegerPt(value) {
+                const num = parseMetricNumber(value);
+                if (!Number.isFinite(num)) return String(value || '').trim() || 'N/D';
+                return String(Math.round(num)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+              }
+
+              function formatScoreValue(value) {
+                const num = parseMetricNumber(value);
+                if (!Number.isFinite(num)) return String(value || '').trim() || 'N/D';
+                return (Math.round(num * 10) / 10).toFixed(1);
+              }
+
+              function formatPercentageValue(value) {
+                const raw = String(value || '').trim();
+                if (!raw) return 'N/D';
+                if (raw.includes('%')) return raw;
+                const num = parseMetricNumber(raw);
+                if (!Number.isFinite(num)) return raw;
+                return (num > 0 ? '+' : '') + (Math.round(num * 10) / 10).toFixed(1) + '%';
+              }
+
+              function archiveFrameUrl(domain, year) {
+                const date = ARCHIVE_POPUP_DATES[year] || String(year) + '0601120000';
+                const url = /^https?:\/\//i.test(domain) ? domain : 'https://' + domain;
+                return 'https://arquivo.pt/wayback/' + date + '/' +
+                  encodeURI(url.replace(/\/?$/, '/'));
+              }
+
+              function waybackUrl(domain) {
+                return 'https://arquivo.pt/wayback/*/' + encodeURIComponent(domain);
+              }
+
+              let archiveModalEl;
+              let archiveModalFrame;
+              let archiveModalTitle;
+              let archiveModalTier;
+              let archiveModalLink;
+              let archiveModalLoadTimeout;
+              let archiveModalCloseTimeout;
+              let archiveModalState = null;
+
+              function ensureArchiveModal() {
+                if (archiveModalEl) return archiveModalEl;
+                archiveModalEl = document.createElement('div');
+                archiveModalEl.className = 'archive-modal';
+                archiveModalEl.hidden = true;
+                archiveModalEl.innerHTML =
+                  '<div class="archive-modal-header">' +
+                    '<div class="archive-modal-heading">' +
+                      '<span class="archive-modal-title"></span>' +
+                      '<span class="archive-modal-tier"></span>' +
+                    '</div>' +
+                    '<button class="archive-modal-close" type="button">✕ FECHAR</button>' +
+                  '</div>' +
+                  '<div class="archive-modal-years" role="group" aria-label="Selecionar ano">' +
+                    '<span class="archive-modal-arrow">←</span>' +
+                    '<button class="archive-modal-year" type="button" data-year="2010">2010</button>' +
+                    '<button class="archive-modal-year" type="button" data-year="2015">2015</button>' +
+                    '<button class="archive-modal-year" type="button" data-year="2020">2020</button>' +
+                    '<button class="archive-modal-year" type="button" data-year="2024">2024</button>' +
+                    '<span class="archive-modal-arrow">→</span>' +
+                  '</div>' +
+                  '<iframe class="archive-modal-frame" loading="lazy" title="Arquivo.pt preview"></iframe>' +
+                  '<div class="archive-modal-footer">' +
+                    '<a class="archive-modal-link" href="#" target="_blank" rel="noopener noreferrer">Ver página completa no Arquivo.pt ↗</a>' +
+                  '</div>';
+                document.body.appendChild(archiveModalEl);
+
+                archiveModalFrame = archiveModalEl.querySelector('.archive-modal-frame');
+                archiveModalTitle = archiveModalEl.querySelector('.archive-modal-title');
+                archiveModalTier = archiveModalEl.querySelector('.archive-modal-tier');
+                archiveModalLink = archiveModalEl.querySelector('.archive-modal-link');
+
+                archiveModalEl.querySelector('.archive-modal-close').addEventListener('click', closeArchiveModal);
+                archiveModalEl.querySelectorAll('.archive-modal-year').forEach(function(button) {
+                  button.addEventListener('click', function() {
+                    setArchiveModalYear(button.dataset.year);
+                  });
+                });
+                archiveModalEl.addEventListener('click', function(event) {
+                  if (event.target === archiveModalEl) closeArchiveModal();
+                });
+                document.addEventListener('keydown', function(event) {
+                  if (event.key === 'Escape' && archiveModalEl && !archiveModalEl.hidden) {
+                    closeArchiveModal();
+                  }
+                });
+                return archiveModalEl;
+              }
+
+              function openArchiveModal(options) {
+                const modal = ensureArchiveModal();
+                if (archiveModalCloseTimeout) clearTimeout(archiveModalCloseTimeout);
+                if (archiveModalLoadTimeout) clearTimeout(archiveModalLoadTimeout);
+                archiveModalState = {
+                  domain: options.domain,
+                  tierColor: options.tierColor,
+                  year: ''
+                };
+                modal.style.setProperty('--archive-tier-color', options.tierColor);
+                archiveModalTitle.textContent = options.name;
+                archiveModalTier.textContent = 'TIER ' + options.tier;
+                archiveModalLink.href = waybackUrl(options.domain);
+                archiveModalFrame.removeAttribute('src');
+                archiveModalEl.querySelectorAll('.archive-modal-year').forEach(function(button) {
+                  button.classList.remove('is-active');
+                });
+                modal.hidden = false;
+                requestAnimationFrame(function() {
+                  modal.classList.add('is-open');
+                });
+              }
+
+              function closeArchiveModal() {
+                if (!archiveModalEl) return;
+                if (archiveModalLoadTimeout) clearTimeout(archiveModalLoadTimeout);
+                archiveModalLoadTimeout = null;
+                archiveModalState = null;
+                if (archiveModalFrame) archiveModalFrame.removeAttribute('src');
+                archiveModalEl.classList.remove('is-open');
+                if (archiveModalCloseTimeout) clearTimeout(archiveModalCloseTimeout);
+                archiveModalCloseTimeout = setTimeout(function() {
+                  if (archiveModalEl) archiveModalEl.hidden = true;
+                }, 200);
+              }
+
+              function setArchiveModalYear(year) {
+                if (!archiveModalState || !archiveModalFrame) return;
+                const selectedYear = String(year);
+                archiveModalState.year = selectedYear;
+                if (archiveModalLoadTimeout) clearTimeout(archiveModalLoadTimeout);
+                archiveModalEl.querySelectorAll('.archive-modal-year').forEach(function(button) {
+                  button.classList.toggle('is-active', button.dataset.year === selectedYear);
+                });
+                archiveModalLoadTimeout = setTimeout(function() {
+                  if (!archiveModalState || archiveModalState.year !== selectedYear) return;
+                  archiveModalFrame.src = archiveFrameUrl(archiveModalState.domain, selectedYear);
+                }, 1000);
+              }
+
+              function buildArchivePopup(feature) {
+                const row = getDashboardRow(feature);
+                const metrics = getArchiveMetrics(feature);
+                const name = displayNameForFeature(feature, row);
+                const tier = getTier(feature);
+                const tierColor = TIER_COLORS[tier] || TIER_COLORS[3];
+                const domain = domainForFeature(feature, row);
+                const pop2011 = formatIntegerPt(pickValue(
+                  [metrics, row, feature.properties],
+                  ['pop_2011', 'Pop_2011', 'pop2011', 'POP_2011', 'Pop. 2011']
+                ) || POP2011_BY_KEY.get(getFeatureKey(feature)) ||
+                  POP2011_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])));
+                const varPop = formatPercentageValue(pickValue(
+                  [metrics, row, feature.properties],
+                  ['Var_Pop', 'var_pop', 'varPop', 'VAR_POP']
+                ));
+                const ieiScore = formatScoreValue(pickValue(
+                  [metrics, row, feature.properties],
+                  ['IEI_Score', 'iei_score', 'IEI', 'score']
+                ));
+                const captures = formatIntegerPt(pickValue(
+                  [metrics, row, feature.properties],
+                  ['Total_Arquivo_Captures', 'capturas', 'captures', 'Capturas']
+                ));
+
+                return '<div class="archive-popup" style="--popup-tier-color:' + tierColor + '" ' +
+                  'data-domain="' + escapeHtml(domain) + '" ' +
+                  'data-name="' + escapeHtml(name) + '" ' +
+                  'data-tier="' + tier + '" ' +
+                  'data-tier-color="' + escapeHtml(tierColor) + '">' +
+                  '<div class="archive-popup-header">' +
+                    '<h3 class="archive-popup-title">' + escapeHtml(name) + '</h3>' +
+                    '<span class="archive-popup-tier">TIER ' + tier + '</span>' +
+                  '</div>' +
+                  '<div class="archive-popup-divider"></div>' +
+                  '<div class="archive-metrics">' +
+                    '<span>Pop. 2011: <strong>' + escapeHtml(pop2011) + '</strong></span>' +
+                    '<span>Var: <strong>' + escapeHtml(varPop) + '</strong></span>' +
+                    '<span>IEI Score: <strong>' + escapeHtml(ieiScore) + '</strong></span>' +
+                    '<span>Capturas: <strong>' + escapeHtml(captures) + '</strong></span>' +
+                  '</div>' +
+                  '<div class="archive-popup-divider"></div>' +
+                  '<button class="archive-explore-btn" type="button">EXPLORAR ARQUIVO HISTÓRICO →</button>' +
+                '</div>';
+              }
+
+              function initArchivePopup(root) {
+                if (!root || root.dataset.initialized === 'true') return;
+                root.dataset.initialized = 'true';
+                if (window.L && L.DomEvent) L.DomEvent.disableClickPropagation(root);
+                const button = root.querySelector('.archive-explore-btn');
+                if (!button) return;
+                button.addEventListener('click', function(event) {
+                  event.preventDefault();
+                  openArchiveModal({
+                    name: root.dataset.name || '',
+                    tier: root.dataset.tier || '',
+                    tierColor: root.dataset.tierColor || '#FF3366',
+                    domain: root.dataset.domain || ''
+                  });
+                });
+              }
+
+              function onEach(feature, layer) {
+                var name = feature.properties['NAME_2'] || 'N/A';
+                const tier = getTier(feature);
+                const tierLabels = {4:'CRÍTICO',3:'ELEVADO',2:'MODERADO',1:'CONTROLADO'};
+                layer.bindTooltip(
+                  '<span style="font-family:Space Grotesk;font-size:12px;' +
+                  'font-weight:600;letter-spacing:0.1em">' +
+                  name.toUpperCase() + '</span>' +
+                  '<br><span style="color:' + TIER_COLORS[tier] + ';font-weight:700">' +
+                  'TIER ' + tier + ' — ' + tierLabels[tier] + '</span>',
+                  { sticky: true, opacity: 1 }
+                );
+                layer.bindPopup(function() {
+                  return buildArchivePopup(feature);
+                }, {
+                  className: 'cassandra-archive-popup',
+                  closeButton: false,
+                  maxWidth: 340,
+                  minWidth: 0
+                });
+                layer.on({
+                  mouseover: e => {
+                    e.target.setStyle({ weight: 2, fillOpacity: 1 });
+                  },
+                  mouseout: e => {
+                    geojsonLayer.resetStyle(e.target);
+                  }
+                });
+              }
+
+              map.on('popupopen', function(event) {
+                const popupEl = event.popup && event.popup.getElement();
+                const root = popupEl ? popupEl.querySelector('.archive-popup') : null;
+                initArchivePopup(root);
+              });
+
+              let geojsonLayer;
+              geojsonLayer = L.geoJSON(MUNICIPIOS_GEOJSON, {
+                style: styleFeature,
+                onEachFeature: onEach
+              }).addTo(map);
+              map.setView([39.5, -8.0], 6);
+              setTimeout(function() {
+                map.invalidateSize();
+                map.setView([39.5, -8.0], 6);
+              }, 300);
+            })();
+            </script>
+          </div>
+
+          <aside class="query-panel">
+            <div>
+              <h2 class="query-title">CONSULTA<br />TERRITORIAL</h2>
+              <p class="query-copy" style="margin-top:10px;">Introduza parâmetros para isolar vetores específicos de risco arquitectónico municipal.</p>
+            </div>
+
+            <div class="field">
+              <label for="territory-search">PESQUISAR MUNICÍPIO</label>
+              <input id="territory-search" type="text" placeholder="Introduza identificador..." />
+            </div>
+
+            <div class="field">
+              <label for="territory-select">SELECIONAR MUNICÍPIO</label>
+              <select id="territory-select">
+                <option value="">Selecionar do índice...</option>
+              </select>
+            </div>
+
+            <button id="territory-query-btn" class="btn primary" type="button" style="width:100%">EXECUTAR CONSULTA →</button>
+
+            <div class="query-meta">
+              <span>PRECISÃO DO MODELO: 66.1%</span>
+              <span>CV ESPACIAL (GROUPKFOLD K=5): 74.11% ± 9.46%</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="collapse" class="page collapse-page">
+        <div class="collapse-inner">
+          <header class="collapse-header">
+            <h2 class="collapse-title">TERRITÓRIOS EM COLAPSO</h2>
+            <p class="collapse-subtitle">Três municípios onde o silêncio digital antecedeu o despovoamento.</p>
+          </header>
+
+          <div class="collapse-cards">
+            <article class="collapse-card">
+              <div class="collapse-card-head">
+                <h3 class="collapse-card-title">Pedrógão Grande</h3>
+                <span class="collapse-tier">TIER 4</span>
+              </div>
+              <div class="collapse-timeline" aria-label="População de Pedrógão Grande entre 2001 e 2021">
+                <span class="collapse-step" style="--step-color:#747878">
+                  <span class="collapse-year">2001</span>
+                  <span class="collapse-pop">4.867</span>
+                </span>
+                <span class="collapse-step" style="--step-color:#b55a71">
+                  <span class="collapse-year">2011</span>
+                  <span class="collapse-pop">3.892</span>
+                </span>
+                <span class="collapse-step" style="--step-color:#FF3366">
+                  <span class="collapse-year">2021</span>
+                  <span class="collapse-pop">3.627</span>
+                </span>
+              </div>
+              <p class="collapse-total">Variação total: -25.5% em 20 anos</p>
+              <dl class="collapse-dates">
+                <div>
+                  <dt>Primeira captura Arquivo.pt</dt>
+                  <dd>2002</dd>
+                </div>
+                <div>
+                  <dt>Última captura registada</dt>
+                  <dd>2023</dd>
+                </div>
+              </dl>
+              <p class="collapse-quote">O despovoamento de Pedrógão Grande acelerou após os incêndios de 2017. A população perdeu um quarto em duas décadas.</p>
+              <a class="collapse-cta" href="https://arquivo.pt/wayback/*/https://cm-pedrogaogrande.pt/" target="_blank" rel="noopener noreferrer">Explorar no Arquivo.pt →</a>
+            </article>
+
+            <article class="collapse-card">
+              <div class="collapse-card-head">
+                <h3 class="collapse-card-title">Idanha-a-Nova</h3>
+                <span class="collapse-tier">TIER 4</span>
+              </div>
+              <div class="collapse-timeline" aria-label="População de Idanha-a-Nova entre 2001 e 2021">
+                <span class="collapse-step" style="--step-color:#747878">
+                  <span class="collapse-year">2001</span>
+                  <span class="collapse-pop">11.659</span>
+                </span>
+                <span class="collapse-step" style="--step-color:#b55a71">
+                  <span class="collapse-year">2011</span>
+                  <span class="collapse-pop">9.716</span>
+                </span>
+                <span class="collapse-step" style="--step-color:#FF3366">
+                  <span class="collapse-year">2021</span>
+                  <span class="collapse-pop">8.355</span>
+                </span>
+              </div>
+              <p class="collapse-total">Variação total: -28.4% em 20 anos</p>
+              <dl class="collapse-dates">
+                <div>
+                  <dt>Primeira captura Arquivo.pt</dt>
+                  <dd>2004</dd>
+                </div>
+                <div>
+                  <dt>Última captura registada</dt>
+                  <dd>2024</dd>
+                </div>
+              </dl>
+              <p class="collapse-quote">Com menos de 8.400 habitantes e uma das maiores áreas do país, Idanha-a-Nova é o símbolo do interior despovoado de Portugal.</p>
+              <a class="collapse-cta" href="https://arquivo.pt/wayback/*/https://cm-idanhanova.pt/" target="_blank" rel="noopener noreferrer">Explorar no Arquivo.pt →</a>
+            </article>
+
+            <article class="collapse-card">
+              <div class="collapse-card-head">
+                <h3 class="collapse-card-title">Mértola</h3>
+                <span class="collapse-tier">TIER 4</span>
+              </div>
+              <div class="collapse-timeline" aria-label="População de Mértola entre 2001 e 2021">
+                <span class="collapse-step" style="--step-color:#747878">
+                  <span class="collapse-year">2001</span>
+                  <span class="collapse-pop">9.136</span>
+                </span>
+                <span class="collapse-step" style="--step-color:#b55a71">
+                  <span class="collapse-year">2011</span>
+                  <span class="collapse-pop">7.274</span>
+                </span>
+                <span class="collapse-step" style="--step-color:#FF3366">
+                  <span class="collapse-year">2021</span>
+                  <span class="collapse-pop">5.996</span>
+                </span>
+              </div>
+              <p class="collapse-total">Variação total: -34.4% em 20 anos</p>
+              <dl class="collapse-dates">
+                <div>
+                  <dt>Primeira captura Arquivo.pt</dt>
+                  <dd>2003</dd>
+                </div>
+                <div>
+                  <dt>Última captura registada</dt>
+                  <dd>2023</dd>
+                </div>
+              </dl>
+              <p class="collapse-quote">Mértola perdeu mais de um terço da sua população em vinte anos. O Alentejo interior esvazia-se em silêncio.</p>
+              <a class="collapse-cta" href="https://arquivo.pt/wayback/*/https://www.cm-mertola.pt/" target="_blank" rel="noopener noreferrer">Explorar no Arquivo.pt →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="archive" class="page">
+        <section class="validation">
+          <h3 class="label-caps" style="margin:0;color:#1c1b1b">VALIDAÇÃO TÉCNICA [ANÁLISE DO MODELO]</h3>
+          <div class="validation-grid">
+            <article class="validation-card">
+              <div class="validation-asset">
+                <img src="./assets/SHAP_SUMMARY_CASSANDRA.PNG"
+                     alt="Gráfico Resumo SHAP"
+                     style="width:100%;height:100%;object-fit:contain;
+                            display:block;background:#fdf8f8;">
+              </div>
+              <div class="validation-body">
+                <p class="validation-filename">SHAP_SUMMARY_CASSANDRA.PNG</p>
+                <h4 class="validation-title">GRÁFICO RESUMO SHAP</h4>
+                <div class="validation-divider"></div>
+                <p class="validation-description">Impacto das variáveis no output do modelo. Importância global das features mapeada.</p>
+              </div>
+            </article>
+            <article class="validation-card">
+              <div class="validation-asset">
+                <img src="./assets/PLOT_CORRELACAO.PNG"
+                     alt="Matriz de Correlação"
+                     style="width:100%;height:100%;object-fit:contain;
+                            display:block;background:#fdf8f8;">
+              </div>
+              <div class="validation-body">
+                <p class="validation-filename">PLOT_CORRELACAO.PNG</p>
+                <h4 class="validation-title">MATRIZ DE CORRELAÇÃO</h4>
+                <div class="validation-divider"></div>
+                <p class="validation-description">Coeficientes de correlação de Pearson nas principais variáveis económicas.</p>
+              </div>
+            </article>
+            <article class="validation-card">
+              <div class="validation-asset">
+                <img src="./assets/PLOT_VALIDACAO.PNG"
+                     alt="Curvas de Validação"
+                     style="width:100%;height:100%;object-fit:contain;
+                            display:block;background:#fdf8f8;">
+              </div>
+              <div class="validation-body">
+                <p class="validation-filename">PLOT_VALIDACAO.PNG</p>
+                <h4 class="validation-title">CURVAS DE VALIDAÇÃO</h4>
+                <div class="validation-divider"></div>
+                <p class="validation-description">Pontuações de treino vs. validação cruzada para monitorizar a variância e o enviesamento do modelo.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section id="intel" class="page">
+        <div class="intel-shell">
+          <span class="intel-kicker">INTEL</span>
+          <h2 class="intel-section-title">ANÁLISE MUNICIPAL</h2>
+        </div>
+
+        <div class="intel-layout">
+          <section class="intel-column">
+            <div class="intel-panel">
+              <h3 class="intel-column-title">Análise Municipal</h3>
+              <label class="intel-label" for="intel-municipality-select">SELECIONAR MUNICÍPIO</label>
+              <select id="intel-municipality-select" class="intel-select">
+                <option value="">— Escolher município —</option>
+              </select>
+              <button id="intel-analyze-btn" class="intel-analyze-btn" type="button">ANALISAR MUNICÍPIO →</button>
+            </div>
+
+            <div id="intel-results" class="intel-results">
+              <div class="intel-results-grid">
+                <article class="intel-metric-block">
+                  <div>
+                    <p id="intel-score-value" class="intel-big-number">0.0</p>
+                    <div class="intel-progress-track">
+                      <div id="intel-score-bar-fill" class="intel-progress-fill"></div>
+                    </div>
+                  </div>
+                  <span class="intel-label">SCORE DE RISCO</span>
+                </article>
+
+                <article class="intel-metric-block">
+                  <div>
+                    <p id="intel-tier-value" class="intel-big-number">TIER 1</p>
+                    <p id="intel-tier-label" class="intel-tier-sub">BAIXO</p>
+                  </div>
+                  <span class="intel-label">NÍVEL DE RISCO</span>
+                </article>
+
+                <article class="intel-metric-block">
+                  <div>
+                    <p id="intel-varpop-value" class="intel-big-number">0.0%</p>
+                  </div>
+                  <span class="intel-label">VARIAÇÃO POPULACIONAL</span>
+                </article>
+
+                <article class="intel-metric-block">
+                  <div>
+                    <p id="intel-ranking-value" class="intel-big-number">0º / 0</p>
+                  </div>
+                  <span class="intel-label">RANKING NACIONAL</span>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="intel-column">
+            <div class="intel-panel">
+              <h3 class="intel-column-title">CONTEXTO NACIONAL</h3>
+
+              <div id="intel-context-placeholder" class="intel-context-placeholder">
+                Selecione um município para ver a comparação nacional.
+              </div>
+
+              <div id="intel-context-content" class="intel-context-content" hidden>
+                <div class="intel-context-rows">
+                  <div class="intel-context-row">
+                    <span class="intel-context-label">Este município</span>
+                    <div class="intel-context-value-wrap">
+                      <span id="intel-context-selected-score" class="intel-context-value">0.0</span>
+                    </div>
+                  </div>
+                  <div class="intel-context-row">
+                    <span class="intel-context-label">Média nacional</span>
+                    <div class="intel-context-value-wrap">
+                      <span id="intel-context-average-score" class="intel-context-value">0.0</span>
+                    </div>
+                  </div>
+                  <div class="intel-context-row">
+                    <span class="intel-context-label">Município menos vulnerável</span>
+                    <div class="intel-context-value-wrap">
+                      <span id="intel-context-best-score" class="intel-context-value">0.0</span>
+                      <span id="intel-context-best-name" class="intel-best-name"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="intel-context-bars">
+                  <div class="intel-context-bar-row">
+                    <span class="intel-context-bar-label">Este município</span>
+                    <div class="intel-context-bar-track">
+                      <div id="intel-bar-selected" class="intel-context-bar-fill"></div>
+                    </div>
+                  </div>
+                  <div class="intel-context-bar-row">
+                    <span class="intel-context-bar-label">Média nacional</span>
+                    <div class="intel-context-bar-track">
+                      <div id="intel-bar-average" class="intel-context-bar-fill"></div>
+                    </div>
+                  </div>
+                  <div class="intel-context-bar-row">
+                    <span class="intel-context-bar-label">Município menos vulnerável</span>
+                    <div class="intel-context-bar-track">
+                      <div id="intel-bar-best" class="intel-context-bar-fill"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <p id="intel-context-sentence" class="intel-context-sentence"></p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- SOBRE NÓS -->
+      <section id="sobre" class="page" style="padding: 80px 40px; max-width: 1100px; margin: 0 auto;">
+
+      <!-- Header -->
+      <div style="margin-bottom: 48px; border-top: 1px solid #d4d1ca; padding-top: 24px;">
+        <span style="font-size: 11px; letter-spacing: 0.15em; color: #7a7974;">SOBRE NÓS</span>
+        <h2 style="font-size: clamp(2rem,4vw,3rem); font-weight: 900; margin-top: 8px; line-height: 1.1;">
+          A EQUIPA<br>
+          <span style="color: #aaa;">A ARQUITECTURA</span><br>
+          INTELECTUAL
+        </h2>
+      </div>
+
+      <!-- Project description -->
+      <p style="max-width: 600px; font-size: 14px; line-height: 1.7; color: #555; margin-bottom: 64px; padding-left: 16px; border-left: 2px solid #28251d;">
+        Somos estudantes de gestão que desenvolveram o projeto CASSANDRA
+        para mapear e analisar as vulnerabilidades demográficas e digitais
+        dos municípios portugueses. Precisão é a nossa base; antecipação é o nosso objetivo.
+      </p>
+
+      <!-- Team cards — 2 columns, equal height -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;">
+
+        <!-- Card 1 -->
+        <div style="border: 1px solid #d4d1ca;">
+          <div style="width:100%; aspect-ratio:3/4; background:#e8e6e2; overflow:hidden;">
+            <img src="./assets/foto-bruno.jpg"
+                 alt="Bruno Machado"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:48px;font-weight:900;color:#aaa;\'>BM</div>'"
+            />
+          </div>
+          <div style="padding: 20px 24px 28px;">
+            <h3 style="font-size: 18px; font-weight: 900; letter-spacing: 0.05em; margin-bottom: 4px;">BRUNO MACHADO</h3>
+            <p style="font-size: 11px; letter-spacing: 0.12em; color: #7a7974; margin-bottom: 16px;">INVESTIGADOR PRINCIPAL</p>
+            <hr style="border:none;border-top:1px solid #d4d1ca;margin-bottom:16px;">
+            <p style="font-size: 13px; line-height: 1.6; color: #555;">
+              Placeholder — descrição a definir.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div style="border: 1px solid #d4d1ca;">
+          <div style="width:100%; aspect-ratio:3/4; background:#e8e6e2; overflow:hidden;">
+            <img src="./assets/foto-ruben.jpg"
+                 alt="Rúben Correia"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:48px;font-weight:900;color:#aaa;\'>RC</div>'"
+            />
+          </div>
+          <div style="padding: 20px 24px 28px;">
+            <h3 style="font-size: 18px; font-weight: 900; letter-spacing: 0.05em; margin-bottom: 4px;">RÚBEN CORREIA</h3>
+            <p style="font-size: 11px; letter-spacing: 0.12em; color: #7a7974; margin-bottom: 16px;">INVESTIGADOR PRINCIPAL</p>
+            <hr style="border:none;border-top:1px solid #d4d1ca;margin-bottom:16px;">
+            <p style="font-size: 13px; line-height: 1.6; color: #555;">
+              Placeholder — descrição a definir.
+            </p>
+          </div>
+        </div>
+
+      </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div class="foot-left">© 2026 CASSANDRA — INTELIGÊNCIA DE RISCO TERRITORIAL</div>
+      <div class="foot-right">
+        <a href="#">DOCUMENTAÇÃO_API</a>
+        <span>|</span>
+        <a href="#">ESTADO_SISTEMA</a>
+        <span>|</span>
+        <a href="#"></a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const validRoutes = new Set(["#home", "#territories", "#collapse", "#intel", "#archive", "#sobre"]);
+      const pages = Array.from(document.querySelectorAll(".page"));
+      const navLinks = Array.from(document.querySelectorAll(".nav-link[data-route]"));
+
+      function getRoute(hash) {
+        return validRoutes.has(hash) ? hash : "#home";
+      }
+
+      function applyRoute() {
+        const hasHash = Boolean(window.location.hash);
+        const route = getRoute(hasHash ? window.location.hash : "#home");
+        if (hasHash && window.location.hash !== route) {
+          window.location.hash = route;
+          return;
+        }
+
+        pages.forEach((page) => {
+          page.classList.toggle("active", `#${page.id}` === route);
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === route);
+        });
+        if (route === "#territories") {
+          if (window.cassandraMap) {
+            window.cassandraMap.invalidateSize();
+          }
+        }
+      }
+
+      applyRoute();
+      window.addEventListener("hashchange", applyRoute);
+
+      document.querySelectorAll(".tier-toggle").forEach((toggle) => {
+        toggle.addEventListener("click", function () {
+          this.classList.toggle("active");
+        });
+      });
+
+      const dashboardData = window.DASHBOARD_DATA || {};
+      const globalStats = dashboardData.global_stats || {};
+
+      function setText(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = String(value);
+      }
+
+      function formatPct(value) {
+        const n = Number(value);
+        return Number.isFinite(n) ? n.toFixed(1) : "0.0";
+      }
+
+      setText("alert-tier4-count", Number(globalStats.tier4_count || 0));
+      setText("kpi-tier4-count", Number(globalStats.tier4_count || 0));
+      setText("kpi-tier3-count", Number(globalStats.tier3_count || 0));
+      setText("kpi-tier2-count", Number(globalStats.tier2_count || 0));
+      setText("kpi-tier1-count", Number(globalStats.tier1_count || 0));
+      setText("kpi-total-count", Number(globalStats.total_municipios || 0));
+      setText("kpi-tier4-pct", formatPct(globalStats.tier4_pct));
+      setText("kpi-tier3-pct", formatPct(globalStats.tier3_pct));
+      setText("kpi-tier2-pct", formatPct(globalStats.tier2_pct));
+      setText("kpi-tier1-pct", formatPct(globalStats.tier1_pct));
+
+      const TIER_LABELS = {
+        4: "Crítico", 3: "Elevado", 2: "Moderado", 1: "Controlado"
+      };
+      const territorySearch = document.getElementById("territory-search");
+      const territorySelect = document.getElementById("territory-select");
+      const territoryQueryBtn = document.getElementById("territory-query-btn");
+
+      const territoryRows = Array.isArray(dashboardData.oracle_log)
+        ? [...dashboardData.oracle_log].sort((a, b) => a.municipio.localeCompare(b.municipio, "pt"))
+        : [];
+      const territoryRowsByName = new Map(
+        territoryRows.map((row) => [row.municipio.toUpperCase(), row])
+      );
+
+      function renderTerritoryOptions(query) {
+        if (!territorySelect) return;
+        const q = (query || "").trim().toLowerCase();
+        const rows = q
+          ? territoryRows.filter((row) => row.municipio.toLowerCase().includes(q))
+          : territoryRows;
+
+        territorySelect.innerHTML = '<option value="">Selecionar do índice...</option>';
+        rows.forEach((row) => {
+          const option = document.createElement("option");
+          option.value = row.id;
+          option.textContent = `${row.municipio.toUpperCase()} [${(TIER_LABELS[row.tier] || "Elevado").toUpperCase()}]`;
+          territorySelect.appendChild(option);
+        });
+      }
+
+      renderTerritoryOptions("");
+
+      if (territorySearch) {
+        territorySearch.addEventListener("input", function () {
+          renderTerritoryOptions(this.value);
+        });
+      }
+
+      const intelSelect = document.getElementById("intel-municipality-select");
+      const intelAnalyzeBtn = document.getElementById("intel-analyze-btn");
+      const intelResults = document.getElementById("intel-results");
+      const intelScoreValue = document.getElementById("intel-score-value");
+      const intelScoreBarFill = document.getElementById("intel-score-bar-fill");
+      const intelTierValue = document.getElementById("intel-tier-value");
+      const intelTierLabel = document.getElementById("intel-tier-label");
+      const intelVarPopValue = document.getElementById("intel-varpop-value");
+      const intelRankingValue = document.getElementById("intel-ranking-value");
+      const intelContextPlaceholder = document.getElementById("intel-context-placeholder");
+      const intelContextContent = document.getElementById("intel-context-content");
+      const intelContextSelectedScore = document.getElementById("intel-context-selected-score");
+      const intelContextAverageScore = document.getElementById("intel-context-average-score");
+      const intelContextBestScore = document.getElementById("intel-context-best-score");
+      const intelContextBestName = document.getElementById("intel-context-best-name");
+      const intelBarSelected = document.getElementById("intel-bar-selected");
+      const intelBarAverage = document.getElementById("intel-bar-average");
+      const intelBarBest = document.getElementById("intel-bar-best");
+      const intelContextSentence = document.getElementById("intel-context-sentence");
+
+      const intelRows = Array.isArray(dashboardData.oracle_log) ? [...dashboardData.oracle_log] : [];
+      const intelRowsByName = [...intelRows].sort((a, b) => String(a.municipio || "").localeCompare(String(b.municipio || ""), "pt"));
+      const intelRowsByScore = [...intelRows].sort((a, b) => {
+        const scoreDiff = toScore(a.score) - toScore(b.score);
+        if (scoreDiff !== 0) return scoreDiff;
+        return String(a.municipio || "").localeCompare(String(b.municipio || ""), "pt");
+      });
+      const intelTotal = intelRowsByScore.length;
+      const intelAverageScore = intelTotal
+        ? intelRowsByScore.reduce((sum, row) => sum + toScore(row.score), 0) / intelTotal
+        : 0;
+      const intelBestMunicipality = intelRowsByScore[0] || null;
+      const intelRowsById = new Map(
+        intelRowsByName.map((row) => [String(row.id || row.municipio || ""), row])
+      );
+      const intelRankById = new Map(
+        intelRowsByScore.map((row, index) => [String(row.id || row.municipio || ""), index + 1])
+      );
+
+      function toScore(value) {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : 0;
+      }
+
+      function parseVarPop(value) {
+        if (typeof value === "number") {
+          return Number.isFinite(value) ? value : 0;
+        }
+        const normalized = String(value || "")
+          .replace("%", "")
+          .replace(",", ".")
+          .trim();
+        const n = Number(normalized);
+        return Number.isFinite(n) ? n : 0;
+      }
+
+      function formatScore(value) {
+        return toScore(value).toFixed(1);
+      }
+
+      function formatVarPop(value) {
+        return `${parseVarPop(value).toFixed(1)}%`;
+      }
+
+      function getRiskColor(score) {
+        if (score >= 75) return "#e53e3e";
+        if (score >= 50) return "#dd6b20";
+        return "#38a169";
+      }
+
+      function getTierMeta(tier) {
+        const tierNumber = Number(tier);
+        if (tierNumber === 4) return { label: "CRÍTICO", color: "#e53e3e" };
+        if (tierNumber === 3) return { label: "ELEVADO", color: "#dd6b20" };
+        if (tierNumber === 2) return { label: "MODERADO", color: "#d69e2e" };
+        return { label: "BAIXO", color: "#38a169" };
+      }
+
+      function updateContextSentence(rank, total) {
+        if (!total) return "Este município tem vulnerabilidade moderada a nível nacional.";
+        const leastVulnerable10Cutoff = Math.ceil(total * 0.10);
+        const leastVulnerable25Cutoff = Math.ceil(total * 0.25);
+        const mostVulnerable10Start = total - leastVulnerable10Cutoff + 1;
+        const mostVulnerable25Start = total - leastVulnerable25Cutoff + 1;
+
+        if (rank <= leastVulnerable10Cutoff) {
+          return "Este município está entre os 10% menos vulneráveis do país.";
+        }
+        if (rank <= leastVulnerable25Cutoff) {
+          return "Este município está entre os 25% menos vulneráveis do país.";
+        }
+        if (rank >= mostVulnerable10Start) {
+          return "Este município está entre os 10% mais vulneráveis do país.";
+        }
+        if (rank >= mostVulnerable25Start) {
+          return "Este município está entre os 25% mais vulneráveis do país.";
+        }
+        return "Este município tem vulnerabilidade moderada a nível nacional.";
+      }
+
+      function setBarState(barEl, score) {
+        if (!barEl) return;
+        const safeScore = Math.max(0, Math.min(100, toScore(score)));
+        barEl.style.width = `${safeScore}%`;
+        barEl.style.background = getRiskColor(safeScore);
+      }
+
+      const intelAnimationFrames = {};
+
+      function animateCounter(key, fromValue, toValue, duration, onUpdate) {
+        if (intelAnimationFrames[key]) {
+          cancelAnimationFrame(intelAnimationFrames[key]);
+        }
+        const startTime = performance.now();
+
+        function step(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const value = fromValue + (toValue - fromValue) * progress;
+          onUpdate(value, progress);
+          if (progress < 1) {
+            intelAnimationFrames[key] = requestAnimationFrame(step);
+          }
+        }
+
+        intelAnimationFrames[key] = requestAnimationFrame(step);
+      }
+
+      function animateScore(targetValue) {
+        if (!intelScoreValue) return;
+        intelScoreValue.textContent = "0.0";
+        animateCounter("score", 0, targetValue, 800, function (value, progress) {
+          if (progress >= 1) {
+            intelScoreValue.textContent = targetValue.toFixed(1);
+            return;
+          }
+          intelScoreValue.textContent = value.toFixed(1);
+        });
+      }
+
+      function populateIntelSelect() {
+        if (!intelSelect) return;
+        intelSelect.innerHTML = '<option value="">— Escolher município —</option>';
+        intelRowsByName.forEach((row) => {
+          const option = document.createElement("option");
+          option.value = String(row.id || row.municipio || "");
+          option.textContent = String(row.municipio || "");
+          intelSelect.appendChild(option);
+        });
+      }
+
+      function renderIntelSelection(selectionId) {
+        const selected = intelRowsById.get(String(selectionId || ""));
+        if (!selected) return;
+
+        const score = toScore(selected.score);
+        const tierNumber = Number(selected.tier) || 1;
+        const tierMeta = getTierMeta(tierNumber);
+        const varPop = parseVarPop(selected.var_pop);
+        const rank = intelRankById.get(String(selected.id || selected.municipio || "")) || intelTotal;
+        const bestScore = intelBestMunicipality ? toScore(intelBestMunicipality.score) : 0;
+
+        if (intelResults) intelResults.classList.add("active");
+        if (intelContextPlaceholder) intelContextPlaceholder.style.display = "none";
+        if (intelContextContent) intelContextContent.hidden = false;
+
+        animateScore(score);
+        if (intelScoreBarFill) {
+          intelScoreBarFill.style.background = getRiskColor(score);
+          intelScoreBarFill.style.width = `${Math.max(0, Math.min(100, score))}%`;
+        }
+
+        if (intelTierValue) intelTierValue.textContent = `TIER ${tierNumber}`;
+        if (intelTierLabel) {
+          intelTierLabel.textContent = tierMeta.label;
+          intelTierLabel.style.color = tierMeta.color;
+        }
+
+        if (intelVarPopValue) {
+          if (varPop < 0) intelVarPopValue.style.color = "#e53e3e";
+          else if (varPop > 0) intelVarPopValue.style.color = "#38a169";
+          else intelVarPopValue.style.color = "#1c1b1b";
+
+          animateCounter("varpop", 0, varPop, 800, function (value, progress) {
+            if (progress >= 1) {
+              intelVarPopValue.textContent = formatVarPop(selected.var_pop);
+              return;
+            }
+            intelVarPopValue.textContent = `${value.toFixed(1)}%`;
+          });
+        }
+
+        if (intelRankingValue) {
+          animateCounter("rank", 0, rank, 800, function (value, progress) {
+            if (progress >= 1) {
+              intelRankingValue.textContent = `${rank}º / ${intelTotal}`;
+              return;
+            }
+            intelRankingValue.textContent = `${Math.max(1, Math.round(value))}º / ${intelTotal}`;
+          });
+        }
+
+        if (intelContextSelectedScore) intelContextSelectedScore.textContent = formatScore(score);
+        if (intelContextAverageScore) intelContextAverageScore.textContent = formatScore(intelAverageScore);
+        if (intelContextBestScore) intelContextBestScore.textContent = formatScore(bestScore);
+        if (intelContextBestName) {
+          intelContextBestName.textContent = intelBestMunicipality
+            ? String(intelBestMunicipality.municipio || "")
+            : "";
+        }
+
+        setBarState(intelBarSelected, score);
+        setBarState(intelBarAverage, intelAverageScore);
+        setBarState(intelBarBest, bestScore);
+
+        if (intelContextSentence) {
+          intelContextSentence.textContent = updateContextSentence(rank, intelTotal);
+        }
+      }
+
+      function getTerritorySelectionKey() {
+        if (territorySelect && territorySelect.value) return territorySelect.value;
+        if (territorySearch) {
+          const typed = territorySearch.value.trim().toUpperCase();
+          const row = territoryRowsByName.get(typed);
+          if (row && row.id) return row.id;
+        }
+        return "";
+      }
+
+      populateIntelSelect();
+
+      if (intelAnalyzeBtn) {
+        intelAnalyzeBtn.addEventListener("click", function () {
+          if (!intelSelect || !intelSelect.value) return;
+          renderIntelSelection(intelSelect.value);
+        });
+      }
+
+      if (territoryQueryBtn) {
+        territoryQueryBtn.addEventListener("click", function () {
+          const selectedKey = getTerritorySelectionKey();
+          if (!selectedKey) return;
+          if (intelSelect) intelSelect.value = String(selectedKey);
+          renderIntelSelection(String(selectedKey));
+          window.location.hash = "#intel";
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

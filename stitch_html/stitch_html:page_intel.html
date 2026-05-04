@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CASSANDRA - Municipal Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .bg-risk-accent {
+                background-color: #FF3366;
+            }
+            .text-risk-accent {
+                color: #FF3366;
+            }
+            .border-risk-accent {
+                border-color: #FF3366;
+            }
+            .border-thin {
+                border-width: 1px;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ebe7e6",
+                        "tertiary-fixed-dim": "#cac6c4",
+                        "tertiary-fixed": "#e6e2df",
+                        "primary-fixed": "#e5e2e1",
+                        "inverse-primary": "#c8c6c5",
+                        "inverse-surface": "#313030",
+                        "surface-tint": "#5f5e5e",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#ddd9d8",
+                        "on-secondary-fixed-variant": "#4a463d",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c4c7c7",
+                        "on-primary-container": "#858383",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-bright": "#fdf8f8",
+                        "on-primary-fixed-variant": "#474746",
+                        "secondary-container": "#e9e2d4",
+                        "tertiary-container": "#1c1b1a",
+                        "on-surface": "#1c1b1b",
+                        "on-secondary-container": "#696459",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#868382",
+                        "surface-container-low": "#f7f3f2",
+                        "surface-container": "#f1edec",
+                        "secondary-fixed": "#e9e2d4",
+                        "tertiary": "#000000",
+                        "surface": "#fdf8f8",
+                        "on-surface-variant": "#444748",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e5e2e1",
+                        "secondary": "#625e54",
+                        "primary-container": "#1c1b1b",
+                        "on-primary-fixed": "#1c1b1b",
+                        "inverse-on-surface": "#f4f0ef",
+                        "background": "#fdf8f8",
+                        "secondary-fixed-dim": "#ccc6b9",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "on-background": "#1c1b1b",
+                        "on-tertiary-fixed": "#1c1b1a",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "primary": "#000000",
+                        "outline": "#747878",
+                        "on-secondary-fixed": "#1e1b13"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "32px",
+                        "margin-edge": "64px",
+                        "container-max": "1440px",
+                        "unit": "8px",
+                        "overlap-offset": "-40px"
+                    },
+                    "fontFamily": {
+                        "headline-outline": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"],
+                        "display-xl": ["Space Grotesk"],
+                        "display-lg": ["Space Grotesk"],
+                        "data-mono": ["Space Grotesk"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-outline": ["80px", { "lineHeight": "84px", "letterSpacing": "0.02em", "fontWeight": "700" }],
+                        "headline-md": ["48px", { "lineHeight": "52px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.2em", "fontWeight": "600" }],
+                        "display-xl": ["120px", { "lineHeight": "110px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-lg": ["80px", { "lineHeight": "84px", "letterSpacing": "0.02em", "fontWeight": "700" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["20px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased">
+<!-- TopNavBar Component -->
+<nav class="docked full-width top-0 border-b-[1px] border-[#1A1A1A] dark:border-[#F5F5F0] bg-[#F5F5F0] dark:bg-[#1A1A1A]">
+<div class="flex justify-between items-center w-full px-16 py-6 max-w-[1920px] mx-auto border-b-[1px] border-[#1A1A1A] dark:border-[#F5F5F0] flat no shadows">
+<div class="text-2xl font-black tracking-tighter text-[#1A1A1A] dark:text-[#F5F5F0]">CASSANDRA</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold text-neutral-400 dark:text-neutral-500 hover:text-[#1A1A1A] dark:hover:text-[#F5F5F0] transition-none" href="#">Oracles</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold text-neutral-400 dark:text-neutral-500 hover:text-[#1A1A1A] dark:hover:text-[#F5F5F0] transition-none" href="#">Protocols</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold text-[#1A1A1A] dark:text-[#F5F5F0] border-b-2 border-[#1A1A1A] dark:border-[#F5F5F0] pb-1 hover:text-[#1A1A1A] dark:hover:text-[#F5F5F0] transition-none" href="#">Intel</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold text-neutral-400 dark:text-neutral-500 hover:text-[#1A1A1A] dark:hover:text-[#F5F5F0] transition-none" href="#">Archive</a>
+</div>
+<button class="font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold text-on-primary bg-primary px-6 py-3 border-thin border-primary hover:bg-background hover:text-primary transition-none hidden md:block">
+                Enter Terminal
+            </button>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-edge py-gutter flex flex-col gap-gutter">
+<!-- Header Section -->
+<header class="flex flex-col gap-4 border-b border-outline pb-8 relative">
+<h1 class="font-headline-outline text-headline-outline text-on-surface uppercase tracking-tight">
+                LISBON METRO <br/> <span class="text-outline"> // NODE 001</span>
+</h1>
+<div class="absolute top-0 right-0 w-4 h-4 bg-risk-accent"></div>
+<div class="flex gap-8 mt-4">
+<div class="flex flex-col border-l border-outline pl-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Var_Pop</span>
+<span class="font-data-mono text-data-mono text-risk-accent">-1.2%</span>
+</div>
+<div class="flex flex-col border-l border-outline pl-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Live_StatusCode</span>
+<span class="font-data-mono text-data-mono text-on-surface">200</span>
+</div>
+<div class="flex flex-col border-l border-outline pl-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">CASSANDRA_Risk_Score</span>
+<span class="font-data-mono text-data-mono text-risk-accent font-bold">9.4</span>
+</div>
+</div>
+</header>
+<!-- Split Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-start">
+<!-- Left Column: Regional Radar -->
+<section class="flex flex-col gap-6 relative border-thin border-outline bg-surface-container-low p-8">
+<div class="absolute top-0 right-0 w-2 h-2 bg-risk-accent m-2"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface border-b border-outline pb-4">Regional Radar</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Risk gap analysis against District Apex Performer (NODE_044). High variance detected in structural resilience.</p>
+<!-- Abstract Radar Representation -->
+<div class="relative w-full aspect-square border-thin border-outline bg-surface flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 grid grid-cols-4 grid-rows-4 opacity-20 pointer-events-none">
+<div class="border-r border-b border-outline"></div><div class="border-r border-b border-outline"></div><div class="border-r border-b border-outline"></div><div class="border-b border-outline"></div>
+<div class="border-r border-b border-outline"></div><div class="border-r border-b border-outline"></div><div class="border-r border-b border-outline"></div><div class="border-b border-outline"></div>
+<div class="border-r border-b border-outline"></div><div class="border-r border-b border-outline"></div><div class="border-r border-b border-outline"></div><div class="border-b border-outline"></div>
+<div class="border-r border-outline"></div><div class="border-r border-outline"></div><div class="border-r border-outline"></div><div></div>
+</div>
+<!-- SVG Chart -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<polygon fill="none" points="50,10 90,40 75,90 25,90 10,40" stroke="#747878" stroke-width="0.5"></polygon>
+<polygon fill="rgba(255,51,102,0.1)" points="50,30 70,50 60,80 40,80 30,50" stroke="#FF3366" stroke-width="1.5"></polygon>
+<line stroke="#747878" stroke-dasharray="2,2" stroke-width="0.5" x1="50" x2="50" y1="50" y2="10"></line>
+<line stroke="#747878" stroke-dasharray="2,2" stroke-width="0.5" x1="50" x2="90" y1="50" y2="40"></line>
+<line stroke="#747878" stroke-dasharray="2,2" stroke-width="0.5" x1="50" x2="75" y1="50" y2="90"></line>
+<line stroke="#747878" stroke-dasharray="2,2" stroke-width="0.5" x1="50" x2="25" y1="50" y2="90"></line>
+<line stroke="#747878" stroke-dasharray="2,2" stroke-width="0.5" x1="50" x2="10" y1="50" y2="40"></line>
+<!-- Data Points -->
+<circle cx="50" cy="30" fill="#FF3366" r="1.5"></circle>
+<circle cx="70" cy="50" fill="#FF3366" r="1.5"></circle>
+<circle cx="60" cy="80" fill="#FF3366" r="1.5"></circle>
+<circle cx="40" cy="80" fill="#FF3366" r="1.5"></circle>
+<circle cx="30" cy="50" fill="#FF3366" r="1.5"></circle>
+</svg>
+<!-- Axis Labels -->
+<span class="absolute top-4 font-label-caps text-[10px] text-on-surface-variant">STRUCTURAL</span>
+<span class="absolute right-4 top-1/3 font-label-caps text-[10px] text-on-surface-variant">ECONOMIC</span>
+<span class="absolute bottom-4 right-1/4 font-label-caps text-[10px] text-on-surface-variant">DEMOGRAPHIC</span>
+<span class="absolute bottom-4 left-1/4 font-label-caps text-[10px] text-on-surface-variant">ENVIRONMENTAL</span>
+<span class="absolute left-4 top-1/3 font-label-caps text-[10px] text-on-surface-variant">DIGITAL</span>
+</div>
+</section>
+<!-- Right Column: Intervention Simulator -->
+<section class="flex flex-col gap-6 relative border-thin border-outline bg-surface-container-low p-8 h-full">
+<div class="absolute top-0 right-0 w-2 h-2 bg-on-surface m-2"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface border-b border-outline pb-4">Intervention Simulator</h2>
+<div class="flex-grow flex flex-col gap-8 justify-center">
+<!-- Simulator Control -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-end border-b border-outline pb-2">
+<label class="font-label-caps text-label-caps text-on-surface uppercase" for="iei-slider">IEI_Score (Digital Health)</label>
+<span class="font-data-mono text-data-mono text-on-surface">65%</span>
+</div>
+<input class="w-full h-1 bg-outline-variant appearance-none cursor-pointer rounded-none accent-risk-accent" id="iei-slider" max="100" min="0" name="iei-slider" type="range" value="65"/>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Adjust to simulate infrastructure injection impact.</p>
+</div>
+<!-- Projected Risk Metric -->
+<div class="border-thin border-outline bg-surface p-6 flex flex-col gap-2 relative overflow-hidden">
+<div class="absolute -right-overlap-offset -top-overlap-offset opacity-5">
+<span class="material-symbols-outlined text-display-xl" style="font-size: 200px;">analytics</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Projected Risk Reduction</span>
+<div class="flex items-baseline gap-4">
+<span class="font-display-lg text-display-lg text-on-surface tracking-tighter">-1.8</span>
+<span class="font-data-mono text-data-mono text-risk-accent font-bold uppercase">Delta</span>
+</div>
+<div class="h-1 w-full bg-outline-variant mt-4">
+<div class="h-full bg-on-surface w-[35%]"></div>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary font-label-caps text-label-caps uppercase border-thin border-primary hover:bg-background hover:text-primary transition-none flex items-center justify-center gap-2">
+                        Execute Simulation <span class="material-symbols-outlined text-sm">terminal</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="docked full-width border-t-[1px] border-[#1A1A1A] dark:border-[#F5F5F0] bg-[#F5F5F0] dark:bg-[#1A1A1A] mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-16 py-12 gap-8 flat no shadows border-t-[1px] border-[#1A1A1A] dark:border-[#F5F5F0]">
+<div class="font-['Space_Grotesk'] uppercase tracking-[0.15em] text-[10px] text-[#1A1A1A] dark:text-[#F5F5F0]">© 2024 CASSANDRA TERRITORIAL RISK INTELLIGENCE</div>
+<div class="flex gap-6 flex-wrap justify-center">
+<a class="font-['Space_Grotesk'] uppercase tracking-[0.15em] text-[10px] text-neutral-500 hover:text-[#1A1A1A] dark:hover:text-white transition-none" href="#">API Documentation</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-[0.15em] text-[10px] text-neutral-500 hover:text-[#1A1A1A] dark:hover:text-white transition-none" href="#">Security Protocol</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-[0.15em] text-[10px] text-neutral-500 hover:text-[#1A1A1A] dark:hover:text-white transition-none" href="#">Infrastructure</a>
+<a class="font-['Space_Grotesk'] uppercase tracking-[0.15em] text-[10px] text-neutral-500 hover:text-[#1A1A1A] dark:hover:text-white transition-none" href="#">Legal Archive</a>
+</div>
+</div>
+</footer>
+</body></html>
