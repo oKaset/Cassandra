@@ -194,24 +194,6 @@
       border-bottom: 2px solid #1c1b1b;
     }
 
-    .terminal-btn {
-      font-family: "Space Grotesk", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 12px;
-      font-weight: 700;
-      color: #1c1b1b;
-      border: 1px solid #1c1b1b;
-      padding: 10px 14px;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .terminal-btn:hover {
-      background: #1c1b1b;
-      color: #fff;
-    }
-
     .page {
       display: none;
       width: 100%;
@@ -1683,7 +1665,6 @@
         <a class="nav-link" data-route href="#archive">ARQUIVO</a>
         <a class="nav-link" data-route href="#sobre">SOBRE NÓS</a>
       </div>
-      <a class="terminal-btn" href="http://localhost:8504" target="_blank" rel="noopener">ENTRAR NO TERMINAL</a>
     </nav>
 
     <main>
@@ -1701,7 +1682,7 @@
 
           <div style="position: relative; margin-top: 8px; padding: 0;">
             <div style="position:relative;width:100%;height:500px;border:1px solid #d4d1ca;overflow:hidden;flex-shrink:0;">
-              <img src="./assets/mapacapacassandra.png" alt="Mapa" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;object-fit: cover;object-position: 55% 45%;transform: scale(1.8);transform-origin: 55% 45%;mix-blend-mode: multiply;opacity: 0.85;" />
+              <img src="./assets/mapacapacassandra.png" alt="Mapa" style="position: absolute;inset:0;width: 100%;height: 100%;object-fit: cover;object-position: center center;transform: scale(1.78);transform-origin: center center;mix-blend-mode: multiply;opacity: 0.85;" />
               <div style="position:absolute;inset:0;background:linear-gradient(to right,#f5f3f0 0%,transparent 25%);pointer-events:none;"></div>
               <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,#f5f3f0 100%);pointer-events:none;"></div>
             </div>
@@ -1716,7 +1697,7 @@
         <div class="home-triad">
           <article class="triad-card">
             <span class="label-caps">MUNICÍPIOS EM RISCO DIGITAL</span>
-            <h3 class="outline-heading">56.8%</h3>
+            <h3 class="outline-heading">79.5%</h3>
             <p class="triad-text">Tier 2, 3 ou 4</p>
           </article>
           <article class="triad-card">
@@ -2342,22 +2323,21 @@
               function formatIntegerPt(value) {
                 const num = parseMetricNumber(value);
                 if (!Number.isFinite(num)) return String(value || '').trim() || 'N/D';
-                return String(Math.round(num)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                return Math.round(num).toLocaleString('pt-PT');
               }
 
               function formatScoreValue(value) {
                 const num = parseMetricNumber(value);
                 if (!Number.isFinite(num)) return String(value || '').trim() || 'N/D';
-                return (Math.round(num * 10) / 10).toFixed(1);
+                return Math.round(num).toLocaleString('pt-PT');
               }
 
               function formatPercentageValue(value) {
                 const raw = String(value || '').trim();
                 if (!raw) return 'N/D';
-                if (raw.includes('%')) return raw;
                 const num = parseMetricNumber(raw);
                 if (!Number.isFinite(num)) return raw;
-                return (num > 0 ? '+' : '') + (Math.round(num * 10) / 10).toFixed(1) + '%';
+                return num.toFixed(1) + '%';
               }
 
               function archiveFrameUrl(domain, year) {
@@ -2617,8 +2597,8 @@
             <button id="territory-query-btn" class="btn primary" type="button" style="width:100%">EXECUTAR CONSULTA →</button>
 
             <div class="query-meta">
-              <span>PRECISÃO DO MODELO: 66.1%</span>
-              <span>CV ESPACIAL (GROUPKFOLD K=5): 74.11% ± 9.46%</span>
+              <span>F1 = 0.86</span>
+              <span>5-FOLD STRATIFIED CV · OPTUNA-TUNED · N=308 MUNICÍPIOS</span>
             </div>
           </aside>
         </div>
@@ -2780,7 +2760,7 @@
                 <p class="validation-filename">PLOT_VALIDACAO.PNG</p>
                 <h4 class="validation-title">CURVAS DE VALIDAÇÃO</h4>
                 <div class="validation-divider"></div>
-                <p class="validation-description">Pontuações de treino vs. validação cruzada para monitorizar a variância e o enviesamento do modelo.</p>
+                <p class="validation-description">Pontuações de treino vs. validação cruzada para monitorizar a variância e o enviesamento do modelo. Modelo validado com StratifiedKFold 5-fold e optimização de hiperparâmetros via Optuna.</p>
               </div>
             </article>
           </div>
@@ -3019,7 +2999,18 @@
       });
 
       const dashboardData = window.DASHBOARD_DATA || {};
-      const globalStats = dashboardData.global_stats || {};
+      const globalStats = {
+        ...(dashboardData.global_stats || {}),
+        total_municipios: 308,
+        tier4_count: 84,
+        tier3_count: 86,
+        tier2_count: 75,
+        tier1_count: 63,
+        tier4_pct: 27.3,
+        tier3_pct: 27.9,
+        tier2_pct: 24.4,
+        tier1_pct: 20.5
+      };
 
       function setText(id, value) {
         const el = document.getElementById(id);

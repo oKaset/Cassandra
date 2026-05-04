@@ -1,0 +1,41 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local environment/secrets
+.env
+.env.*
+!.env.example
+
+# CASSANDRA local extraction/runtime artifacts
+cdx_checkpoint.json
+cdx_checkpoint.json.tmp
+failures.log
+*.log
+
+# Local generated/dev artifacts
+output/
+*.pkl
+reports/*.pkl
+
+# Editor/temp
+*.swp
+*.swo
+*~
+*.tmp

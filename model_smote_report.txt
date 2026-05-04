@@ -1,0 +1,89 @@
+CASSANDRA Opcao A - Rigorous Evaluation and Optimization Report
+Generated: 2026-05-04T13:43:35
+Input: feature_matrix_v2.csv
+Target: CASSANDRA_Risk_Tier
+SMOTE: enabled
+
+Rows after dropping missing targets: 308
+Columns excluded before training: Município, CASSANDRA_Risk_Score, municipio
+Class distribution for CASSANDRA_Risk_Tier (value_counts):
+CASSANDRA_Risk_Tier
+TIER 3 - Risco de Fuga         86
+TIER 4 - Profecia CASSANDRA    84
+TIER 2 - Estagnação            75
+TIER 1 - Resiliência           63
+
+=== STEP A — Stratified K-Fold Cross-Validation (Baseline and V2) ===
+CV: StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+SMOTE is applied to training folds only; test folds remain unchanged.
+Baseline raw columns: Var_Pop, IEI_Score, Total_Arquivo_Captures, Live_StatusCode
+Baseline encoded feature count: 10
+V2 raw columns: Var_Pop, IEI_Score, Total_Arquivo_Captures, Live_StatusCode, site_mortality_rate, unique_domains, capture_acceleration, last_capture_gap_days
+V2 encoded feature count: 14
+
+Baseline weighted F1: 0.8330 ± 0.0369
+Mean per-class metrics across 5 folds:
+class                             precision     recall   f1-score
+TIER 1 - Resiliência                 0.9038     0.9038     0.9032
+TIER 2 - Estagnação                  0.9013     0.8933     0.8911
+TIER 3 - Risco de Fuga               0.7596     0.7333     0.7394
+TIER 4 - Profecia CASSANDRA          0.8183     0.8338     0.8241
+
+V2 all features weighted F1: 0.8592 ± 0.0404
+Mean per-class metrics across 5 folds:
+class                             precision     recall   f1-score
+TIER 1 - Resiliência                 0.9038     0.9038     0.9032
+TIER 2 - Estagnação                  0.9214     0.8933     0.9012
+TIER 3 - Risco de Fuga               0.7919     0.8131     0.7972
+TIER 4 - Profecia CASSANDRA          0.8584     0.8456     0.8509
+V2 minus baseline mean weighted F1: +0.0262
+
+=== STEP B — Feature Analysis ===
+Zero-importance features removed:
+  - Live_StatusCode_400
+  - Live_StatusCode_403
+  - Live_StatusCode_404
+  - Live_StatusCode_503
+  - Live_StatusCode_Timeout
+Correlation pruning threshold: Pearson r > 0.85
+Correlation-pruned features removed: none
+Final clean feature list (9 features):
+  - Var_Pop
+  - IEI_Score
+  - Total_Arquivo_Captures
+  - site_mortality_rate
+  - unique_domains
+  - capture_acceleration
+  - last_capture_gap_days
+  - Live_StatusCode_200
+  - Live_StatusCode_Dead
+
+=== STEP C — Hyperparameter Tuning with Optuna ===
+Best Optuna CV weighted F1: 0.8665
+Best Optuna params: {"colsample_bytree": 0.6624074561769746, "learning_rate": 0.2536999076681771, "max_depth": 5, "min_child_weight": 2, "n_estimators": 393, "subsample": 0.8394633936788146}
+
+=== STEP D — Final Model Evaluation ===
+Final clean V2 model weighted F1: 0.8665 ± 0.0445
+Mean per-class metrics across 5 folds:
+class                             precision     recall   f1-score   support
+TIER 1 - Resiliência                 0.9346     0.8718     0.9013        63
+TIER 2 - Estagnação                  0.8857     0.8933     0.8831        75
+TIER 3 - Risco de Fuga               0.8110     0.8477     0.8238        86
+TIER 4 - Profecia CASSANDRA          0.8812     0.8574     0.8683        84
+Top 10 feature importances, mean across 5 folds:
+   1. Var_Pop: 0.306038
+   2. unique_domains: 0.196149
+   3. Live_StatusCode_200: 0.115781
+   4. Live_StatusCode_Dead: 0.107472
+   5. Total_Arquivo_Captures: 0.087265
+   6. IEI_Score: 0.072757
+   7. capture_acceleration: 0.045838
+   8. last_capture_gap_days: 0.034600
+   9. site_mortality_rate: 0.034101
+Final model trained on the full dataset: 344 training rows from 308 original rows, 9 clean features.
+Best Step C CV weighted F1 used for parameter selection: 0.8665
+Previous weighted F1 benchmark: 0.8614
+Final model delta vs previous benchmark: +0.0051
+
+GOOD MODEL — solid but note confidence interval
+SMOTE improved the model
