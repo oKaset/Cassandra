@@ -36,6 +36,9 @@ DIGITAL_DECAY_NOTE = (
     "Media_Dias_Entre_Capturas; original derivation formula not fully "
     "recoverable from current repository"
 )
+CONFIRMED_METRICS_JSON = ROOT / "reports" / "confirmed_model_metrics.json"
+ABLATION_SUMMARY_JSON = DATA / "arquivo_ablation_summary.json"
+LEGACY_MODEL_METRICS_JSON = ROOT / "reports" / "model_metrics.json"
 
 TIER_LABELS = {
     "TIER 1 - Resiliência": "Tier 1 — Resiliência",
@@ -148,6 +151,11 @@ def find_ablation_artifacts() -> list[Path]:
         for p in ROOT.rglob("arquivo_ablation_results.json")
         if ".git" not in p.parts
     )
+
+
+def load_json(path: Path) -> Any:
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
 
 
 print("[1/6] Loading source files...")
@@ -496,9 +504,8 @@ with open(out_audit, "w", newline="", encoding="utf-8") as f:
     writer.writerows(audit_rows)
 print(f"  Wrote {len(audit_rows)} rows -> {out_audit.name}")
 
-metrics_path = ROOT / "reports" / "model_metrics.json"
-with open(metrics_path, encoding="utf-8") as f:
-    model_metrics = json.load(f)
+confirmed_metrics = load_json(CONFIRMED_METRICS_JSON)
+arquivo_ablation_summary = load_json(ABLATION_SUMMARY_JSON)
 
 featured_names = ["Alcácer do Sal", "Torres Vedras", "Proença-a-Nova"]
 featured_cases: dict[str, dict[str, Any]] = {}
@@ -526,26 +533,26 @@ for name in featured_names:
     }
 
 ablation_artifacts = find_ablation_artifacts()
-if ablation_artifacts:
-    ablation_summary = {
-        "arquivo_ablation_results_json": [str(p.relative_to(ROOT)) for p in ablation_artifacts],
-        "note": (
-            "Ablation artifact found, but this builder only includes deltas after direct "
-            "schema validation is added. No inferred ablation deltas are generated here."
-        ),
-        "model_accuracy_with_arquivo_features": model_metrics.get("accuracy"),
-        "source": "reports/model_metrics.json for full-model metrics only",
-    }
-else:
-    ablation_summary = {
-        "arquivo_ablation_results_json": "NOT_FOUND",
-        "note": (
-            "A ligação à ablação deve ser feita quando o artefacto "
-            "arquivo_ablation_results.json for restaurado e validado."
-        ),
-        "model_accuracy_with_arquivo_features": model_metrics.get("accuracy"),
-        "source": "reports/model_metrics.json for current full-model metrics only",
-    }
+ablation_summary = {
+    "arquivo_ablation_results_json": (
+        [str(p.relative_to(ROOT)) for p in ablation_artifacts]
+        if ablation_artifacts
+        else "NOT_FOUND"
+    ),
+    "summary_json": str(ABLATION_SUMMARY_JSON.relative_to(ROOT)),
+    "validated": bool(arquivo_ablation_summary.get("validated", False)),
+    "note": (
+        "Confirmed public ablation metrics are loaded from "
+        "reports/confirmed_model_metrics.json and data/arquivo_ablation_summary.json; "
+        "raw restored ablation values live in arquivo_ablation_results.json when present."
+    ),
+    "with_arquivo": arquivo_ablation_summary.get("with_arquivo", confirmed_metrics.get("with_arquivo")),
+    "without_arquivo": arquivo_ablation_summary.get("without_arquivo", confirmed_metrics.get("without_arquivo")),
+    "delta": arquivo_ablation_summary.get("delta", confirmed_metrics.get("delta")),
+    "source": (
+        "reports/confirmed_model_metrics.json and data/arquivo_ablation_summary.json"
+    ),
+}
 
 pack = {
     "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -559,7 +566,10 @@ pack = {
         "dados_demograficos": "dados_demograficos.csv",
         "relatorio_produto_cassandra": "relatorio_produto_cassandra.csv",
         "arquivo_temporal_features": "data/arquivo_temporal_features.csv",
-        "model_metrics": "reports/model_metrics.json",
+        "legacy_internal_model_metrics": str(LEGACY_MODEL_METRICS_JSON.relative_to(ROOT)),
+        "confirmed_public_model_metrics": str(CONFIRMED_METRICS_JSON.relative_to(ROOT)),
+        "arquivo_ablation_summary": str(ABLATION_SUMMARY_JSON.relative_to(ROOT)),
+        "arquivo_ablation_results": "arquivo_ablation_results.json",
     },
     "field_notes": {
         "checkpoint_cdx_record_count": (
@@ -583,12 +593,19 @@ pack = {
         ),
     },
     "metrics_source": {
-        "confirmed_accuracy": model_metrics.get("accuracy"),
-        "f1_macro": model_metrics.get("f1_macro"),
-        "f1_per_tier": model_metrics.get("f1_per_tier"),
-        "note": (
-            "Metrics from reports/model_metrics.json. No SHAP values, probabilities, "
-            "or ablation deltas are fabricated."
+        "status": "CONFIRMED_PUBLIC_METRICS",
+        "source_files": [
+            str(CONFIRMED_METRICS_JSON.relative_to(ROOT)),
+            str(ABLATION_SUMMARY_JSON.relative_to(ROOT)),
+            "arquivo_ablation_results.json",
+        ],
+        "with_arquivo": confirmed_metrics["with_arquivo"],
+        "without_arquivo": confirmed_metrics["without_arquivo"],
+        "delta": confirmed_metrics["delta"],
+        "public_framing": confirmed_metrics.get("public_framing", ""),
+        "legacy_internal_note": (
+            "reports/model_metrics.json is retained only as an internal macro-F1/"
+            "per-tier artifact and is not the public metric source."
         ),
     },
     "total_municipalities": len(summary_rows),
@@ -626,7 +643,7 @@ md = """# Pacote de Evidências Arquivo.pt — CASSANDRA
 ## Documento para Auditoria por Júri
 
 **Gerado em:** {generated_at}
-**Fonte de métricas confirmadas do modelo completo:** `reports/model_metrics.json`
+**Fonte de métricas públicas confirmadas:** `reports/confirmed_model_metrics.json` e `data/arquivo_ablation_summary.json`
 
 ---
 
@@ -707,14 +724,14 @@ Estas ligações não são verificadas por este script. O campo `replay_url_veri
 
 ## 8. Estado da ablação
 
-As métricas atuais do modelo completo são:
+As métricas públicas confirmadas são:
 
-- **Acurácia global:** {accuracy:.1%}
-- **F1-macro:** {f1_macro:.1%}
+- **Com Arquivo.pt:** exatidão global {with_accuracy:.2f}%; F1 ponderado {with_weighted_f1:.2f}%
+- **Sem Arquivo.pt:** exatidão global {without_accuracy:.2f}%; F1 ponderado {without_weighted_f1:.2f}%
 
-Estas métricas vêm de `reports/model_metrics.json`. O ficheiro `arquivo_ablation_results.json` não está presente na árvore de trabalho atual, portanto este Evidence Pack não reclama conter evidência completa de ablação.
+Estas métricas vêm de `reports/confirmed_model_metrics.json` e `data/arquivo_ablation_summary.json`, com valores brutos restaurados em `arquivo_ablation_results.json` quando presente. `reports/model_metrics.json` é um artefacto interno legado de macro-F1/per-tier e não é a fonte das métricas públicas.
 
-**Nota conservadora:** A ligação à ablação deve ser feita quando o artefacto `arquivo_ablation_results.json` for restaurado e validado.
+**Nota conservadora:** A remoção das variáveis derivadas do Arquivo.pt corresponde a {accuracy_delta:.2f} pp de exatidão e {weighted_f1_delta:.2f} pp de F1 ponderado. Isto suporta enquadramento de apoio à decisão, não uma alegação de predição infalível.
 
 ---
 
@@ -747,8 +764,12 @@ Estas métricas vêm de `reports/model_metrics.json`. O ficheiro `arquivo_ablati
     alcacer_checkpoint=alcacer["checkpoint_cdx_record_count"],
     alcacer_valid=alcacer["checkpoint_valid_capture_count"],
     alcacer_model_total=fmt_num(alcacer["model_total_arquivo_captures"]),
-    accuracy=model_metrics.get("accuracy", 0),
-    f1_macro=model_metrics.get("f1_macro", 0),
+    with_accuracy=confirmed_metrics["with_arquivo"]["accuracy"] * 100,
+    with_weighted_f1=confirmed_metrics["with_arquivo"]["weighted_f1"] * 100,
+    without_accuracy=confirmed_metrics["without_arquivo"]["accuracy"] * 100,
+    without_weighted_f1=confirmed_metrics["without_arquivo"]["weighted_f1"] * 100,
+    accuracy_delta=confirmed_metrics["delta"]["accuracy_pp"],
+    weighted_f1_delta=confirmed_metrics["delta"]["weighted_f1_pp"],
 )
 
 out_md = DOCS / "ARQUIVO_EVIDENCE_PACK.md"

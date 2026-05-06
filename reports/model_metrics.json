@@ -1,4 +1,25 @@
 {
+  "artifact_status": "LEGACY_INTERNAL_ONLY",
+  "public_metric_warning": "Do not cite this file for public CASSANDRA metrics. It is an internal macro-F1/per-tier artifact retained for reproducibility.",
+  "confirmed_public_metric_sources": [
+    "reports/confirmed_model_metrics.json",
+    "data/arquivo_ablation_summary.json",
+    "arquivo_ablation_results.json"
+  ],
+  "confirmed_public_metrics": {
+    "with_arquivo": {
+      "accuracy": 0.6613,
+      "weighted_f1": 0.6490
+    },
+    "without_arquivo": {
+      "accuracy": 0.5806,
+      "weighted_f1": 0.5819
+    },
+    "delta": {
+      "accuracy_pp": -8.06,
+      "weighted_f1_pp": -6.71
+    }
+  },
   "accuracy": 0.6612903225806451,
   "f1_macro": 0.6722071978364884,
   "f1_per_tier": {

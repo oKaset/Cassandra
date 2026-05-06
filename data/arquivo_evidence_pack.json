@@ -8,7 +8,10 @@
     "dados_demograficos": "dados_demograficos.csv",
     "relatorio_produto_cassandra": "relatorio_produto_cassandra.csv",
     "arquivo_temporal_features": "data/arquivo_temporal_features.csv",
-    "model_metrics": "reports/model_metrics.json"
+    "legacy_internal_model_metrics": "reports/model_metrics.json",
+    "confirmed_public_model_metrics": "reports/confirmed_model_metrics.json",
+    "arquivo_ablation_summary": "data/arquivo_ablation_summary.json",
+    "arquivo_ablation_results": "arquivo_ablation_results.json"
   },
   "field_notes": {
     "checkpoint_cdx_record_count": "checkpoint_cdx_record_count reflects records available in the local capped checkpoint, not a complete historical total of all Arquivo.pt captures.",
@@ -21,15 +24,30 @@
     "digital_decay_rate_limit": "Original derivation formula is not fully recoverable from the current repository."
   },
   "metrics_source": {
-    "confirmed_accuracy": 0.6612903225806451,
-    "f1_macro": 0.6722071978364884,
-    "f1_per_tier": {
-      "Tier 1": 0.782608695652174,
-      "Tier 2": 0.6,
-      "Tier 3": 0.5789473684210527,
-      "Tier 4": 0.7272727272727273
+    "status": "CONFIRMED_PUBLIC_METRICS",
+    "source_files": [
+      "reports/confirmed_model_metrics.json",
+      "data/arquivo_ablation_summary.json",
+      "arquivo_ablation_results.json"
+    ],
+    "with_arquivo": {
+      "accuracy": 0.6613,
+      "weighted_f1": 0.649
     },
-    "note": "Metrics from reports/model_metrics.json. No SHAP values, probabilities, or ablation deltas are fabricated."
+    "without_arquivo": {
+      "accuracy": 0.5806,
+      "weighted_f1": 0.5819
+    },
+    "delta": {
+      "accuracy_pp": -8.06,
+      "weighted_f1_pp": -6.71,
+      "tier1_recall_pp": -18.18,
+      "tier2_recall_pp": -20.0,
+      "tier3_recall_pp": 5.0,
+      "tier4_recall_pp": -6.25
+    },
+    "public_framing": "Decision-support territorial risk classification. Not an infallible prediction engine.",
+    "legacy_internal_note": "reports/model_metrics.json is retained only as an internal macro-F1/per-tier artifact and is not the public metric source."
   },
   "total_municipalities": 308,
   "total_checkpoint_cdx_records": 1521598,
@@ -102,9 +120,26 @@
     }
   },
   "ablation_summary": {
-    "arquivo_ablation_results_json": "NOT_FOUND",
-    "note": "A ligação à ablação deve ser feita quando o artefacto arquivo_ablation_results.json for restaurado e validado.",
-    "model_accuracy_with_arquivo_features": 0.6612903225806451,
-    "source": "reports/model_metrics.json for current full-model metrics only"
+    "arquivo_ablation_results_json": "arquivo_ablation_results.json",
+    "summary_json": "data/arquivo_ablation_summary.json",
+    "validated": true,
+    "note": "Confirmed public ablation metrics are loaded from reports/confirmed_model_metrics.json and data/arquivo_ablation_summary.json; raw restored ablation values live in arquivo_ablation_results.json.",
+    "with_arquivo": {
+      "accuracy": 0.6613,
+      "weighted_f1": 0.649
+    },
+    "without_arquivo": {
+      "accuracy": 0.5806,
+      "weighted_f1": 0.5819
+    },
+    "delta": {
+      "accuracy_pp": -8.06,
+      "weighted_f1_pp": -6.71,
+      "tier1_recall_pp": -18.18,
+      "tier2_recall_pp": -20.0,
+      "tier3_recall_pp": 5.0,
+      "tier4_recall_pp": -6.25
+    },
+    "source": "reports/confirmed_model_metrics.json and data/arquivo_ablation_summary.json"
   }
 }

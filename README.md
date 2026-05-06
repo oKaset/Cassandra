@@ -1,5 +1,5 @@
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
-![F1 Score](https://img.shields.io/badge/F1--score-0.87-green)
+![Weighted F1](https://img.shields.io/badge/weighted_F1-64.90%25-green)
 [![Live Site](https://img.shields.io/badge/demo-live-brightgreen)](https://okaset.github.io/Cassandra/)
 
 # CASSANDRA
@@ -40,13 +40,15 @@ CASSANDRA identifies 83 municipalities in `TIER 4 - Profecia CASSANDRA`, the cri
 
 ## Model performance
 
-The predictive model is an XGBoost classifier validated with an F1 score of 0.87.
+The confirmed public Arquivo.pt ablation metrics are:
 
-Methodology:
+- With Arquivo.pt: 66.13% accuracy, 64.90% weighted F1.
+- Without Arquivo.pt: 58.06% accuracy, 58.19% weighted F1.
+- Removing Arquivo.pt features changes accuracy by -8.06 pp and weighted F1 by -6.71 pp.
 
-- 5-fold stratified cross-validation
-- Optuna hyperparameter tuning
-- SMOTE applied to training folds for class balancing
+Metric sources: `reports/confirmed_model_metrics.json`, `data/arquivo_ablation_summary.json`, and `arquivo_ablation_results.json`.
+
+Legacy SMOTE/CV optimization reports are retained for internal reproducibility only and should not be cited as public CASSANDRA performance.
 
 ## Installation & usage
 

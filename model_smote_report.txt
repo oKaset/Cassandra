@@ -1,3 +1,12 @@
+LEGACY/INTERNAL REPORT - NOT PUBLIC CONFIRMED METRICS
+This file preserves an older SMOTE/CV optimization run for reproducibility.
+Do not cite the legacy high-score values below as public CASSANDRA performance.
+Confirmed public metrics:
+- With Arquivo.pt: 66.13% accuracy, 64.90% weighted F1.
+- Without Arquivo.pt: 58.06% accuracy, 58.19% weighted F1.
+- Accuracy delta: -8.06 pp; weighted F1 delta: -6.71 pp.
+Confirmed sources: reports/confirmed_model_metrics.json and data/arquivo_ablation_summary.json.
+
 CASSANDRA Opcao A - Rigorous Evaluation and Optimization Report
 Generated: 2026-05-04T13:43:35
 Input: feature_matrix_v2.csv
