@@ -12,9 +12,9 @@ O checkpoint CDX local não publicado contém registos CDX extraídos da API pú
 
 Este checkpoint não é copiado para a documentação nem publicado como anexo. O checkpoint tem 1,521,598 registos para 308 domínios; 301/308 domínios estão exatamente no limite local de 5000 registos definido por `cassandra_opcao_a.py`.
 
-**Definição crítica:** “checkpoint_cdx_record_count reflects records available in the local capped checkpoint, not a complete historical total of all Arquivo.pt captures.”
+**Definição crítica:** `checkpoint_cdx_record_count` reflecte os registos disponíveis no checkpoint local limitado; não é um total histórico completo de todas as capturas Arquivo.pt.
 
-**Definição de validade:** “checkpoint_valid_capture_count counts checkpoint records with status 200, 301, 302, or 304.”
+**Definição de validade:** `checkpoint_valid_capture_count` conta registos do checkpoint com status 200, 301, 302 ou 304.
 
 ---
 
@@ -49,9 +49,23 @@ No Evidence Pack, `capture_density` é calculada com `model_total_arquivo_captur
 
 ## 5. `digital_decay_rate`
 
-“digital_decay_rate is imported as a legacy model feature from metricas_iei_completo.csv:Media_Dias_Entre_Capturas. The original derivation formula is not fully recoverable from the current repository.”
+`digital_decay_rate` é importada como variável temporal legada a partir de `metricas_iei_completo.csv:Media_Dias_Entre_Capturas`. A fórmula de derivação original não é totalmente recuperável no repositório actual.
 
 Por isso, este campo é auditável ao nível de coluna-fonte, mas não deve ser descrito como fórmula plenamente recuperada.
+
+---
+
+## Robustez metodológica: variáveis Arquivo Core
+
+As variáveis Arquivo Core totalmente auditáveis são `Total_Arquivo_Captures` e `capture_density`. A primeira corresponde ao valor de entrada do modelo, com distinção explícita face aos contadores de checkpoint. A segunda é calculada por fórmula directa:
+
+`capture_density = Total_Arquivo_Captures / Pop. 2021`
+
+`digital_decay_rate` mantém proveniência de coluna documentada, mas tem limitação assumida quanto à fórmula original. Por esse motivo, o argumento central da candidatura não deve depender exclusivamente desta variável temporal legada.
+
+O projecto inclui agora o `Arquivo Core Robustness Check`, com resumo em `data/arquivo_core_robustness_summary.json`, para testar a contribuição funcional mensurável das variáveis Arquivo.pt sem reforçar artificialmente a variável legada. Na execução actual, o teste está validado como verificação secundária, mas é conservador: a remoção de todas as variáveis Arquivo.pt altera a exatidão em -0,3490 pp e o F1 ponderado em -0,3954 pp; a remoção apenas das variáveis Arquivo Core, mantendo `digital_decay_rate`, altera a exatidão em +1,2586 pp e o F1 ponderado em +1,2130 pp.
+
+Este resultado não substitui a ablação pública validada. A sua utilidade é metodológica: explicita a limitação de proveniência documentada e impede que a candidatura dependa exclusivamente de `digital_decay_rate`.
 
 ---
 
@@ -92,7 +106,7 @@ Estas métricas vêm do artefacto restaurado `arquivo_ablation_results.json` e f
 
 ## Ligação à ablação
 
-O Evidence Pack liga agora as variáveis derivadas do Arquivo.pt (`Total_Arquivo_Captures`, `capture_density`, `digital_decay_rate`) ao resumo validado de ablação. A remoção destas variáveis reduz a exatidão global em 8,06 pontos percentuais e o F1 ponderado em 6,71 pontos percentuais, demonstrando que a memória digital arquivada contém sinal territorial mensurável sem reclamar causalidade direta nem desempenho infalível.
+O Evidence Pack liga agora as variáveis derivadas do Arquivo.pt (`Total_Arquivo_Captures`, `capture_density`, `digital_decay_rate`) ao resumo validado de ablação. A remoção destas variáveis reduz a exatidão global em 8,06 pontos percentuais e o F1 ponderado em 6,71 pontos percentuais, constituindo evidência por ablação de que a memória digital arquivada contém sinal territorial mensurável para um sistema de apoio à decisão.
 
 ---
 
@@ -100,6 +114,7 @@ O Evidence Pack liga agora as variáveis derivadas do Arquivo.pt (`Total_Arquivo
 
 - O checkpoint CDX é limitado localmente e não representa totais históricos completos.
 - `digital_decay_rate` tem proveniência de coluna, mas a fórmula original não está totalmente recuperável no repositório atual.
+- O `Arquivo Core Robustness Check` é uma verificação secundária; no resultado actual, não deve ser usado para ampliar a alegação oficial sobre as variáveis Arquivo Core.
 - As ligações `generated_arquivo_replay_url` são geradas, não verificadas.
 - Valores SHAP, probabilidades individuais e fórmulas ausentes no repositório não foram inventados; as métricas de ablação vêm apenas do artefacto restaurado e validado.
 - O checkpoint CDX local não está incluído nem ligado como download público.
@@ -114,4 +129,6 @@ O Evidence Pack liga agora as variáveis derivadas do Arquivo.pt (`Total_Arquivo
 | `data/arquivo_capture_samples.csv` | Amostras de capturas CDX por município |
 | `data/arquivo_feature_audit.csv` | Auditoria de variáveis de modelo |
 | `data/arquivo_evidence_pack.json` | Pacote JSON compacto para auditoria |
+| `data/arquivo_core_robustness_summary.json` | Verificação secundária de robustez das variáveis Arquivo Core |
+| `docs/DIGITAL_DECAY_RATE_PROVENANCE.md` | Nota de proveniência e limitação de `digital_decay_rate` |
 | `docs/ARQUIVO_EVIDENCE_PACK.md` | Este documento |

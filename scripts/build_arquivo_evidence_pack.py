@@ -32,9 +32,9 @@ MEDIAN_IMPUTED = 628
 CAPTURE_DENSITY_FORMULA = "Total_Arquivo_Captures / Pop. 2021"
 DIGITAL_DECAY_SOURCE = "metricas_iei_completo.csv:Media_Dias_Entre_Capturas"
 DIGITAL_DECAY_NOTE = (
-    "LEGACY_MODEL_FEATURE - imported from metricas_iei_completo.csv:"
-    "Media_Dias_Entre_Capturas; original derivation formula not fully "
-    "recoverable from current repository"
+    "VARIAVEL_TEMPORAL_LEGADA - importada de metricas_iei_completo.csv:"
+    "Media_Dias_Entre_Capturas; fórmula de derivação original não totalmente "
+    "recuperável no repositório actual"
 )
 CONFIRMED_METRICS_JSON = ROOT / "reports" / "confirmed_model_metrics.json"
 ABLATION_SUMMARY_JSON = DATA / "arquivo_ablation_summary.json"
@@ -577,19 +577,19 @@ pack = {
             "checkpoint, not a complete historical total of all Arquivo.pt captures."
         ),
         "checkpoint_valid_capture_count": (
-            "checkpoint_valid_capture_count counts checkpoint records with status 200, "
-            "301, 302, or 304."
+            "checkpoint_valid_capture_count conta registos do checkpoint com status 200, "
+            "301, 302 ou 304."
         ),
         "generated_arquivo_replay_url": (
-            "Syntactically generated from timestamp and URL; replay_url_verified is false "
-            "unless a future script verifies the URL."
+            "Gerado sintaticamente a partir do timestamp e do URL; replay_url_verified "
+            "fica false enquanto não existir verificação por script dedicado."
         ),
     },
     "model_feature_formulas": {
         "capture_density": CAPTURE_DENSITY_FORMULA,
         "digital_decay_rate": DIGITAL_DECAY_SOURCE,
         "digital_decay_rate_limit": (
-            "Original derivation formula is not fully recoverable from the current repository."
+            "A fórmula de derivação original não é totalmente recuperável no repositório actual."
         ),
     },
     "metrics_source": {
@@ -617,12 +617,12 @@ pack = {
     "imputed_capture_count_municipalities": imputed_count,
     "municipalities_needing_manual_review": needs_review_count,
     "formula_warnings": [
-        "checkpoint CDX counts are capped local provenance evidence, not model input values.",
+        "Os contadores do checkpoint CDX são evidência local limitada, não valores de entrada do modelo.",
         f"capture_density = {CAPTURE_DENSITY_FORMULA}",
         (
-            "digital_decay_rate is imported as a legacy model feature from "
-            "metricas_iei_completo.csv:Media_Dias_Entre_Capturas. The original "
-            "derivation formula is not fully recoverable from the current repository."
+            "digital_decay_rate é importada como variável temporal legada a partir de "
+            "metricas_iei_completo.csv:Media_Dias_Entre_Capturas. A fórmula original "
+            "não é totalmente recuperável no repositório actual."
         ),
         (
             f"Imputation marker: model values equal to {MEDIAN_IMPUTED}.0 when fase2 raw=0 "
@@ -649,13 +649,13 @@ md = """# Pacote de Evidências Arquivo.pt — CASSANDRA
 
 ## 1. O que contém o checkpoint CDX local?
 
-O ficheiro local `cdx_checkpoint.json` contém registos CDX extraídos da API pública do Arquivo.pt para domínios municipais portugueses. Cada registo inclui URL, timestamp, MIME type, HTTP status, digest, filename, collection e source.
+O checkpoint CDX local não publicado contém registos CDX extraídos da API pública do Arquivo.pt para domínios municipais portugueses. Cada registo inclui URL, timestamp, MIME type, HTTP status, digest, filename, collection e source.
 
-Este ficheiro não é copiado para a documentação nem publicado como anexo. O checkpoint tem {total_checkpoint_cdx_records:,} registos para {checkpoint_domains} domínios; {domains_at_checkpoint_limit}/{checkpoint_domains} domínios estão exatamente no limite local de {checkpoint_limit} registos definido por `cassandra_opcao_a.py`.
+Este checkpoint não é copiado para a documentação nem publicado como anexo. O checkpoint tem {total_checkpoint_cdx_records:,} registos para {checkpoint_domains} domínios; {domains_at_checkpoint_limit}/{checkpoint_domains} domínios estão exatamente no limite local de {checkpoint_limit} registos definido por `cassandra_opcao_a.py`.
 
-**Definição crítica:** “checkpoint_cdx_record_count reflects records available in the local capped checkpoint, not a complete historical total of all Arquivo.pt captures.”
+**Definição crítica:** `checkpoint_cdx_record_count` reflecte os registos disponíveis no checkpoint local limitado; não é um total histórico completo de todas as capturas Arquivo.pt.
 
-**Definição de validade:** “checkpoint_valid_capture_count counts checkpoint records with status 200, 301, 302, or 304.”
+**Definição de validade:** `checkpoint_valid_capture_count` conta registos do checkpoint com status 200, 301, 302 ou 304.
 
 ---
 
@@ -663,8 +663,8 @@ Este ficheiro não é copiado para a documentação nem publicado como anexo. O 
 
 | Conceito | Fonte | Significado |
 |---|---|---|
-| `checkpoint_cdx_record_count` | `cdx_checkpoint.json` local | Número de registos disponíveis no checkpoint local limitado; não é total histórico completo |
-| `checkpoint_valid_capture_count` | `cdx_checkpoint.json` local | Registos do checkpoint com status 200, 301, 302 ou 304 |
+| `checkpoint_cdx_record_count` | checkpoint CDX local não publicado | Número de registos disponíveis no checkpoint local limitado; não é total histórico completo |
+| `checkpoint_valid_capture_count` | checkpoint CDX local não publicado | Registos do checkpoint com status 200, 301, 302 ou 304 |
 | `model_total_arquivo_captures` | `relatorio_produto_cassandra.csv` | Valor de `Total_Arquivo_Captures` usado pelo modelo |
 | `capture_count_imputed` | derivado | `yes` quando o modelo usou o valor mediano ({median_imputed}) em vez do valor bruto da fase 2 |
 
@@ -690,9 +690,21 @@ No Evidence Pack, `capture_density` é calculada com `model_total_arquivo_captur
 
 ## 5. `digital_decay_rate`
 
-“digital_decay_rate is imported as a legacy model feature from metricas_iei_completo.csv:Media_Dias_Entre_Capturas. The original derivation formula is not fully recoverable from the current repository.”
+`digital_decay_rate` é importada como variável temporal legada a partir de `metricas_iei_completo.csv:Media_Dias_Entre_Capturas`. A fórmula de derivação original não é totalmente recuperável no repositório actual.
 
 Por isso, este campo é auditável ao nível de coluna-fonte, mas não deve ser descrito como fórmula plenamente recuperada.
+
+---
+
+## Robustez metodológica: variáveis Arquivo Core
+
+As variáveis Arquivo Core totalmente auditáveis são `Total_Arquivo_Captures` e `capture_density`. A primeira corresponde ao valor de entrada do modelo, com distinção explícita face aos contadores de checkpoint. A segunda é calculada por fórmula directa:
+
+`capture_density = Total_Arquivo_Captures / Pop. 2021`
+
+`digital_decay_rate` mantém proveniência de coluna documentada, mas tem limitação assumida quanto à fórmula original. Por esse motivo, o argumento central da candidatura não deve depender exclusivamente desta variável temporal legada.
+
+O projecto inclui agora o `Arquivo Core Robustness Check`, com resumo em `data/arquivo_core_robustness_summary.json`, para testar a contribuição funcional mensurável das variáveis Arquivo.pt sem reforçar artificialmente a variável legada. Quando o resultado for fraco ou conservador, deve ser comunicado como limitação metodológica e não como substituto da ablação pública validada.
 
 ---
 
@@ -731,7 +743,7 @@ As métricas públicas confirmadas são:
 
 Estas métricas vêm de `reports/confirmed_model_metrics.json` e `data/arquivo_ablation_summary.json`, com valores brutos restaurados em `arquivo_ablation_results.json` quando presente. `reports/model_metrics.json` é um artefacto interno legado de macro-F1/per-tier e não é a fonte das métricas públicas.
 
-**Nota conservadora:** A remoção das variáveis derivadas do Arquivo.pt corresponde a {accuracy_delta:.2f} pp de exatidão e {weighted_f1_delta:.2f} pp de F1 ponderado. Isto suporta enquadramento de apoio à decisão, não uma alegação de predição infalível.
+**Nota conservadora:** A remoção das variáveis derivadas do Arquivo.pt corresponde a {accuracy_delta:.2f} pp de exatidão e {weighted_f1_delta:.2f} pp de F1 ponderado. Isto suporta evidência por ablação e enquadramento de sistema de apoio à decisão.
 
 ---
 
@@ -739,9 +751,10 @@ Estas métricas vêm de `reports/confirmed_model_metrics.json` e `data/arquivo_a
 
 - O checkpoint CDX é limitado localmente e não representa totais históricos completos.
 - `digital_decay_rate` tem proveniência de coluna, mas a fórmula original não está totalmente recuperável no repositório atual.
+- O `Arquivo Core Robustness Check` é uma verificação secundária e não substitui as métricas públicas confirmadas.
 - As ligações `generated_arquivo_replay_url` são geradas, não verificadas.
 - Valores SHAP, probabilidades individuais, métricas de ablação e fórmulas ausentes no repositório não foram inventados.
-- `cdx_checkpoint.json` não está incluído nem ligado como download público.
+- O checkpoint CDX local não está incluído nem ligado como download público.
 
 ---
 
@@ -753,6 +766,8 @@ Estas métricas vêm de `reports/confirmed_model_metrics.json` e `data/arquivo_a
 | `data/arquivo_capture_samples.csv` | Amostras de capturas CDX por município |
 | `data/arquivo_feature_audit.csv` | Auditoria de variáveis de modelo |
 | `data/arquivo_evidence_pack.json` | Pacote JSON compacto para auditoria |
+| `data/arquivo_core_robustness_summary.json` | Verificação secundária de robustez das variáveis Arquivo Core |
+| `docs/DIGITAL_DECAY_RATE_PROVENANCE.md` | Nota de proveniência e limitação de `digital_decay_rate` |
 | `docs/ARQUIVO_EVIDENCE_PACK.md` | Este documento |
 """.format(
     generated_at=pack["generated_at"],

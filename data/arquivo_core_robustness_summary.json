@@ -1,0 +1,38 @@
+{
+  "validated": true,
+  "purpose": "Robustness check isolating fully auditable Arquivo.pt variables.",
+  "features_tested": {
+    "arquivo_core": [
+      "Total_Arquivo_Captures",
+      "capture_density"
+    ],
+    "legacy_temporal_feature": "digital_decay_rate"
+  },
+  "experiments": {
+    "full_model": {
+      "accuracy": 0.5844,
+      "weighted_f1": 0.578904
+    },
+    "without_all_arquivo": {
+      "accuracy": 0.58091,
+      "weighted_f1": 0.57495
+    },
+    "without_arquivo_core_only": {
+      "accuracy": 0.596986,
+      "weighted_f1": 0.591034
+    }
+  },
+  "deltas": {
+    "without_all_arquivo_accuracy_pp": -0.349,
+    "without_all_arquivo_weighted_f1_pp": -0.3954,
+    "without_arquivo_core_accuracy_pp": 1.2586,
+    "without_arquivo_core_weighted_f1_pp": 1.213
+  },
+  "interpretation": "No protocolo secundário de 5 folds, a remoção de todas as variáveis Arquivo.pt altera a exatidão em -0.3490 pp e o F1 ponderado em -0.3954 pp. A remoção apenas das variáveis Arquivo Core, mantendo digital_decay_rate como variável temporal legada, altera a exatidão em +1.2586 pp e o F1 ponderado em +1.2130 pp. Este resultado deve ser lido como teste de robustez conservador: documenta a limitação e não substitui a ablação pública validada.",
+  "limitations": [
+    "Este teste é uma verificação secundária e não substitui as métricas públicas confirmadas.",
+    "digital_decay_rate é mantida apenas como variável temporal legada com proveniência de coluna documentada.",
+    "Neste protocolo, o resultado das variáveis Arquivo Core deve ser comunicado sem reforço artificial da alegação.",
+    "Os deltas são calculados como experiência sem variáveis menos modelo completo, em pontos percentuais."
+  ]
+}
