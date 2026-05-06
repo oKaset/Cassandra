@@ -1,0 +1,26 @@
+{
+  "source": "Restored from git stash untracked commit cf24abb7b36bdc9187608bab1ba4b627001d68c6, arquivo_ablation_results.json blob 8799a53e6ea2ede4e1a226fa01ca2539af7c092b; cross-checked against reports/confirmed_model_metrics.json blob ab0bc188b26380b471119b54ecc9295c232733d9",
+  "validated": true,
+  "with_arquivo": {
+    "accuracy": 0.6613,
+    "weighted_f1": 0.6490
+  },
+  "without_arquivo": {
+    "accuracy": 0.5806,
+    "weighted_f1": 0.5819
+  },
+  "delta": {
+    "accuracy_pp": -8.06,
+    "weighted_f1_pp": -6.71,
+    "tier1_recall_pp": -18.18,
+    "tier2_recall_pp": -20.00,
+    "tier3_recall_pp": 5.00,
+    "tier4_recall_pp": -6.25
+  },
+  "removed_features": [
+    "Total_Arquivo_Captures",
+    "capture_density",
+    "digital_decay_rate"
+  ],
+  "interpretation": "A remoção das variáveis derivadas do Arquivo.pt reduz o desempenho do modelo, demonstrando que a memória digital arquivada contém sinal territorial mensurável."
+}

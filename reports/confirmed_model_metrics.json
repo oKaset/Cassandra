@@ -1,0 +1,19 @@
+{
+  "with_arquivo": {
+    "accuracy": 0.6613,
+    "weighted_f1": 0.6490
+  },
+  "without_arquivo": {
+    "accuracy": 0.5806,
+    "weighted_f1": 0.5819
+  },
+  "delta": {
+    "accuracy_pp": -8.06,
+    "weighted_f1_pp": -6.71,
+    "tier1_recall_pp": -18.18,
+    "tier2_recall_pp": -20.00,
+    "tier3_recall_pp": 5.00,
+    "tier4_recall_pp": -6.25
+  },
+  "public_framing": "Decision-support territorial risk classification. Not an infallible prediction engine."
+}

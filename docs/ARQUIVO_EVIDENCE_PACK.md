@@ -83,14 +83,16 @@ Estas ligações não são verificadas por este script. O campo `replay_url_veri
 
 ## 8. Estado da ablação
 
-As métricas atuais do modelo completo são:
+As métricas públicas confirmadas são:
 
-- **Acurácia global:** 66.1%
-- **F1-macro:** 67.2%
+- **Com Arquivo.pt:** exatidão global 66,13%; F1 ponderado 64,90%
+- **Sem Arquivo.pt:** exatidão global 58,06%; F1 ponderado 58,19%
 
-Estas métricas vêm de `reports/model_metrics.json`. O ficheiro `arquivo_ablation_results.json` não está presente na árvore de trabalho atual, portanto este Evidence Pack não reclama conter evidência completa de ablação.
+Estas métricas vêm do artefacto restaurado `arquivo_ablation_results.json` e foram cruzadas com `reports/confirmed_model_metrics.json`. O resumo validado está em `data/arquivo_ablation_summary.json`.
 
-**Nota conservadora:** A ligação à ablação deve ser feita quando o artefacto `arquivo_ablation_results.json` for restaurado e validado.
+## Ligação à ablação
+
+O Evidence Pack liga agora as variáveis derivadas do Arquivo.pt (`Total_Arquivo_Captures`, `capture_density`, `digital_decay_rate`) ao resumo validado de ablação. A remoção destas variáveis reduz a exatidão global em 8,06 pontos percentuais e o F1 ponderado em 6,71 pontos percentuais, demonstrando que a memória digital arquivada contém sinal territorial mensurável sem reclamar causalidade direta nem desempenho infalível.
 
 ---
 
@@ -99,7 +101,7 @@ Estas métricas vêm de `reports/model_metrics.json`. O ficheiro `arquivo_ablati
 - O checkpoint CDX é limitado localmente e não representa totais históricos completos.
 - `digital_decay_rate` tem proveniência de coluna, mas a fórmula original não está totalmente recuperável no repositório atual.
 - As ligações `generated_arquivo_replay_url` são geradas, não verificadas.
-- Valores SHAP, probabilidades individuais, métricas de ablação e fórmulas ausentes no repositório não foram inventados.
+- Valores SHAP, probabilidades individuais e fórmulas ausentes no repositório não foram inventados; as métricas de ablação vêm apenas do artefacto restaurado e validado.
 - `cdx_checkpoint.json` não está incluído nem ligado como download público.
 
 ---
