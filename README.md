@@ -31,12 +31,12 @@ The IEI output maps each municipality to one of four tiers:
 TIER 1 - Resiliência
 TIER 2 - Estagnação
 TIER 3 - Risco de Fuga
-TIER 4 - Profecia CASSANDRA
+Tier 4 — Risco Crítico
 ```
 
 ## Key finding
 
-CASSANDRA identifies 83 municipalities in `TIER 4 - Profecia CASSANDRA`, the critical risk tier. The distribution suggests that digital decay risk is systemic rather than limited to isolated municipal websites.
+CASSANDRA identifies 83 municipalities in `Tier 4 — Risco Crítico`, the critical risk tier. The distribution suggests that digital decay risk is systemic rather than limited to isolated municipal websites.
 
 ## Model performance
 

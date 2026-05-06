@@ -2,15 +2,15 @@
 ## Documento para Auditoria por Júri
 
 **Gerado em:** 2026-05-06T01:33:23.049770+00:00
-**Fonte de métricas confirmadas do modelo completo:** `reports/model_metrics.json`
+**Fontes de métricas públicas confirmadas:** `reports/confirmed_model_metrics.json`, `data/arquivo_ablation_summary.json`, `arquivo_ablation_results.json`
 
 ---
 
 ## 1. O que contém o checkpoint CDX local?
 
-O ficheiro local `cdx_checkpoint.json` contém registos CDX extraídos da API pública do Arquivo.pt para domínios municipais portugueses. Cada registo inclui URL, timestamp, MIME type, HTTP status, digest, filename, collection e source.
+O checkpoint CDX local não publicado contém registos CDX extraídos da API pública do Arquivo.pt para domínios municipais portugueses. Cada registo inclui URL, timestamp, MIME type, HTTP status, digest, filename, collection e source.
 
-Este ficheiro não é copiado para a documentação nem publicado como anexo. O checkpoint tem 1,521,598 registos para 308 domínios; 301/308 domínios estão exatamente no limite local de 5000 registos definido por `cassandra_opcao_a.py`.
+Este checkpoint não é copiado para a documentação nem publicado como anexo. O checkpoint tem 1,521,598 registos para 308 domínios; 301/308 domínios estão exatamente no limite local de 5000 registos definido por `cassandra_opcao_a.py`.
 
 **Definição crítica:** “checkpoint_cdx_record_count reflects records available in the local capped checkpoint, not a complete historical total of all Arquivo.pt captures.”
 
@@ -22,8 +22,8 @@ Este ficheiro não é copiado para a documentação nem publicado como anexo. O 
 
 | Conceito | Fonte | Significado |
 |---|---|---|
-| `checkpoint_cdx_record_count` | `cdx_checkpoint.json` local | Número de registos disponíveis no checkpoint local limitado; não é total histórico completo |
-| `checkpoint_valid_capture_count` | `cdx_checkpoint.json` local | Registos do checkpoint com status 200, 301, 302 ou 304 |
+| `checkpoint_cdx_record_count` | checkpoint CDX local não publicado | Número de registos disponíveis no checkpoint local limitado; não é total histórico completo |
+| `checkpoint_valid_capture_count` | checkpoint CDX local não publicado | Registos do checkpoint com status 200, 301, 302 ou 304 |
 | `model_total_arquivo_captures` | `relatorio_produto_cassandra.csv` | Valor de `Total_Arquivo_Captures` usado pelo modelo |
 | `capture_count_imputed` | derivado | `yes` quando o modelo usou o valor mediano (628) em vez do valor bruto da fase 2 |
 
@@ -102,7 +102,7 @@ O Evidence Pack liga agora as variáveis derivadas do Arquivo.pt (`Total_Arquivo
 - `digital_decay_rate` tem proveniência de coluna, mas a fórmula original não está totalmente recuperável no repositório atual.
 - As ligações `generated_arquivo_replay_url` são geradas, não verificadas.
 - Valores SHAP, probabilidades individuais e fórmulas ausentes no repositório não foram inventados; as métricas de ablação vêm apenas do artefacto restaurado e validado.
-- `cdx_checkpoint.json` não está incluído nem ligado como download público.
+- O checkpoint CDX local não está incluído nem ligado como download público.
 
 ---
 
