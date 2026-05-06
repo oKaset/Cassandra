@@ -2513,6 +2513,19 @@
       width: auto;
       display: block;
     }
+    .site-logo--light { display: none; }
+    .site-logo--dark  { display: block; }
+
+    [data-theme="light"] .site-logo--light { display: block; }
+    [data-theme="light"] .site-logo--dark  { display: none; }
+
+    [data-theme="dark"] .site-logo--light  { display: none; }
+    [data-theme="dark"] .site-logo--dark   { display: block; }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme]) .site-logo--light { display: block; }
+      :root:not([data-theme]) .site-logo--dark  { display: none; }
+    }
   </style>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="./assets/municipios_inline.js"></script>
@@ -2529,7 +2542,15 @@
           height="36" 
           width="auto"
           loading="eager"
-          class="site-logo"
+          class="site-logo site-logo--dark"
+        />
+        <img 
+          src="./assets/cassandra_logo_whitemode.png" 
+          alt="CASSANDRA Oracle Engine" 
+          height="36" 
+          width="auto"
+          loading="eager"
+          class="site-logo site-logo--light"
         />
       </div>
       <div class="nav-links">
