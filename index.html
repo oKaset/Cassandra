@@ -1130,6 +1130,358 @@
       color: #FF3366;
     }
 
+    .archive-evidence {
+      border-top: 1px solid var(--outline);
+      padding-top: 20px;
+      display: grid;
+      gap: 28px;
+    }
+
+    .archive-evidence-header {
+      max-width: 980px;
+    }
+
+    .archive-evidence-kicker,
+    .archive-panel-kicker,
+    .archive-table-caption {
+      margin: 0 0 10px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--on-surface-variant);
+    }
+
+    .archive-evidence-title {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.02;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: var(--on-surface);
+    }
+
+    .archive-evidence-subtitle {
+      margin: 16px 0 0;
+      max-width: 880px;
+      color: var(--on-surface-variant);
+      font-size: 18px;
+      line-height: 30px;
+    }
+
+    .evidence-chain {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container-lowest);
+    }
+
+    .evidence-step {
+      position: relative;
+      min-height: 168px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      border-right: 1px solid var(--outline-variant);
+    }
+
+    .evidence-step:last-child {
+      border-right: 0;
+    }
+
+    .evidence-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 18px;
+      right: 16px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      line-height: 1;
+      color: var(--brand-critical);
+    }
+
+    .evidence-step-number {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      font-weight: 700;
+    }
+
+    .evidence-step-title {
+      margin: 0;
+      padding-right: 22px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      line-height: 1.15;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--on-surface);
+    }
+
+    .evidence-step-copy {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    .archive-warning {
+      border-left: 4px solid var(--brand-elevated);
+      background: var(--surface-container-low);
+      padding: 18px 20px;
+      color: var(--on-surface);
+      font-size: 15px;
+      line-height: 24px;
+    }
+
+    .archive-warning p {
+      margin: 0;
+    }
+
+    .archive-case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .archive-case-card,
+    .archive-panel {
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container-lowest);
+    }
+
+    .archive-case-card {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .archive-case-head {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .archive-case-title {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1.12;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--on-surface);
+    }
+
+    .archive-case-tier {
+      color: var(--brand-critical);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .archive-case-tier.resilient {
+      color: #008aa0;
+    }
+
+    .archive-case-metrics {
+      display: grid;
+      margin: 0;
+    }
+
+    .archive-case-metrics div {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: baseline;
+      padding: 10px 0;
+      border-top: 1px solid var(--outline-variant);
+    }
+
+    .archive-case-metrics dt {
+      min-width: 0;
+      color: var(--on-surface-variant);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .archive-case-metrics dd {
+      margin: 0;
+      color: var(--on-surface);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 18px;
+      font-weight: 700;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .archive-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container-lowest);
+    }
+
+    .archive-evidence-table {
+      width: 100%;
+      min-width: 880px;
+      border-collapse: collapse;
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .archive-evidence-table caption {
+      text-align: left;
+      padding: 16px 18px 0;
+    }
+
+    .archive-evidence-table th,
+    .archive-evidence-table td {
+      border-top: 1px solid var(--outline-variant);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .archive-evidence-table th {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .archive-evidence-table td {
+      color: var(--on-surface-variant);
+    }
+
+    .archive-evidence-table td:first-child,
+    .archive-evidence-table td:last-child {
+      color: var(--on-surface);
+      font-weight: 700;
+    }
+
+    .archive-mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      letter-spacing: 0;
+    }
+
+    .archive-ablation-card {
+      border: 1px solid var(--on-surface);
+      background: var(--on-surface);
+      color: var(--surface);
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .archive-ablation-card .archive-panel-kicker {
+      color: rgba(255,255,255,0.72);
+    }
+
+    .archive-ablation-title {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: var(--surface);
+    }
+
+    .archive-ablation-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .archive-ablation-metric {
+      border: 1px solid rgba(255,255,255,0.24);
+      padding: 16px;
+      min-height: 138px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .archive-ablation-metric span {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      font-weight: 700;
+    }
+
+    .archive-ablation-metric strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.05;
+      letter-spacing: 0;
+      color: var(--surface);
+    }
+
+    .archive-ablation-copy {
+      margin: 0;
+      max-width: 920px;
+      color: rgba(255,255,255,0.82);
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .archive-panel {
+      padding: 20px;
+    }
+
+    .archive-links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .archive-links a {
+      border: 1px solid var(--outline-variant);
+      padding: 12px;
+      color: var(--on-surface);
+      background: var(--surface-container-low);
+      text-decoration: none;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .archive-links a:hover {
+      background: var(--on-surface);
+      color: var(--surface);
+    }
+
     .validation {
       margin-top: 26px;
       padding-top: 20px;
@@ -1582,6 +1934,24 @@
       .collapse-cards {
         grid-template-columns: 1fr;
       }
+
+      .evidence-chain {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .evidence-step:nth-child(2) {
+        border-right: 0;
+      }
+
+      .evidence-step:nth-child(2)::after {
+        content: "";
+      }
+
+      .archive-case-grid,
+      .archive-ablation-metrics,
+      .archive-links {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 760px) {
@@ -1644,6 +2014,54 @@
       .collapse-page {
         padding-top: 44px;
         padding-bottom: 56px;
+      }
+
+      .archive-evidence-title {
+        line-height: 1.08;
+      }
+
+      .archive-evidence-subtitle {
+        font-size: 16px;
+        line-height: 26px;
+      }
+
+      .evidence-chain {
+        grid-template-columns: 1fr;
+      }
+
+      .evidence-step,
+      .evidence-step:nth-child(2) {
+        min-height: 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--outline-variant);
+      }
+
+      .evidence-step:last-child {
+        border-bottom: 0;
+      }
+
+      .evidence-step:not(:last-child)::after,
+      .evidence-step:nth-child(2)::after {
+        content: "↓";
+        top: auto;
+        right: 20px;
+        bottom: 18px;
+      }
+
+      .archive-case-metrics div {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .archive-case-metrics dd {
+        text-align: left;
+        white-space: normal;
+      }
+
+      .archive-ablation-card,
+      .archive-panel,
+      .archive-case-card {
+        padding: 18px;
       }
     }
   </style>
@@ -2718,6 +3136,305 @@
       </section>
 
       <section id="archive" class="page">
+        <section class="archive-evidence" aria-labelledby="archive-evidence-title">
+          <header class="archive-evidence-header">
+            <p class="archive-evidence-kicker">ARQUIVO.PT // EVIDÊNCIA PÚBLICA</p>
+            <h2 id="archive-evidence-title" class="archive-evidence-title">A PROVA // DA CAPTURA À CLASSIFICAÇÃO</h2>
+            <p class="archive-evidence-subtitle">Cada classificação CASSANDRA pode ser rastreada até à memória web preservada pelo Arquivo.pt: registos CDX, variáveis derivadas, entrada no modelo e impacto quando essas variáveis são removidas.</p>
+          </header>
+
+          <div class="evidence-chain" aria-label="Cadeia de evidência Arquivo.pt">
+            <article class="evidence-step">
+              <span class="evidence-step-number">01</span>
+              <div>
+                <h3 class="evidence-step-title">Registos CDX Arquivo.pt</h3>
+                <p class="evidence-step-copy">O checkpoint CDX local documenta registos preservados por domínio municipal, com limite de 5.000 registos por domínio.</p>
+              </div>
+            </article>
+            <article class="evidence-step">
+              <span class="evidence-step-number">02</span>
+              <div>
+                <h3 class="evidence-step-title">Variáveis digitais</h3>
+                <p class="evidence-step-copy">Os registos auditados alimentam variáveis derivadas como <span class="archive-mono">Total_Arquivo_Captures</span>, <span class="archive-mono">capture_density</span> e <span class="archive-mono">digital_decay_rate</span>.</p>
+              </div>
+            </article>
+            <article class="evidence-step">
+              <span class="evidence-step-number">03</span>
+              <div>
+                <h3 class="evidence-step-title">Modelo XGBoost</h3>
+                <p class="evidence-step-copy">Os valores usados pelo modelo entram com variáveis demográficas e económicas no sistema de apoio à decisão.</p>
+              </div>
+            </article>
+            <article class="evidence-step">
+              <span class="evidence-step-number">04</span>
+              <div>
+                <h3 class="evidence-step-title">Classificação territorial</h3>
+                <p class="evidence-step-copy">A classificação resultante atribui o tier público do município, incluindo Tier 4 — Risco Crítico quando o risco territorial é elevado.</p>
+              </div>
+            </article>
+          </div>
+
+          <aside class="archive-warning" aria-label="Aviso sobre checkpoint e modelo">
+            <p>O CASSANDRA distingue registos CDX observados no checkpoint local de valores usados pelo modelo. O checkpoint CDX está limitado a 5.000 registos por domínio; por isso, checkpoint_cdx_record_count é prova de proveniência, não a contagem total histórica absoluta. Quando houve imputação, essa imputação é explicitamente assinalada.</p>
+          </aside>
+
+          <div class="archive-case-grid" aria-label="Casos validados do Evidence Pack">
+            <article class="archive-case-card">
+              <header class="archive-case-head">
+                <h3 class="archive-case-title">Alcácer do Sal</h3>
+                <span class="archive-case-tier">tier_public_label: Tier 4 — Risco Crítico</span>
+              </header>
+              <dl class="archive-case-metrics">
+                <div>
+                  <dt>checkpoint_cdx_record_count<br />registos CDX no checkpoint</dt>
+                  <dd>5000</dd>
+                </div>
+                <div>
+                  <dt>checkpoint_valid_capture_count<br />registos válidos no checkpoint</dt>
+                  <dd>4567</dd>
+                </div>
+                <div>
+                  <dt>model_total_arquivo_captures<br />valor usado pelo modelo</dt>
+                  <dd>129.0</dd>
+                </div>
+                <div>
+                  <dt>capture_count_imputed</dt>
+                  <dd>false</dd>
+                </div>
+                <div>
+                  <dt>capture_density</dt>
+                  <dd>0.011537429568</dd>
+                </div>
+                <div>
+                  <dt>digital_decay_rate</dt>
+                  <dd>26.547</dd>
+                </div>
+                <div>
+                  <dt>evidence_quality_flag</dt>
+                  <dd>ok</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="archive-case-card">
+              <header class="archive-case-head">
+                <h3 class="archive-case-title">Torres Vedras</h3>
+                <span class="archive-case-tier resilient">tier_public_label: Tier 1 — Resiliência</span>
+              </header>
+              <dl class="archive-case-metrics">
+                <div>
+                  <dt>checkpoint_cdx_record_count<br />registos CDX no checkpoint</dt>
+                  <dd>5000</dd>
+                </div>
+                <div>
+                  <dt>checkpoint_valid_capture_count<br />registos válidos no checkpoint</dt>
+                  <dd>4814</dd>
+                </div>
+                <div>
+                  <dt>model_total_arquivo_captures<br />valor usado pelo modelo</dt>
+                  <dd>2209.0</dd>
+                </div>
+                <div>
+                  <dt>capture_count_imputed</dt>
+                  <dd>false</dd>
+                </div>
+                <div>
+                  <dt>capture_density</dt>
+                  <dd>0.0262239422575</dd>
+                </div>
+                <div>
+                  <dt>digital_decay_rate</dt>
+                  <dd>15.308</dd>
+                </div>
+                <div>
+                  <dt>evidence_quality_flag</dt>
+                  <dd>ok</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="archive-case-card">
+              <header class="archive-case-head">
+                <h3 class="archive-case-title">Proença-a-Nova</h3>
+                <span class="archive-case-tier">tier_public_label: Tier 4 — Risco Crítico</span>
+              </header>
+              <dl class="archive-case-metrics">
+                <div>
+                  <dt>checkpoint_cdx_record_count<br />registos CDX no checkpoint</dt>
+                  <dd>5000</dd>
+                </div>
+                <div>
+                  <dt>checkpoint_valid_capture_count<br />registos válidos no checkpoint</dt>
+                  <dd>4895</dd>
+                </div>
+                <div>
+                  <dt>model_total_arquivo_captures<br />valor usado pelo modelo</dt>
+                  <dd>3247.0</dd>
+                </div>
+                <div>
+                  <dt>capture_count_imputed</dt>
+                  <dd>false</dd>
+                </div>
+                <div>
+                  <dt>capture_density</dt>
+                  <dd>0.454062368899</dd>
+                </div>
+                <div>
+                  <dt>digital_decay_rate</dt>
+                  <dd>1.2997</dd>
+                </div>
+                <div>
+                  <dt>evidence_quality_flag</dt>
+                  <dd>ok</dd>
+                </div>
+              </dl>
+            </article>
+          </div>
+
+          <div class="archive-table-wrap">
+            <table class="archive-evidence-table">
+              <caption class="archive-table-caption">Tabela compacta de evidência municipal</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Município</th>
+                  <th scope="col">Registos CDX no checkpoint</th>
+                  <th scope="col">Registos válidos no checkpoint</th>
+                  <th scope="col">Valor usado no modelo</th>
+                  <th scope="col">Imputado?</th>
+                  <th scope="col">capture_density</th>
+                  <th scope="col">digital_decay_rate</th>
+                  <th scope="col">Tier</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Alcácer do Sal</td>
+                  <td class="archive-mono">5000</td>
+                  <td class="archive-mono">4567</td>
+                  <td class="archive-mono">129.0</td>
+                  <td class="archive-mono">false</td>
+                  <td class="archive-mono">0.011537429568</td>
+                  <td class="archive-mono">26.547</td>
+                  <td>Tier 4 — Risco Crítico</td>
+                </tr>
+                <tr>
+                  <td>Torres Vedras</td>
+                  <td class="archive-mono">5000</td>
+                  <td class="archive-mono">4814</td>
+                  <td class="archive-mono">2209.0</td>
+                  <td class="archive-mono">false</td>
+                  <td class="archive-mono">0.0262239422575</td>
+                  <td class="archive-mono">15.308</td>
+                  <td>Tier 1 — Resiliência</td>
+                </tr>
+                <tr>
+                  <td>Proença-a-Nova</td>
+                  <td class="archive-mono">5000</td>
+                  <td class="archive-mono">4895</td>
+                  <td class="archive-mono">3247.0</td>
+                  <td class="archive-mono">false</td>
+                  <td class="archive-mono">0.454062368899</td>
+                  <td class="archive-mono">1.2997</td>
+                  <td>Tier 4 — Risco Crítico</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <section class="archive-ablation-card" aria-labelledby="archive-ablation-title">
+            <div>
+              <p class="archive-panel-kicker">PROVA DE ABLAÇÃO VALIDADA</p>
+              <h3 id="archive-ablation-title" class="archive-ablation-title">O sinal Arquivo.pt é mensurável</h3>
+            </div>
+            <div class="archive-ablation-metrics">
+              <div class="archive-ablation-metric">
+                <span>Com Arquivo.pt</span>
+                <strong>66,13% accuracy<br />64,90% F1 ponderado</strong>
+              </div>
+              <div class="archive-ablation-metric">
+                <span>Sem Arquivo.pt</span>
+                <strong>58,06% accuracy<br />58,19% F1 ponderado</strong>
+              </div>
+              <div class="archive-ablation-metric">
+                <span>Delta</span>
+                <strong>-8,06 pp accuracy<br />-6,71 pp F1 ponderado</strong>
+              </div>
+            </div>
+            <p class="archive-ablation-copy">Quando as variáveis derivadas do Arquivo.pt são removidas, o modelo perde 8,06 pontos percentuais de accuracy e 6,71 pontos percentuais de F1 ponderado. A memória digital arquivada contém sinal territorial mensurável.</p>
+          </section>
+
+          <div class="archive-table-wrap">
+            <table class="archive-evidence-table">
+              <caption class="archive-table-caption">Tabela de insubstituibilidade das variáveis</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Variável</th>
+                  <th scope="col">Fonte</th>
+                  <th scope="col">Substituível?</th>
+                  <th scope="col">Leitura</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Var% 2001→2011</td>
+                  <td>Censos</td>
+                  <td>Sim</td>
+                  <td>Dado demográfico clássico</td>
+                </tr>
+                <tr>
+                  <td>Env. 2001</td>
+                  <td>Censos</td>
+                  <td>Sim</td>
+                  <td>Dado demográfico clássico</td>
+                </tr>
+                <tr>
+                  <td>Pop. 2011</td>
+                  <td>Censos</td>
+                  <td>Sim</td>
+                  <td>Dado demográfico clássico</td>
+                </tr>
+                <tr>
+                  <td>IEI_Score</td>
+                  <td>Indicadores económicos</td>
+                  <td>Parcialmente</td>
+                  <td>Indicador económico sintético</td>
+                </tr>
+                <tr>
+                  <td>Total_Arquivo_Captures</td>
+                  <td>Arquivo.pt</td>
+                  <td>Não</td>
+                  <td>Derivado de extracção Arquivo.pt usada no modelo</td>
+                </tr>
+                <tr>
+                  <td>capture_density</td>
+                  <td>Arquivo.pt + Pop. 2021</td>
+                  <td>Não</td>
+                  <td>Total_Arquivo_Captures / Pop. 2021</td>
+                </tr>
+                <tr>
+                  <td>digital_decay_rate</td>
+                  <td>Arquivo.pt</td>
+                  <td>Não</td>
+                  <td>Importado de Media_Dias_Entre_Capturas</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <section class="archive-panel" aria-labelledby="archive-pack-title">
+            <p class="archive-panel-kicker">PACOTE DE EVIDÊNCIA VALIDADO</p>
+            <h3 id="archive-pack-title" class="validation-title">Fontes auditáveis publicadas</h3>
+            <div class="archive-links">
+              <a href="data/arquivo_evidence_summary.csv">data/arquivo_evidence_summary.csv</a>
+              <a href="data/arquivo_feature_audit.csv">data/arquivo_feature_audit.csv</a>
+              <a href="data/arquivo_capture_samples.csv">data/arquivo_capture_samples.csv</a>
+              <a href="data/arquivo_evidence_pack.json">data/arquivo_evidence_pack.json</a>
+              <a href="data/arquivo_ablation_summary.json">data/arquivo_ablation_summary.json</a>
+              <a href="docs/ARQUIVO_EVIDENCE_PACK.md">docs/ARQUIVO_EVIDENCE_PACK.md</a>
+            </div>
+          </section>
+        </section>
+
         <section class="validation">
           <h3 class="label-caps" style="margin:0;color:#1c1b1b">VALIDAÇÃO TÉCNICA [ANÁLISE DO MODELO]</h3>
           <div class="validation-grid">
