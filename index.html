@@ -255,21 +255,22 @@
 
     .theme-toggle {
       border: 1px solid var(--outline);
-      background: var(--surface);
+      background: var(--surface-container-lowest);
       color: var(--on-surface);
-      min-height: 32px;
-      padding: 7px 10px;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
+      padding: 0;
       font-family: "Space Grotesk", sans-serif;
-      font-size: 11px;
-      line-height: 14px;
+      font-size: 18px;
+      line-height: 1;
       font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      white-space: nowrap;
+      flex: 0 0 auto;
     }
 
     .theme-toggle:hover,
@@ -281,6 +282,13 @@
     .theme-toggle:focus-visible {
       outline: 2px solid var(--brand-controlled);
       outline-offset: 3px;
+    }
+
+    .theme-toggle-icon {
+      display: block;
+      font-size: 19px;
+      line-height: 1;
+      letter-spacing: 0;
     }
 
     .page {
@@ -1486,16 +1494,16 @@
     }
 
     .archive-ablation-card {
-      border: 1px solid var(--on-surface);
-      background: var(--on-surface);
-      color: var(--surface);
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container-lowest);
+      color: var(--on-surface);
       padding: 24px;
       display: grid;
       gap: 18px;
     }
 
     .archive-ablation-card .archive-panel-kicker {
-      color: rgba(255,255,255,0.72);
+      color: var(--brand-critical);
     }
 
     .archive-ablation-title {
@@ -1506,7 +1514,7 @@
       letter-spacing: 0.02em;
       text-transform: uppercase;
       font-weight: 900;
-      color: var(--surface);
+      color: var(--on-surface);
     }
 
     .archive-ablation-metrics {
@@ -1516,7 +1524,7 @@
     }
 
     .archive-ablation-metric {
-      border: 1px solid rgba(255,255,255,0.24);
+      border: 1px solid var(--outline-variant);
       padding: 16px;
       min-height: 138px;
       display: flex;
@@ -1531,7 +1539,7 @@
       line-height: 16px;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
+      color: var(--on-surface-variant);
       font-weight: 700;
     }
 
@@ -1541,13 +1549,13 @@
       font-size: clamp(24px, 3vw, 34px);
       line-height: 1.05;
       letter-spacing: 0;
-      color: var(--surface);
+      color: var(--on-surface);
     }
 
     .archive-ablation-copy {
       margin: 0;
       max-width: 920px;
-      color: rgba(255,255,255,0.82);
+      color: var(--on-surface-variant);
       font-size: 16px;
       line-height: 26px;
     }
@@ -1580,6 +1588,52 @@
     .archive-links a:hover {
       background: var(--on-surface);
       color: var(--surface);
+    }
+
+    .archive-technical {
+      display: grid;
+      gap: 14px;
+    }
+
+    .archive-technical-toggle {
+      width: fit-content;
+      border: 0;
+      border-bottom: 1px solid var(--brand-critical);
+      background: transparent;
+      color: var(--brand-critical);
+      padding: 0 0 3px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .archive-technical-toggle:focus-visible {
+      outline: 2px solid var(--brand-controlled);
+      outline-offset: 4px;
+    }
+
+    .archive-technical-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .archive-technical-inner {
+      display: grid;
+      gap: 18px;
+      padding-top: 4px;
+    }
+
+    .archive-case-tier.resilient {
+      color: #008aa0;
+    }
+
+    [data-theme="dark"] .archive-case-tier.resilient {
+      color: var(--brand-controlled);
     }
 
     .validation {
@@ -1941,6 +1995,160 @@
       color: #3f3e3a;
     }
 
+    .collapse-page,
+    #intel {
+      background: var(--background);
+      color: var(--on-background);
+    }
+
+    .collapse-card,
+    .intel-panel,
+    .intel-metric-block,
+    .intel-context-placeholder {
+      border-color: var(--outline-variant);
+      background: var(--surface-container-lowest);
+      color: var(--on-surface);
+    }
+
+    .collapse-title,
+    .collapse-card-title,
+    .collapse-pop,
+    .collapse-dates dd,
+    .collapse-cta,
+    .intel-section-title,
+    .intel-column-title,
+    .intel-big-number,
+    .intel-context-value {
+      color: var(--on-surface);
+    }
+
+    .collapse-subtitle,
+    .collapse-year,
+    .collapse-dates,
+    .collapse-dates dt,
+    .collapse-quote,
+    .intel-kicker,
+    .intel-label,
+    .intel-best-name,
+    .intel-context-placeholder,
+    .intel-context-label,
+    .intel-context-bar-label,
+    .intel-context-sentence {
+      color: var(--on-surface-variant);
+    }
+
+    .collapse-dates div + div,
+    .intel-shell,
+    .intel-context-row,
+    .intel-context-sentence {
+      border-color: var(--outline-variant);
+    }
+
+    .collapse-timeline::before {
+      background: linear-gradient(90deg, var(--outline-variant), var(--brand-critical));
+    }
+
+    .collapse-step::before {
+      border-color: var(--surface-container-lowest);
+    }
+
+    .collapse-step:nth-child(2) .collapse-pop {
+      color: var(--on-surface-variant);
+    }
+
+    .collapse-step:nth-child(3) .collapse-pop,
+    .collapse-total,
+    .collapse-tier {
+      color: var(--brand-critical);
+    }
+
+    .intel-select {
+      border-color: var(--outline-variant);
+      background: var(--surface-container-lowest);
+      color: var(--on-surface);
+    }
+
+    .intel-select:focus {
+      border-color: var(--on-surface);
+    }
+
+    .intel-analyze-btn {
+      border-color: var(--on-surface);
+      background: var(--on-surface);
+      color: var(--surface);
+    }
+
+    .intel-analyze-btn:hover {
+      background: var(--surface-container-lowest);
+      color: var(--on-surface);
+    }
+
+    .intel-progress-track,
+    .intel-context-bar-track {
+      border-color: var(--outline-variant);
+      background: var(--surface-container-low);
+    }
+
+    .validation .label-caps {
+      color: var(--on-surface) !important;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .team-card {
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container-lowest);
+      min-width: 0;
+    }
+
+    .team-photo-frame {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: var(--surface-container-high);
+      overflow: hidden;
+    }
+
+    .team-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(0.08);
+    }
+
+    .team-body {
+      padding: 20px 24px 28px;
+    }
+
+    .team-name {
+      margin: 0 0 14px;
+      color: var(--on-surface);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .team-rule {
+      border: none;
+      border-top: 1px solid var(--outline-variant);
+      margin: 0 0 16px;
+    }
+
+    .team-copy {
+      margin: 0;
+      color: var(--on-surface-variant);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
     .app-footer {
       margin-top: auto;
       border-top: 1px solid var(--outline-variant);
@@ -1973,11 +2181,17 @@
     .foot-right a {
       color: var(--on-surface);
       text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
     }
 
     .foot-right a:hover {
-      background: var(--on-surface);
-      color: var(--surface);
+      color: var(--brand-critical);
+      border-bottom-color: var(--brand-critical);
+    }
+
+    .foot-right a.footer-repo {
+      border-bottom-color: var(--brand-critical);
     }
 
     [data-theme="dark"] .validation-card {
@@ -2133,6 +2347,10 @@
         grid-template-columns: 1fr !important;
       }
 
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
       .legend {
         position: static;
         margin-top: 16px;
@@ -2247,8 +2465,8 @@
         <a class="nav-link" data-route href="#intel">INTEL</a>
         <a class="nav-link" data-route href="#archive">ARQUIVO</a>
         <a class="nav-link" data-route href="#sobre">SOBRE NÓS</a>
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Mudar para modo claro">
-          <span class="theme-toggle-label">MODO CLARO</span>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Activar modo claro" title="Activar modo claro">
+          <span class="theme-toggle-icon" aria-hidden="true">☼</span>
         </button>
       </div>
     </nav>
@@ -3308,29 +3526,29 @@
           <header class="archive-evidence-header">
             <p class="archive-evidence-kicker">ARQUIVO.PT // EVIDÊNCIA PÚBLICA</p>
             <h2 id="archive-evidence-title" class="archive-evidence-title">A PROVA // DA CAPTURA À CLASSIFICAÇÃO</h2>
-            <p class="archive-evidence-subtitle">Cada classificação CASSANDRA pode ser rastreada até à memória web preservada pelo Arquivo.pt: registos CDX, variáveis derivadas, entrada no modelo e impacto quando essas variáveis são removidas.</p>
+            <p class="archive-evidence-subtitle">Esta secção documenta de forma auditável como os dados do Arquivo.pt foram recolhidos, processados e usados no modelo — para que qualquer investigador possa verificar a cadeia de evidência desde o arquivo até à classificação final.</p>
           </header>
 
           <div class="evidence-chain" aria-label="Cadeia de evidência Arquivo.pt">
             <article class="evidence-step">
               <span class="evidence-step-number">01</span>
               <div>
-                <h3 class="evidence-step-title">Registos CDX Arquivo.pt</h3>
-                <p class="evidence-step-copy">O checkpoint CDX local documenta registos preservados por domínio municipal, com limite de 5.000 registos por domínio.</p>
+                <h3 class="evidence-step-title">Memória Arquivo.pt</h3>
+                <p class="evidence-step-copy">As capturas preservadas por domínio municipal documentam a presença digital observável de cada território.</p>
               </div>
             </article>
             <article class="evidence-step">
               <span class="evidence-step-number">02</span>
               <div>
-                <h3 class="evidence-step-title">Variáveis digitais</h3>
-                <p class="evidence-step-copy">Os registos auditados alimentam variáveis derivadas como <span class="archive-mono">Total_Arquivo_Captures</span>, <span class="archive-mono">capture_density</span> e <span class="archive-mono">digital_decay_rate</span>.</p>
+                <h3 class="evidence-step-title">Variáveis do modelo</h3>
+                <p class="evidence-step-copy">A evidência arquivada é convertida em valores como capturas usadas, densidade de presença digital e intervalo médio entre capturas.</p>
               </div>
             </article>
             <article class="evidence-step">
               <span class="evidence-step-number">03</span>
               <div>
-                <h3 class="evidence-step-title">Modelo XGBoost</h3>
-                <p class="evidence-step-copy">Os valores usados pelo modelo entram com variáveis demográficas e económicas no sistema de apoio à decisão.</p>
+                <h3 class="evidence-step-title">Apoio à decisão</h3>
+                <p class="evidence-step-copy">Os valores entram com variáveis demográficas e económicas no sistema de inteligência territorial CASSANDRA.</p>
               </div>
             </article>
             <article class="evidence-step">
@@ -3342,44 +3560,27 @@
             </article>
           </div>
 
-          <aside class="archive-warning" aria-label="Aviso sobre checkpoint e modelo">
-            <p>O CASSANDRA distingue registos CDX observados no checkpoint local de valores usados pelo modelo. O checkpoint CDX está limitado a 5.000 registos por domínio; por isso, checkpoint_cdx_record_count é prova de proveniência, não a contagem total histórica absoluta. Quando houve imputação, essa imputação é explicitamente assinalada.</p>
-          </aside>
-
           <div class="archive-case-grid" aria-label="Casos validados do Evidence Pack">
             <article class="archive-case-card">
               <header class="archive-case-head">
                 <h3 class="archive-case-title">Alcácer do Sal</h3>
-                <span class="archive-case-tier">tier_public_label: Tier 4 — Risco Crítico</span>
               </header>
               <dl class="archive-case-metrics">
                 <div>
-                  <dt>checkpoint_cdx_record_count<br />registos CDX no checkpoint</dt>
-                  <dd>5000</dd>
+                  <dt>Classificação</dt>
+                  <dd>Tier 4 — Risco Crítico</dd>
                 </div>
                 <div>
-                  <dt>checkpoint_valid_capture_count<br />registos válidos no checkpoint</dt>
-                  <dd>4567</dd>
-                </div>
-                <div>
-                  <dt>model_total_arquivo_captures<br />valor usado pelo modelo</dt>
+                  <dt>Capturas usadas pelo modelo</dt>
                   <dd>129.0</dd>
                 </div>
                 <div>
-                  <dt>capture_count_imputed</dt>
-                  <dd>false</dd>
-                </div>
-                <div>
-                  <dt>capture_density</dt>
+                  <dt>Densidade de presença digital</dt>
                   <dd>0.011537429568</dd>
                 </div>
                 <div>
-                  <dt>digital_decay_rate</dt>
+                  <dt>Intervalo médio entre capturas</dt>
                   <dd>26.547</dd>
-                </div>
-                <div>
-                  <dt>evidence_quality_flag</dt>
-                  <dd>ok</dd>
                 </div>
               </dl>
             </article>
@@ -3387,36 +3588,23 @@
             <article class="archive-case-card">
               <header class="archive-case-head">
                 <h3 class="archive-case-title">Torres Vedras</h3>
-                <span class="archive-case-tier resilient">tier_public_label: Tier 1 — Resiliência</span>
               </header>
               <dl class="archive-case-metrics">
                 <div>
-                  <dt>checkpoint_cdx_record_count<br />registos CDX no checkpoint</dt>
-                  <dd>5000</dd>
+                  <dt>Classificação</dt>
+                  <dd>Tier 1 — Resiliência</dd>
                 </div>
                 <div>
-                  <dt>checkpoint_valid_capture_count<br />registos válidos no checkpoint</dt>
-                  <dd>4814</dd>
-                </div>
-                <div>
-                  <dt>model_total_arquivo_captures<br />valor usado pelo modelo</dt>
+                  <dt>Capturas usadas pelo modelo</dt>
                   <dd>2209.0</dd>
                 </div>
                 <div>
-                  <dt>capture_count_imputed</dt>
-                  <dd>false</dd>
-                </div>
-                <div>
-                  <dt>capture_density</dt>
+                  <dt>Densidade de presença digital</dt>
                   <dd>0.0262239422575</dd>
                 </div>
                 <div>
-                  <dt>digital_decay_rate</dt>
+                  <dt>Intervalo médio entre capturas</dt>
                   <dd>15.308</dd>
-                </div>
-                <div>
-                  <dt>evidence_quality_flag</dt>
-                  <dd>ok</dd>
                 </div>
               </dl>
             </article>
@@ -3424,112 +3612,27 @@
             <article class="archive-case-card">
               <header class="archive-case-head">
                 <h3 class="archive-case-title">Proença-a-Nova</h3>
-                <span class="archive-case-tier">tier_public_label: Tier 4 — Risco Crítico</span>
               </header>
               <dl class="archive-case-metrics">
                 <div>
-                  <dt>checkpoint_cdx_record_count<br />registos CDX no checkpoint</dt>
-                  <dd>5000</dd>
+                  <dt>Classificação</dt>
+                  <dd>Tier 4 — Risco Crítico</dd>
                 </div>
                 <div>
-                  <dt>checkpoint_valid_capture_count<br />registos válidos no checkpoint</dt>
-                  <dd>4895</dd>
-                </div>
-                <div>
-                  <dt>model_total_arquivo_captures<br />valor usado pelo modelo</dt>
+                  <dt>Capturas usadas pelo modelo</dt>
                   <dd>3247.0</dd>
                 </div>
                 <div>
-                  <dt>capture_count_imputed</dt>
-                  <dd>false</dd>
-                </div>
-                <div>
-                  <dt>capture_density</dt>
+                  <dt>Densidade de presença digital</dt>
                   <dd>0.454062368899</dd>
                 </div>
                 <div>
-                  <dt>digital_decay_rate</dt>
+                  <dt>Intervalo médio entre capturas</dt>
                   <dd>1.2997</dd>
-                </div>
-                <div>
-                  <dt>evidence_quality_flag</dt>
-                  <dd>ok</dd>
                 </div>
               </dl>
             </article>
           </div>
-
-          <div class="archive-table-wrap">
-            <table class="archive-evidence-table">
-              <caption class="archive-table-caption">Tabela compacta de evidência municipal</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Município</th>
-                  <th scope="col">Registos CDX no checkpoint</th>
-                  <th scope="col">Registos válidos no checkpoint</th>
-                  <th scope="col">Valor usado no modelo</th>
-                  <th scope="col">Imputado?</th>
-                  <th scope="col">capture_density</th>
-                  <th scope="col">digital_decay_rate</th>
-                  <th scope="col">Tier</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Alcácer do Sal</td>
-                  <td class="archive-mono">5000</td>
-                  <td class="archive-mono">4567</td>
-                  <td class="archive-mono">129.0</td>
-                  <td class="archive-mono">false</td>
-                  <td class="archive-mono">0.011537429568</td>
-                  <td class="archive-mono">26.547</td>
-                  <td>Tier 4 — Risco Crítico</td>
-                </tr>
-                <tr>
-                  <td>Torres Vedras</td>
-                  <td class="archive-mono">5000</td>
-                  <td class="archive-mono">4814</td>
-                  <td class="archive-mono">2209.0</td>
-                  <td class="archive-mono">false</td>
-                  <td class="archive-mono">0.0262239422575</td>
-                  <td class="archive-mono">15.308</td>
-                  <td>Tier 1 — Resiliência</td>
-                </tr>
-                <tr>
-                  <td>Proença-a-Nova</td>
-                  <td class="archive-mono">5000</td>
-                  <td class="archive-mono">4895</td>
-                  <td class="archive-mono">3247.0</td>
-                  <td class="archive-mono">false</td>
-                  <td class="archive-mono">0.454062368899</td>
-                  <td class="archive-mono">1.2997</td>
-                  <td>Tier 4 — Risco Crítico</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <section class="archive-ablation-card" aria-labelledby="archive-ablation-title">
-            <div>
-              <p class="archive-panel-kicker">PROVA DE ABLAÇÃO VALIDADA</p>
-              <h3 id="archive-ablation-title" class="archive-ablation-title">O sinal Arquivo.pt é mensurável</h3>
-            </div>
-            <div class="archive-ablation-metrics">
-              <div class="archive-ablation-metric">
-                <span>Com Arquivo.pt</span>
-                <strong>66,13% accuracy<br />64,90% F1 ponderado</strong>
-              </div>
-              <div class="archive-ablation-metric">
-                <span>Sem Arquivo.pt</span>
-                <strong>58,06% accuracy<br />58,19% F1 ponderado</strong>
-              </div>
-              <div class="archive-ablation-metric">
-                <span>Delta</span>
-                <strong>-8,06 pp accuracy<br />-6,71 pp F1 ponderado</strong>
-              </div>
-            </div>
-            <p class="archive-ablation-copy">Quando as variáveis derivadas do Arquivo.pt são removidas, o modelo perde 8,06 pontos percentuais de accuracy e 6,71 pontos percentuais de F1 ponderado. A memória digital arquivada contém sinal territorial mensurável.</p>
-          </section>
 
           <div class="archive-table-wrap">
             <table class="archive-evidence-table">
@@ -3589,16 +3692,91 @@
             </table>
           </div>
 
-          <section class="archive-panel" aria-labelledby="archive-pack-title">
-            <p class="archive-panel-kicker">PACOTE DE EVIDÊNCIA VALIDADO</p>
-            <h3 id="archive-pack-title" class="validation-title">Fontes auditáveis publicadas</h3>
-            <div class="archive-links">
-              <a href="data/arquivo_evidence_summary.csv">data/arquivo_evidence_summary.csv</a>
-              <a href="data/arquivo_feature_audit.csv">data/arquivo_feature_audit.csv</a>
-              <a href="data/arquivo_capture_samples.csv">data/arquivo_capture_samples.csv</a>
-              <a href="data/arquivo_evidence_pack.json">data/arquivo_evidence_pack.json</a>
-              <a href="data/arquivo_ablation_summary.json">data/arquivo_ablation_summary.json</a>
-              <a href="docs/ARQUIVO_EVIDENCE_PACK.md">docs/ARQUIVO_EVIDENCE_PACK.md</a>
+          <section class="archive-ablation-card" aria-labelledby="archive-ablation-title">
+            <div>
+              <p class="archive-panel-kicker">PROVA DE ABLAÇÃO VALIDADA</p>
+              <h3 id="archive-ablation-title" class="archive-ablation-title">O sinal Arquivo.pt é mensurável</h3>
+            </div>
+            <div class="archive-ablation-metrics">
+              <div class="archive-ablation-metric">
+                <span>Com Arquivo.pt</span>
+                <strong>66,13% accuracy<br />64,90% F1 ponderado</strong>
+              </div>
+              <div class="archive-ablation-metric">
+                <span>Sem Arquivo.pt</span>
+                <strong>58,06% accuracy<br />58,19% F1 ponderado</strong>
+              </div>
+              <div class="archive-ablation-metric">
+                <span>Delta</span>
+                <strong>-8,06 pp accuracy<br />-6,71 pp F1 ponderado</strong>
+              </div>
+            </div>
+            <p class="archive-ablation-copy">Este teste remove as variáveis derivadas do Arquivo.pt e mede quanto o modelo enfraquece. Sem esse sinal, a accuracy desce 8,06 pontos percentuais e o F1 ponderado desce 6,71 pontos percentuais.</p>
+          </section>
+
+          <section class="archive-technical" aria-label="Dados técnicos do Evidence Pack">
+            <button id="archive-technical-toggle" class="archive-technical-toggle" type="button" aria-expanded="false" aria-controls="archive-technical-content">+ VER DADOS TÉCNICOS</button>
+            <div id="archive-technical-content" class="archive-technical-content" aria-hidden="true" inert>
+              <div class="archive-technical-inner">
+                <aside class="archive-warning" aria-label="Aviso técnico sobre checkpoint e modelo">
+                  <p>O CASSANDRA distingue evidência bruta/checkpoint, valores usados pelo modelo, imputação e qualidade da evidência. O campo <span class="archive-mono">checkpoint_cdx_record_count</span> é evidência de proveniência de um checkpoint local limitado a 5.000 registos CDX por domínio. Não é o total histórico completo de todas as capturas Arquivo.pt. O campo <span class="archive-mono">model_total_arquivo_captures</span> é o valor usado pelo modelo.</p>
+                </aside>
+
+                <div class="archive-table-wrap">
+                  <table class="archive-evidence-table">
+                    <caption id="archive-technical-title" class="archive-table-caption">Dados técnicos do Evidence Pack validado</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Município</th>
+                        <th scope="col">checkpoint_cdx_record_count</th>
+                        <th scope="col">checkpoint_valid_capture_count</th>
+                        <th scope="col">model_total_arquivo_captures</th>
+                        <th scope="col">capture_count_imputed</th>
+                        <th scope="col">evidence_quality_flag</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Alcácer do Sal</td>
+                        <td class="archive-mono">5000</td>
+                        <td class="archive-mono">4567</td>
+                        <td class="archive-mono">129.0</td>
+                        <td class="archive-mono">false</td>
+                        <td class="archive-mono">ok</td>
+                      </tr>
+                      <tr>
+                        <td>Torres Vedras</td>
+                        <td class="archive-mono">5000</td>
+                        <td class="archive-mono">4814</td>
+                        <td class="archive-mono">2209.0</td>
+                        <td class="archive-mono">false</td>
+                        <td class="archive-mono">ok</td>
+                      </tr>
+                      <tr>
+                        <td>Proença-a-Nova</td>
+                        <td class="archive-mono">5000</td>
+                        <td class="archive-mono">4895</td>
+                        <td class="archive-mono">3247.0</td>
+                        <td class="archive-mono">false</td>
+                        <td class="archive-mono">ok</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <section class="archive-panel" aria-labelledby="archive-pack-title">
+                  <p class="archive-panel-kicker">PACOTE DE EVIDÊNCIA VALIDADO</p>
+                  <h3 id="archive-pack-title" class="validation-title">Fontes auditáveis publicadas</h3>
+                  <div class="archive-links">
+                    <a href="data/arquivo_evidence_summary.csv">data/arquivo_evidence_summary.csv</a>
+                    <a href="data/arquivo_feature_audit.csv">data/arquivo_feature_audit.csv</a>
+                    <a href="data/arquivo_capture_samples.csv">data/arquivo_capture_samples.csv</a>
+                    <a href="data/arquivo_evidence_pack.json">data/arquivo_evidence_pack.json</a>
+                    <a href="data/arquivo_ablation_summary.json">data/arquivo_ablation_summary.json</a>
+                    <a href="docs/ARQUIVO_EVIDENCE_PACK.md">docs/ARQUIVO_EVIDENCE_PACK.md</a>
+                  </div>
+                </section>
+              </div>
             </div>
           </section>
         </section>
@@ -3786,35 +3964,29 @@
       </p>
 
       <!-- Team cards — 2 columns, equal height -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;">
+      <div class="team-grid">
 
         <!-- Card 1 -->
-        <div style="border: 1px solid #d4d1ca;">
-          <div aria-label="Bruno Machado" style="width:100%; aspect-ratio:3/4; background:#e8e6e2; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-            <div style="width:96px; height:96px; border-radius:9999px; border:1px solid #c8c3b8; display:flex; align-items:center; justify-content:center; font-size:38px; font-weight:900; letter-spacing:0.08em; color:#28251d; background:#f4f1ea;">BM</div>
+        <div class="team-card">
+          <div class="team-photo-frame">
+            <img class="team-photo" src="https://i.ibb.co/BKSPj4nZ/IMG-7209.avif" alt="Bruno Machado" loading="lazy" onerror="this.style.display='none'">
           </div>
-          <div style="padding: 20px 24px 28px;">
-            <h3 style="font-size: 18px; font-weight: 900; letter-spacing: 0.05em; margin-bottom: 4px;">BRUNO MACHADO</h3>
-            <p style="font-size: 11px; letter-spacing: 0.12em; color: #7a7974; margin-bottom: 16px;">INVESTIGADOR PRINCIPAL</p>
-            <hr style="border:none;border-top:1px solid #d4d1ca;margin-bottom:16px;">
-            <p style="font-size: 13px; line-height: 1.6; color: #555;">
-              Investigação, desenvolvimento e validação metodológica do CASSANDRA.
-            </p>
+          <div class="team-body">
+            <h3 class="team-name">BRUNO MACHADO</h3>
+            <hr class="team-rule">
+            <p class="team-copy">Estudante de 2.º ano de Gestão de Marketing no IPAM. Co-autor do projecto CASSANDRA.</p>
           </div>
         </div>
 
         <!-- Card 2 -->
-        <div style="border: 1px solid #d4d1ca;">
-          <div aria-label="Rúben Correia" style="width:100%; aspect-ratio:3/4; background:#e8e6e2; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-            <div style="width:96px; height:96px; border-radius:9999px; border:1px solid #c8c3b8; display:flex; align-items:center; justify-content:center; font-size:38px; font-weight:900; letter-spacing:0.08em; color:#28251d; background:#f4f1ea;">RC</div>
+        <div class="team-card">
+          <div class="team-photo-frame">
+            <img class="team-photo" src="https://i.ibb.co/YBDZV27s/ruben.jpg" alt="Rúben Correia" loading="lazy" onerror="this.style.display='none'">
           </div>
-          <div style="padding: 20px 24px 28px;">
-            <h3 style="font-size: 18px; font-weight: 900; letter-spacing: 0.05em; margin-bottom: 4px;">RÚBEN CORREIA</h3>
-            <p style="font-size: 11px; letter-spacing: 0.12em; color: #7a7974; margin-bottom: 16px;">INVESTIGADOR PRINCIPAL</p>
-            <hr style="border:none;border-top:1px solid #d4d1ca;margin-bottom:16px;">
-            <p style="font-size: 13px; line-height: 1.6; color: #555;">
-              Análise territorial, estrutura narrativa e interpretação dos resultados.
-            </p>
+          <div class="team-body">
+            <h3 class="team-name">RÚBEN CORREIA</h3>
+            <hr class="team-rule">
+            <p class="team-copy">Estudante de 2.º ano de Gestão de Marketing no IPAM. Co-autor do projecto CASSANDRA.</p>
           </div>
         </div>
 
@@ -3825,11 +3997,9 @@
     <footer class="app-footer">
       <div class="foot-left">© 2026 CASSANDRA — INTELIGÊNCIA DE RISCO TERRITORIAL</div>
       <div class="foot-right">
-        <span>DOCUMENTAÇÃO API — A DISPONIBILIZAR</span>
+        <a href="#archive">METODOLOGIA</a>
         <span>|</span>
-        <span>ESTADO DO SISTEMA — A DISPONIBILIZAR</span>
-        <span>|</span>
-        <span>GITHUB — A DISPONIBILIZAR</span>
+        <a class="footer-repo" href="https://github.com/oKaset/Cassandra" target="_blank" rel="noopener noreferrer">REPOSITÓRIO</a>
       </div>
     </footer>
   </div>
@@ -3838,7 +4008,7 @@
     (function () {
       const root = document.documentElement;
       const themeToggle = document.getElementById("theme-toggle");
-      const themeToggleLabel = themeToggle ? themeToggle.querySelector(".theme-toggle-label") : null;
+      const themeToggleIcon = themeToggle ? themeToggle.querySelector(".theme-toggle-icon") : null;
 
       function getTheme() {
         return root.getAttribute("data-theme") === "light" ? "light" : "dark";
@@ -3846,21 +4016,15 @@
 
       function applyTheme(theme) {
         const activeTheme = theme === "light" ? "light" : "dark";
-        const nextTheme = activeTheme === "dark" ? "light" : "dark";
+        const isDark = activeTheme === "dark";
+        const toggleLabel = isDark ? "Activar modo claro" : "Activar modo escuro";
         root.setAttribute("data-theme", activeTheme);
 
         if (themeToggle) {
-          const nextLabel = nextTheme === "light" ? "MODO CLARO" : "MODO ESCURO";
-          themeToggle.setAttribute(
-            "aria-label",
-            nextTheme === "light" ? "Mudar para modo claro" : "Mudar para modo escuro"
-          );
-          themeToggle.setAttribute(
-            "title",
-            nextTheme === "light" ? "Mudar para modo claro" : "Mudar para modo escuro"
-          );
+          themeToggle.setAttribute("aria-label", toggleLabel);
+          themeToggle.setAttribute("title", toggleLabel);
           themeToggle.dataset.activeTheme = activeTheme;
-          if (themeToggleLabel) themeToggleLabel.textContent = nextLabel;
+          if (themeToggleIcon) themeToggleIcon.textContent = isDark ? "☼" : "☾";
         }
       }
 
@@ -3869,6 +4033,32 @@
       if (themeToggle) {
         themeToggle.addEventListener("click", function () {
           applyTheme(getTheme() === "dark" ? "light" : "dark");
+        });
+      }
+
+      const archiveTechnicalToggle = document.getElementById("archive-technical-toggle");
+      const archiveTechnicalContent = document.getElementById("archive-technical-content");
+
+      function setArchiveTechnicalState(isOpen) {
+        if (!archiveTechnicalToggle || !archiveTechnicalContent) return;
+        archiveTechnicalToggle.setAttribute("aria-expanded", String(isOpen));
+        archiveTechnicalToggle.textContent = isOpen ? "− OCULTAR DADOS TÉCNICOS" : "+ VER DADOS TÉCNICOS";
+        archiveTechnicalContent.setAttribute("aria-hidden", String(!isOpen));
+        if (isOpen) archiveTechnicalContent.removeAttribute("inert");
+        else archiveTechnicalContent.setAttribute("inert", "");
+        archiveTechnicalContent.style.maxHeight = isOpen ? `${archiveTechnicalContent.scrollHeight}px` : "0px";
+      }
+
+      setArchiveTechnicalState(false);
+
+      if (archiveTechnicalToggle && archiveTechnicalContent) {
+        archiveTechnicalToggle.addEventListener("click", function () {
+          setArchiveTechnicalState(this.getAttribute("aria-expanded") !== "true");
+        });
+        window.addEventListener("resize", function () {
+          if (archiveTechnicalToggle.getAttribute("aria-expanded") === "true") {
+            archiveTechnicalContent.style.maxHeight = `${archiveTechnicalContent.scrollHeight}px`;
+          }
         });
       }
 
@@ -4166,7 +4356,7 @@
         if (intelVarPopValue) {
           if (varPop < 0) intelVarPopValue.style.color = "#e53e3e";
           else if (varPop > 0) intelVarPopValue.style.color = "#38a169";
-          else intelVarPopValue.style.color = "#1c1b1b";
+          else intelVarPopValue.style.color = "var(--on-surface)";
 
           animateCounter("varpop", 0, varPop, 800, function (value, progress) {
             if (progress >= 1) {
