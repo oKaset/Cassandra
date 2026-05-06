@@ -38,14 +38,18 @@
 //   }
 -->
 <html lang="pt-PT" data-theme="dark">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CASSANDRA Oracle Engine</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231c1b1a'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial,sans-serif' font-size='32' font-weight='700' fill='%23fdf8f8'%3EC%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231c1b1a'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial,sans-serif' font-size='32' font-weight='700' fill='%23fdf8f8'%3EC%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Work+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet" />
   <script src="./assets/dashboard_data.js"></script>
   <script src="./assets/tier_data.js"></script>
   <style>
@@ -551,10 +555,21 @@
       background: transparent;
     }
 
-    .kpi.critical::after { background: var(--brand-critical); }
-    .kpi.elevated::after { background: var(--brand-elevated); }
-    .kpi.moderate::after { background: var(--brand-moderate); }
-    .kpi.controlled::after { background: var(--brand-controlled); }
+    .kpi.critical::after {
+      background: var(--brand-critical);
+    }
+
+    .kpi.elevated::after {
+      background: var(--brand-elevated);
+    }
+
+    .kpi.moderate::after {
+      background: var(--brand-moderate);
+    }
+
+    .kpi.controlled::after {
+      background: var(--brand-controlled);
+    }
 
     .kpi-value {
       display: block;
@@ -584,7 +599,7 @@
       border-bottom: 1px solid var(--outline-variant);
     }
 
-    .territories-layout > * {
+    .territories-layout>* {
       min-width: 0;
     }
 
@@ -860,7 +875,9 @@
     }
 
     @media (max-width: 768px) {
-      #cassandra-map { height: 360px; }
+      #cassandra-map {
+        height: 360px;
+      }
     }
 
     .map-image {
@@ -881,10 +898,39 @@
       border: 1px solid var(--surface);
     }
 
-    .map-point.p1 { top: 25%; left: 33%; width: 12px; height: 12px; background: var(--brand-critical); box-shadow: var(--shadow-hard); }
-    .map-point.p2 { top: 34%; left: 50%; width: 8px; height: 8px; background: var(--brand-elevated); }
-    .map-point.p3 { top: 66%; left: 25%; width: 14px; height: 14px; background: var(--brand-moderate); opacity: 0.8; }
-    .map-point.p4 { top: 51%; left: 67%; width: 8px; height: 8px; background: var(--brand-controlled); }
+    .map-point.p1 {
+      top: 25%;
+      left: 33%;
+      width: 12px;
+      height: 12px;
+      background: var(--brand-critical);
+      box-shadow: var(--shadow-hard);
+    }
+
+    .map-point.p2 {
+      top: 34%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: var(--brand-elevated);
+    }
+
+    .map-point.p3 {
+      top: 66%;
+      left: 25%;
+      width: 14px;
+      height: 14px;
+      background: var(--brand-moderate);
+      opacity: 0.8;
+    }
+
+    .map-point.p4 {
+      top: 51%;
+      left: 67%;
+      width: 8px;
+      height: 8px;
+      background: var(--brand-controlled);
+    }
 
     .legend {
       position: absolute;
@@ -1063,7 +1109,7 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     }
 
     .collapse-card-head {
@@ -1192,7 +1238,7 @@
       padding: 0;
     }
 
-    .collapse-dates div + div {
+    .collapse-dates div+div {
       border-top: 1px solid #e5e2e1;
       margin-top: 12px;
       padding-top: 12px;
@@ -2037,7 +2083,7 @@
       color: var(--on-surface-variant);
     }
 
-    .collapse-dates div + div,
+    .collapse-dates div+div,
     .intel-shell,
     .intel-context-row,
     .intel-context-sentence {
@@ -2238,6 +2284,7 @@
     }
 
     @media (max-width: 1220px) {
+
       .top-nav,
       .app-footer,
       .page {
@@ -2343,7 +2390,7 @@
         padding-right: 28px !important;
       }
 
-      #sobre > div[style*="grid-template-columns"] {
+      #sobre>div[style*="grid-template-columns"] {
         grid-template-columns: 1fr !important;
       }
 
@@ -2448,12 +2495,11 @@
       }
     }
   </style>
-  <link rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="./assets/municipios_inline.js"></script>
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
+
 <body>
   <div class="app-shell">
     <nav class="top-nav">
@@ -2465,7 +2511,8 @@
         <a class="nav-link" data-route href="#intel">INTEL</a>
         <a class="nav-link" data-route href="#archive">ARQUIVO</a>
         <a class="nav-link" data-route href="#sobre">SOBRE NÓS</a>
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Activar modo claro" title="Activar modo claro">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Activar modo claro"
+          title="Activar modo claro">
           <span class="theme-toggle-icon" aria-hidden="true">☼</span>
         </button>
       </div>
@@ -2477,7 +2524,8 @@
         <div class="home-grid">
           <div>
             <h2 class="home-title">Portugal está a desaparecer da internet.</h2>
-            <p class="home-lead">O CASSANDRA monitoriza a presença digital dos 308 municípios portugueses e identifica aqueles cuja memória online está em colapso — antes que desapareça para sempre.</p>
+            <p class="home-lead">O CASSANDRA monitoriza a presença digital dos 308 municípios portugueses e identifica
+              aqueles cuja memória online está em colapso — antes que desapareça para sempre.</p>
             <div class="action-row">
               <a class="btn primary" href="#territories">Explorar Mapa →</a>
               <a class="btn" href="#archive">Ver Metodologia ↑</a>
@@ -2485,10 +2533,16 @@
           </div>
 
           <div style="position: relative; margin-top: 8px; padding: 0;">
-            <div class="home-map-frame" style="position:relative;width:100%;height:500px;border:1px solid #d4d1ca;overflow:hidden;flex-shrink:0;">
-              <img src="./assets/mapacapacassandra.png" alt="Mapa" style="position: absolute;inset:0;width: 100%;height: 100%;object-fit: cover;object-position: center center;transform: scale(1.78);transform-origin: center center;mix-blend-mode: multiply;opacity: 0.85;" />
-              <div style="position:absolute;inset:0;background:linear-gradient(to right,#f5f3f0 0%,transparent 25%);pointer-events:none;"></div>
-              <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,#f5f3f0 100%);pointer-events:none;"></div>
+            <div class="home-map-frame"
+              style="position:relative;width:100%;height:500px;border:1px solid #d4d1ca;overflow:hidden;flex-shrink:0;">
+              <img src="./assets/mapacapacassandra.png" alt="Mapa"
+                style="position: absolute;inset:0;width: 100%;height: 100%;object-fit: cover;object-position: center center;transform: scale(1.78);transform-origin: center center;mix-blend-mode: multiply;opacity: 0.85;" />
+              <div
+                style="position:absolute;inset:0;background:linear-gradient(to right,#f5f3f0 0%,transparent 25%);pointer-events:none;">
+              </div>
+              <div
+                style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,#f5f3f0 100%);pointer-events:none;">
+              </div>
             </div>
             <aside class="alert-card">
               <p class="alert-head">ALERTA DO SISTEMA: MASSA CRÍTICA</p>
@@ -2548,842 +2602,842 @@
 
         <div class="territories-layout">
           <div class="map-zone" style="min-height:500px;">
-            <div id="cassandra-map"
-              style="width:100%;height:560px;background:#e5e2e1;"></div>
+            <div id="cassandra-map" style="width:100%;height:560px;background:#e5e2e1;"></div>
             <script>
-            (function(){
-              var mapEl = document.getElementById('cassandra-map');
+              (function () {
+                var mapEl = document.getElementById('cassandra-map');
 
-              function showMapFallback(message) {
+                function showMapFallback(message) {
+                  if (!mapEl) return;
+                  mapEl.innerHTML =
+                    '<div style="display:flex;align-items:center;justify-content:center;' +
+                    'height:100%;padding:32px;text-align:center;font-family:Space Grotesk,' +
+                    'sans-serif;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;' +
+                    'color:#444748;border:1px solid #c4c7c7;background:#f1edec;">' +
+                    message +
+                    '</div>';
+                }
+
                 if (!mapEl) return;
-                mapEl.innerHTML =
-                  '<div style="display:flex;align-items:center;justify-content:center;' +
-                  'height:100%;padding:32px;text-align:center;font-family:Space Grotesk,' +
-                  'sans-serif;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;' +
-                  'color:#444748;border:1px solid #c4c7c7;background:#f1edec;">' +
-                  message +
-                  '</div>';
-              }
+                if (!window.L) {
+                  console.error('CASSANDRA map error: Leaflet did not load.');
+                  showMapFallback('Mapa indisponível: biblioteca Leaflet não carregada.');
+                  return;
+                }
+                if (!window.MUNICIPIOS_GEOJSON) {
+                  console.error('CASSANDRA map error: ./assets/municipios_inline.js did not load.');
+                  showMapFallback('Mapa indisponível: dados geográficos não carregados.');
+                  return;
+                }
 
-              if (!mapEl) return;
-              if (!window.L) {
-                console.error('CASSANDRA map error: Leaflet did not load.');
-                showMapFallback('Mapa indisponível: biblioteca Leaflet não carregada.');
-                return;
-              }
-              if (!window.MUNICIPIOS_GEOJSON) {
-                console.error('CASSANDRA map error: ./assets/municipios_inline.js did not load.');
-                showMapFallback('Mapa indisponível: dados geográficos não carregados.');
-                return;
-              }
-
-              try {
-              var map = L.map('cassandra-map', {
-                center: [39.5, -8.0],
-                zoom: 6,
-                minZoom: 5,
-                zoomControl: true,
-                attributionControl: false,
-                scrollWheelZoom: false
-              });
-              window.cassandraMap = map;
-              map.getContainer().addEventListener('mouseenter', function() {
-                map.scrollWheelZoom.enable();
-              });
-              map.getContainer().addEventListener('mouseleave', function() {
-                map.scrollWheelZoom.disable();
-              });
-              setTimeout(function() { map.invalidateSize(); }, 100);
-
-              // Warm neutral base tiles matching CASSANDRA palette
-              L.tileLayer(
-                'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
-                { maxZoom: 12, opacity: 0.4 }
-              ).addTo(map);
-
-              // Tier color map — CASSANDRA risk palette
-              const TIER_COLORS = {
-                4: '#FF3366',  // CRÍTICO
-                3: '#FFAA00',  // ELEVADO
-                2: '#FFD166',  // MODERADO
-                1: '#00E5FF'   // CONTROLADO
-              };
-
-              function normalizeMunicipalityName(value) {
-                return (value || '')
-                  .normalize('NFD')
-                  .replace(/[\u0300-\u036f]/g, '')
-                  .toUpperCase()
-                  .replace(/[^A-Z0-9]/g, '');
-              }
-
-              const TIER_ENTRY_BY_KEY = new Map(
-                Object.entries(window.TIER_DATA || {}).map(([name, value]) => [
-                  normalizeMunicipalityName(name),
-                  value
-                ])
-              );
-
-              const NORMALIZED_TIER_DATA = Object.fromEntries(
-                Object.entries(window.TIER_DATA || {}).map(([name, value]) => [
-                  normalizeMunicipalityName(name),
-                  Number(value && typeof value === 'object' ? value.tier : value)
-                ])
-              );
-
-              const DASHBOARD_ROWS_BY_KEY = new Map(
-                (Array.isArray(window.DASHBOARD_DATA && window.DASHBOARD_DATA.oracle_log)
-                  ? window.DASHBOARD_DATA.oracle_log
-                  : []
-                ).map(row => [normalizeMunicipalityName(row.municipio), row])
-              );
-
-              const DOMAIN_BY_KEY = new Map();
-              const ARCHIVE_METRICS_BY_KEY = new Map();
-              const ARCHIVE_POPUP_DATES = {
-                2010: '20100601120000',
-                2015: '20150601120000',
-                2020: '20200601120000',
-                2024: '20240601120000'
-              };
-              const POP2011_BY_KEY = new Map([
-                ['ABRANTES', 39160],
-                ['AGUEDA', 47772],
-                ['AGUIARDABEIRA', 5674],
-                ['ALANDROAL', 5812],
-                ['ALBERGARIAAVELHA', 25329],
-                ['ALBUFEIRA', 40984],
-                ['ALCACERDOSAL', 12959],
-                ['ALCANENA', 13813],
-                ['ALCOBACA', 56834],
-                ['ALCOCHETE', 17691],
-                ['ALCOUTIM', 2914],
-                ['ALENQUER', 43377],
-                ['ALFANDEGADAFE', 5049],
-                ['ALIJO', 11806],
-                ['ALJEZUR', 5824],
-                ['ALJUSTREL', 9256],
-                ['ALMADA', 174741],
-                ['ALMEIDA', 7281],
-                ['ALMEIRIM', 23418],
-                ['ALMODOVAR', 7466],
-                ['ALPIARCA', 7697],
-                ['ALTERDOCHAO', 3610],
-                ['ALVAIAZERE', 7222],
-                ['ALVITO', 2566],
-                ['AMADORA', 174194],
-                ['AMARANTE', 56125],
-                ['AMARES', 18893],
-                ['ANADIA', 29138],
-                ['ANGRADOHEROISMO', 35478],
-                ['ANSIAO', 13144],
-                ['ARCOSDEVALDEVEZ', 22645],
-                ['ARGANIL', 12152],
-                ['ARMAMAR', 6285],
-                ['AROUCA', 22317],
-                ['ARRAIOLOS', 7298],
-                ['ARRONCHES', 3205],
-                ['ARRUDADOSVINHOS', 13460],
-                ['AVEIRO', 78759],
-                ['AVIS', 4550],
-                ['AZAMBUJA', 21835],
-                ['BAIAO', 20335],
-                ['BARCELOS', 120277],
-                ['BARRANCOS', 1828],
-                ['BARREIRO', 78982],
-                ['BATALHA', 15758],
-                ['BEJA', 35956],
-                ['BELMONTE', 6868],
-                ['BENAVENTE', 29123],
-                ['BOMBARRAL', 13203],
-                ['BORBA', 7306],
-                ['BOTICAS', 5699],
-                ['BRAGA', 182122],
-                ['BRAGANCA', 35592],
-                ['CABECEIRASDEBASTO', 16661],
-                ['CADAVAL', 14286],
-                ['CALDASDARAINHA', 51946],
-                ['CALHETARAA', 3757],
-                ['CALHETARAM', 11463],
-                ['CAMARADELOBOS', 35520],
-                ['CAMINHA', 16724],
-                ['CAMPOMAIOR', 8454],
-                ['CANTANHEDE', 36615],
-                ['CARRAZEDADEANSIAES', 6251],
-                ['CARREGALDOSAL', 9815],
-                ['CARTAXO', 24513],
-                ['CASCAIS', 207494],
-                ['CASTANHEIRADEPERA', 3182],
-                ['CASTELOBRANCO', 56134],
-                ['CASTELODEPAIVA', 16714],
-                ['CASTELODEVIDE', 3470],
-                ['CASTRODAIRE', 15221],
-                ['CASTROMARIM', 6707],
-                ['CASTROVERDE', 7319],
-                ['CELORICODABEIRA', 7638],
-                ['CELORICODEBASTO', 19995],
-                ['CHAMUSCA', 9989],
-                ['CHAVES', 41122],
-                ['CINFAES', 20302],
-                ['COIMBRA', 143500],
-                ['CONDEIXAANOVA', 17183],
-                ['CONSTANCIA', 4059],
-                ['CORUCHE', 19868],
-                ['CORVO', 412],
-                ['COVILHA', 51600],
-                ['CRATO', 3769],
-                ['CUBA', 4933],
-                ['ELVAS', 23076],
-                ['ENTRONCAMENTO', 20267],
-                ['ESPINHO', 31866],
-                ['ESPOSENDE', 34384],
-                ['ESTARREJA', 27057],
-                ['ESTREMOZ', 14191],
-                ['EVORA', 56618],
-                ['FAFE', 50605],
-                ['FARO', 65211],
-                ['FELGUEIRAS', 58049],
-                ['FERREIRADOALENTEJO', 8257],
-                ['FERREIRADOZEZERE', 8600],
-                ['FIGUEIRADAFOZ', 62295],
-                ['FIGUEIRADECASTELORODRIGO', 6250],
-                ['FIGUEIRODOSVINHOS', 6111],
-                ['FORNOSDEALGODRES', 5055],
-                ['FREIXODEESPADAACINTA', 3806],
-                ['FRONTEIRA', 3423],
-                ['FUNCHAL', 112079],
-                ['FUNDAO', 29028],
-                ['GAVIAO', 4149],
-                ['GOIS', 4271],
-                ['GOLEGA', 5715],
-                ['GONDOMAR', 168151],
-                ['GOUVEIA', 14029],
-                ['GRANDOLA', 14783],
-                ['GUARDA', 42716],
-                ['GUIMARAES', 158212],
-                ['HORTA', 14994],
-                ['IDANHAANOVA', 9645],
-                ['ILHAVO', 38661],
-                ['LAGOA', 22988],
-                ['LAGOARAA', 14418],
-                ['LAGOS', 31113],
-                ['LAJESDASFLORES', 1509],
-                ['LAJESDOPICO', 4699],
-                ['LAMEGO', 26650],
-                ['LEIRIA', 127348],
-                ['LISBOA', 545506],
-                ['LOULE', 70463],
-                ['LOURES', 202489],
-                ['LOURINHA', 25888],
-                ['LOUSA', 17626],
-                ['LOUSADA', 47465],
-                ['MACAO', 7348],
-                ['MACEDODECAVALEIROS', 15642],
-                ['MACHICO', 21796],
-                ['MADALENA', 6068],
-                ['MAFRA', 77228],
-                ['MAIA', 135536],
-                ['MANGUALDE', 19863],
-                ['MANTEIGAS', 3446],
-                ['MARCODECANAVESES', 53342],
-                ['MARINHAGRANDE', 38754],
-                ['MARVAO', 3510],
-                ['MATOSINHOS', 175813],
-                ['MEALHADA', 20428],
-                ['MEDA', 5120],
-                ['MELGACO', 9134],
-                ['MERTOLA', 7134],
-                ['MESAOFRIO', 4412],
-                ['MIRA', 12502],
-                ['MIRANDADOCORVO', 13161],
-                ['MIRANDADODOURO', 7438],
-                ['MIRANDELA', 23818],
-                ['MOGADOURO', 9450],
-                ['MOIMENTADABEIRA', 10163],
-                ['MOITA', 66186],
-                ['MONCAO', 19187],
-                ['MONCHIQUE', 5996],
-                ['MONDIMDEBASTO', 7464],
-                ['MONFORTE', 3336],
-                ['MONTALEGRE', 10439],
-                ['MONTEMORONOVO', 17377],
-                ['MONTEMOROVELHO', 26166],
-                ['MONTIJO', 51551],
-                ['MORA', 4997],
-                ['MORTAGUA', 9589],
-                ['MOURA', 15073],
-                ['MOURAO', 2657],
-                ['MURCA', 5926],
-                ['MURTOSA', 10576],
-                ['NAZARE', 15197],
-                ['NELAS', 14048],
-                ['NISA', 7421],
-                ['NORDESTE', 4941],
-                ['OBIDOS', 11805],
-                ['ODEMIRA', 25975],
-                ['ODIVELAS', 144874],
-                ['OEIRAS', 172142],
-                ['OLEIROS', 5659],
-                ['OLHAO', 45342],
-                ['OLIVEIRADEAZEMEIS', 68578],
-                ['OLIVEIRADEFRADES', 10237],
-                ['OLIVEIRADOBAIRRO', 23090],
-                ['OLIVEIRADOHOSPITAL', 20820],
-                ['OUREM', 46184],
-                ['OURIQUE', 5429],
-                ['OVAR', 55461],
-                ['PACOSDEFERREIRA', 56449],
-                ['PALMELA', 63634],
-                ['PAMPILHOSADASERRA', 4469],
-                ['PAREDES', 86732],
-                ['PAREDESDECOURA', 9138],
-                ['PEDROGAOGRANDE', 3892],
-                ['PENACOVA', 15180],
-                ['PENAFIEL', 72253],
-                ['PENALVADOCASTELO', 7967],
-                ['PENAMACOR', 5602],
-                ['PENEDONO', 2962],
-                ['PENELA', 5977],
-                ['PENICHE', 27789],
-                ['PESODAREGUA', 17044],
-                ['PINHEL', 9513],
-                ['POMBAL', 55295],
-                ['PONTADELGADA', 68928],
-                ['PONTADOSOL', 8855],
-                ['PONTEDABARCA', 12037],
-                ['PONTEDELIMA', 43493],
-                ['PONTEDESOR', 16686],
-                ['PORTALEGRE', 24813],
-                ['PORTEL', 6356],
-                ['PORTIMAO', 56007],
-                ['PORTO', 236964],
-                ['PORTODEMOS', 24360],
-                ['PORTOMONIZ', 2730],
-                ['PORTOSANTO', 5496],
-                ['POVOACAO', 6298],
-                ['POVOADELANHOSO', 21917],
-                ['POVOADEVARZIM', 63554],
-                ['PROENCAANOVA', 8272],
-                ['REDONDO', 7019],
-                ['REGUENGOSDEMONSARAZ', 10800],
-                ['RESENDE', 11318],
-                ['RIBEIRABRAVA', 13384],
-                ['RIBEIRADEPENA', 6498],
-                ['RIBEIRAGRANDE', 32184],
-                ['RIOMAIOR', 21254],
-                ['SABROSA', 6302],
-                ['SABUGAL', 12617],
-                ['SALVATERRADEMAGOS', 22259],
-                ['SANTACOMBADAO', 11603],
-                ['SANTACRUZ', 43054],
-                ['SANTACRUZDAGRACIOSA', 4385],
-                ['SANTACRUZDASFLORES', 2289],
-                ['SANTAMARIADAFEIRA', 139295],
-                ['SANTAMARTADEPENAGUIAO', 7272],
-                ['SANTANA', 7655],
-                ['SANTAREM', 62025],
-                ['SANTIAGODOCACEM', 29669],
-                ['SANTOTIRSO', 71536],
-                ['SAOBRASDEALPORTEL', 10719],
-                ['SAOJOAODAMADEIRA', 21792],
-                ['SAOJOAODAPESQUEIRA', 7820],
-                ['SAOPEDRODOSUL', 16714],
-                ['SAOROQUEDOPICO', 3395],
-                ['SAOVICENTE', 5650],
-                ['SARDOAL', 3960],
-                ['SATAO', 12495],
-                ['SEIA', 24838],
-                ['SEIXAL', 159192],
-                ['SERNANCELHE', 5692],
-                ['SERPA', 15551],
-                ['SERTA', 15757],
-                ['SESIMBRA', 49828],
-                ['SETUBAL', 121811],
-                ['SEVERDOVOUGA', 12299],
-                ['SILVES', 36975],
-                ['SINES', 14390],
-                ['SINTRA', 378409],
-                ['SOBRALDEMONTEAGRACO', 10235],
-                ['SOURE', 19218],
-                ['SOUSEL', 5062],
-                ['TABUA', 12109],
-                ['TABUACO', 6265],
-                ['TAROUCA', 7965],
-                ['TAVIRA', 26164],
-                ['TERRASDEBOURO', 7193],
-                ['TOMAR', 40586],
-                ['TONDELA', 28737],
-                ['TORREDEMONCORVO', 8388],
-                ['TORRESNOVAS', 36777],
-                ['TORRESVEDRAS', 80058],
-                ['TRANCOSO', 9863],
-                ['TROFA', 39035],
-                ['VAGOS', 22917],
-                ['VALEDECAMBRA', 22829],
-                ['VALENCA', 14091],
-                ['VALONGO', 94008],
-                ['VALPACOS', 16806],
-                ['VELAS', 5410],
-                ['VENDASNOVAS', 11857],
-                ['VIANADOALENTEJO', 5815],
-                ['VIANADOCASTELO', 88635],
-                ['VIDIGUEIRA', 5889],
-                ['VIEIRADOMINHO', 13026],
-                ['VILADAPRAIADAVITORIA', 21005],
-                ['VILADEREI', 3548],
-                ['VILADOBISPO', 5267],
-                ['VILADOCONDE', 79738],
-                ['VILADOPORTO', 5560],
-                ['VILAFLOR', 6662],
-                ['VILAFRANCADEXIRA', 137097],
-                ['VILAFRANCADOCAMPO', 11200],
-                ['VILANOVADABARQUINHA', 7323],
-                ['VILANOVADECERVEIRA', 9260],
-                ['VILANOVADEFAMALICAO', 133867],
-                ['VILANOVADEFOZCOA', 7231],
-                ['VILANOVADEGAIA', 302999],
-                ['VILANOVADEPAIVA', 5199],
-                ['VILANOVADEPOIARES', 7349],
-                ['VILAPOUCADEAGUIAR', 13105],
-                ['VILAREAL', 51900],
-                ['VILAREALDESANTOANTONIO', 19143],
-                ['VILAVELHADERODAO', 3558],
-                ['VILAVERDE', 47892],
-                ['VILAVICOSA', 8281],
-                ['VIMIOSO', 4649],
-                ['VINHAIS', 8943],
-                ['VISEU', 99655],
-                ['VIZELA', 23747],
-                ['VOUZELA', 10486],
-              ]);
-
-              function loadCsvRows(path, onRow) {
-                if (!window.fetch) return;
-                fetch(path)
-                  .then(function(response) {
-                    if (!response.ok) {
-                      console.warn('CASSANDRA optional data file not loaded:', path, response.status);
-                      return '';
-                    }
-                    return response.text();
-                  })
-                  .then(function(text) {
-                    if (!text) return;
-                    const lines = text.trim().split(/\r?\n/);
-                    if (lines.length < 2) return;
-                    const headers = lines.shift().split(',').map(function(header) {
-                      return header.replace(/^\uFEFF/, '').trim();
-                    });
-                    lines.forEach(function(line) {
-                      if (!line.trim()) return;
-                      const values = line.split(',');
-                      const row = {};
-                      headers.forEach(function(header, index) {
-                        row[header] = (values[index] || '').trim();
-                      });
-                      onRow(row);
-                    });
-                  })
-                  .catch(function(error) {
-                    console.warn('CASSANDRA optional data file failed:', path, error);
+                try {
+                  var map = L.map('cassandra-map', {
+                    center: [39.5, -8.0],
+                    zoom: 6,
+                    minZoom: 5,
+                    zoomControl: true,
+                    attributionControl: false,
+                    scrollWheelZoom: false
                   });
-              }
+                  window.cassandraMap = map;
+                  map.getContainer().addEventListener('mouseenter', function () {
+                    map.scrollWheelZoom.enable();
+                  });
+                  map.getContainer().addEventListener('mouseleave', function () {
+                    map.scrollWheelZoom.disable();
+                  });
+                  setTimeout(function () { map.invalidateSize(); }, 100);
 
-              loadCsvRows('./municipios_dominios.csv', function(row) {
-                const key = normalizeMunicipalityName(row['Município']);
-                if (key && row.Domain) DOMAIN_BY_KEY.set(key, row.Domain);
-              });
+                  // Warm neutral base tiles matching CASSANDRA palette
+                  L.tileLayer(
+                    'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+                    { maxZoom: 12, opacity: 0.4 }
+                  ).addTo(map);
 
-              loadCsvRows('./relatorio_produto_cassandra.csv', function(row) {
-                const key = normalizeMunicipalityName(row['Município']);
-                if (key) ARCHIVE_METRICS_BY_KEY.set(key, row);
-              });
+                  // Tier color map — CASSANDRA risk palette
+                  const TIER_COLORS = {
+                    4: '#FF3366',  // CRÍTICO
+                    3: '#FFAA00',  // ELEVADO
+                    2: '#FFD166',  // MODERADO
+                    1: '#00E5FF'   // CONTROLADO
+                  };
 
-              function tierLookupKey(feature) {
-                const nameKey = normalizeMunicipalityName(feature.properties['NAME_2']);
-                const regionKey = normalizeMunicipalityName(feature.properties['NAME_1']);
-                if (nameKey === 'CALHETA' && regionKey === 'AZORES') return 'CALHETARAA';
-                if (nameKey === 'CALHETA' && regionKey === 'MADEIRA') return 'CALHETARAM';
-                if (nameKey === 'LAGOA' && regionKey === 'AZORES') return 'LAGOARAA';
-                if (nameKey === 'PRAIADAVITORIA') return 'VILADAPRAIADAVITORIA';
-                return nameKey;
-              }
-
-              function getTier(feature) {
-                var tier = Number(feature.properties.CASSANDRA_Risk_Tier);
-                if (!TIER_COLORS[tier]) {
-                  const rowTier = Number((getDashboardRow(feature) || {}).tier);
-                  tier = (TIER_COLORS[rowTier] && rowTier) ||
-                    NORMALIZED_TIER_DATA[tierLookupKey(feature)] ||
-                    3;
-                  feature.properties.CASSANDRA_Risk_Tier = tier;
-                }
-                return tier;
-              }
-
-              function styleFeature(feature) {
-                var tier = getTier(feature);
-                return {
-                  fillColor: TIER_COLORS[tier],
-                  weight: 0.5,
-                  opacity: 1,
-                  color: '#1c1b1b',
-                  fillOpacity: 0.85
-                };
-              }
-
-              function getFeatureKey(feature) {
-                return tierLookupKey(feature);
-              }
-
-              function getDashboardRow(feature) {
-                const key = getFeatureKey(feature);
-                return DASHBOARD_ROWS_BY_KEY.get(key) ||
-                  DASHBOARD_ROWS_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])) ||
-                  null;
-              }
-
-              function getArchiveMetrics(feature) {
-                const key = getFeatureKey(feature);
-                return ARCHIVE_METRICS_BY_KEY.get(key) ||
-                  ARCHIVE_METRICS_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])) ||
-                  null;
-              }
-
-              function getTierEntry(feature) {
-                const key = getFeatureKey(feature);
-                return TIER_ENTRY_BY_KEY.get(key) ||
-                  TIER_ENTRY_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])) ||
-                  null;
-              }
-
-              function escapeHtml(value) {
-                return String(value == null ? '' : value).replace(/[&<>"']/g, function(char) {
-                  return {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#39;'
-                  }[char];
-                });
-              }
-
-              function pickValue(sources, keys) {
-                for (const source of sources) {
-                  if (!source || typeof source !== 'object') continue;
-                  for (const key of keys) {
-                    if (source[key] !== undefined && source[key] !== null && String(source[key]).trim() !== '') {
-                      return source[key];
-                    }
+                  function normalizeMunicipalityName(value) {
+                    return (value || '')
+                      .normalize('NFD')
+                      .replace(/[\u0300-\u036f]/g, '')
+                      .toUpperCase()
+                      .replace(/[^A-Z0-9]/g, '');
                   }
-                }
-                return '';
-              }
 
-              function displayNameForFeature(feature, row) {
-                return pickValue([row, feature.properties], ['municipio', 'Município', 'name', 'NAME_2']) || 'N/A';
-              }
+                  const TIER_ENTRY_BY_KEY = new Map(
+                    Object.entries(window.TIER_DATA || {}).map(([name, value]) => [
+                      normalizeMunicipalityName(name),
+                      value
+                    ])
+                  );
 
-              function slugMunicipalityName(value) {
-                return String(value || '')
-                  .replace(/\[[^\]]+\]/g, '')
-                  .normalize('NFD')
-                  .replace(/[\u0300-\u036f]/g, '')
-                  .toLowerCase()
-                  .replace(/[^a-z0-9]+/g, '-')
-                  .replace(/^-+|-+$/g, '');
-              }
+                  const NORMALIZED_TIER_DATA = Object.fromEntries(
+                    Object.entries(window.TIER_DATA || {}).map(([name, value]) => [
+                      normalizeMunicipalityName(name),
+                      Number(value && typeof value === 'object' ? value.tier : value)
+                    ])
+                  );
 
-              function cleanDomain(value) {
-                return String(value || '')
-                  .trim()
-                  .replace(/^https?:\/\//i, '')
-                  .replace(/^www\./i, '')
-                  .replace(/\/.*$/, '');
-              }
+                  const DASHBOARD_ROWS_BY_KEY = new Map(
+                    (Array.isArray(window.DASHBOARD_DATA && window.DASHBOARD_DATA.oracle_log)
+                      ? window.DASHBOARD_DATA.oracle_log
+                      : []
+                    ).map(row => [normalizeMunicipalityName(row.municipio), row])
+                  );
 
-              function domainForFeature(feature, row) {
-                const name = displayNameForFeature(feature, row);
-                const tierEntry = getTierEntry(feature);
-                const key = getFeatureKey(feature);
-                const directDomain = pickValue(
-                  [row, tierEntry, feature.properties],
-                  ['domain', 'Domain', 'dominio', 'Dominio']
-                );
-                const domain = cleanDomain(directDomain || DOMAIN_BY_KEY.get(key));
-                return domain || ('cm-' + slugMunicipalityName(name) + '.pt');
-              }
+                  const DOMAIN_BY_KEY = new Map();
+                  const ARCHIVE_METRICS_BY_KEY = new Map();
+                  const ARCHIVE_POPUP_DATES = {
+                    2010: '20100601120000',
+                    2015: '20150601120000',
+                    2020: '20200601120000',
+                    2024: '20240601120000'
+                  };
+                  const POP2011_BY_KEY = new Map([
+                    ['ABRANTES', 39160],
+                    ['AGUEDA', 47772],
+                    ['AGUIARDABEIRA', 5674],
+                    ['ALANDROAL', 5812],
+                    ['ALBERGARIAAVELHA', 25329],
+                    ['ALBUFEIRA', 40984],
+                    ['ALCACERDOSAL', 12959],
+                    ['ALCANENA', 13813],
+                    ['ALCOBACA', 56834],
+                    ['ALCOCHETE', 17691],
+                    ['ALCOUTIM', 2914],
+                    ['ALENQUER', 43377],
+                    ['ALFANDEGADAFE', 5049],
+                    ['ALIJO', 11806],
+                    ['ALJEZUR', 5824],
+                    ['ALJUSTREL', 9256],
+                    ['ALMADA', 174741],
+                    ['ALMEIDA', 7281],
+                    ['ALMEIRIM', 23418],
+                    ['ALMODOVAR', 7466],
+                    ['ALPIARCA', 7697],
+                    ['ALTERDOCHAO', 3610],
+                    ['ALVAIAZERE', 7222],
+                    ['ALVITO', 2566],
+                    ['AMADORA', 174194],
+                    ['AMARANTE', 56125],
+                    ['AMARES', 18893],
+                    ['ANADIA', 29138],
+                    ['ANGRADOHEROISMO', 35478],
+                    ['ANSIAO', 13144],
+                    ['ARCOSDEVALDEVEZ', 22645],
+                    ['ARGANIL', 12152],
+                    ['ARMAMAR', 6285],
+                    ['AROUCA', 22317],
+                    ['ARRAIOLOS', 7298],
+                    ['ARRONCHES', 3205],
+                    ['ARRUDADOSVINHOS', 13460],
+                    ['AVEIRO', 78759],
+                    ['AVIS', 4550],
+                    ['AZAMBUJA', 21835],
+                    ['BAIAO', 20335],
+                    ['BARCELOS', 120277],
+                    ['BARRANCOS', 1828],
+                    ['BARREIRO', 78982],
+                    ['BATALHA', 15758],
+                    ['BEJA', 35956],
+                    ['BELMONTE', 6868],
+                    ['BENAVENTE', 29123],
+                    ['BOMBARRAL', 13203],
+                    ['BORBA', 7306],
+                    ['BOTICAS', 5699],
+                    ['BRAGA', 182122],
+                    ['BRAGANCA', 35592],
+                    ['CABECEIRASDEBASTO', 16661],
+                    ['CADAVAL', 14286],
+                    ['CALDASDARAINHA', 51946],
+                    ['CALHETARAA', 3757],
+                    ['CALHETARAM', 11463],
+                    ['CAMARADELOBOS', 35520],
+                    ['CAMINHA', 16724],
+                    ['CAMPOMAIOR', 8454],
+                    ['CANTANHEDE', 36615],
+                    ['CARRAZEDADEANSIAES', 6251],
+                    ['CARREGALDOSAL', 9815],
+                    ['CARTAXO', 24513],
+                    ['CASCAIS', 207494],
+                    ['CASTANHEIRADEPERA', 3182],
+                    ['CASTELOBRANCO', 56134],
+                    ['CASTELODEPAIVA', 16714],
+                    ['CASTELODEVIDE', 3470],
+                    ['CASTRODAIRE', 15221],
+                    ['CASTROMARIM', 6707],
+                    ['CASTROVERDE', 7319],
+                    ['CELORICODABEIRA', 7638],
+                    ['CELORICODEBASTO', 19995],
+                    ['CHAMUSCA', 9989],
+                    ['CHAVES', 41122],
+                    ['CINFAES', 20302],
+                    ['COIMBRA', 143500],
+                    ['CONDEIXAANOVA', 17183],
+                    ['CONSTANCIA', 4059],
+                    ['CORUCHE', 19868],
+                    ['CORVO', 412],
+                    ['COVILHA', 51600],
+                    ['CRATO', 3769],
+                    ['CUBA', 4933],
+                    ['ELVAS', 23076],
+                    ['ENTRONCAMENTO', 20267],
+                    ['ESPINHO', 31866],
+                    ['ESPOSENDE', 34384],
+                    ['ESTARREJA', 27057],
+                    ['ESTREMOZ', 14191],
+                    ['EVORA', 56618],
+                    ['FAFE', 50605],
+                    ['FARO', 65211],
+                    ['FELGUEIRAS', 58049],
+                    ['FERREIRADOALENTEJO', 8257],
+                    ['FERREIRADOZEZERE', 8600],
+                    ['FIGUEIRADAFOZ', 62295],
+                    ['FIGUEIRADECASTELORODRIGO', 6250],
+                    ['FIGUEIRODOSVINHOS', 6111],
+                    ['FORNOSDEALGODRES', 5055],
+                    ['FREIXODEESPADAACINTA', 3806],
+                    ['FRONTEIRA', 3423],
+                    ['FUNCHAL', 112079],
+                    ['FUNDAO', 29028],
+                    ['GAVIAO', 4149],
+                    ['GOIS', 4271],
+                    ['GOLEGA', 5715],
+                    ['GONDOMAR', 168151],
+                    ['GOUVEIA', 14029],
+                    ['GRANDOLA', 14783],
+                    ['GUARDA', 42716],
+                    ['GUIMARAES', 158212],
+                    ['HORTA', 14994],
+                    ['IDANHAANOVA', 9645],
+                    ['ILHAVO', 38661],
+                    ['LAGOA', 22988],
+                    ['LAGOARAA', 14418],
+                    ['LAGOS', 31113],
+                    ['LAJESDASFLORES', 1509],
+                    ['LAJESDOPICO', 4699],
+                    ['LAMEGO', 26650],
+                    ['LEIRIA', 127348],
+                    ['LISBOA', 545506],
+                    ['LOULE', 70463],
+                    ['LOURES', 202489],
+                    ['LOURINHA', 25888],
+                    ['LOUSA', 17626],
+                    ['LOUSADA', 47465],
+                    ['MACAO', 7348],
+                    ['MACEDODECAVALEIROS', 15642],
+                    ['MACHICO', 21796],
+                    ['MADALENA', 6068],
+                    ['MAFRA', 77228],
+                    ['MAIA', 135536],
+                    ['MANGUALDE', 19863],
+                    ['MANTEIGAS', 3446],
+                    ['MARCODECANAVESES', 53342],
+                    ['MARINHAGRANDE', 38754],
+                    ['MARVAO', 3510],
+                    ['MATOSINHOS', 175813],
+                    ['MEALHADA', 20428],
+                    ['MEDA', 5120],
+                    ['MELGACO', 9134],
+                    ['MERTOLA', 7134],
+                    ['MESAOFRIO', 4412],
+                    ['MIRA', 12502],
+                    ['MIRANDADOCORVO', 13161],
+                    ['MIRANDADODOURO', 7438],
+                    ['MIRANDELA', 23818],
+                    ['MOGADOURO', 9450],
+                    ['MOIMENTADABEIRA', 10163],
+                    ['MOITA', 66186],
+                    ['MONCAO', 19187],
+                    ['MONCHIQUE', 5996],
+                    ['MONDIMDEBASTO', 7464],
+                    ['MONFORTE', 3336],
+                    ['MONTALEGRE', 10439],
+                    ['MONTEMORONOVO', 17377],
+                    ['MONTEMOROVELHO', 26166],
+                    ['MONTIJO', 51551],
+                    ['MORA', 4997],
+                    ['MORTAGUA', 9589],
+                    ['MOURA', 15073],
+                    ['MOURAO', 2657],
+                    ['MURCA', 5926],
+                    ['MURTOSA', 10576],
+                    ['NAZARE', 15197],
+                    ['NELAS', 14048],
+                    ['NISA', 7421],
+                    ['NORDESTE', 4941],
+                    ['OBIDOS', 11805],
+                    ['ODEMIRA', 25975],
+                    ['ODIVELAS', 144874],
+                    ['OEIRAS', 172142],
+                    ['OLEIROS', 5659],
+                    ['OLHAO', 45342],
+                    ['OLIVEIRADEAZEMEIS', 68578],
+                    ['OLIVEIRADEFRADES', 10237],
+                    ['OLIVEIRADOBAIRRO', 23090],
+                    ['OLIVEIRADOHOSPITAL', 20820],
+                    ['OUREM', 46184],
+                    ['OURIQUE', 5429],
+                    ['OVAR', 55461],
+                    ['PACOSDEFERREIRA', 56449],
+                    ['PALMELA', 63634],
+                    ['PAMPILHOSADASERRA', 4469],
+                    ['PAREDES', 86732],
+                    ['PAREDESDECOURA', 9138],
+                    ['PEDROGAOGRANDE', 3892],
+                    ['PENACOVA', 15180],
+                    ['PENAFIEL', 72253],
+                    ['PENALVADOCASTELO', 7967],
+                    ['PENAMACOR', 5602],
+                    ['PENEDONO', 2962],
+                    ['PENELA', 5977],
+                    ['PENICHE', 27789],
+                    ['PESODAREGUA', 17044],
+                    ['PINHEL', 9513],
+                    ['POMBAL', 55295],
+                    ['PONTADELGADA', 68928],
+                    ['PONTADOSOL', 8855],
+                    ['PONTEDABARCA', 12037],
+                    ['PONTEDELIMA', 43493],
+                    ['PONTEDESOR', 16686],
+                    ['PORTALEGRE', 24813],
+                    ['PORTEL', 6356],
+                    ['PORTIMAO', 56007],
+                    ['PORTO', 236964],
+                    ['PORTODEMOS', 24360],
+                    ['PORTOMONIZ', 2730],
+                    ['PORTOSANTO', 5496],
+                    ['POVOACAO', 6298],
+                    ['POVOADELANHOSO', 21917],
+                    ['POVOADEVARZIM', 63554],
+                    ['PROENCAANOVA', 8272],
+                    ['REDONDO', 7019],
+                    ['REGUENGOSDEMONSARAZ', 10800],
+                    ['RESENDE', 11318],
+                    ['RIBEIRABRAVA', 13384],
+                    ['RIBEIRADEPENA', 6498],
+                    ['RIBEIRAGRANDE', 32184],
+                    ['RIOMAIOR', 21254],
+                    ['SABROSA', 6302],
+                    ['SABUGAL', 12617],
+                    ['SALVATERRADEMAGOS', 22259],
+                    ['SANTACOMBADAO', 11603],
+                    ['SANTACRUZ', 43054],
+                    ['SANTACRUZDAGRACIOSA', 4385],
+                    ['SANTACRUZDASFLORES', 2289],
+                    ['SANTAMARIADAFEIRA', 139295],
+                    ['SANTAMARTADEPENAGUIAO', 7272],
+                    ['SANTANA', 7655],
+                    ['SANTAREM', 62025],
+                    ['SANTIAGODOCACEM', 29669],
+                    ['SANTOTIRSO', 71536],
+                    ['SAOBRASDEALPORTEL', 10719],
+                    ['SAOJOAODAMADEIRA', 21792],
+                    ['SAOJOAODAPESQUEIRA', 7820],
+                    ['SAOPEDRODOSUL', 16714],
+                    ['SAOROQUEDOPICO', 3395],
+                    ['SAOVICENTE', 5650],
+                    ['SARDOAL', 3960],
+                    ['SATAO', 12495],
+                    ['SEIA', 24838],
+                    ['SEIXAL', 159192],
+                    ['SERNANCELHE', 5692],
+                    ['SERPA', 15551],
+                    ['SERTA', 15757],
+                    ['SESIMBRA', 49828],
+                    ['SETUBAL', 121811],
+                    ['SEVERDOVOUGA', 12299],
+                    ['SILVES', 36975],
+                    ['SINES', 14390],
+                    ['SINTRA', 378409],
+                    ['SOBRALDEMONTEAGRACO', 10235],
+                    ['SOURE', 19218],
+                    ['SOUSEL', 5062],
+                    ['TABUA', 12109],
+                    ['TABUACO', 6265],
+                    ['TAROUCA', 7965],
+                    ['TAVIRA', 26164],
+                    ['TERRASDEBOURO', 7193],
+                    ['TOMAR', 40586],
+                    ['TONDELA', 28737],
+                    ['TORREDEMONCORVO', 8388],
+                    ['TORRESNOVAS', 36777],
+                    ['TORRESVEDRAS', 80058],
+                    ['TRANCOSO', 9863],
+                    ['TROFA', 39035],
+                    ['VAGOS', 22917],
+                    ['VALEDECAMBRA', 22829],
+                    ['VALENCA', 14091],
+                    ['VALONGO', 94008],
+                    ['VALPACOS', 16806],
+                    ['VELAS', 5410],
+                    ['VENDASNOVAS', 11857],
+                    ['VIANADOALENTEJO', 5815],
+                    ['VIANADOCASTELO', 88635],
+                    ['VIDIGUEIRA', 5889],
+                    ['VIEIRADOMINHO', 13026],
+                    ['VILADAPRAIADAVITORIA', 21005],
+                    ['VILADEREI', 3548],
+                    ['VILADOBISPO', 5267],
+                    ['VILADOCONDE', 79738],
+                    ['VILADOPORTO', 5560],
+                    ['VILAFLOR', 6662],
+                    ['VILAFRANCADEXIRA', 137097],
+                    ['VILAFRANCADOCAMPO', 11200],
+                    ['VILANOVADABARQUINHA', 7323],
+                    ['VILANOVADECERVEIRA', 9260],
+                    ['VILANOVADEFAMALICAO', 133867],
+                    ['VILANOVADEFOZCOA', 7231],
+                    ['VILANOVADEGAIA', 302999],
+                    ['VILANOVADEPAIVA', 5199],
+                    ['VILANOVADEPOIARES', 7349],
+                    ['VILAPOUCADEAGUIAR', 13105],
+                    ['VILAREAL', 51900],
+                    ['VILAREALDESANTOANTONIO', 19143],
+                    ['VILAVELHADERODAO', 3558],
+                    ['VILAVERDE', 47892],
+                    ['VILAVICOSA', 8281],
+                    ['VIMIOSO', 4649],
+                    ['VINHAIS', 8943],
+                    ['VISEU', 99655],
+                    ['VIZELA', 23747],
+                    ['VOUZELA', 10486],
+                  ]);
 
-              function parseMetricNumber(value) {
-                const raw = String(value == null ? '' : value).trim().replace('%', '');
-                if (!raw) return NaN;
-                if (/^[+-]?\d{1,3}(\.\d{3})+(,\d+)?$/.test(raw)) {
-                  return Number(raw.replace(/\./g, '').replace(',', '.'));
-                }
-                return Number(raw.replace(/\s/g, '').replace(',', '.'));
-              }
+                  function loadCsvRows(path, onRow) {
+                    if (!window.fetch) return;
+                    fetch(path)
+                      .then(function (response) {
+                        if (!response.ok) {
+                          console.warn('CASSANDRA optional data file not loaded:', path, response.status);
+                          return '';
+                        }
+                        return response.text();
+                      })
+                      .then(function (text) {
+                        if (!text) return;
+                        const lines = text.trim().split(/\r?\n/);
+                        if (lines.length < 2) return;
+                        const headers = lines.shift().split(',').map(function (header) {
+                          return header.replace(/^\uFEFF/, '').trim();
+                        });
+                        lines.forEach(function (line) {
+                          if (!line.trim()) return;
+                          const values = line.split(',');
+                          const row = {};
+                          headers.forEach(function (header, index) {
+                            row[header] = (values[index] || '').trim();
+                          });
+                          onRow(row);
+                        });
+                      })
+                      .catch(function (error) {
+                        console.warn('CASSANDRA optional data file failed:', path, error);
+                      });
+                  }
 
-              function formatIntegerPt(value) {
-                const num = parseMetricNumber(value);
-                if (!Number.isFinite(num)) return String(value || '').trim() || 'N/D';
-                return Math.round(num).toLocaleString('pt-PT');
-              }
+                  loadCsvRows('./municipios_dominios.csv', function (row) {
+                    const key = normalizeMunicipalityName(row['Município']);
+                    if (key && row.Domain) DOMAIN_BY_KEY.set(key, row.Domain);
+                  });
 
-              function formatScoreValue(value) {
-                const num = parseMetricNumber(value);
-                if (!Number.isFinite(num)) return String(value || '').trim() || 'N/D';
-                return Math.round(num).toLocaleString('pt-PT');
-              }
+                  loadCsvRows('./relatorio_produto_cassandra.csv', function (row) {
+                    const key = normalizeMunicipalityName(row['Município']);
+                    if (key) ARCHIVE_METRICS_BY_KEY.set(key, row);
+                  });
 
-              function formatPercentageValue(value) {
-                const raw = String(value || '').trim();
-                if (!raw) return 'N/D';
-                const num = parseMetricNumber(raw);
-                if (!Number.isFinite(num)) return raw;
-                return num.toFixed(1) + '%';
-              }
+                  function tierLookupKey(feature) {
+                    const nameKey = normalizeMunicipalityName(feature.properties['NAME_2']);
+                    const regionKey = normalizeMunicipalityName(feature.properties['NAME_1']);
+                    if (nameKey === 'CALHETA' && regionKey === 'AZORES') return 'CALHETARAA';
+                    if (nameKey === 'CALHETA' && regionKey === 'MADEIRA') return 'CALHETARAM';
+                    if (nameKey === 'LAGOA' && regionKey === 'AZORES') return 'LAGOARAA';
+                    if (nameKey === 'PRAIADAVITORIA') return 'VILADAPRAIADAVITORIA';
+                    return nameKey;
+                  }
 
-              function archiveFrameUrl(domain, year) {
-                const date = ARCHIVE_POPUP_DATES[year] || String(year) + '0601120000';
-                const url = /^https?:\/\//i.test(domain) ? domain : 'https://' + domain;
-                return 'https://arquivo.pt/wayback/' + date + '/' +
-                  encodeURI(url.replace(/\/?$/, '/'));
-              }
+                  function getTier(feature) {
+                    var tier = Number(feature.properties.CASSANDRA_Risk_Tier);
+                    if (!TIER_COLORS[tier]) {
+                      const rowTier = Number((getDashboardRow(feature) || {}).tier);
+                      tier = (TIER_COLORS[rowTier] && rowTier) ||
+                        NORMALIZED_TIER_DATA[tierLookupKey(feature)] ||
+                        3;
+                      feature.properties.CASSANDRA_Risk_Tier = tier;
+                    }
+                    return tier;
+                  }
 
-              function waybackUrl(domain) {
-                return 'https://arquivo.pt/wayback/*/' + encodeURIComponent(domain);
-              }
+                  function styleFeature(feature) {
+                    var tier = getTier(feature);
+                    return {
+                      fillColor: TIER_COLORS[tier],
+                      weight: 0.5,
+                      opacity: 1,
+                      color: '#1c1b1b',
+                      fillOpacity: 0.85
+                    };
+                  }
 
-              let archiveModalEl;
-              let archiveModalFrame;
-              let archiveModalTitle;
-              let archiveModalTier;
-              let archiveModalLink;
-              let archiveModalLoadTimeout;
-              let archiveModalCloseTimeout;
-              let archiveModalState = null;
+                  function getFeatureKey(feature) {
+                    return tierLookupKey(feature);
+                  }
 
-              function ensureArchiveModal() {
-                if (archiveModalEl) return archiveModalEl;
-                archiveModalEl = document.createElement('div');
-                archiveModalEl.className = 'archive-modal';
-                archiveModalEl.hidden = true;
-                archiveModalEl.innerHTML =
-                  '<div class="archive-modal-header">' +
-                    '<div class="archive-modal-heading">' +
+                  function getDashboardRow(feature) {
+                    const key = getFeatureKey(feature);
+                    return DASHBOARD_ROWS_BY_KEY.get(key) ||
+                      DASHBOARD_ROWS_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])) ||
+                      null;
+                  }
+
+                  function getArchiveMetrics(feature) {
+                    const key = getFeatureKey(feature);
+                    return ARCHIVE_METRICS_BY_KEY.get(key) ||
+                      ARCHIVE_METRICS_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])) ||
+                      null;
+                  }
+
+                  function getTierEntry(feature) {
+                    const key = getFeatureKey(feature);
+                    return TIER_ENTRY_BY_KEY.get(key) ||
+                      TIER_ENTRY_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])) ||
+                      null;
+                  }
+
+                  function escapeHtml(value) {
+                    return String(value == null ? '' : value).replace(/[&<>"']/g, function (char) {
+                      return {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#39;'
+                      }[char];
+                    });
+                  }
+
+                  function pickValue(sources, keys) {
+                    for (const source of sources) {
+                      if (!source || typeof source !== 'object') continue;
+                      for (const key of keys) {
+                        if (source[key] !== undefined && source[key] !== null && String(source[key]).trim() !== '') {
+                          return source[key];
+                        }
+                      }
+                    }
+                    return '';
+                  }
+
+                  function displayNameForFeature(feature, row) {
+                    return pickValue([row, feature.properties], ['municipio', 'Município', 'name', 'NAME_2']) || 'N/A';
+                  }
+
+                  function slugMunicipalityName(value) {
+                    return String(value || '')
+                      .replace(/\[[^\]]+\]/g, '')
+                      .normalize('NFD')
+                      .replace(/[\u0300-\u036f]/g, '')
+                      .toLowerCase()
+                      .replace(/[^a-z0-9]+/g, '-')
+                      .replace(/^-+|-+$/g, '');
+                  }
+
+                  function cleanDomain(value) {
+                    return String(value || '')
+                      .trim()
+                      .replace(/^https?:\/\//i, '')
+                      .replace(/^www\./i, '')
+                      .replace(/\/.*$/, '');
+                  }
+
+                  function domainForFeature(feature, row) {
+                    const name = displayNameForFeature(feature, row);
+                    const tierEntry = getTierEntry(feature);
+                    const key = getFeatureKey(feature);
+                    const directDomain = pickValue(
+                      [row, tierEntry, feature.properties],
+                      ['domain', 'Domain', 'dominio', 'Dominio']
+                    );
+                    const domain = cleanDomain(directDomain || DOMAIN_BY_KEY.get(key));
+                    return domain || ('cm-' + slugMunicipalityName(name) + '.pt');
+                  }
+
+                  function parseMetricNumber(value) {
+                    const raw = String(value == null ? '' : value).trim().replace('%', '');
+                    if (!raw) return NaN;
+                    if (/^[+-]?\d{1,3}(\.\d{3})+(,\d+)?$/.test(raw)) {
+                      return Number(raw.replace(/\./g, '').replace(',', '.'));
+                    }
+                    return Number(raw.replace(/\s/g, '').replace(',', '.'));
+                  }
+
+                  function formatIntegerPt(value) {
+                    const num = parseMetricNumber(value);
+                    if (!Number.isFinite(num)) return String(value || '').trim() || 'N/D';
+                    return Math.round(num).toLocaleString('pt-PT');
+                  }
+
+                  function formatScoreValue(value) {
+                    const num = parseMetricNumber(value);
+                    if (!Number.isFinite(num)) return String(value || '').trim() || 'N/D';
+                    return Math.round(num).toLocaleString('pt-PT');
+                  }
+
+                  function formatPercentageValue(value) {
+                    const raw = String(value || '').trim();
+                    if (!raw) return 'N/D';
+                    const num = parseMetricNumber(raw);
+                    if (!Number.isFinite(num)) return raw;
+                    return num.toFixed(1) + '%';
+                  }
+
+                  function archiveFrameUrl(domain, year) {
+                    const date = ARCHIVE_POPUP_DATES[year] || String(year) + '0601120000';
+                    const url = /^https?:\/\//i.test(domain) ? domain : 'https://' + domain;
+                    return 'https://arquivo.pt/wayback/' + date + '/' +
+                      encodeURI(url.replace(/\/?$/, '/'));
+                  }
+
+                  function waybackUrl(domain) {
+                    return 'https://arquivo.pt/wayback/*/' + encodeURIComponent(domain);
+                  }
+
+                  let archiveModalEl;
+                  let archiveModalFrame;
+                  let archiveModalTitle;
+                  let archiveModalTier;
+                  let archiveModalLink;
+                  let archiveModalLoadTimeout;
+                  let archiveModalCloseTimeout;
+                  let archiveModalState = null;
+
+                  function ensureArchiveModal() {
+                    if (archiveModalEl) return archiveModalEl;
+                    archiveModalEl = document.createElement('div');
+                    archiveModalEl.className = 'archive-modal';
+                    archiveModalEl.hidden = true;
+                    archiveModalEl.innerHTML =
+                      '<div class="archive-modal-header">' +
+                      '<div class="archive-modal-heading">' +
                       '<span class="archive-modal-title"></span>' +
                       '<span class="archive-modal-tier"></span>' +
-                    '</div>' +
-                    '<button class="archive-modal-close" type="button">✕ FECHAR</button>' +
-                  '</div>' +
-                  '<div class="archive-modal-years" role="group" aria-label="Selecionar ano">' +
-                    '<span class="archive-modal-arrow">←</span>' +
-                    '<button class="archive-modal-year" type="button" data-year="2010">2010</button>' +
-                    '<button class="archive-modal-year" type="button" data-year="2015">2015</button>' +
-                    '<button class="archive-modal-year" type="button" data-year="2020">2020</button>' +
-                    '<button class="archive-modal-year" type="button" data-year="2024">2024</button>' +
-                    '<span class="archive-modal-arrow">→</span>' +
-                  '</div>' +
-                  '<iframe class="archive-modal-frame" loading="lazy" title="Arquivo.pt preview"></iframe>' +
-                  '<div class="archive-modal-footer">' +
-                    '<a class="archive-modal-link" target="_blank" rel="noopener noreferrer">Ver página completa no Arquivo.pt ↗</a>' +
-                  '</div>';
-                document.body.appendChild(archiveModalEl);
+                      '</div>' +
+                      '<button class="archive-modal-close" type="button">✕ FECHAR</button>' +
+                      '</div>' +
+                      '<div class="archive-modal-years" role="group" aria-label="Selecionar ano">' +
+                      '<span class="archive-modal-arrow">←</span>' +
+                      '<button class="archive-modal-year" type="button" data-year="2010">2010</button>' +
+                      '<button class="archive-modal-year" type="button" data-year="2015">2015</button>' +
+                      '<button class="archive-modal-year" type="button" data-year="2020">2020</button>' +
+                      '<button class="archive-modal-year" type="button" data-year="2024">2024</button>' +
+                      '<span class="archive-modal-arrow">→</span>' +
+                      '</div>' +
+                      '<iframe class="archive-modal-frame" loading="lazy" title="Arquivo.pt preview"></iframe>' +
+                      '<div class="archive-modal-footer">' +
+                      '<a class="archive-modal-link" target="_blank" rel="noopener noreferrer">Ver página completa no Arquivo.pt ↗</a>' +
+                      '</div>';
+                    document.body.appendChild(archiveModalEl);
 
-                archiveModalFrame = archiveModalEl.querySelector('.archive-modal-frame');
-                archiveModalTitle = archiveModalEl.querySelector('.archive-modal-title');
-                archiveModalTier = archiveModalEl.querySelector('.archive-modal-tier');
-                archiveModalLink = archiveModalEl.querySelector('.archive-modal-link');
+                    archiveModalFrame = archiveModalEl.querySelector('.archive-modal-frame');
+                    archiveModalTitle = archiveModalEl.querySelector('.archive-modal-title');
+                    archiveModalTier = archiveModalEl.querySelector('.archive-modal-tier');
+                    archiveModalLink = archiveModalEl.querySelector('.archive-modal-link');
 
-                archiveModalEl.querySelector('.archive-modal-close').addEventListener('click', closeArchiveModal);
-                archiveModalEl.querySelectorAll('.archive-modal-year').forEach(function(button) {
-                  button.addEventListener('click', function() {
-                    setArchiveModalYear(button.dataset.year);
-                  });
-                });
-                archiveModalEl.addEventListener('click', function(event) {
-                  if (event.target === archiveModalEl) closeArchiveModal();
-                });
-                document.addEventListener('keydown', function(event) {
-                  if (event.key === 'Escape' && archiveModalEl && !archiveModalEl.hidden) {
-                    closeArchiveModal();
+                    archiveModalEl.querySelector('.archive-modal-close').addEventListener('click', closeArchiveModal);
+                    archiveModalEl.querySelectorAll('.archive-modal-year').forEach(function (button) {
+                      button.addEventListener('click', function () {
+                        setArchiveModalYear(button.dataset.year);
+                      });
+                    });
+                    archiveModalEl.addEventListener('click', function (event) {
+                      if (event.target === archiveModalEl) closeArchiveModal();
+                    });
+                    document.addEventListener('keydown', function (event) {
+                      if (event.key === 'Escape' && archiveModalEl && !archiveModalEl.hidden) {
+                        closeArchiveModal();
+                      }
+                    });
+                    return archiveModalEl;
                   }
-                });
-                return archiveModalEl;
-              }
 
-              function openArchiveModal(options) {
-                const modal = ensureArchiveModal();
-                if (archiveModalCloseTimeout) clearTimeout(archiveModalCloseTimeout);
-                if (archiveModalLoadTimeout) clearTimeout(archiveModalLoadTimeout);
-                archiveModalState = {
-                  domain: options.domain,
-                  tierColor: options.tierColor,
-                  year: ''
-                };
-                modal.style.setProperty('--archive-tier-color', options.tierColor);
-                archiveModalTitle.textContent = options.name;
-                archiveModalTier.textContent = 'TIER ' + options.tier;
-                archiveModalLink.href = waybackUrl(options.domain);
-                archiveModalFrame.removeAttribute('src');
-                archiveModalEl.querySelectorAll('.archive-modal-year').forEach(function(button) {
-                  button.classList.remove('is-active');
-                });
-                modal.hidden = false;
-                requestAnimationFrame(function() {
-                  modal.classList.add('is-open');
-                });
-              }
-
-              function closeArchiveModal() {
-                if (!archiveModalEl) return;
-                if (archiveModalLoadTimeout) clearTimeout(archiveModalLoadTimeout);
-                archiveModalLoadTimeout = null;
-                archiveModalState = null;
-                if (archiveModalFrame) archiveModalFrame.removeAttribute('src');
-                archiveModalEl.classList.remove('is-open');
-                if (archiveModalCloseTimeout) clearTimeout(archiveModalCloseTimeout);
-                archiveModalCloseTimeout = setTimeout(function() {
-                  if (archiveModalEl) archiveModalEl.hidden = true;
-                }, 200);
-              }
-
-              function setArchiveModalYear(year) {
-                if (!archiveModalState || !archiveModalFrame) return;
-                const selectedYear = String(year);
-                archiveModalState.year = selectedYear;
-                if (archiveModalLoadTimeout) clearTimeout(archiveModalLoadTimeout);
-                archiveModalEl.querySelectorAll('.archive-modal-year').forEach(function(button) {
-                  button.classList.toggle('is-active', button.dataset.year === selectedYear);
-                });
-                archiveModalLoadTimeout = setTimeout(function() {
-                  if (!archiveModalState || archiveModalState.year !== selectedYear) return;
-                  archiveModalFrame.src = archiveFrameUrl(archiveModalState.domain, selectedYear);
-                }, 1000);
-              }
-
-              function buildArchivePopup(feature) {
-                const row = getDashboardRow(feature);
-                const metrics = getArchiveMetrics(feature);
-                const name = displayNameForFeature(feature, row);
-                const tier = getTier(feature);
-                const tierColor = TIER_COLORS[tier] || TIER_COLORS[3];
-                const domain = domainForFeature(feature, row);
-                const pop2011 = formatIntegerPt(pickValue(
-                  [metrics, row, feature.properties],
-                  ['pop_2011', 'Pop_2011', 'pop2011', 'POP_2011', 'Pop. 2011']
-                ) || POP2011_BY_KEY.get(getFeatureKey(feature)) ||
-                  POP2011_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])));
-                const varPop = formatPercentageValue(pickValue(
-                  [metrics, row, feature.properties],
-                  ['Var_Pop', 'var_pop', 'varPop', 'VAR_POP']
-                ));
-                const ieiScore = formatScoreValue(pickValue(
-                  [metrics, row, feature.properties],
-                  ['IEI_Score', 'iei_score', 'IEI', 'score']
-                ));
-                const captures = formatIntegerPt(pickValue(
-                  [metrics, row, feature.properties],
-                  ['Total_Arquivo_Captures', 'capturas', 'captures', 'Capturas']
-                ));
-
-                return '<div class="archive-popup" style="--popup-tier-color:' + tierColor + '" ' +
-                  'data-domain="' + escapeHtml(domain) + '" ' +
-                  'data-name="' + escapeHtml(name) + '" ' +
-                  'data-tier="' + tier + '" ' +
-                  'data-tier-color="' + escapeHtml(tierColor) + '">' +
-                  '<div class="archive-popup-header">' +
-                    '<h3 class="archive-popup-title">' + escapeHtml(name) + '</h3>' +
-                    '<span class="archive-popup-tier">TIER ' + tier + '</span>' +
-                  '</div>' +
-                  '<div class="archive-popup-divider"></div>' +
-                  '<div class="archive-metrics">' +
-                    '<span>Pop. 2011: <strong>' + escapeHtml(pop2011) + '</strong></span>' +
-                    '<span>Var: <strong>' + escapeHtml(varPop) + '</strong></span>' +
-                    '<span>IEI Score: <strong>' + escapeHtml(ieiScore) + '</strong></span>' +
-                    '<span>Capturas: <strong>' + escapeHtml(captures) + '</strong></span>' +
-                  '</div>' +
-                  '<div class="archive-popup-divider"></div>' +
-                  '<button class="archive-explore-btn" type="button">EXPLORAR ARQUIVO HISTÓRICO →</button>' +
-                '</div>';
-              }
-
-              function initArchivePopup(root) {
-                if (!root || root.dataset.initialized === 'true') return;
-                root.dataset.initialized = 'true';
-                if (window.L && L.DomEvent) L.DomEvent.disableClickPropagation(root);
-                const button = root.querySelector('.archive-explore-btn');
-                if (!button) return;
-                button.addEventListener('click', function(event) {
-                  event.preventDefault();
-                  openArchiveModal({
-                    name: root.dataset.name || '',
-                    tier: root.dataset.tier || '',
-                    tierColor: root.dataset.tierColor || '#FF3366',
-                    domain: root.dataset.domain || ''
-                  });
-                });
-              }
-
-              function onEach(feature, layer) {
-                var name = feature.properties['NAME_2'] || 'N/A';
-                const tier = getTier(feature);
-                const tierLabels = {4:'CRÍTICO',3:'ELEVADO',2:'MODERADO',1:'CONTROLADO'};
-                layer.bindTooltip(
-                  '<span style="font-family:Space Grotesk;font-size:12px;' +
-                  'font-weight:600;letter-spacing:0.1em">' +
-                  name.toUpperCase() + '</span>' +
-                  '<br><span style="color:' + TIER_COLORS[tier] + ';font-weight:700">' +
-                  'TIER ' + tier + ' — ' + tierLabels[tier] + '</span>',
-                  { sticky: true, opacity: 1 }
-                );
-                layer.bindPopup(function() {
-                  return buildArchivePopup(feature);
-                }, {
-                  className: 'cassandra-archive-popup',
-                  closeButton: false,
-                  maxWidth: 340,
-                  minWidth: 0
-                });
-                layer.on({
-                  mouseover: e => {
-                    e.target.setStyle({ weight: 2, fillOpacity: 1 });
-                  },
-                  mouseout: e => {
-                    geojsonLayer.resetStyle(e.target);
+                  function openArchiveModal(options) {
+                    const modal = ensureArchiveModal();
+                    if (archiveModalCloseTimeout) clearTimeout(archiveModalCloseTimeout);
+                    if (archiveModalLoadTimeout) clearTimeout(archiveModalLoadTimeout);
+                    archiveModalState = {
+                      domain: options.domain,
+                      tierColor: options.tierColor,
+                      year: ''
+                    };
+                    modal.style.setProperty('--archive-tier-color', options.tierColor);
+                    archiveModalTitle.textContent = options.name;
+                    archiveModalTier.textContent = 'TIER ' + options.tier;
+                    archiveModalLink.href = waybackUrl(options.domain);
+                    archiveModalFrame.removeAttribute('src');
+                    archiveModalEl.querySelectorAll('.archive-modal-year').forEach(function (button) {
+                      button.classList.remove('is-active');
+                    });
+                    modal.hidden = false;
+                    requestAnimationFrame(function () {
+                      modal.classList.add('is-open');
+                    });
                   }
-                });
-              }
 
-              map.on('popupopen', function(event) {
-                const popupEl = event.popup && event.popup.getElement();
-                const root = popupEl ? popupEl.querySelector('.archive-popup') : null;
-                initArchivePopup(root);
-              });
+                  function closeArchiveModal() {
+                    if (!archiveModalEl) return;
+                    if (archiveModalLoadTimeout) clearTimeout(archiveModalLoadTimeout);
+                    archiveModalLoadTimeout = null;
+                    archiveModalState = null;
+                    if (archiveModalFrame) archiveModalFrame.removeAttribute('src');
+                    archiveModalEl.classList.remove('is-open');
+                    if (archiveModalCloseTimeout) clearTimeout(archiveModalCloseTimeout);
+                    archiveModalCloseTimeout = setTimeout(function () {
+                      if (archiveModalEl) archiveModalEl.hidden = true;
+                    }, 200);
+                  }
 
-              let geojsonLayer;
-              geojsonLayer = L.geoJSON(window.MUNICIPIOS_GEOJSON, {
-                style: styleFeature,
-                onEachFeature: onEach
-              }).addTo(map);
-              map.setView([39.5, -8.0], 6);
-              setTimeout(function() {
-                map.invalidateSize();
-                map.setView([39.5, -8.0], 6);
-              }, 300);
-              } catch (error) {
-                console.error('CASSANDRA map initialization failed:', error);
-                showMapFallback('Mapa indisponível: erro ao inicializar camada territorial.');
-              }
-            })();
+                  function setArchiveModalYear(year) {
+                    if (!archiveModalState || !archiveModalFrame) return;
+                    const selectedYear = String(year);
+                    archiveModalState.year = selectedYear;
+                    if (archiveModalLoadTimeout) clearTimeout(archiveModalLoadTimeout);
+                    archiveModalEl.querySelectorAll('.archive-modal-year').forEach(function (button) {
+                      button.classList.toggle('is-active', button.dataset.year === selectedYear);
+                    });
+                    archiveModalLoadTimeout = setTimeout(function () {
+                      if (!archiveModalState || archiveModalState.year !== selectedYear) return;
+                      archiveModalFrame.src = archiveFrameUrl(archiveModalState.domain, selectedYear);
+                    }, 1000);
+                  }
+
+                  function buildArchivePopup(feature) {
+                    const row = getDashboardRow(feature);
+                    const metrics = getArchiveMetrics(feature);
+                    const name = displayNameForFeature(feature, row);
+                    const tier = getTier(feature);
+                    const tierColor = TIER_COLORS[tier] || TIER_COLORS[3];
+                    const domain = domainForFeature(feature, row);
+                    const pop2011 = formatIntegerPt(pickValue(
+                      [metrics, row, feature.properties],
+                      ['pop_2011', 'Pop_2011', 'pop2011', 'POP_2011', 'Pop. 2011']
+                    ) || POP2011_BY_KEY.get(getFeatureKey(feature)) ||
+                      POP2011_BY_KEY.get(normalizeMunicipalityName(feature.properties['NAME_2'])));
+                    const varPop = formatPercentageValue(pickValue(
+                      [metrics, row, feature.properties],
+                      ['Var_Pop', 'var_pop', 'varPop', 'VAR_POP']
+                    ));
+                    const ieiScore = formatScoreValue(pickValue(
+                      [metrics, row, feature.properties],
+                      ['IEI_Score', 'iei_score', 'IEI', 'score']
+                    ));
+                    const captures = formatIntegerPt(pickValue(
+                      [metrics, row, feature.properties],
+                      ['Total_Arquivo_Captures', 'capturas', 'captures', 'Capturas']
+                    ));
+
+                    return '<div class="archive-popup" style="--popup-tier-color:' + tierColor + '" ' +
+                      'data-domain="' + escapeHtml(domain) + '" ' +
+                      'data-name="' + escapeHtml(name) + '" ' +
+                      'data-tier="' + tier + '" ' +
+                      'data-tier-color="' + escapeHtml(tierColor) + '">' +
+                      '<div class="archive-popup-header">' +
+                      '<h3 class="archive-popup-title">' + escapeHtml(name) + '</h3>' +
+                      '<span class="archive-popup-tier">TIER ' + tier + '</span>' +
+                      '</div>' +
+                      '<div class="archive-popup-divider"></div>' +
+                      '<div class="archive-metrics">' +
+                      '<span>Pop. 2011: <strong>' + escapeHtml(pop2011) + '</strong></span>' +
+                      '<span>Var: <strong>' + escapeHtml(varPop) + '</strong></span>' +
+                      '<span>IEI Score: <strong>' + escapeHtml(ieiScore) + '</strong></span>' +
+                      '<span>Capturas: <strong>' + escapeHtml(captures) + '</strong></span>' +
+                      '</div>' +
+                      '<div class="archive-popup-divider"></div>' +
+                      '<button class="archive-explore-btn" type="button">EXPLORAR ARQUIVO HISTÓRICO →</button>' +
+                      '</div>';
+                  }
+
+                  function initArchivePopup(root) {
+                    if (!root || root.dataset.initialized === 'true') return;
+                    root.dataset.initialized = 'true';
+                    if (window.L && L.DomEvent) L.DomEvent.disableClickPropagation(root);
+                    const button = root.querySelector('.archive-explore-btn');
+                    if (!button) return;
+                    button.addEventListener('click', function (event) {
+                      event.preventDefault();
+                      openArchiveModal({
+                        name: root.dataset.name || '',
+                        tier: root.dataset.tier || '',
+                        tierColor: root.dataset.tierColor || '#FF3366',
+                        domain: root.dataset.domain || ''
+                      });
+                    });
+                  }
+
+                  function onEach(feature, layer) {
+                    var name = feature.properties['NAME_2'] || 'N/A';
+                    const tier = getTier(feature);
+                    const tierLabels = { 4: 'CRÍTICO', 3: 'ELEVADO', 2: 'MODERADO', 1: 'CONTROLADO' };
+                    layer.bindTooltip(
+                      '<span style="font-family:Space Grotesk;font-size:12px;' +
+                      'font-weight:600;letter-spacing:0.1em">' +
+                      name.toUpperCase() + '</span>' +
+                      '<br><span style="color:' + TIER_COLORS[tier] + ';font-weight:700">' +
+                      'TIER ' + tier + ' — ' + tierLabels[tier] + '</span>',
+                      { sticky: true, opacity: 1 }
+                    );
+                    layer.bindPopup(function () {
+                      return buildArchivePopup(feature);
+                    }, {
+                      className: 'cassandra-archive-popup',
+                      closeButton: false,
+                      maxWidth: 340,
+                      minWidth: 0
+                    });
+                    layer.on({
+                      mouseover: e => {
+                        e.target.setStyle({ weight: 2, fillOpacity: 1 });
+                      },
+                      mouseout: e => {
+                        geojsonLayer.resetStyle(e.target);
+                      }
+                    });
+                  }
+
+                  map.on('popupopen', function (event) {
+                    const popupEl = event.popup && event.popup.getElement();
+                    const root = popupEl ? popupEl.querySelector('.archive-popup') : null;
+                    initArchivePopup(root);
+                  });
+
+                  let geojsonLayer;
+                  geojsonLayer = L.geoJSON(window.MUNICIPIOS_GEOJSON, {
+                    style: styleFeature,
+                    onEachFeature: onEach
+                  }).addTo(map);
+                  map.setView([39.5, -8.0], 6);
+                  setTimeout(function () {
+                    map.invalidateSize();
+                    map.setView([39.5, -8.0], 6);
+                  }, 300);
+                } catch (error) {
+                  console.error('CASSANDRA map initialization failed:', error);
+                  showMapFallback('Mapa indisponível: erro ao inicializar camada territorial.');
+                }
+              })();
             </script>
           </div>
 
           <aside class="query-panel">
             <div>
               <h2 class="query-title">CONSULTA<br />TERRITORIAL</h2>
-              <p class="query-copy" style="margin-top:10px;">Introduza parâmetros para isolar vetores específicos de risco arquitectónico municipal.</p>
+              <p class="query-copy" style="margin-top:10px;">Introduza parâmetros para isolar vetores específicos de
+                risco arquitectónico municipal.</p>
             </div>
 
             <div class="field">
@@ -3398,7 +3452,8 @@
               </select>
             </div>
 
-            <button id="territory-query-btn" class="btn primary" type="button" style="width:100%">EXECUTAR CONSULTA →</button>
+            <button id="territory-query-btn" class="btn primary" type="button" style="width:100%">EXECUTAR CONSULTA
+              →</button>
 
             <div class="query-meta">
               <span>ARQUIVO.PT · ACC 66,13% · F1 POND. 64,90%</span>
@@ -3446,8 +3501,10 @@
                   <dd>2023</dd>
                 </div>
               </dl>
-              <p class="collapse-quote">O despovoamento de Pedrógão Grande acelerou após os incêndios de 2017. A população perdeu um quarto em duas décadas.</p>
-              <a class="collapse-cta" href="https://arquivo.pt/wayback/*/https://cm-pedrogaogrande.pt/" target="_blank" rel="noopener noreferrer">Explorar no Arquivo.pt →</a>
+              <p class="collapse-quote">O despovoamento de Pedrógão Grande acelerou após os incêndios de 2017. A
+                população perdeu um quarto em duas décadas.</p>
+              <a class="collapse-cta" href="https://arquivo.pt/wayback/*/https://cm-pedrogaogrande.pt/" target="_blank"
+                rel="noopener noreferrer">Explorar no Arquivo.pt →</a>
             </article>
 
             <article class="collapse-card">
@@ -3480,8 +3537,10 @@
                   <dd>2024</dd>
                 </div>
               </dl>
-              <p class="collapse-quote">Com menos de 8.400 habitantes e uma das maiores áreas do país, Idanha-a-Nova é o símbolo do interior despovoado de Portugal.</p>
-              <a class="collapse-cta" href="https://arquivo.pt/wayback/*/https://cm-idanhanova.pt/" target="_blank" rel="noopener noreferrer">Explorar no Arquivo.pt →</a>
+              <p class="collapse-quote">Com menos de 8.400 habitantes e uma das maiores áreas do país, Idanha-a-Nova é o
+                símbolo do interior despovoado de Portugal.</p>
+              <a class="collapse-cta" href="https://arquivo.pt/wayback/*/https://cm-idanhanova.pt/" target="_blank"
+                rel="noopener noreferrer">Explorar no Arquivo.pt →</a>
             </article>
 
             <article class="collapse-card">
@@ -3514,8 +3573,10 @@
                   <dd>2023</dd>
                 </div>
               </dl>
-              <p class="collapse-quote">Mértola perdeu mais de um terço da sua população em vinte anos. O Alentejo interior esvazia-se em silêncio.</p>
-              <a class="collapse-cta" href="https://arquivo.pt/wayback/*/https://www.cm-mertola.pt/" target="_blank" rel="noopener noreferrer">Explorar no Arquivo.pt →</a>
+              <p class="collapse-quote">Mértola perdeu mais de um terço da sua população em vinte anos. O Alentejo
+                interior esvazia-se em silêncio.</p>
+              <a class="collapse-cta" href="https://arquivo.pt/wayback/*/https://www.cm-mertola.pt/" target="_blank"
+                rel="noopener noreferrer">Explorar no Arquivo.pt →</a>
             </article>
           </div>
         </div>
@@ -3526,7 +3587,9 @@
           <header class="archive-evidence-header">
             <p class="archive-evidence-kicker">ARQUIVO.PT // EVIDÊNCIA PÚBLICA</p>
             <h2 id="archive-evidence-title" class="archive-evidence-title">A PROVA // DA CAPTURA À CLASSIFICAÇÃO</h2>
-            <p class="archive-evidence-subtitle">Esta secção documenta de forma auditável como os dados do Arquivo.pt foram recolhidos, processados e usados no modelo — para que qualquer investigador possa verificar a cadeia de evidência desde o arquivo até à classificação final.</p>
+            <p class="archive-evidence-subtitle">Esta secção documenta de forma auditável como os dados do Arquivo.pt
+              foram recolhidos, processados e usados no modelo — para que qualquer investigador possa verificar a cadeia
+              de evidência desde o arquivo até à classificação final.</p>
           </header>
 
           <div class="evidence-chain" aria-label="Cadeia de evidência Arquivo.pt">
@@ -3534,28 +3597,32 @@
               <span class="evidence-step-number">01</span>
               <div>
                 <h3 class="evidence-step-title">Memória Arquivo.pt</h3>
-                <p class="evidence-step-copy">As capturas preservadas por domínio municipal documentam a presença digital observável de cada território.</p>
+                <p class="evidence-step-copy">As capturas preservadas por domínio municipal documentam a presença
+                  digital observável de cada território.</p>
               </div>
             </article>
             <article class="evidence-step">
               <span class="evidence-step-number">02</span>
               <div>
                 <h3 class="evidence-step-title">Variáveis do modelo</h3>
-                <p class="evidence-step-copy">A evidência arquivada é convertida em valores como capturas usadas, densidade de presença digital e intervalo médio entre capturas.</p>
+                <p class="evidence-step-copy">A evidência arquivada é convertida em valores como capturas usadas,
+                  densidade de presença digital e intervalo médio entre capturas.</p>
               </div>
             </article>
             <article class="evidence-step">
               <span class="evidence-step-number">03</span>
               <div>
                 <h3 class="evidence-step-title">Apoio à decisão</h3>
-                <p class="evidence-step-copy">Os valores entram com variáveis demográficas e económicas no sistema de inteligência territorial CASSANDRA.</p>
+                <p class="evidence-step-copy">Os valores entram com variáveis demográficas e económicas no sistema de
+                  inteligência territorial CASSANDRA.</p>
               </div>
             </article>
             <article class="evidence-step">
               <span class="evidence-step-number">04</span>
               <div>
                 <h3 class="evidence-step-title">Classificação territorial</h3>
-                <p class="evidence-step-copy">A classificação resultante atribui o tier público do município, incluindo Tier 4 — Risco Crítico quando o risco territorial é elevado.</p>
+                <p class="evidence-step-copy">A classificação resultante atribui o tier público do município, incluindo
+                  Tier 4 — Risco Crítico quando o risco territorial é elevado.</p>
               </div>
             </article>
           </div>
@@ -3711,20 +3778,28 @@
                 <strong>-8,06 pp accuracy<br />-6,71 pp F1 ponderado</strong>
               </div>
             </div>
-            <p class="archive-ablation-copy">Este teste remove as variáveis derivadas do Arquivo.pt e mede quanto o modelo enfraquece. Sem esse sinal, a accuracy desce 8,06 pontos percentuais e o F1 ponderado desce 6,71 pontos percentuais.</p>
+            <p class="archive-ablation-copy">Este teste remove as variáveis derivadas do Arquivo.pt e mede quanto o
+              modelo enfraquece. Sem esse sinal, a accuracy desce 8,06 pontos percentuais e o F1 ponderado desce 6,71
+              pontos percentuais.</p>
           </section>
 
           <section class="archive-technical" aria-label="Dados técnicos do Evidence Pack">
-            <button id="archive-technical-toggle" class="archive-technical-toggle" type="button" aria-expanded="false" aria-controls="archive-technical-content">+ VER DADOS TÉCNICOS</button>
+            <button id="archive-technical-toggle" class="archive-technical-toggle" type="button" aria-expanded="false"
+              aria-controls="archive-technical-content">+ VER DADOS TÉCNICOS</button>
             <div id="archive-technical-content" class="archive-technical-content" aria-hidden="true" inert>
               <div class="archive-technical-inner">
                 <aside class="archive-warning" aria-label="Aviso técnico sobre checkpoint e modelo">
-                  <p>O CASSANDRA distingue evidência bruta/checkpoint, valores usados pelo modelo, imputação e qualidade da evidência. O campo <span class="archive-mono">checkpoint_cdx_record_count</span> é evidência de proveniência de um checkpoint local limitado a 5.000 registos CDX por domínio. Não é o total histórico completo de todas as capturas Arquivo.pt. O campo <span class="archive-mono">model_total_arquivo_captures</span> é o valor usado pelo modelo.</p>
+                  <p>O CASSANDRA distingue evidência bruta/checkpoint, valores usados pelo modelo, imputação e qualidade
+                    da evidência. O campo <span class="archive-mono">checkpoint_cdx_record_count</span> é evidência de
+                    proveniência de um checkpoint local limitado a 5.000 registos CDX por domínio. Não é o total
+                    histórico completo de todas as capturas Arquivo.pt. O campo <span
+                      class="archive-mono">model_total_arquivo_captures</span> é o valor usado pelo modelo.</p>
                 </aside>
 
                 <div class="archive-table-wrap">
                   <table class="archive-evidence-table">
-                    <caption id="archive-technical-title" class="archive-table-caption">Dados técnicos do Evidence Pack validado</caption>
+                    <caption id="archive-technical-title" class="archive-table-caption">Dados técnicos do Evidence Pack
+                      validado</caption>
                     <thead>
                       <tr>
                         <th scope="col">Município</th>
@@ -3786,44 +3861,42 @@
           <div class="validation-grid">
             <article class="validation-card">
               <div class="validation-asset">
-                <img src="./assets/SHAP_SUMMARY_CASSANDRA.PNG"
-                     alt="Gráfico Resumo SHAP"
-                     style="width:100%;height:100%;object-fit:contain;
+                <img src="./assets/SHAP_SUMMARY_CASSANDRA.PNG" alt="Gráfico Resumo SHAP" style="width:100%;height:100%;object-fit:contain;
                             display:block;background:#fdf8f8;">
               </div>
               <div class="validation-body">
                 <p class="validation-filename">SHAP_SUMMARY_CASSANDRA.PNG</p>
                 <h4 class="validation-title">GRÁFICO RESUMO SHAP</h4>
                 <div class="validation-divider"></div>
-                <p class="validation-description">Impacto das variáveis no output do modelo. Importância global das features mapeada.</p>
+                <p class="validation-description">Impacto das variáveis no output do modelo. Importância global das
+                  features mapeada.</p>
               </div>
             </article>
             <article class="validation-card">
               <div class="validation-asset">
-                <img src="./assets/PLOT_CORRELACAO.PNG"
-                     alt="Matriz de Correlação"
-                     style="width:100%;height:100%;object-fit:contain;
+                <img src="./assets/PLOT_CORRELACAO.PNG" alt="Matriz de Correlação" style="width:100%;height:100%;object-fit:contain;
                             display:block;background:#fdf8f8;">
               </div>
               <div class="validation-body">
                 <p class="validation-filename">PLOT_CORRELACAO.PNG</p>
                 <h4 class="validation-title">MATRIZ DE CORRELAÇÃO</h4>
                 <div class="validation-divider"></div>
-                <p class="validation-description">Coeficientes de correlação de Pearson nas principais variáveis económicas.</p>
+                <p class="validation-description">Coeficientes de correlação de Pearson nas principais variáveis
+                  económicas.</p>
               </div>
             </article>
             <article class="validation-card">
               <div class="validation-asset">
-                <img src="./assets/PLOT_VALIDACAO.PNG"
-                     alt="Curvas de Validação"
-                     style="width:100%;height:100%;object-fit:contain;
+                <img src="./assets/PLOT_VALIDACAO.PNG" alt="Curvas de Validação" style="width:100%;height:100%;object-fit:contain;
                             display:block;background:#fdf8f8;">
               </div>
               <div class="validation-body">
                 <p class="validation-filename">PLOT_VALIDACAO.PNG</p>
                 <h4 class="validation-title">CURVAS DE VALIDAÇÃO</h4>
                 <div class="validation-divider"></div>
-                <p class="validation-description">Pontuações de treino vs. validação cruzada para monitorizar a variância e o enviesamento do modelo. Modelo validado com StratifiedKFold 5-fold e optimização de hiperparâmetros via Optuna.</p>
+                <p class="validation-description">Pontuações de treino vs. validação cruzada para monitorizar a
+                  variância e o enviesamento do modelo. Modelo validado com StratifiedKFold 5-fold e optimização de
+                  hiperparâmetros via Optuna.</p>
               </div>
             </article>
           </div>
@@ -3946,51 +4019,56 @@
       <!-- SOBRE NÓS -->
       <section id="sobre" class="page" style="padding: 80px 40px; max-width: 1100px; margin: 0 auto;">
 
-      <!-- Header -->
-      <div style="margin-bottom: 48px; border-top: 1px solid #d4d1ca; padding-top: 24px;">
-        <span style="font-size: 11px; letter-spacing: 0.15em; color: #7a7974;">SOBRE NÓS</span>
-        <h2 style="font-size: clamp(2rem,4vw,3rem); font-weight: 900; margin-top: 8px; line-height: 1.1;">
-          A EQUIPA<br>
-          <span style="color: #aaa;">A ARQUITECTURA</span><br>
-          INTELECTUAL
-        </h2>
-      </div>
-
-      <!-- Project description -->
-      <p style="max-width: 600px; font-size: 14px; line-height: 1.7; color: #555; margin-bottom: 64px; padding-left: 16px; border-left: 2px solid #28251d;">
-        Somos estudantes de gestão que desenvolveram o projeto CASSANDRA
-        para mapear e analisar as vulnerabilidades demográficas e digitais
-        dos municípios portugueses. Precisão é a nossa base; antecipação é o nosso objetivo.
-      </p>
-
-      <!-- Team cards — 2 columns, equal height -->
-      <div class="team-grid">
-
-        <!-- Card 1 -->
-        <div class="team-card">
-          <div class="team-photo-frame">
-            <img class="team-photo" src="https://i.ibb.co/BKSPj4nZ/IMG-7209.avif" alt="Bruno Machado" loading="lazy" onerror="this.style.display='none'">
-          </div>
-          <div class="team-body">
-            <h3 class="team-name">BRUNO MACHADO</h3>
-            <hr class="team-rule">
-            <p class="team-copy">Estudante de 2.º ano de Gestão de Marketing no IPAM. Co-autor do projecto CASSANDRA.</p>
-          </div>
+        <!-- Header -->
+        <div style="margin-bottom: 48px; border-top: 1px solid #d4d1ca; padding-top: 24px;">
+          <span style="font-size: 11px; letter-spacing: 0.15em; color: #7a7974;">SOBRE NÓS</span>
+          <h2 style="font-size: clamp(2rem,4vw,3rem); font-weight: 900; margin-top: 8px; line-height: 1.1;">
+            A EQUIPA<br>
+            <span style="color: #aaa;">A ARQUITECTURA</span><br>
+            INTELECTUAL
+          </h2>
         </div>
 
-        <!-- Card 2 -->
-        <div class="team-card">
-          <div class="team-photo-frame">
-            <img class="team-photo" src="https://i.ibb.co/YBDZV27s/ruben.jpg" alt="Rúben Correia" loading="lazy" onerror="this.style.display='none'">
-          </div>
-          <div class="team-body">
-            <h3 class="team-name">RÚBEN CORREIA</h3>
-            <hr class="team-rule">
-            <p class="team-copy">Estudante de 2.º ano de Gestão de Marketing no IPAM. Co-autor do projecto CASSANDRA.</p>
-          </div>
-        </div>
+        <!-- Project description -->
+        <p
+          style="max-width: 600px; font-size: 14px; line-height: 1.7; color: #555; margin-bottom: 64px; padding-left: 16px; border-left: 2px solid #28251d;">
+          Somos estudantes de gestão de marketing no IPAM, que desenvolveram o projeto CASSANDRA
+          para mapear e analisar as vulnerabilidades demográficas e digitais
+          dos municípios portugueses. Precisão é a nossa base; antecipação é o nosso objetivo.
+        </p>
 
-      </div>
+        <!-- Team cards — 2 columns, equal height -->
+        <div class="team-grid">
+
+          <!-- Card 1 -->
+          <div class="team-card">
+            <div class="team-photo-frame">
+              <img class="team-photo" src="https://i.ibb.co/BKSPj4nZ/IMG-7209.avif" alt="Bruno Machado" loading="lazy"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="team-body">
+              <h3 class="team-name">BRUNO MACHADO</h3>
+              <hr class="team-rule">
+              <p class="team-copy">Estudante de 2.º ano de Gestão de Marketing no IPAM. Co-autor do projecto CASSANDRA.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="team-card">
+            <div class="team-photo-frame">
+              <img class="team-photo" src="https://i.ibb.co/YBDZV27s/ruben.jpg" alt="Rúben Correia" loading="lazy"
+                onerror="this.style.display='none'">
+            </div>
+            <div class="team-body">
+              <h3 class="team-name">RÚBEN CORREIA</h3>
+              <hr class="team-rule">
+              <p class="team-copy">Estudante de 2.º ano de Gestão de Marketing no IPAM. Co-autor do projecto CASSANDRA.
+              </p>
+            </div>
+          </div>
+
+        </div>
       </section>
     </main>
 
@@ -3999,7 +4077,8 @@
       <div class="foot-right">
         <a href="#archive">METODOLOGIA</a>
         <span>|</span>
-        <a class="footer-repo" href="https://github.com/oKaset/Cassandra" target="_blank" rel="noopener noreferrer">REPOSITÓRIO</a>
+        <a class="footer-repo" href="https://github.com/oKaset/Cassandra" target="_blank"
+          rel="noopener noreferrer">REPOSITÓRIO</a>
       </div>
     </footer>
   </div>
@@ -4426,4 +4505,5 @@
     })();
   </script>
 </body>
+
 </html>
