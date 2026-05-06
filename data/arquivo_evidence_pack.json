@@ -1,0 +1,110 @@
+{
+  "generated_at": "2026-05-06T01:33:23.049770+00:00",
+  "source_files": {
+    "local_cdx_checkpoint": "cdx_checkpoint.json (local capped checkpoint; not exposed publicly)",
+    "municipios_dominios": "municipios_dominios.csv",
+    "metricas_fase2_completo": "metricas_fase2_completo.csv",
+    "metricas_iei_completo": "metricas_iei_completo.csv",
+    "dados_demograficos": "dados_demograficos.csv",
+    "relatorio_produto_cassandra": "relatorio_produto_cassandra.csv",
+    "arquivo_temporal_features": "data/arquivo_temporal_features.csv",
+    "model_metrics": "reports/model_metrics.json"
+  },
+  "field_notes": {
+    "checkpoint_cdx_record_count": "checkpoint_cdx_record_count reflects records available in the local capped checkpoint, not a complete historical total of all Arquivo.pt captures.",
+    "checkpoint_valid_capture_count": "checkpoint_valid_capture_count counts checkpoint records with status 200, 301, 302, or 304.",
+    "generated_arquivo_replay_url": "Syntactically generated from timestamp and URL; replay_url_verified is false unless a future script verifies the URL."
+  },
+  "model_feature_formulas": {
+    "capture_density": "Total_Arquivo_Captures / Pop. 2021",
+    "digital_decay_rate": "metricas_iei_completo.csv:Media_Dias_Entre_Capturas",
+    "digital_decay_rate_limit": "Original derivation formula is not fully recoverable from the current repository."
+  },
+  "metrics_source": {
+    "confirmed_accuracy": 0.6612903225806451,
+    "f1_macro": 0.6722071978364884,
+    "f1_per_tier": {
+      "Tier 1": 0.782608695652174,
+      "Tier 2": 0.6,
+      "Tier 3": 0.5789473684210527,
+      "Tier 4": 0.7272727272727273
+    },
+    "note": "Metrics from reports/model_metrics.json. No SHAP values, probabilities, or ablation deltas are fabricated."
+  },
+  "total_municipalities": 308,
+  "total_checkpoint_cdx_records": 1521598,
+  "checkpoint_domains": 308,
+  "checkpoint_record_cap_per_domain": 5000,
+  "checkpoint_domains_at_record_cap": 301,
+  "total_sample_records": 3074,
+  "imputed_capture_count_municipalities": 80,
+  "municipalities_needing_manual_review": 0,
+  "formula_warnings": [
+    "checkpoint CDX counts are capped local provenance evidence, not model input values.",
+    "capture_density = Total_Arquivo_Captures / Pop. 2021",
+    "digital_decay_rate is imported as a legacy model feature from metricas_iei_completo.csv:Media_Dias_Entre_Capturas. The original derivation formula is not fully recoverable from the current repository.",
+    "Imputation marker: model values equal to 628.0 when fase2 raw=0 are treated as median-imputed."
+  ],
+  "featured_cases": {
+    "Alcácer do Sal": {
+      "municipality_id": "MUN_A5EC4C7A",
+      "domain": "cm-alcacerdosal.pt",
+      "tier_public_label": "Tier 4 — Risco Crítico",
+      "risk_score": "79.2",
+      "checkpoint_cdx_record_count": 5000,
+      "checkpoint_valid_capture_count": 4567,
+      "model_total_arquivo_captures": 129.0,
+      "capture_count_imputed": "no",
+      "imputation_note": "raw value used directly",
+      "first_capture_year": "2008",
+      "last_capture_year": "2024",
+      "active_years_count": 17,
+      "capture_density": "0.011537429568",
+      "digital_decay_rate": "26.547",
+      "digital_decay_rate_source": "metricas_iei_completo.csv:Media_Dias_Entre_Capturas",
+      "evidence_quality_flag": "ok"
+    },
+    "Torres Vedras": {
+      "municipality_id": "MUN_C8F82DB5",
+      "domain": "cm-tvedras.pt",
+      "tier_public_label": "Tier 1 — Resiliência",
+      "risk_score": "0.3",
+      "checkpoint_cdx_record_count": 5000,
+      "checkpoint_valid_capture_count": 4814,
+      "model_total_arquivo_captures": 2209.0,
+      "capture_count_imputed": "no",
+      "imputation_note": "raw value used directly",
+      "first_capture_year": "1998",
+      "last_capture_year": "2024",
+      "active_years_count": 27,
+      "capture_density": "0.0262239422575",
+      "digital_decay_rate": "15.308",
+      "digital_decay_rate_source": "metricas_iei_completo.csv:Media_Dias_Entre_Capturas",
+      "evidence_quality_flag": "ok"
+    },
+    "Proença-a-Nova": {
+      "municipality_id": "MUN_10BB533C",
+      "domain": "cm-proencanova.pt",
+      "tier_public_label": "Tier 4 — Risco Crítico",
+      "risk_score": "95.4",
+      "checkpoint_cdx_record_count": 5000,
+      "checkpoint_valid_capture_count": 4895,
+      "model_total_arquivo_captures": 3247.0,
+      "capture_count_imputed": "no",
+      "imputation_note": "raw value used directly",
+      "first_capture_year": "2000",
+      "last_capture_year": "2024",
+      "active_years_count": 25,
+      "capture_density": "0.454062368899",
+      "digital_decay_rate": "1.2997",
+      "digital_decay_rate_source": "metricas_iei_completo.csv:Media_Dias_Entre_Capturas",
+      "evidence_quality_flag": "ok"
+    }
+  },
+  "ablation_summary": {
+    "arquivo_ablation_results_json": "NOT_FOUND",
+    "note": "A ligação à ablação deve ser feita quando o artefacto arquivo_ablation_results.json for restaurado e validado.",
+    "model_accuracy_with_arquivo_features": 0.6612903225806451,
+    "source": "reports/model_metrics.json for current full-model metrics only"
+  }
+}
