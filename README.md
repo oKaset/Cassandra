@@ -10,6 +10,8 @@ CASSANDRA é uma ferramenta de análise territorial. Cruza dados demográficos, 
 ## Demonstração pública
 
 🔗 [https://okaset.github.io/Cassandra/](https://okaset.github.io/Cassandra/)
+ou
+🔗 https://cassandraprojeto.site
 
 ---
 
