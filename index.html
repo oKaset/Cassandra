@@ -2508,6 +2508,11 @@
     .linkedin-cta:hover {
       opacity: 0.75;
     }
+    .site-logo {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
   </style>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="./assets/municipios_inline.js"></script>
@@ -2517,7 +2522,16 @@
 <body>
   <div class="app-shell">
     <nav class="top-nav">
-      <div class="brand">CASSANDRA</div>
+      <div class="brand">
+        <img 
+          src="./assets/LOGO_CASSANDRA.png" 
+          alt="CASSANDRA Oracle Engine" 
+          height="36" 
+          width="auto"
+          loading="eager"
+          class="site-logo"
+        />
+      </div>
       <div class="nav-links">
         <a class="nav-link" data-route href="#home">INÍCIO</a>
         <a class="nav-link" data-route href="#territories">TERRITÓRIOS</a>
