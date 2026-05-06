@@ -5,7 +5,7 @@
 
 # CASSANDRA Oracle Engine
 
-CASSANDRA é uma plataforma de inteligência territorial que cruza dados demográficos, indicadores económicos e memória digital preservada pelo Arquivo.pt para classificar os 308 municípios portugueses em níveis de risco demográfico-digital.
+CASSANDRA é uma ferramenta de análise territorial. Cruza dados demográficos, indicadores económicos e a memória digital preservada pelo Arquivo.pt para classificar os 308 municípios portugueses por nível de risco.
 
 ## Demonstração pública
 
@@ -15,9 +15,9 @@ CASSANDRA é uma plataforma de inteligência territorial que cruza dados demogr�
 
 ## Ideia central
 
-O Arquivo.pt é usado como **fonte analítica primária**: os seus registos permitem transformar memória web preservada em variáveis computacionais de presença, densidade e persistência digital territorial.
+O Arquivo.pt é a fonte principal de análise: os seus registos permitem converter a memória web preservada em indicadores quantificáveis de presença, densidade e continuidade digital por território.
 
-Estas variáveis são incorporadas directamente no modelo preditivo. A sua remoção — documentada através de um estudo de ablação controlado — produz uma degradação mensurável no desempenho. O Arquivo.pt não é, portanto, uma ilustração: é uma fonte de sinal territorial.
+Estes indicadores entram directamente no modelo. Quando são retirados — num teste controlado chamado ablação — o desempenho do modelo desce de forma mensurável. O Arquivo.pt não é decoração: é sinal.
 
 ---
 
@@ -58,9 +58,9 @@ O site público inclui a secção **"A PROVA // DA CAPTURA À CLASSIFICAÇÃO"**
 
 - **Algoritmo:** XGBoost (`XGBClassifier`)
 - **Optimização de hiperparâmetros:** Optuna (pesquisa bayesiana)
-- **Validação cruzada:** StratifiedKFold 5-fold
-- **Balanceamento de classes:** SMOTE aplicado exclusivamente ao conjunto de treino (nunca ao conjunto de teste)
-- **Explicabilidade:** SHAP values por município e por variável
+- **Validação cruzada:** 5 iterações com estratificação
+- **Equilíbrio de classes:** técnica SMOTE aplicada exclusivamente ao conjunto de treino (nunca ao de teste)
+- **Explicabilidade:** contribuição de cada variável no resultado final, calculada por município (SHAP)
 - **Tiers de risco:** 4 classes (Tier 1 — Resiliência → Tier 4 — Risco Crítico)
 
 ---
@@ -100,7 +100,7 @@ Fontes de métricas públicas: `reports/confirmed_model_metrics.json`, `data/arq
 
 ## Evidence Pack
 
-Conjunto de ficheiros auditáveis que documentam a cadeia desde os registos Arquivo.pt até às classificações do modelo:
+Ficheiros que permitem verificar, passo a passo, como os dados do Arquivo.pt chegam à classificação final de cada município:
 
 | Ficheiro | Conteúdo |
 |---|---|
@@ -117,22 +117,22 @@ Conjunto de ficheiros auditáveis que documentam a cadeia desde os registos Arqu
 
 **Distinções importantes:**
 
-- `checkpoint_cdx_record_count` — evidência de checkpoint Arquivo.pt, capeada a 5 000 registos por domínio; não representa o total histórico completo.
-- `model_total_arquivo_captures` — valor efectivamente usado pelo modelo como variável de entrada.
-- `capture_count_imputed` — marca imputação quando capturas directas não estavam disponíveis.
+- `checkpoint_cdx_record_count` — registo de checkpoint do Arquivo.pt, limitado a 5 000 entradas por domínio. Não é o total histórico completo.
+- `model_total_arquivo_captures` — valor que entra directamente no modelo.
+- `capture_count_imputed` — indica que o valor foi estimado por falta de dados directos.
 - checkpoint CDX local — artefacto interno; intencionalmente não exposto no site público.
 
 ---
 
 ## Casos demonstrativos
 
-Os casos abaixo ilustram a diversidade de padrões captados pelo modelo. Não representam previsões definitivas.
+Os casos abaixo mostram padrões distintos identificados pelo modelo. Não são previsões definitivas.
 
 | Município | Classificação | Observação |
 |---|---|---|
-| **Alcácer do Sal** | Tier 4 — Risco Crítico | Fraca persistência digital aliada a indicadores demográficos de risco elevado |
-| **Torres Vedras** | Tier 1 — Resiliência | Continuidade territorial e digital mais sólida |
-| **Proença-a-Nova** | Tier 4 — Risco Crítico | Demonstra que um número elevado de capturas não garante automaticamente resiliência territorial |
+| **Alcácer do Sal** | Tier 4 — Risco Crítico | Presença digital fraca, com indicadores demográficos de alto risco |
+| **Torres Vedras** | Tier 1 — Resiliência | Continuidade territorial e digital mais estável |
+| **Proença-a-Nova** | Tier 4 — Risco Crítico | Mostra que um número elevado de capturas não garante resiliência territorial |
 
 ---
 
