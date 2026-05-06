@@ -8,7 +8,9 @@ import warnings
 from pathlib import Path
 from typing import Any
 
-os.environ.setdefault("MPLCONFIGDIR", "/private/tmp/matplotlib-cache")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+MPLCONFIG_DIR = PROJECT_ROOT / "reports" / ".matplotlib-cache"
+os.environ.setdefault("MPLCONFIGDIR", str(MPLCONFIG_DIR))
 
 import joblib
 import matplotlib
@@ -27,8 +29,7 @@ from sklearn.utils.class_weight import compute_sample_weight
 
 warnings.filterwarnings("ignore")
 
-ROOT = Path(__file__).resolve().parents[1]
-ASSETS_DIR = ROOT / "assets"
+ASSETS_DIR = PROJECT_ROOT / "assets"
 ASSETS_DIR.mkdir(parents=True, exist_ok=True)
 
 BG = "#fdf8f8"
@@ -50,11 +51,11 @@ FEATURES = [
 ]
 
 MODEL_PICKLE_CANDIDATES = [
-    ROOT / "reports" / "validated_model.pkl",
-    ROOT / "reports" / "modelo_preditivo_real.pkl",
-    ROOT / "reports" / "cassandra_xgb_model.pkl",
-    ROOT / "modelo_preditivo_real.pkl",
-    ROOT / "cassandra_xgb_model.pkl",
+    PROJECT_ROOT / "reports" / "validated_model.pkl",
+    PROJECT_ROOT / "reports" / "modelo_preditivo_real.pkl",
+    PROJECT_ROOT / "reports" / "cassandra_xgb_model.pkl",
+    PROJECT_ROOT / "modelo_preditivo_real.pkl",
+    PROJECT_ROOT / "cassandra_xgb_model.pkl",
 ]
 
 BALANCED_TIER_THRESHOLDS = {
@@ -161,9 +162,9 @@ def impute_total_arquivo_captures(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def load_training_data() -> pd.DataFrame:
-    df_iei = pd.read_csv(ROOT / "metricas_iei_completo.csv")
+    df_iei = pd.read_csv(PROJECT_ROOT / "metricas_iei_completo.csv")
 
-    fase2_path = ROOT / "metricas_fase2_completo.csv"
+    fase2_path = PROJECT_ROOT / "metricas_fase2_completo.csv"
     if fase2_path.exists():
         df_fase2 = pd.read_csv(fase2_path, encoding="utf-8-sig")
         f2_mun_col = find_municipio_col(df_fase2)
@@ -178,7 +179,7 @@ def load_training_data() -> pd.DataFrame:
         ]
         df_iei = df_iei.merge(df_fase2[["_key"] + merge_cols], on="_key", how="left")
 
-    temporal_path = ROOT / "data" / "arquivo_temporal_features.csv"
+    temporal_path = PROJECT_ROOT / "data" / "arquivo_temporal_features.csv"
     if temporal_path.exists():
         df_temporal = pd.read_csv(temporal_path, encoding="utf-8-sig")
         temporal_mun_col = find_municipio_col(df_temporal)
@@ -192,7 +193,7 @@ def load_training_data() -> pd.DataFrame:
         if temporal_mun_col != iei_mun_col and temporal_mun_col in df_iei.columns:
             df_iei = df_iei.drop(columns=[temporal_mun_col])
 
-    df_dem = pd.read_excel(ROOT / "dados_demograficos.csv", header=1)
+    df_dem = pd.read_excel(PROJECT_ROOT / "dados_demograficos.csv", header=1)
 
     iei_mun_col = find_municipio_col(df_iei)
     dem_mun_col = find_municipio_col(df_dem)

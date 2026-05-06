@@ -42,6 +42,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CASSANDRA Oracle Engine</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231c1b1a'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial,sans-serif' font-size='32' font-weight='700' fill='%23fdf8f8'%3EC%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -764,7 +765,10 @@
     .map-image {
       position: absolute;
       inset: 0;
-      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAIi27thrCOtVk3xwu-YqgutzP0o5D7zzFCg6-eb0bMYUZOo-kptQHRrnENTVcBpDNqVsDwWl17MiEiWmeouo5XG4H66wNneEuGFfUk5vGU4SPuD7mkNYw9tExD6tpKVzmEKvhTeunR5t9XhO1yLhU7UfqaNQ86fl049aOdGLvjUF9vlCTXqBIay7PKvjF86KPJipWaDSo1ODJrZw-Gc4mxMoF4UsOCmn5sVOa3Wz3jfjsDKJagEw-DXe6Mxv9iDlGZ3GgrOWgWdqFM');
+      background-image:
+        radial-gradient(circle at 33% 25%, rgba(255, 51, 102, 0.34), transparent 18%),
+        radial-gradient(circle at 67% 51%, rgba(0, 175, 199, 0.26), transparent 20%),
+        linear-gradient(135deg, rgba(40, 37, 29, 0.46), rgba(253, 248, 248, 0.08));
       background-size: cover;
       background-position: center;
       opacity: 0.15;
@@ -2801,7 +2805,7 @@
                   '</div>' +
                   '<iframe class="archive-modal-frame" loading="lazy" title="Arquivo.pt preview"></iframe>' +
                   '<div class="archive-modal-footer">' +
-                    '<a class="archive-modal-link" href="#" target="_blank" rel="noopener noreferrer">Ver página completa no Arquivo.pt ↗</a>' +
+                    '<a class="archive-modal-link" target="_blank" rel="noopener noreferrer">Ver página completa no Arquivo.pt ↗</a>' +
                   '</div>';
                 document.body.appendChild(archiveModalEl);
 
@@ -3630,7 +3634,7 @@
             <p style="font-size: 11px; letter-spacing: 0.12em; color: #7a7974; margin-bottom: 16px;">INVESTIGADOR PRINCIPAL</p>
             <hr style="border:none;border-top:1px solid #d4d1ca;margin-bottom:16px;">
             <p style="font-size: 13px; line-height: 1.6; color: #555;">
-              Placeholder — descrição a definir.
+              Investigação, desenvolvimento e validação metodológica do CASSANDRA.
             </p>
           </div>
         </div>
@@ -3645,7 +3649,7 @@
             <p style="font-size: 11px; letter-spacing: 0.12em; color: #7a7974; margin-bottom: 16px;">INVESTIGADOR PRINCIPAL</p>
             <hr style="border:none;border-top:1px solid #d4d1ca;margin-bottom:16px;">
             <p style="font-size: 13px; line-height: 1.6; color: #555;">
-              Placeholder — descrição a definir.
+              Análise territorial, estrutura narrativa e interpretação dos resultados.
             </p>
           </div>
         </div>
@@ -3657,11 +3661,11 @@
     <footer class="app-footer">
       <div class="foot-left">© 2026 CASSANDRA — INTELIGÊNCIA DE RISCO TERRITORIAL</div>
       <div class="foot-right">
-        <a href="#">DOCUMENTAÇÃO_API</a>
+        <span>DOCUMENTAÇÃO API — A DISPONIBILIZAR</span>
         <span>|</span>
-        <a href="#">ESTADO_SISTEMA</a>
+        <span>ESTADO DO SISTEMA — A DISPONIBILIZAR</span>
         <span>|</span>
-        <a href="#"></a>
+        <span>GITHUB — A DISPONIBILIZAR</span>
       </div>
     </footer>
   </div>

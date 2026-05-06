@@ -9,7 +9,9 @@ import warnings
 from pathlib import Path
 from typing import Any
 
-os.environ.setdefault("MPLCONFIGDIR", "/private/tmp/matplotlib-cache")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+MPLCONFIG_DIR = PROJECT_ROOT / "reports" / ".matplotlib-cache"
+os.environ.setdefault("MPLCONFIGDIR", str(MPLCONFIG_DIR))
 
 import matplotlib
 
@@ -30,18 +32,17 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.utils.class_weight import compute_sample_weight
 
-ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.generate_charts import FEATURES, load_training_data
 
 warnings.filterwarnings("ignore")
 
-OPTUNA_REPORT = ROOT / "model_smote_report.txt"
-RESULTS_TABLE_PNG = ROOT / "arquivo_ablation_results.png"
-SHAP_COMPARISON_PNG = ROOT / "shap_comparison.png"
-RESULTS_JSON = ROOT / "arquivo_ablation_results.json"
+OPTUNA_REPORT = PROJECT_ROOT / "model_smote_report.txt"
+RESULTS_TABLE_PNG = PROJECT_ROOT / "arquivo_ablation_results.png"
+SHAP_COMPARISON_PNG = PROJECT_ROOT / "shap_comparison.png"
+RESULTS_JSON = PROJECT_ROOT / "arquivo_ablation_results.json"
 
 RANDOM_STATE = 42
 TEST_SIZE = 0.20
